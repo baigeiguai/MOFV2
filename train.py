@@ -34,9 +34,6 @@ logger = log.get_log()
 
 now_seed = 3407
 seed_torch(now_seed)
-# now_seed = torch.initial_seed()
-
-
 
 device_list = [int(i) for i in args.device.split(',')]
 device = torch.device('cuda:%d'%device_list[0] if  torch.cuda.is_available() else 'cpu')
@@ -44,12 +41,6 @@ device = torch.device('cuda:%d'%device_list[0] if  torch.cuda.is_available() els
 if args.model_path is None :
     from models.ExplorerV1 import ExplorerV1
     model = ExplorerV1(16,4).to(device)
-    # from models.ResTcn_5000 import ResTcn
-    # model = ResTcn().to(device)
-    # from models.ResTcn_8500 import ResTcn
-    # model = ResTcn(2).to(device)
-    # from models.ResTcn_mayraw import RES_TCN
-    # model = RES_TCN().to(device)
 else :
     model = torch.load(args.model_path,map_location=device)
 

@@ -10,6 +10,9 @@ from torch.utils.tensorboard.writer import SummaryWriter
 from utils.dataset import XrdData
 from torchmetrics.classification import MulticlassAccuracy
 
+torch.backends.cudnn.enabled = False
+os.environ['CUDA_LAUNCH_BLOCKING'] = '0'
+
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--data_path',type=str,required=True)
@@ -39,8 +42,15 @@ device_list = [int(i) for i in args.device.split(',')]
 device = torch.device('cuda:%d'%device_list[0] if  torch.cuda.is_available() else 'cpu')
 
 if args.model_path is None :
-    from models.ExplorerV1 import ExplorerV1
-    model = ExplorerV1(16,4).to(device)
+   # from models.XAt_base import XrdAttentionBase 
+   #  model = XrdAttentionBase().to(device)
+    
+    # from models.SConv import SResTcn
+    # model = SResTcn().to(device)
+    
+    from models.RawEmbedConv import RawEmbedConv
+    model = RawEmbedConv().to(device)
+    
 else :
     model = torch.load(args.model_path,map_location=device)
 
@@ -88,9 +98,10 @@ def train():
             dataloader = DataLoader(xrd_dataset,batch_size=args.batch_size,shuffle=True,num_workers=args.num_workers)
             for data in dataloader:
                 optimizer.zero_grad()
-                intensity,angle,labels230 = data[0].type(torch.float).to(device),data[1].type(torch.float).to(device),data[2].to(device)
+                intensity,angle,labels230 = data[0].type(torch.float).to(device),data[1].to(device),data[2].to(device)
                 out = model(intensity,angle)
-                logits,hkl = out[0],out[1]
+                logits = out 
+                # logits,hkl = out[0],out[1]
                 error = lossfn(logits,labels230)
                 error.backward()
                 optimizer.step()
@@ -127,7 +138,8 @@ def test():
                 intensity , angle,labels230 = data[0].type(torch.float).to(device),data[1].type(torch.float).to(device),data[2].to(device)
                 # print('labels230 shape',labels230.shape)
                 out = model(intensity,angle)
-                raw_logits,hkl = out[0],out[1]
+                raw_logits = out 
+                # raw_logits,hkl = out[0],out[1]
                 err = lossfn(raw_logits,labels230)
                 total_err += err.item()
                 logits = raw_logits.softmax(dim=1)

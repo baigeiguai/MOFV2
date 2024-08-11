@@ -25,47 +25,52 @@ class ResTcn(torch.nn.Module):
         self.in_c = in_c
         
         self.conv = torch.nn.Sequential(
-            ResBlock1D(in_c,32),
-            torch.nn.MaxPool1d(2,2),
+            
+            ResBlock1D(in_c,8),
+            torch.nn.Conv1d(8,8,3,2,1),
+            
+            ResBlock1D(8,8),
+            torch.nn.Conv1d(8,8,3,2,1),
+            
+            ResBlock1D(8,16),
+            torch.nn.Conv1d(16,16,3,2,1),
+            
+            ResBlock1D(16,16),
+            torch.nn.Conv1d(16,16,3,2,1),
+            
+            ResBlock1D(16,32),
+            torch.nn.Conv1d(32,32,3,2,1),
 
             ResBlock1D(32,32),
-            torch.nn.MaxPool1d(2,2),
+            torch.nn.Conv1d(32,32,3,2,1),
 
             ResBlock1D(32,64),
-            torch.nn.MaxPool1d(2,2),
+            torch.nn.Conv1d(64,64,3,2,1),
             
             ResBlock1D(64,128),
-            torch.nn.MaxPool1d(2,2),
+            torch.nn.Conv1d(128,128,3,2,1),
 
             ResBlock1D(128,128),
-            torch.nn.AvgPool1d(2,2,1),
+            torch.nn.Conv1d(128,128,3,2,1),
 
             ResBlock1D(128,256),
-            torch.nn.AvgPool1d(2,2),
+            torch.nn.Conv1d(256,256,3,2,1),
 
             ResBlock1D(256,256),
-            torch.nn.AvgPool1d(2,2,1),
+            torch.nn.Conv1d(256,256,3,2,1),
 
             ResBlock1D(256,512),
-            torch.nn.AvgPool1d(2,2,1),
+            torch.nn.Conv1d(512,512,3,2,1),
+            torch.nn.Dropout(p_dropout),
 
             ResBlock1D(512,512),
-            torch.nn.AvgPool1d(2,2),
+            torch.nn.Conv1d(512,512,3,2,1),
+            torch.nn.Dropout(p_dropout),
 
             ResBlock1D(512,1024),
-            torch.nn.AvgPool1d(2,2),
+            torch.nn.Conv1d(1024,1024,3,2,1),
             torch.nn.Dropout(p_dropout),
 
-            ResBlock1D(1024,1024),
-            torch.nn.AvgPool1d(2,2),
-            torch.nn.Dropout(p_dropout),
-
-            ResBlock1D(1024,1024),
-            torch.nn.AvgPool1d(2,2),
-            torch.nn.Dropout(p_dropout),
-
-            ResBlock1D(1024,1024),
-            torch.nn.AvgPool1d(2,2),
 
             torch.nn.Flatten(),
             torch.nn.Linear(1024,230),                
@@ -78,20 +83,14 @@ class ResTcn(torch.nn.Module):
 
 
 if __name__ =='__main__':
-
-    # total_params = sum(p.numel() for p in model.parameters())
-    # total_params += sum(p.numel() for p in model.buffers())
-    # print(total_params/1024/1024)
-    # inp = torch.randn((4,2,8500)).type(torch.float)
-    # print(inp.shape)
-    # inp = model(inp)
-    # print(inp.shape)
-    
-    device = torch.device('cuda:0')
-    model = ResTcn(2).to(device)
+    from torchinfo import summaryw
+    device = torch.device('cuda:3')
+    model = ResTcn(2,0.5).to(device)
     inp = torch.randn((16,2,8500)).to(device)
     out = model(inp)
-    print(out.shape)
+    summary(model,(16,2,8500))
+    print("out.shape:",out.shape)
+    
     
     
      

@@ -56,7 +56,8 @@ def test():
             for data in dataloader:
                 intensity , angle,labels230 = data[0].type(torch.float).to(device),data[1].type(torch.float).to(device),data[2].to(device)
                 out = model(intensity,angle)
-                raw_logits,hkl = out[0],out[1]
+                raw_logits = out
+                # raw_logits,hkl = out[0],out[1]
                 # raw_logits = model(intensity,angle)
                 err = lossfn(raw_logits,labels230)
                 logits = raw_logits.softmax(dim=1)
@@ -74,7 +75,7 @@ def test():
         per_class_acc = list(acc_per_class.compute().cpu().numpy())
         h_acc,m_acc,t_acc = per_class_acc2hmt_acc(per_class_acc) 
     
-    logger.info('-'*15+'performance'+'-'*15+'\total_num:%d\nerror:%f\ntotal_acc:%s\nf1_score:%s\ntop%d_acc:%s\nhead_acc:%s\nmedium_acc:%s\ntail_add:%s\n'%(
+    logger.info('-'*15+'performance'+'-'*15+'\ntotal_num:%d\nerror:%f\ntotal_acc:%s\nf1_score:%s\ntop%d_acc:%s\nhead_acc:%s\nmedium_acc:%s\ntail_add:%s\n'%(
         total_num,
         total_err/batch_cnt,
         total_acc_val,

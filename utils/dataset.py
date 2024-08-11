@@ -11,7 +11,6 @@ ANGLE_END = 90
 class XrdData(Dataset):
     def __init__(self,file_path):
         data = np.load(file_path,allow_pickle=True,encoding='latin1')
-        # self.features = data.item().get('features')
         self.intensity = data.item().get('intensitys')
         self.angle = data.item().get('angles')
         self.labels230 = data.item().get('labels230')
@@ -19,7 +18,8 @@ class XrdData(Dataset):
         if self.intensity is None:
             self.intensity = data.item().get('features')
         if self.angle is None :
-            self.angle = [np.arange(ANGLE_START,ANGLE_END,(ANGLE_END-ANGLE_START)/TO_XRD_LENGTH) for i in range(len(self.labels230)) ]
+            # self.angle = [np.arange(ANGLE_START,ANGLE_END,(ANGLE_END-ANGLE_START)/TO_XRD_LENGTH) for i in range(len(self.labels230)) ]
+            self.angle = np.arange(0,TO_XRD_LENGTH).reshape(1,-1).repeat(len(self.labels230),axis=0)
         # atomic_number  = data.item().get('atomic_number')
         # print(self.features.shape,self.angle.shape,self.labels230.shape,self.labels7.shape)
         

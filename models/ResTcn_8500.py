@@ -24,6 +24,8 @@ class ResTcn(torch.nn.Module):
         super(ResTcn,self).__init__()
         self.in_c = in_c
         
+        self.intensity_norm = torch.nn.BatchNorm1d(1)
+        
         self.TCN = torch.nn.Sequential(
             ResBlock1D(in_c,32),
             torch.nn.MaxPool1d(2,2),
@@ -74,8 +76,9 @@ class ResTcn(torch.nn.Module):
         
     def forward(self,intensity,angle):
         intensity = intensity.view(intensity.shape[0],1,-1)
+        intensity = self.intensity_norm(intensity)
         angle = angle.view(angle.shape[0],1,-1)
-        data = torch.concat([intensity,angle],dim=1)
+        data = torch.concat([intensity,angle.deg2rad().sin()],dim=1)
         return self.TCN(data)
 
 

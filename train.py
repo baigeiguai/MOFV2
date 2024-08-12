@@ -81,7 +81,7 @@ logger.info('-'*15+'seed'+'-'*15+'\n'+str(now_seed))
 file_paths = os.listdir(args.data_path)
 train_files,test_files = [os.path.join(args.data_path,f)  for f in file_paths if f.startswith('train')],[os.path.join(args.data_path,f) for f in file_paths if f.startswith('test')]
 
-writer = SummaryWriter(log_dir='./board_dir/%s'%args.log_name)
+writer = SummaryWriter(log_dir='./board_dir_hh/%s'%args.log_name)
 
 
 def train():

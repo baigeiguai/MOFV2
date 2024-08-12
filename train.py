@@ -95,7 +95,7 @@ def train():
         total_num = 0.0
         total_err = 0.0 
         batch_cnt = 0
-        # model.train()
+        model.train()
         for file in train_files:
             xrd_dataset = XrdData(file)
             dataloader = DataLoader(xrd_dataset,batch_size=args.batch_size,shuffle=True,num_workers=args.num_workers)

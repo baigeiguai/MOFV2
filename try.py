@@ -89,16 +89,28 @@ from torchinfo import summary
 # out = model(angle,intensity)
 # summary(model,[(batch,length),(batch,length)])
 
-from models.RawEmbedConv import RawEmbedConv
-device = torch.device("cuda:3")
-model = RawEmbedConv().to(device)
+# from models.RawEmbedConv import RawEmbedConv
+# device = torch.device("cuda:3")
+# model = RawEmbedConv().to(device)
+# batch,length = 32,8500
+# angle = torch.arange(0,length).view(1,-1).repeat((batch,1)).to(device)
+# intensity = torch.randn(batch,length).to(device)
+# a = model(intensity,angle)
+
+# summary(model,[(batch,length),(batch,length)])
+
+# print(a.shape)
+
+
+from models.ConcatEmbedConv import ConcatEmbedConv
+device = torch.device("cuda:1")
+model = ConcatEmbedConv().to(device)
 batch,length = 32,8500
 angle = torch.arange(0,length).view(1,-1).repeat((batch,1)).to(device)
 intensity = torch.randn(batch,length).to(device)
 a = model(intensity,angle)
 
-summary(model,[(batch,length),(batch,length)])
+# summary(model,[(batch,length),(batch,length)])
 
 print(a.shape)
-
 

@@ -10,7 +10,7 @@ from torch.utils.tensorboard.writer import SummaryWriter
 from utils.dataset import XrdData
 from torchmetrics.classification import MulticlassAccuracy
 
-torch.backends.cudnn.enabled = False
+torch.backends.cudnn.enabled = True
 os.environ['CUDA_LAUNCH_BLOCKING'] = '0'
 
 
@@ -48,8 +48,11 @@ if args.model_path is None :
     # from models.SConv import SResTcn
     # model = SResTcn().to(device)
     
-    from models.RawEmbedConv import RawEmbedConv
-    model = RawEmbedConv().to(device)
+    # from models.RawEmbedConv import RawEmbedConv
+    # model = RawEmbedConv().to(device)
+    
+    from models.ConcatEmbedConv import ConcatEmbedConv 
+    model = ConcatEmbedConv().to(device)
     
 else :
     model = torch.load(args.model_path,map_location=device)

@@ -54,8 +54,11 @@ if args.model_path is None :
     # from models.ConcatEmbedConv import ConcatEmbedConv 
     # model = ConcatEmbedConv().to(device)
     
-    from models.AtBase import AtBase
-    model = AtBase().to(device)
+    # from models.AtBase import AtBase
+    # model = AtBase().to(device)
+    
+    from models.AtLBase import AtLBase
+    model = AtLBase().to(device)
     
 else :
     model = torch.load(args.model_path,map_location=device)

@@ -30,8 +30,6 @@ class ScaledDotProductAttention(torch.nn.Module):
         self.d_k = d_k 
 
     def forward(self,q,k,v):
-        # print("aq",q.shape)
-        # print("ak",k.shape)
         attention_score = torch.matmul(q,k.transpose(-1,-2))/ np.sqrt(self.d_k)
         attn_weights = torch.nn.Softmax(dim=-1)(attention_score)
         output = torch.matmul(attn_weights,v)

@@ -114,9 +114,19 @@ from torchinfo import summary
 
 # print(a.shape)
 
-from models.AtBase import AtBase
-device = torch.device("cuda:1")
-model = AtBase(n_layers=24).to(device)
+# from models.AtBase import AtBase
+# device = torch.device("cuda:0")
+# model = AtBase(n_layers=24,n_heads=1).to(device)
+# batch,length = 32,850
+# angle = torch.arange(0,length).view(1,-1).repeat((batch,1)).to(device)
+# intensity = torch.randn(batch,length).to(device)
+# a = model(intensity,angle)
+# summary(model,[(batch,length),(batch,length)])
+# print(a.shape)
+
+from models.AtLBase import AtLBase
+device = torch.device("cuda:7")
+model = AtLBase(n_layers=1).to(device)
 batch,length = 32,850
 angle = torch.arange(0,length).view(1,-1).repeat((batch,1)).to(device)
 intensity = torch.randn(batch,length).to(device)

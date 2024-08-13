@@ -67,7 +67,7 @@ ANGLE_NUM =850
 
 
 class AtLBase(torch.nn.Module):
-    def __init__(self,embed_len=64,n_layers=24,p_drop=0.1,d_ff=256):
+    def __init__(self,embed_len=64,n_layers=24,p_drop=0.05,d_ff=256):
         super(AtLBase,self).__init__()
         self.embed = torch.nn.Embedding(ANGLE_NUM,embed_len)
         self.encoders =  torch.nn.ModuleList([EncoderLayer(embed_len,p_drop,d_ff) for _ in range(n_layers)])        

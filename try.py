@@ -126,8 +126,8 @@ from torchinfo import summary
 
 from models.AtLBase import AtLBase
 device = torch.device("cuda:1")
-model = AtLBase(n_layers=2).to(device)
-batch,length = 4,850
+model = AtLBase(n_layers=8,embed_len=512,d_ff=1024).to(device)
+batch,length = 128,850
 angle = torch.arange(0,length).view(1,-1).repeat((batch,1)).to(device)
 intensity = torch.randn(batch,length).to(device)
 a,_,_ = model(intensity,angle)

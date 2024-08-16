@@ -58,7 +58,7 @@ if args.model_path is None :
     # model = AtBase().to(device)
     
     from models.AtLBase import AtLBase
-    model = AtLBase(embed_len=128,d_ff=256).to(device)
+    model = AtLBase(embed_len=512,d_ff=1024,n_layers=8).to(device)
     
 else :
     model = torch.load(args.model_path,map_location=device)

@@ -15,6 +15,10 @@ class XrdData(Dataset):
         self.angle = data.item().get('angles')
         self.labels230 = data.item().get('labels230')
         self.labels7 = data.item().get('labels7')
+        self.lattice = data.item().get('lattices')
+        self.atomic_labels = data.item().get('atomic_labels')
+        self.mask = data.item().get('mask')
+        self.cart_coords = data.item().get('cart_coords')
         if self.intensity is None:
             self.intensity = data.item().get('features')
         if self.angle is None :
@@ -25,17 +29,22 @@ class XrdData(Dataset):
         
     def __getitem__(self, index) :
         # return [self.features[index],self.angle,self.labels230[index],self.labels7[index]]
-        return [self.intensity[index],self.angle[index],self.labels230[index]]
+        return [self.intensity[index],
+                self.angle[index],
+                self.labels230[index],
+                self.lattice[index],
+                self.atomic_labels[index],
+                self.mask[index],
+                self.cart_coords[index]]
         
     def __len__(self):
         return len(self.labels230)
     
 if __name__ == '__main__':
-    t = XrdData('/home/ylh/code/MyExps/MOFV2/data/Pymatgen_Wrapped/0/test_0.npy')
+    t = XrdData('/home/ylh/code/MyExps/MOFV2/data/Pymatgen_Wrapped_Plus/0/train_0.npy')
     dataloader = DataLoader(t,16,True)
     for data in dataloader :
-        [a,b,c] = data 
-        print(a.shape,b.shape,c.shape)
-        print(b[0][50:100])
+        [a,b,c,d,e,f,g] = data 
+        print(a.shape,b.shape,c.shape,d.shape,e.shape,f.shape,g.shape)
         break
     

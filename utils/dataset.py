@@ -1,6 +1,7 @@
 from torch import multiprocessing 
 from torch.utils.data import Dataset
 from torch.utils.data import DataLoader
+import torch 
 import numpy as np
 
 
@@ -29,6 +30,7 @@ class XrdData(Dataset):
         
     def __getitem__(self, index) :
         # return [self.features[index],self.angle,self.labels230[index],self.labels7[index]]
+        # torch.Size([16, 850]) torch.Size([16, 850]) torch.Size([16]) torch.Size([16, 3, 3]) torch.Size([16, 500]) torch.Size([16, 500]) torch.Size([16, 500, 3])
         return [self.intensity[index],
                 self.angle[index],
                 self.labels230[index],
@@ -46,5 +48,7 @@ if __name__ == '__main__':
     for data in dataloader :
         [a,b,c,d,e,f,g] = data 
         print(a.shape,b.shape,c.shape,d.shape,e.shape,f.shape,g.shape)
+        print(torch.concat([e.view(e.shape[0],-1,1),g],dim=-1).shape)
+        # torch.Size([16, 850]) torch.Size([16, 850]) torch.Size([16]) torch.Size([16, 3, 3]) torch.Size([16, 500]) torch.Size([16, 500]) torch.Size([16, 500, 3])
         break
     

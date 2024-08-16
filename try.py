@@ -124,53 +124,53 @@ from torchinfo import summary
 # summary(model,[(batch,length),(batch,length)])
 # print(a.shape)
 
-# from models.AtLBase import AtLBase
-# device = torch.device("cuda:7")
-# model = AtLBase(n_layers=1).to(device)
-# batch,length = 32,850
-# angle = torch.arange(0,length).view(1,-1).repeat((batch,1)).to(device)
-# intensity = torch.randn(batch,length).to(device)
-# a = model(intensity,angle)
-# summary(model,[(batch,length),(batch,length)])
-# print(a.shape)
+from models.AtLBase import AtLBase
+device = torch.device("cuda:1")
+model = AtLBase(n_layers=2).to(device)
+batch,length = 4,850
+angle = torch.arange(0,length).view(1,-1).repeat((batch,1)).to(device)
+intensity = torch.randn(batch,length).to(device)
+a,_,_ = model(intensity,angle)
+summary(model,[(batch,length),(batch,length)])
+print(a.shape)
 
-from pymatgen.core import Structure
-from pymatgen.analysis.diffraction.xrd import XRDCalculator
-import argparse
+# from pymatgen.core import Structure
+# from pymatgen.analysis.diffraction.xrd import XRDCalculator
+# import argparse
 
-ANGLE_START = 5
-ANGLE_END = 90
+# ANGLE_START = 5
+# ANGLE_END = 90
 
-space_group_map_dict = {}
-for i in range(1, 3):
-    space_group_map_dict[i] = 1
-for i in range(3, 16):
-    space_group_map_dict[i] = 2
-for i in range(16, 75):
-    space_group_map_dict[i] = 3
-for i in range(75, 143):
-    space_group_map_dict[i] = 4
-for i in range(143, 168):
-    space_group_map_dict[i] = 5
-for i in range(168, 195):
-    space_group_map_dict[i] = 6
-for i in range(195, 231):
-    space_group_map_dict[i] = 7
+# space_group_map_dict = {}
+# for i in range(1, 3):
+#     space_group_map_dict[i] = 1
+# for i in range(3, 16):
+#     space_group_map_dict[i] = 2
+# for i in range(16, 75):
+#     space_group_map_dict[i] = 3
+# for i in range(75, 143):
+#     space_group_map_dict[i] = 4
+# for i in range(143, 168):
+#     space_group_map_dict[i] = 5
+# for i in range(168, 195):
+#     space_group_map_dict[i] = 6
+# for i in range(195, 231):
+#     space_group_map_dict[i] = 7
 
-parser = argparse.ArgumentParser()
-parser.add_argument('--data_path',type=str,required=True)
-args = parser.parse_args()
+# parser = argparse.ArgumentParser()
+# parser.add_argument('--data_path',type=str,required=True)
+# args = parser.parse_args()
 
-structure  = Structure.from_file(args.data_path,primitive=True)
-space_group = structure.get_space_group_info()[1]-1
-print("space group:%d"%space_group)
-crystal_system = space_group_map_dict[space_group+1]-1
-print("crystal_system:%d"%crystal_system)
-atomic_numbers = structure.atomic_numbers
-print("len:",len(atomic_numbers),"atomic_numbers:",atomic_numbers[:500])
-cart_coords = structure.cart_coords
-print("len:",len(cart_coords),"cart_coords:",cart_coords[:500])
-frac_coords = structure.frac_coords
-print("len:",len(frac_coords),"frac_coords:",frac_coords)
-lattice = structure.lattice
-print("lattice:",lattice.metric_tensor)
+# structure  = Structure.from_file(args.data_path,primitive=True)
+# space_group = structure.get_space_group_info()[1]-1
+# print("space group:%d"%space_group)
+# crystal_system = space_group_map_dict[space_group+1]-1
+# print("crystal_system:%d"%crystal_system)
+# atomic_numbers = structure.atomic_numbers
+# print("len:",len(atomic_numbers),"atomic_numbers:",atomic_numbers[:500])
+# cart_coords = structure.cart_coords
+# print("len:",len(cart_coords),"cart_coords:",cart_coords[:500])
+# frac_coords = structure.frac_coords
+# print("len:",len(frac_coords),"frac_coords:",frac_coords)
+# lattice = structure.lattice
+# print("lattice:",lattice.metric_tensor)

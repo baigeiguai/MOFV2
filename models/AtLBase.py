@@ -65,22 +65,40 @@ class EncoderLayer(torch.nn.Module):
 
 ANGLE_NUM =850
 
+class MLP(torch.nn.Module):
+    def __init__(self,in_d,out_d):
+        super(MLP,self).__init__()
+        self.mlp = torch.nn.Sequential(
+            torch.nn.Linear(in_d,512),
+            torch.nn.LeakyReLU(),
+            torch.nn.Linear(512,1024),
+            torch.nn.LeakyReLU(),
+            torch.nn.Linear(1024,out_d)
+        )
+    
+    def forward(self,x):
+        return self.mlp(x)
+        
 
 class AtLBase(torch.nn.Module):
     def __init__(self,embed_len=64,n_layers=24,p_drop=0.05,d_ff=256):
         super(AtLBase,self).__init__()
         self.embed = torch.nn.Embedding(ANGLE_NUM,embed_len)
         self.encoders =  torch.nn.ModuleList([EncoderLayer(embed_len,p_drop,d_ff) for _ in range(n_layers)])        
-        self.cls = torch.nn.Linear(embed_len*ANGLE_NUM,230)
+        self.cls_sp = MLP(embed_len,230)
+        self.reg_lattice = MLP(embed_len,9)
+        self.reg_coord = MLP(embed_len,2000)
         
     def forward(self,intensity,angle):
         angle = angle.view(angle.shape[0],-1).type(torch.long)
-        intensity = torch.diag_embed(intensity.view(intensity.shape[0],-1))
+        intensity = intensity.view(intensity.shape[0],-1,1)
         x = self.embed(angle)
+        x = x * intensity
+        intensity = torch.diag_embed(intensity.view(intensity.shape[0],-1))
         for encoder in self.encoders:
-            x = encoder(x,intensity)
-        x = x.view(x.shape[0],-1)
-        return self.cls(x)
+            x = encoder(x,intensity) 
+        x,_ = x.max(dim=1)
+        return self.cls_sp(x),self.reg_lattice(x).view(x.shape[0],3,3),self.reg_coord(x).view(x.shape[0],-1,4)
             
         
         

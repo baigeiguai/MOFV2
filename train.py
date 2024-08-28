@@ -52,6 +52,7 @@ else :
 if args.refer_model_path is not None :
     refer_model = torch.load(args.refer_model_path,map_location=device)
     refer_model.TCN.__delitem__(30)
+    refer_model = refer_model.requires_grad_(False)
 
 if len(device_list) >  1 :
     model = torch.nn.DataParallel(model,device_list).to(device)
@@ -152,9 +153,9 @@ def test():
             xrd_dataset = XrdData(file)
             dataloader = DataLoader(xrd_dataset,args.batch_size,num_workers=args.num_workers)
             for data in dataloader:
-                intensity , angle,labels230 = data[0].type(torch.float).to(device),data[1].type(torch.float).to(device),data[2].to(device)
+                intensity , angle,labels230,index = data[0].type(torch.float).to(device),data[1].type(torch.float).to(device),data[2].to(device),data[3].to(device)
                 # print('labels230 shape',labels230.shape)
-                _,cls = model(intensity,angle)
+                _,cls = model(intensity,index)
                 # raw_logits,hkl = out[0],out[1]
                 err = lossfn_ce(cls,labels230)
                 total_err += err.item()

@@ -103,7 +103,9 @@ def train():
             for data in dataloader:
                 optimizer.zero_grad()
                 intensity,angle,labels230,index = data[0].type(torch.float).to(device),data[1].to(device),data[2].to(device),data[3].to(device)
-                refer_features = refer_model(intensity,angle)
+                with torch.no_grad():
+                    refer_model.eval()
+                    refer_features = refer_model(intensity,angle)
                 features,cls = model(intensity,index)
                 error_cls = lossfn_ce(cls,labels230)
                 error_distil = lossfn_l1(features,refer_features)

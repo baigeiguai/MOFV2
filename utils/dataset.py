@@ -5,7 +5,7 @@ import torch
 import numpy as np
 
 
-TO_XRD_LENGTH = 850
+TO_XRD_LENGTH = 8500
 ANGLE_START = 5 
 ANGLE_END = 90
  
@@ -23,8 +23,9 @@ class XrdData(Dataset):
         if self.intensity is None:
             self.intensity = data.item().get('features')
         if self.angle is None :
-            # self.angle = [np.arange(ANGLE_START,ANGLE_END,(ANGLE_END-ANGLE_START)/TO_XRD_LENGTH) for i in range(len(self.labels230)) ]
-            self.angle = np.arange(0,TO_XRD_LENGTH).reshape(1,-1).repeat(len(self.labels230),axis=0)
+            self.angle = np.arange(ANGLE_START,ANGLE_END,(ANGLE_END-ANGLE_START)/TO_XRD_LENGTH).reshape(1,-1).repeat(len(self.labels230),axis=0).astype(np.float32)
+
+        self.index = np.arange(0,TO_XRD_LENGTH).reshape(1,-1).repeat(len(self.labels230),axis=0)
         # atomic_number  = data.item().get('atomic_number')
         # print(self.features.shape,self.angle.shape,self.labels230.shape,self.labels7.shape)
         
@@ -34,21 +35,24 @@ class XrdData(Dataset):
         return [self.intensity[index],
                 self.angle[index],
                 self.labels230[index],
-                self.lattice[index],
-                self.atomic_labels[index],
-                self.mask[index],
-                self.cart_coords[index]]
+                self.index[index]]
+                # self.lattice[index],
+                # self.atomic_labels[index],
+                # self.mask[index],
+                # self.cart_coords[index]]
         
     def __len__(self):
         return len(self.labels230)
     
 if __name__ == '__main__':
-    t = XrdData('/home/ylh/code/MyExps/MOFV2/data/Pymatgen_Wrapped_Plus/0/train_0.npy')
+    t = XrdData('/home/ylh/code/MyExps/MOFV2/data/Pymatgen_Wrapped_Short/0/train_0.npy')
     dataloader = DataLoader(t,16,True)
     for data in dataloader :
-        [a,b,c,d,e,f,g] = data 
-        print(a.shape,b.shape,c.shape,d.shape,e.shape,f.shape,g.shape)
-        print(torch.concat([e.view(e.shape[0],-1,1),g],dim=-1).shape)
+        [a,b,c] = data 
+        print(a.shape,b.shape,c.shape)
+        # [a,b,c,d,e,f,g] = data 
+        # print(a.shape,b.shape,c.shape,d.shape,e.shape,f.shape,g.shape)
+        # print(torch.concat([e.view(e.shape[0],-1,1),g],dim=-1).shape)
         # torch.Size([16, 850]) torch.Size([16, 850]) torch.Size([16]) torch.Size([16, 3, 3]) torch.Size([16, 500]) torch.Size([16, 500]) torch.Size([16, 500, 3])
         break
     

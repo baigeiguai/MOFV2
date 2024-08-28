@@ -75,6 +75,8 @@ class ResTcn(torch.nn.Module):
         )
         
     def forward(self,intensity,angle):
+        intensity = intensity.type(torch.float)
+        angle = angle.type(torch.float)
         intensity = intensity.view(intensity.shape[0],1,-1)
         intensity = self.intensity_norm(intensity)
         angle = angle.view(angle.shape[0],1,-1)

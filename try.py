@@ -124,19 +124,19 @@ from torchinfo import summary
 # summary(model,[(batch,length),(batch,length)])
 # print(a.shape)
 
-from models.AtLBase import AtLBase
-device = torch.device("cuda:1")
-model = AtLBase(n_layers=8,embed_len=512,d_ff=1024).to(device)
-batch,length = 128,850
-angle = torch.arange(0,length).view(1,-1).repeat((batch,1)).to(device)
-intensity = torch.randn(batch,length).to(device)
-a,_,_ = model(intensity,angle)
-summary(model,[(batch,length),(batch,length)])
-print(a.shape)
+# from models.AtLBase import AtLBase
+# device = torch.device("cuda:1")
+# model = AtLBase(n_layers=8,embed_len=512,d_ff=1024).to(device)
+# batch,length = 256,850
+# angle = torch.arange(0,length).view(1,-1).repeat((batch,1)).to(device)
+# intensity = torch.randn(batch,length).to(device)
+# a,_,_ = model(intensity,angle)
+# summary(model,[(batch,length),(batch,length)])
+# print(a.shape)
 
 # from pymatgen.core import Structure
 # from pymatgen.analysis.diffraction.xrd import XRDCalculator
-# import argparse
+# import argparse  
 
 # ANGLE_START = 5
 # ANGLE_END = 90
@@ -174,3 +174,52 @@ print(a.shape)
 # print("len:",len(frac_coords),"frac_coords:",frac_coords)
 # lattice = structure.lattice
 # print("lattice:",lattice.metric_tensor)
+
+
+# device = torch.device("cuda:6")
+# from models.ResTcn_8500 import ResTcn
+# model = ResTcn(2,0).to(device)
+# batch,length = 256,8500
+# angle = torch.arange(0,length).view(1,-1).repeat((batch,1)).to(device)
+# intensity = torch.randn(batch,length).to(device)
+# a = model(intensity,angle)
+# summary(model,[(batch,length),(batch,length)])
+# print(a.shape)
+
+# import argparse 
+
+# parser = argparse.ArgumentParser()
+# parser.add_argument('--model_path',type=str)
+# args = parser.parse_args()
+
+# device = torch.device("cuda:6")
+# model = torch.load(args.model_path,map_location=device).to(device)
+# model.TCN.__delitem__(30)
+# batch,length = 32,8500
+# angle = torch.arange(0,length).view(1,-1).repeat((batch,1)).to(device)
+# intensity = torch.randn(batch,length).to(device)
+# a = model(intensity,angle)
+# # summary(model,[(batch,length),(batch,length)])
+# print(a.shape)
+
+# device = torch.device("cuda:6")
+# from models.AtLBase import AtLBase 
+
+# model = AtLBase(embed_len=8,n_layers=4,p_drop=0).to(device)
+# batch,length = 8,8500
+# index = torch.arange(0,length).view(1,-1).repeat((batch,1)).to(device)
+# intensity = torch.randn(batch,length).to(device)
+# a,b = model(intensity,index)
+# summary(model,[(batch,length),(batch,length)])
+# print(a.shape,b.shape)
+
+device = torch.device("cuda:6")
+from models.AttDistil import AttDistil 
+model = AttDistil().to(device)
+batch,length = 32,8500
+index = torch.arange(0,length).view(1,-1).repeat((batch,1)).to(device)
+intensity = torch.randn(batch,length).to(device)
+a,b = model(intensity,index)
+summary(model,[(batch,length),(batch,length)])
+# print(a.shape)
+print(a.shape,b.shape)

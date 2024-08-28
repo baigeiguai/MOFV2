@@ -12,11 +12,12 @@ class Attention(torch.nn.Module):
         self.linear = torch.nn.Linear(self.d_v,dimension)
 
     def forward(self,X,intensity):
-        batch_size = X.shape[0]
+        # print("intensity.shape:",intensity.shape)
         q = self.WQ(X)
         k_T = self.WK(X).transpose(-1,-2)
         v = self.WV(X)
         atten_score = q@(k_T/np.sqrt(self.d_k))
+        # print("atten_score.shape:",atten_score.shape)
         attn_weights = atten_score.softmax(dim=-1)+intensity
         out = attn_weights@v 
         return self.linear(out)
@@ -63,7 +64,7 @@ class EncoderLayer(torch.nn.Module):
         return ffn_output
 
 
-ANGLE_NUM =850
+ANGLE_NUM =8500
 
 class MLP(torch.nn.Module):
     def __init__(self,in_d,out_d):
@@ -81,13 +82,12 @@ class MLP(torch.nn.Module):
         
 
 class AtLBase(torch.nn.Module):
-    def __init__(self,embed_len=64,n_layers=24,p_drop=0.05,d_ff=256):
+    def __init__(self,embed_len=32,n_layers=8,p_drop=0.05,d_ff=64):
         super(AtLBase,self).__init__()
         self.embed = torch.nn.Embedding(ANGLE_NUM,embed_len)
         self.encoders =  torch.nn.ModuleList([EncoderLayer(embed_len,p_drop,d_ff) for _ in range(n_layers)])        
-        self.cls_sp = MLP(embed_len,230)
-        self.reg_lattice = MLP(embed_len,9)
-        self.reg_coord = MLP(embed_len,2000)
+        self.mlp = torch.nn.Linear(embed_len*ANGLE_NUM,1024)
+        self.cls = torch.nn.Linear(1024,230)
         
     def forward(self,intensity,angle):
         angle = angle.view(angle.shape[0],-1).type(torch.long)
@@ -97,8 +97,10 @@ class AtLBase(torch.nn.Module):
         intensity = torch.diag_embed(intensity.view(intensity.shape[0],-1))
         for encoder in self.encoders:
             x = encoder(x,intensity) 
-        x,_ = x.max(dim=1)
-        return self.cls_sp(x),self.reg_lattice(x).view(x.shape[0],3,3),self.reg_coord(x).view(x.shape[0],-1,4)
+        x  = x.view(x.shape[0],-1)
+        features = self.mlp(x)
+        sp = self.cls(features)
+        return features,sp 
             
         
         

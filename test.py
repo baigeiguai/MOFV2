@@ -54,9 +54,9 @@ def test():
             xrd_dataset = XrdData(file)
             dataloader = DataLoader(xrd_dataset,batch_size=args.batch_size,num_workers=args.num_workers)
             for data in dataloader:
-                intensity , angle,labels230 = data[0].type(torch.float).to(device),data[1].type(torch.float).to(device),data[2].to(device)
-                out = model(intensity,angle)
-                raw_logits = out
+                intensity , angle,labels230,index = data[0].type(torch.float).to(device),data[1].type(torch.float).to(device),data[2].to(device),data[3].to(device)
+                _,raw_logits = model(intensity,index)
+                
                 # raw_logits,hkl = out[0],out[1]
                 # raw_logits = model(intensity,angle)
                 err = lossfn(raw_logits,labels230)

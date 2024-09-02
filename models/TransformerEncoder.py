@@ -5,10 +5,9 @@ import numpy as np
 
 
 class PositionEmbedding(torch.nn.Module):
-    def __init__(self,device,seq_len,dimension) -> None:
+    def __init__(self,seq_len,dimension) -> None:
         super(PositionEmbedding,self).__init__()
-        self.device = device
-        self.position_embedding = self.get_position_embedding(seq_len,dimension).to(device)
+        self.position_embedding = torch.nn.Parameter(self.get_position_embedding(seq_len,dimension),requires_grad=False)
 
     def forward(self,x):
         # print("x.shape",x.shape,"position_embedding.shape",self.position_embedding.shape)
@@ -96,9 +95,9 @@ class EncoderLayer(torch.nn.Module):
         return ffn_output
 
 class TransformerEncoder(torch.nn.Module):
-    def __init__(self,seq_len,dimension,n_layers,n_heads,p_drop,d_ff,device) -> None:
+    def __init__(self,seq_len,dimension,n_layers,n_heads,p_drop,d_ff) -> None:
         super(TransformerEncoder,self).__init__()
-        self.positionEnbeding = PositionEmbedding(device,seq_len,dimension)
+        self.positionEnbeding = PositionEmbedding(seq_len,dimension)
         self.encoder_layers = torch.nn.ModuleList([EncoderLayer(dimension,n_heads,p_drop,d_ff) for _ in range(n_layers)])
     
     def forward(self,X):
@@ -116,5 +115,5 @@ if __name__ == '__main__':
     # position_embed = PositionEmbedding().to(device)
     X = torch.rand((128,500,512)).to(device)
     # X = position_embed(X)
-    encoder = TransformerEncoder(500,512,1,8,0.01,256,device).to(device)
+    encoder = TransformerEncoder(500,512,1,8,0.01,256).to(device)
     X = encoder(X)

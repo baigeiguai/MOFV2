@@ -216,7 +216,7 @@ from torchinfo import summary
 device = torch.device("cuda:6")
 from models.AttDistil import AttDistil 
 model = AttDistil().to(device)
-batch,length = 32,8500
+batch,length = 8,8500
 index = torch.arange(0,length).view(1,-1).repeat((batch,1)).to(device)
 intensity = torch.randn(batch,length).to(device)
 a,b = model(intensity,index)

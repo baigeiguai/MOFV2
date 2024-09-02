@@ -35,7 +35,7 @@ args = parser.parse_args()
 log = Log(__name__,file_dir='log/train/',log_file_name='train_%s'%(args.train_name))
 args.log_name = log.log_name
 logger = log.get_log()
-
+logger.info("start")
 now_seed = 3407
 seed_torch(now_seed)
 
@@ -86,7 +86,7 @@ train_files,test_files = [os.path.join(args.data_path,f)  for f in file_paths if
 
 writer = SummaryWriter(log_dir='./hh_board_dir/%s'%args.log_name)
 
-
+logger.info("start_train")
 def train():
     max_acc = 0 
     mini_err = 1e9 
@@ -99,8 +99,10 @@ def train():
         batch_cnt = 0
         model.train()
         for file in train_files:
+            logger.info("start get file data")
             xrd_dataset = XrdData(file)
             dataloader = DataLoader(xrd_dataset,batch_size=args.batch_size,shuffle=True,num_workers=args.num_workers)
+            logger.info("finish get file data,start train")
             for data in dataloader:
                 optimizer.zero_grad()
                 intensity,angle,labels230,index = data[0].type(torch.float).to(device),data[1].to(device),data[2].to(device),data[3].to(device)
@@ -118,6 +120,7 @@ def train():
                 total_err += error.item()
                 total_err_cls += error_cls.item()
                 total_err_distil += error_distil.item()
+            logger.info("finish train file data")
         # logger.info('[training]total_num: '+str(total_num)+',error: '+str(total_err/batch_cnt))
         logger.info('[training]total_num:%s, error:%s, cls_error:%s, distil_error:%s '%(
             str(total_num),

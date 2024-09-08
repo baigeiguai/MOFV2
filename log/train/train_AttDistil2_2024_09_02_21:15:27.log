@@ -1,0 +1,874 @@
+[2024-09-02 21:15:27,194][train.py][line:38][INFO] start
+[2024-09-02 21:15:31,732][train.py][line:77][INFO] ---------------args---------------
+Namespace(data_path='./data/Pymatgen_Wrapped/0', train_name='AttDistil2', model_path=None, learning_rate=0.0005, min_learning_rate=1e-05, start_scheduler_step=50, weight_decay=1e-05, momentum=0.99, batch_size=32, class_num=230, epoch_num=200, model_save_path='/data/ylh/MyExps/MOFV2/checkpoints/AttDistil', device='1,3,5,7', scheduler_T=None, num_workers=20, refer_model_path='./checkpoints/RawConv/RawConv_epoch_93.pth', log_name='log/train//train_AttDistil2_2024_09_02_21:15:27.log')
+[2024-09-02 21:15:31,734][train.py][line:78][INFO] ---------------model---------------
+DataParallel(
+  (module): AttDistil(
+    (embed): Embedding(8500, 64)
+    (encoder): TransformerEncoder(
+      (positionEnbeding): PositionEmbedding()
+      (encoder_layers): ModuleList(
+        (0-23): 24 x EncoderLayer(
+          (mha): MultiHeadAttention(
+            (WQ): Linear(in_features=640, out_features=640, bias=True)
+            (WK): Linear(in_features=640, out_features=640, bias=True)
+            (WV): Linear(in_features=640, out_features=640, bias=True)
+            (scaled_dot_product_attn): ScaledDotProductAttention()
+            (linear): Linear(in_features=640, out_features=640, bias=True)
+          )
+          (dropout1): Dropout(p=0, inplace=False)
+          (layernorm1): LayerNorm((640,), eps=1e-06, elementwise_affine=True)
+          (ffn): FeedForwardNetwork(
+            (linear1): Linear(in_features=640, out_features=1024, bias=True)
+            (linear2): Linear(in_features=1024, out_features=640, bias=True)
+            (relu): LeakyReLU(negative_slope=0.01)
+          )
+          (dropout2): Dropout(p=0, inplace=False)
+          (layernorm2): LayerNorm((640,), eps=1e-06, elementwise_affine=True)
+        )
+      )
+    )
+    (to_features): Linear(in_features=640, out_features=1024, bias=True)
+    (to_cls): Linear(in_features=1024, out_features=230, bias=True)
+  )
+)
+[2024-09-02 21:15:31,734][train.py][line:79][INFO] ---------------device---------------
+cuda:1
+[2024-09-02 21:15:31,734][train.py][line:80][INFO] ---------------optimizer---------------
+AdamW (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    initial_lr: 0.0005
+    lr: 0.0005
+    maximize: False
+    weight_decay: 1e-05
+)
+[2024-09-02 21:15:31,734][train.py][line:81][INFO] ---------------lossfn---------------
+CrossEntropyLoss(),L1Loss()
+[2024-09-02 21:15:31,734][train.py][line:82][INFO] ---------------seed---------------
+3407
+[2024-09-02 21:15:31,737][train.py][line:89][INFO] start_train
+[2024-09-02 21:15:31,738][train.py][line:94][INFO] ---------------epoch 1---------------
+lr: [0.0005]
+[2024-09-02 21:15:31,739][train.py][line:102][INFO] start get file data
+[2024-09-02 21:15:32,525][train.py][line:105][INFO] finish get file data,start train
+[2024-09-02 21:18:45,735][train.py][line:123][INFO] finish train file data
+[2024-09-02 21:18:45,736][train.py][line:102][INFO] start get file data
+[2024-09-02 21:18:46,509][train.py][line:105][INFO] finish get file data,start train
+[2024-09-02 21:21:52,088][train.py][line:123][INFO] finish train file data
+[2024-09-02 21:21:52,088][train.py][line:102][INFO] start get file data
+[2024-09-02 21:21:52,839][train.py][line:105][INFO] finish get file data,start train
+[2024-09-02 21:24:57,947][train.py][line:123][INFO] finish train file data
+[2024-09-02 21:24:57,948][train.py][line:102][INFO] start get file data
+[2024-09-02 21:24:58,699][train.py][line:105][INFO] finish get file data,start train
+[2024-09-02 21:28:03,862][train.py][line:123][INFO] finish train file data
+[2024-09-02 21:28:03,863][train.py][line:102][INFO] start get file data
+[2024-09-02 21:28:04,068][train.py][line:105][INFO] finish get file data,start train
+[2024-09-02 21:28:54,178][train.py][line:123][INFO] finish train file data
+[2024-09-02 21:28:54,178][train.py][line:102][INFO] start get file data
+[2024-09-02 21:28:54,922][train.py][line:105][INFO] finish get file data,start train
+[2024-09-02 21:32:00,185][train.py][line:123][INFO] finish train file data
+[2024-09-02 21:32:00,186][train.py][line:102][INFO] start get file data
+[2024-09-02 21:32:00,942][train.py][line:105][INFO] finish get file data,start train
+[2024-09-02 21:35:06,711][train.py][line:123][INFO] finish train file data
+[2024-09-02 21:35:06,712][train.py][line:102][INFO] start get file data
+[2024-09-02 21:35:07,526][train.py][line:105][INFO] finish get file data,start train
+[2024-09-02 21:38:13,453][train.py][line:123][INFO] finish train file data
+[2024-09-02 21:38:13,454][train.py][line:102][INFO] start get file data
+[2024-09-02 21:38:14,210][train.py][line:105][INFO] finish get file data,start train
+[2024-09-02 21:41:20,047][train.py][line:123][INFO] finish train file data
+[2024-09-02 21:41:20,047][train.py][line:102][INFO] start get file data
+[2024-09-02 21:41:20,812][train.py][line:105][INFO] finish get file data,start train
+[2024-09-02 21:44:26,509][train.py][line:123][INFO] finish train file data
+[2024-09-02 21:44:26,509][train.py][line:102][INFO] start get file data
+[2024-09-02 21:44:27,261][train.py][line:105][INFO] finish get file data,start train
+[2024-09-02 21:47:32,293][train.py][line:123][INFO] finish train file data
+[2024-09-02 21:47:32,294][train.py][line:102][INFO] start get file data
+[2024-09-02 21:47:33,063][train.py][line:105][INFO] finish get file data,start train
+[2024-09-02 21:50:38,495][train.py][line:123][INFO] finish train file data
+[2024-09-02 21:50:38,495][train.py][line:102][INFO] start get file data
+[2024-09-02 21:50:39,266][train.py][line:105][INFO] finish get file data,start train
+[2024-09-02 21:53:44,929][train.py][line:123][INFO] finish train file data
+[2024-09-02 21:53:44,930][train.py][line:102][INFO] start get file data
+[2024-09-02 21:53:45,678][train.py][line:105][INFO] finish get file data,start train
+[2024-09-02 21:56:51,014][train.py][line:123][INFO] finish train file data
+[2024-09-02 21:56:51,015][train.py][line:102][INFO] start get file data
+[2024-09-02 21:56:51,769][train.py][line:105][INFO] finish get file data,start train
+[2024-09-02 21:59:57,049][train.py][line:123][INFO] finish train file data
+[2024-09-02 21:59:57,049][train.py][line:125][INFO] [training]total_num:142618.0, error:4.003469668462285, cls_error:3.793343414061813, distil_error:0.2101262527781682 
+[2024-09-02 22:14:44,520][train.py][line:171][INFO] [testing]total_number: 142618,error: 3.7791917868839797,total_acc: 0.06614172458648682
+[2024-09-02 22:14:45,930][train.py][line:94][INFO] ---------------epoch 2---------------
+lr: [0.0005]
+[2024-09-02 22:14:45,932][train.py][line:102][INFO] start get file data
+[2024-09-02 22:14:46,721][train.py][line:105][INFO] finish get file data,start train
+[2024-09-02 22:17:52,611][train.py][line:123][INFO] finish train file data
+[2024-09-02 22:17:52,612][train.py][line:102][INFO] start get file data
+[2024-09-02 22:17:53,364][train.py][line:105][INFO] finish get file data,start train
+[2024-09-02 22:20:58,844][train.py][line:123][INFO] finish train file data
+[2024-09-02 22:20:58,845][train.py][line:102][INFO] start get file data
+[2024-09-02 22:20:59,603][train.py][line:105][INFO] finish get file data,start train
+[2024-09-02 22:24:06,009][train.py][line:123][INFO] finish train file data
+[2024-09-02 22:24:06,010][train.py][line:102][INFO] start get file data
+[2024-09-02 22:24:06,789][train.py][line:105][INFO] finish get file data,start train
+[2024-09-02 22:27:12,549][train.py][line:123][INFO] finish train file data
+[2024-09-02 22:27:12,550][train.py][line:102][INFO] start get file data
+[2024-09-02 22:27:12,759][train.py][line:105][INFO] finish get file data,start train
+[2024-09-02 22:28:03,768][train.py][line:123][INFO] finish train file data
+[2024-09-02 22:28:03,768][train.py][line:102][INFO] start get file data
+[2024-09-02 22:28:04,518][train.py][line:105][INFO] finish get file data,start train
+[2024-09-02 22:31:11,488][train.py][line:123][INFO] finish train file data
+[2024-09-02 22:31:11,489][train.py][line:102][INFO] start get file data
+[2024-09-02 22:31:12,239][train.py][line:105][INFO] finish get file data,start train
+[2024-09-02 22:34:18,008][train.py][line:123][INFO] finish train file data
+[2024-09-02 22:34:18,009][train.py][line:102][INFO] start get file data
+[2024-09-02 22:34:18,781][train.py][line:105][INFO] finish get file data,start train
+[2024-09-02 22:37:25,644][train.py][line:123][INFO] finish train file data
+[2024-09-02 22:37:25,645][train.py][line:102][INFO] start get file data
+[2024-09-02 22:37:26,406][train.py][line:105][INFO] finish get file data,start train
+[2024-09-02 22:40:32,642][train.py][line:123][INFO] finish train file data
+[2024-09-02 22:40:32,642][train.py][line:102][INFO] start get file data
+[2024-09-02 22:40:33,394][train.py][line:105][INFO] finish get file data,start train
+[2024-09-02 22:43:38,354][train.py][line:123][INFO] finish train file data
+[2024-09-02 22:43:38,355][train.py][line:102][INFO] start get file data
+[2024-09-02 22:43:39,106][train.py][line:105][INFO] finish get file data,start train
+[2024-09-02 22:46:44,091][train.py][line:123][INFO] finish train file data
+[2024-09-02 22:46:44,092][train.py][line:102][INFO] start get file data
+[2024-09-02 22:46:44,888][train.py][line:105][INFO] finish get file data,start train
+[2024-09-02 22:49:49,995][train.py][line:123][INFO] finish train file data
+[2024-09-02 22:49:49,996][train.py][line:102][INFO] start get file data
+[2024-09-02 22:49:50,759][train.py][line:105][INFO] finish get file data,start train
+[2024-09-02 22:52:55,891][train.py][line:123][INFO] finish train file data
+[2024-09-02 22:52:55,892][train.py][line:102][INFO] start get file data
+[2024-09-02 22:52:56,644][train.py][line:105][INFO] finish get file data,start train
+[2024-09-02 22:56:01,538][train.py][line:123][INFO] finish train file data
+[2024-09-02 22:56:01,538][train.py][line:102][INFO] start get file data
+[2024-09-02 22:56:02,309][train.py][line:105][INFO] finish get file data,start train
+[2024-09-02 22:59:07,302][train.py][line:123][INFO] finish train file data
+[2024-09-02 22:59:07,303][train.py][line:125][INFO] [training]total_num:142618.0, error:3.952615125365155, cls_error:3.7751648367839903, distil_error:0.17745028913862282 
+[2024-09-02 23:13:53,400][train.py][line:171][INFO] [testing]total_number: 142618,error: 3.7712232889240362,total_acc: 0.06608562916517258
+[2024-09-02 23:13:54,276][train.py][line:94][INFO] ---------------epoch 3---------------
+lr: [0.0005]
+[2024-09-02 23:13:54,277][train.py][line:102][INFO] start get file data
+[2024-09-02 23:13:55,067][train.py][line:105][INFO] finish get file data,start train
+[2024-09-02 23:17:00,227][train.py][line:123][INFO] finish train file data
+[2024-09-02 23:17:00,228][train.py][line:102][INFO] start get file data
+[2024-09-02 23:17:00,984][train.py][line:105][INFO] finish get file data,start train
+[2024-09-02 23:20:06,381][train.py][line:123][INFO] finish train file data
+[2024-09-02 23:20:06,381][train.py][line:102][INFO] start get file data
+[2024-09-02 23:20:07,147][train.py][line:105][INFO] finish get file data,start train
+[2024-09-02 23:23:12,731][train.py][line:123][INFO] finish train file data
+[2024-09-02 23:23:12,732][train.py][line:102][INFO] start get file data
+[2024-09-02 23:23:13,482][train.py][line:105][INFO] finish get file data,start train
+[2024-09-02 23:26:18,638][train.py][line:123][INFO] finish train file data
+[2024-09-02 23:26:18,639][train.py][line:102][INFO] start get file data
+[2024-09-02 23:26:18,846][train.py][line:105][INFO] finish get file data,start train
+[2024-09-02 23:27:09,159][train.py][line:123][INFO] finish train file data
+[2024-09-02 23:27:09,159][train.py][line:102][INFO] start get file data
+[2024-09-02 23:27:09,903][train.py][line:105][INFO] finish get file data,start train
+[2024-09-02 23:30:15,084][train.py][line:123][INFO] finish train file data
+[2024-09-02 23:30:15,084][train.py][line:102][INFO] start get file data
+[2024-09-02 23:30:15,835][train.py][line:105][INFO] finish get file data,start train
+[2024-09-02 23:33:20,949][train.py][line:123][INFO] finish train file data
+[2024-09-02 23:33:20,950][train.py][line:102][INFO] start get file data
+[2024-09-02 23:33:21,715][train.py][line:105][INFO] finish get file data,start train
+[2024-09-02 23:36:27,034][train.py][line:123][INFO] finish train file data
+[2024-09-02 23:36:27,035][train.py][line:102][INFO] start get file data
+[2024-09-02 23:36:27,795][train.py][line:105][INFO] finish get file data,start train
+[2024-09-02 23:39:34,314][train.py][line:123][INFO] finish train file data
+[2024-09-02 23:39:34,314][train.py][line:102][INFO] start get file data
+[2024-09-02 23:39:35,066][train.py][line:105][INFO] finish get file data,start train
+[2024-09-02 23:42:40,463][train.py][line:123][INFO] finish train file data
+[2024-09-02 23:42:40,464][train.py][line:102][INFO] start get file data
+[2024-09-02 23:42:41,220][train.py][line:105][INFO] finish get file data,start train
+[2024-09-02 23:45:46,494][train.py][line:123][INFO] finish train file data
+[2024-09-02 23:45:46,495][train.py][line:102][INFO] start get file data
+[2024-09-02 23:45:47,241][train.py][line:105][INFO] finish get file data,start train
+[2024-09-02 23:48:52,779][train.py][line:123][INFO] finish train file data
+[2024-09-02 23:48:52,780][train.py][line:102][INFO] start get file data
+[2024-09-02 23:48:53,558][train.py][line:105][INFO] finish get file data,start train
+[2024-09-02 23:51:59,219][train.py][line:123][INFO] finish train file data
+[2024-09-02 23:51:59,219][train.py][line:102][INFO] start get file data
+[2024-09-02 23:51:59,977][train.py][line:105][INFO] finish get file data,start train
+[2024-09-02 23:55:05,420][train.py][line:123][INFO] finish train file data
+[2024-09-02 23:55:05,421][train.py][line:102][INFO] start get file data
+[2024-09-02 23:55:06,223][train.py][line:105][INFO] finish get file data,start train
+[2024-09-02 23:58:11,559][train.py][line:123][INFO] finish train file data
+[2024-09-02 23:58:11,560][train.py][line:125][INFO] [training]total_num:142618.0, error:3.94407685576374, cls_error:3.7722053321138507, distil_error:0.17187152299562664 
+[2024-09-03 00:12:54,508][train.py][line:171][INFO] [testing]total_number: 142618,error: 3.769834425660872,total_acc: 0.06608562916517258
+[2024-09-03 00:12:55,375][train.py][line:94][INFO] ---------------epoch 4---------------
+lr: [0.0005]
+[2024-09-03 00:12:55,376][train.py][line:102][INFO] start get file data
+[2024-09-03 00:12:56,170][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 00:16:01,552][train.py][line:123][INFO] finish train file data
+[2024-09-03 00:16:01,553][train.py][line:102][INFO] start get file data
+[2024-09-03 00:16:02,320][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 00:19:07,696][train.py][line:123][INFO] finish train file data
+[2024-09-03 00:19:07,696][train.py][line:102][INFO] start get file data
+[2024-09-03 00:19:08,467][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 00:22:13,242][train.py][line:123][INFO] finish train file data
+[2024-09-03 00:22:13,243][train.py][line:102][INFO] start get file data
+[2024-09-03 00:22:14,044][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 00:25:19,562][train.py][line:123][INFO] finish train file data
+[2024-09-03 00:25:19,562][train.py][line:102][INFO] start get file data
+[2024-09-03 00:25:19,770][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 00:26:09,972][train.py][line:123][INFO] finish train file data
+[2024-09-03 00:26:09,973][train.py][line:102][INFO] start get file data
+[2024-09-03 00:26:10,726][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 00:29:16,096][train.py][line:123][INFO] finish train file data
+[2024-09-03 00:29:16,096][train.py][line:102][INFO] start get file data
+[2024-09-03 00:29:16,848][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 00:32:21,818][train.py][line:123][INFO] finish train file data
+[2024-09-03 00:32:21,819][train.py][line:102][INFO] start get file data
+[2024-09-03 00:32:22,577][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 00:35:28,146][train.py][line:123][INFO] finish train file data
+[2024-09-03 00:35:28,146][train.py][line:102][INFO] start get file data
+[2024-09-03 00:35:28,900][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 00:38:34,862][train.py][line:123][INFO] finish train file data
+[2024-09-03 00:38:34,863][train.py][line:102][INFO] start get file data
+[2024-09-03 00:38:35,624][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 00:41:40,842][train.py][line:123][INFO] finish train file data
+[2024-09-03 00:41:40,843][train.py][line:102][INFO] start get file data
+[2024-09-03 00:41:41,649][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 00:44:46,993][train.py][line:123][INFO] finish train file data
+[2024-09-03 00:44:46,994][train.py][line:102][INFO] start get file data
+[2024-09-03 00:44:47,795][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 00:47:53,911][train.py][line:123][INFO] finish train file data
+[2024-09-03 00:47:53,912][train.py][line:102][INFO] start get file data
+[2024-09-03 00:47:54,674][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 00:50:59,490][train.py][line:123][INFO] finish train file data
+[2024-09-03 00:50:59,491][train.py][line:102][INFO] start get file data
+[2024-09-03 00:51:00,294][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 00:54:05,263][train.py][line:123][INFO] finish train file data
+[2024-09-03 00:54:05,264][train.py][line:102][INFO] start get file data
+[2024-09-03 00:54:06,019][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 00:57:11,008][train.py][line:123][INFO] finish train file data
+[2024-09-03 00:57:11,009][train.py][line:125][INFO] [training]total_num:142618.0, error:3.939790179759371, cls_error:3.7707790301905737, distil_error:0.16901114922497543 
+[2024-09-03 01:11:53,569][train.py][line:171][INFO] [testing]total_number: 142618,error: 3.7703483037410246,total_acc: 0.06608562916517258
+[2024-09-03 01:11:53,576][train.py][line:94][INFO] ---------------epoch 5---------------
+lr: [0.0005]
+[2024-09-03 01:11:53,577][train.py][line:102][INFO] start get file data
+[2024-09-03 01:11:54,376][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 01:14:59,269][train.py][line:123][INFO] finish train file data
+[2024-09-03 01:14:59,270][train.py][line:102][INFO] start get file data
+[2024-09-03 01:15:00,020][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 01:18:05,301][train.py][line:123][INFO] finish train file data
+[2024-09-03 01:18:05,302][train.py][line:102][INFO] start get file data
+[2024-09-03 01:18:06,062][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 01:21:11,093][train.py][line:123][INFO] finish train file data
+[2024-09-03 01:21:11,094][train.py][line:102][INFO] start get file data
+[2024-09-03 01:21:11,893][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 01:24:17,136][train.py][line:123][INFO] finish train file data
+[2024-09-03 01:24:17,136][train.py][line:102][INFO] start get file data
+[2024-09-03 01:24:17,348][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 01:25:08,083][train.py][line:123][INFO] finish train file data
+[2024-09-03 01:25:08,083][train.py][line:102][INFO] start get file data
+[2024-09-03 01:25:08,827][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 01:28:14,249][train.py][line:123][INFO] finish train file data
+[2024-09-03 01:28:14,250][train.py][line:102][INFO] start get file data
+[2024-09-03 01:28:15,006][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 01:31:21,216][train.py][line:123][INFO] finish train file data
+[2024-09-03 01:31:21,217][train.py][line:102][INFO] start get file data
+[2024-09-03 01:31:21,975][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 01:34:27,175][train.py][line:123][INFO] finish train file data
+[2024-09-03 01:34:27,176][train.py][line:102][INFO] start get file data
+[2024-09-03 01:34:27,928][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 01:37:33,157][train.py][line:123][INFO] finish train file data
+[2024-09-03 01:37:33,158][train.py][line:102][INFO] start get file data
+[2024-09-03 01:37:33,910][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 01:40:39,219][train.py][line:123][INFO] finish train file data
+[2024-09-03 01:40:39,220][train.py][line:102][INFO] start get file data
+[2024-09-03 01:40:39,977][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 01:43:45,018][train.py][line:123][INFO] finish train file data
+[2024-09-03 01:43:45,018][train.py][line:102][INFO] start get file data
+[2024-09-03 01:43:45,768][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 01:46:50,550][train.py][line:123][INFO] finish train file data
+[2024-09-03 01:46:50,550][train.py][line:102][INFO] start get file data
+[2024-09-03 01:46:51,301][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 01:49:56,338][train.py][line:123][INFO] finish train file data
+[2024-09-03 01:49:56,338][train.py][line:102][INFO] start get file data
+[2024-09-03 01:49:57,089][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 01:53:02,082][train.py][line:123][INFO] finish train file data
+[2024-09-03 01:53:02,082][train.py][line:102][INFO] start get file data
+[2024-09-03 01:53:02,831][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 01:56:07,771][train.py][line:123][INFO] finish train file data
+[2024-09-03 01:56:07,771][train.py][line:125][INFO] [training]total_num:142618.0, error:3.937122679579215, cls_error:3.769714757479647, distil_error:0.1674079229607911 
+[2024-09-03 02:10:55,214][train.py][line:171][INFO] [testing]total_number: 142618,error: 3.7693263017789436,total_acc: 0.06608562916517258
+[2024-09-03 02:10:56,095][train.py][line:94][INFO] ---------------epoch 6---------------
+lr: [0.0005]
+[2024-09-03 02:10:56,096][train.py][line:102][INFO] start get file data
+[2024-09-03 02:10:56,889][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 02:14:02,019][train.py][line:123][INFO] finish train file data
+[2024-09-03 02:14:02,020][train.py][line:102][INFO] start get file data
+[2024-09-03 02:14:02,774][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 02:17:08,099][train.py][line:123][INFO] finish train file data
+[2024-09-03 02:17:08,099][train.py][line:102][INFO] start get file data
+[2024-09-03 02:17:08,869][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 02:20:13,874][train.py][line:123][INFO] finish train file data
+[2024-09-03 02:20:13,875][train.py][line:102][INFO] start get file data
+[2024-09-03 02:20:14,677][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 02:23:20,698][train.py][line:123][INFO] finish train file data
+[2024-09-03 02:23:20,699][train.py][line:102][INFO] start get file data
+[2024-09-03 02:23:20,923][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 02:24:11,113][train.py][line:123][INFO] finish train file data
+[2024-09-03 02:24:11,113][train.py][line:102][INFO] start get file data
+[2024-09-03 02:24:11,875][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 02:27:17,746][train.py][line:123][INFO] finish train file data
+[2024-09-03 02:27:17,747][train.py][line:102][INFO] start get file data
+[2024-09-03 02:27:18,520][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 02:30:24,213][train.py][line:123][INFO] finish train file data
+[2024-09-03 02:30:24,214][train.py][line:102][INFO] start get file data
+[2024-09-03 02:30:25,024][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 02:33:30,454][train.py][line:123][INFO] finish train file data
+[2024-09-03 02:33:30,454][train.py][line:102][INFO] start get file data
+[2024-09-03 02:33:31,207][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 02:36:36,656][train.py][line:123][INFO] finish train file data
+[2024-09-03 02:36:36,656][train.py][line:102][INFO] start get file data
+[2024-09-03 02:36:37,425][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 02:39:42,470][train.py][line:123][INFO] finish train file data
+[2024-09-03 02:39:42,471][train.py][line:102][INFO] start get file data
+[2024-09-03 02:39:43,243][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 02:42:48,187][train.py][line:123][INFO] finish train file data
+[2024-09-03 02:42:48,187][train.py][line:102][INFO] start get file data
+[2024-09-03 02:42:48,935][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 02:45:54,426][train.py][line:123][INFO] finish train file data
+[2024-09-03 02:45:54,426][train.py][line:102][INFO] start get file data
+[2024-09-03 02:45:55,176][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 02:49:01,087][train.py][line:123][INFO] finish train file data
+[2024-09-03 02:49:01,087][train.py][line:102][INFO] start get file data
+[2024-09-03 02:49:01,841][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 02:52:06,791][train.py][line:123][INFO] finish train file data
+[2024-09-03 02:52:06,791][train.py][line:102][INFO] start get file data
+[2024-09-03 02:52:07,542][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 02:55:12,725][train.py][line:123][INFO] finish train file data
+[2024-09-03 02:55:12,725][train.py][line:125][INFO] [training]total_num:142618.0, error:3.934856745931837, cls_error:3.768425297405985, distil_error:0.16643145076570012 
+[2024-09-03 03:09:57,831][train.py][line:171][INFO] [testing]total_number: 142618,error: 3.76658155392575,total_acc: 0.06538445502519608
+[2024-09-03 03:09:58,683][train.py][line:94][INFO] ---------------epoch 7---------------
+lr: [0.0005]
+[2024-09-03 03:09:58,684][train.py][line:102][INFO] start get file data
+[2024-09-03 03:09:59,483][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 03:13:05,104][train.py][line:123][INFO] finish train file data
+[2024-09-03 03:13:05,105][train.py][line:102][INFO] start get file data
+[2024-09-03 03:13:05,902][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 03:16:11,612][train.py][line:123][INFO] finish train file data
+[2024-09-03 03:16:11,613][train.py][line:102][INFO] start get file data
+[2024-09-03 03:16:12,379][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 03:19:17,558][train.py][line:123][INFO] finish train file data
+[2024-09-03 03:19:17,559][train.py][line:102][INFO] start get file data
+[2024-09-03 03:19:18,377][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 03:22:24,254][train.py][line:123][INFO] finish train file data
+[2024-09-03 03:22:24,254][train.py][line:102][INFO] start get file data
+[2024-09-03 03:22:24,465][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 03:23:14,682][train.py][line:123][INFO] finish train file data
+[2024-09-03 03:23:14,683][train.py][line:102][INFO] start get file data
+[2024-09-03 03:23:15,432][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 03:26:20,713][train.py][line:123][INFO] finish train file data
+[2024-09-03 03:26:20,714][train.py][line:102][INFO] start get file data
+[2024-09-03 03:26:21,469][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 03:29:26,880][train.py][line:123][INFO] finish train file data
+[2024-09-03 03:29:26,880][train.py][line:102][INFO] start get file data
+[2024-09-03 03:29:27,640][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 03:32:33,042][train.py][line:123][INFO] finish train file data
+[2024-09-03 03:32:33,043][train.py][line:102][INFO] start get file data
+[2024-09-03 03:32:33,796][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 03:35:39,190][train.py][line:123][INFO] finish train file data
+[2024-09-03 03:35:39,191][train.py][line:102][INFO] start get file data
+[2024-09-03 03:35:39,946][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 03:38:45,226][train.py][line:123][INFO] finish train file data
+[2024-09-03 03:38:45,227][train.py][line:102][INFO] start get file data
+[2024-09-03 03:38:45,976][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 03:41:51,232][train.py][line:123][INFO] finish train file data
+[2024-09-03 03:41:51,233][train.py][line:102][INFO] start get file data
+[2024-09-03 03:41:51,980][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 03:44:57,251][train.py][line:123][INFO] finish train file data
+[2024-09-03 03:44:57,251][train.py][line:102][INFO] start get file data
+[2024-09-03 03:44:58,000][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 03:48:03,792][train.py][line:123][INFO] finish train file data
+[2024-09-03 03:48:03,792][train.py][line:102][INFO] start get file data
+[2024-09-03 03:48:04,545][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 03:51:09,385][train.py][line:123][INFO] finish train file data
+[2024-09-03 03:51:09,385][train.py][line:102][INFO] start get file data
+[2024-09-03 03:51:10,141][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 03:54:15,013][train.py][line:123][INFO] finish train file data
+[2024-09-03 03:54:15,013][train.py][line:125][INFO] [training]total_num:142618.0, error:3.9335696613382694, cls_error:3.7679071620266926, distil_error:0.16566250124098367 
+[2024-09-03 04:08:57,806][train.py][line:171][INFO] [testing]total_number: 142618,error: 3.76615338631001,total_acc: 0.06608562916517258
+[2024-09-03 04:08:58,630][train.py][line:94][INFO] ---------------epoch 8---------------
+lr: [0.0005]
+[2024-09-03 04:08:58,631][train.py][line:102][INFO] start get file data
+[2024-09-03 04:08:59,422][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 04:12:04,551][train.py][line:123][INFO] finish train file data
+[2024-09-03 04:12:04,551][train.py][line:102][INFO] start get file data
+[2024-09-03 04:12:05,305][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 04:15:10,370][train.py][line:123][INFO] finish train file data
+[2024-09-03 04:15:10,371][train.py][line:102][INFO] start get file data
+[2024-09-03 04:15:11,175][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 04:18:16,702][train.py][line:123][INFO] finish train file data
+[2024-09-03 04:18:16,703][train.py][line:102][INFO] start get file data
+[2024-09-03 04:18:17,452][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 04:21:22,094][train.py][line:123][INFO] finish train file data
+[2024-09-03 04:21:22,095][train.py][line:102][INFO] start get file data
+[2024-09-03 04:21:22,308][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 04:22:12,463][train.py][line:123][INFO] finish train file data
+[2024-09-03 04:22:12,464][train.py][line:102][INFO] start get file data
+[2024-09-03 04:22:13,211][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 04:25:18,080][train.py][line:123][INFO] finish train file data
+[2024-09-03 04:25:18,081][train.py][line:102][INFO] start get file data
+[2024-09-03 04:25:18,837][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 04:28:24,920][train.py][line:123][INFO] finish train file data
+[2024-09-03 04:28:24,920][train.py][line:102][INFO] start get file data
+[2024-09-03 04:28:25,729][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 04:31:31,223][train.py][line:123][INFO] finish train file data
+[2024-09-03 04:31:31,224][train.py][line:102][INFO] start get file data
+[2024-09-03 04:31:31,979][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 04:34:37,580][train.py][line:123][INFO] finish train file data
+[2024-09-03 04:34:37,580][train.py][line:102][INFO] start get file data
+[2024-09-03 04:34:38,334][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 04:37:43,685][train.py][line:123][INFO] finish train file data
+[2024-09-03 04:37:43,685][train.py][line:102][INFO] start get file data
+[2024-09-03 04:37:44,440][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 04:40:50,790][train.py][line:123][INFO] finish train file data
+[2024-09-03 04:40:50,790][train.py][line:102][INFO] start get file data
+[2024-09-03 04:40:51,540][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 04:43:56,575][train.py][line:123][INFO] finish train file data
+[2024-09-03 04:43:56,576][train.py][line:102][INFO] start get file data
+[2024-09-03 04:43:57,380][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 04:47:02,878][train.py][line:123][INFO] finish train file data
+[2024-09-03 04:47:02,879][train.py][line:102][INFO] start get file data
+[2024-09-03 04:47:03,633][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 04:50:08,611][train.py][line:123][INFO] finish train file data
+[2024-09-03 04:50:08,612][train.py][line:102][INFO] start get file data
+[2024-09-03 04:50:09,361][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 04:53:14,452][train.py][line:123][INFO] finish train file data
+[2024-09-03 04:53:14,453][train.py][line:125][INFO] [training]total_num:142618.0, error:3.9326459762229713, cls_error:3.7674197752736376, distil_error:0.16522620077241598 
+[2024-09-03 05:07:57,585][train.py][line:171][INFO] [testing]total_number: 142618,error: 3.765767088179947,total_acc: 0.06588228791952133
+[2024-09-03 05:07:58,439][train.py][line:94][INFO] ---------------epoch 9---------------
+lr: [0.0005]
+[2024-09-03 05:07:58,440][train.py][line:102][INFO] start get file data
+[2024-09-03 05:07:59,241][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 05:11:04,454][train.py][line:123][INFO] finish train file data
+[2024-09-03 05:11:04,454][train.py][line:102][INFO] start get file data
+[2024-09-03 05:11:05,211][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 05:14:10,489][train.py][line:123][INFO] finish train file data
+[2024-09-03 05:14:10,489][train.py][line:102][INFO] start get file data
+[2024-09-03 05:14:11,259][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 05:17:18,114][train.py][line:123][INFO] finish train file data
+[2024-09-03 05:17:18,115][train.py][line:102][INFO] start get file data
+[2024-09-03 05:17:18,873][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 05:20:23,907][train.py][line:123][INFO] finish train file data
+[2024-09-03 05:20:23,908][train.py][line:102][INFO] start get file data
+[2024-09-03 05:20:24,114][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 05:21:14,415][train.py][line:123][INFO] finish train file data
+[2024-09-03 05:21:14,416][train.py][line:102][INFO] start get file data
+[2024-09-03 05:21:15,190][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 05:24:19,949][train.py][line:123][INFO] finish train file data
+[2024-09-03 05:24:19,949][train.py][line:102][INFO] start get file data
+[2024-09-03 05:24:20,705][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 05:27:26,217][train.py][line:123][INFO] finish train file data
+[2024-09-03 05:27:26,218][train.py][line:102][INFO] start get file data
+[2024-09-03 05:27:26,979][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 05:30:32,972][train.py][line:123][INFO] finish train file data
+[2024-09-03 05:30:32,972][train.py][line:102][INFO] start get file data
+[2024-09-03 05:30:33,750][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 05:33:39,283][train.py][line:123][INFO] finish train file data
+[2024-09-03 05:33:39,284][train.py][line:102][INFO] start get file data
+[2024-09-03 05:33:40,034][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 05:36:45,417][train.py][line:123][INFO] finish train file data
+[2024-09-03 05:36:45,417][train.py][line:102][INFO] start get file data
+[2024-09-03 05:36:46,170][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 05:39:51,355][train.py][line:123][INFO] finish train file data
+[2024-09-03 05:39:51,356][train.py][line:102][INFO] start get file data
+[2024-09-03 05:39:52,115][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 05:42:57,068][train.py][line:123][INFO] finish train file data
+[2024-09-03 05:42:57,069][train.py][line:102][INFO] start get file data
+[2024-09-03 05:42:57,872][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 05:46:03,006][train.py][line:123][INFO] finish train file data
+[2024-09-03 05:46:03,007][train.py][line:102][INFO] start get file data
+[2024-09-03 05:46:03,771][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 05:49:08,916][train.py][line:123][INFO] finish train file data
+[2024-09-03 05:49:08,917][train.py][line:102][INFO] start get file data
+[2024-09-03 05:49:09,667][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 05:52:15,106][train.py][line:123][INFO] finish train file data
+[2024-09-03 05:52:15,106][train.py][line:125][INFO] [training]total_num:142618.0, error:3.931950002374615, cls_error:3.7670586961037795, distil_error:0.16489130731899038 
+[2024-09-03 06:07:00,078][train.py][line:171][INFO] [testing]total_number: 142618,error: 3.7683279879631533,total_acc: 0.06493569910526276
+[2024-09-03 06:07:00,085][train.py][line:94][INFO] ---------------epoch 10---------------
+lr: [0.0005]
+[2024-09-03 06:07:00,086][train.py][line:102][INFO] start get file data
+[2024-09-03 06:07:00,880][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 06:10:05,509][train.py][line:123][INFO] finish train file data
+[2024-09-03 06:10:05,509][train.py][line:102][INFO] start get file data
+[2024-09-03 06:10:06,263][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 06:13:11,176][train.py][line:123][INFO] finish train file data
+[2024-09-03 06:13:11,176][train.py][line:102][INFO] start get file data
+[2024-09-03 06:13:11,937][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 06:16:17,001][train.py][line:123][INFO] finish train file data
+[2024-09-03 06:16:17,001][train.py][line:102][INFO] start get file data
+[2024-09-03 06:16:17,749][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 06:19:23,004][train.py][line:123][INFO] finish train file data
+[2024-09-03 06:19:23,005][train.py][line:102][INFO] start get file data
+[2024-09-03 06:19:23,210][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 06:20:13,519][train.py][line:123][INFO] finish train file data
+[2024-09-03 06:20:13,519][train.py][line:102][INFO] start get file data
+[2024-09-03 06:20:14,262][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 06:23:20,402][train.py][line:123][INFO] finish train file data
+[2024-09-03 06:23:20,403][train.py][line:102][INFO] start get file data
+[2024-09-03 06:23:21,157][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 06:26:26,265][train.py][line:123][INFO] finish train file data
+[2024-09-03 06:26:26,266][train.py][line:102][INFO] start get file data
+[2024-09-03 06:26:27,087][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 06:29:33,080][train.py][line:123][INFO] finish train file data
+[2024-09-03 06:29:33,081][train.py][line:102][INFO] start get file data
+[2024-09-03 06:29:33,841][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 06:32:38,580][train.py][line:123][INFO] finish train file data
+[2024-09-03 06:32:38,580][train.py][line:102][INFO] start get file data
+[2024-09-03 06:32:39,360][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 06:35:44,542][train.py][line:123][INFO] finish train file data
+[2024-09-03 06:35:44,543][train.py][line:102][INFO] start get file data
+[2024-09-03 06:35:45,299][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 06:38:50,857][train.py][line:123][INFO] finish train file data
+[2024-09-03 06:38:50,858][train.py][line:102][INFO] start get file data
+[2024-09-03 06:38:51,654][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 06:41:57,374][train.py][line:123][INFO] finish train file data
+[2024-09-03 06:41:57,374][train.py][line:102][INFO] start get file data
+[2024-09-03 06:41:58,132][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 06:45:03,089][train.py][line:123][INFO] finish train file data
+[2024-09-03 06:45:03,090][train.py][line:102][INFO] start get file data
+[2024-09-03 06:45:03,837][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 06:48:08,613][train.py][line:123][INFO] finish train file data
+[2024-09-03 06:48:08,613][train.py][line:102][INFO] start get file data
+[2024-09-03 06:48:09,362][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 06:51:14,498][train.py][line:123][INFO] finish train file data
+[2024-09-03 06:51:14,499][train.py][line:125][INFO] [training]total_num:142618.0, error:3.9312069111079726, cls_error:3.7664200472361724, distil_error:0.1647868638050385 
+[2024-09-03 07:05:56,057][train.py][line:171][INFO] [testing]total_number: 142618,error: 3.770672257388792,total_acc: 0.06493569910526276
+[2024-09-03 07:05:56,064][train.py][line:94][INFO] ---------------epoch 11---------------
+lr: [0.0005]
+[2024-09-03 07:05:56,066][train.py][line:102][INFO] start get file data
+[2024-09-03 07:05:56,858][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 07:09:02,294][train.py][line:123][INFO] finish train file data
+[2024-09-03 07:09:02,295][train.py][line:102][INFO] start get file data
+[2024-09-03 07:09:03,102][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 07:12:08,337][train.py][line:123][INFO] finish train file data
+[2024-09-03 07:12:08,337][train.py][line:102][INFO] start get file data
+[2024-09-03 07:12:09,091][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 07:15:14,362][train.py][line:123][INFO] finish train file data
+[2024-09-03 07:15:14,362][train.py][line:102][INFO] start get file data
+[2024-09-03 07:15:15,127][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 07:18:19,918][train.py][line:123][INFO] finish train file data
+[2024-09-03 07:18:19,918][train.py][line:102][INFO] start get file data
+[2024-09-03 07:18:20,131][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 07:19:10,295][train.py][line:123][INFO] finish train file data
+[2024-09-03 07:19:10,296][train.py][line:102][INFO] start get file data
+[2024-09-03 07:19:11,040][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 07:22:15,935][train.py][line:123][INFO] finish train file data
+[2024-09-03 07:22:15,935][train.py][line:102][INFO] start get file data
+[2024-09-03 07:22:16,692][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 07:25:22,030][train.py][line:123][INFO] finish train file data
+[2024-09-03 07:25:22,031][train.py][line:102][INFO] start get file data
+[2024-09-03 07:25:22,805][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 07:28:27,672][train.py][line:123][INFO] finish train file data
+[2024-09-03 07:28:27,673][train.py][line:102][INFO] start get file data
+[2024-09-03 07:28:28,483][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 07:31:33,881][train.py][line:123][INFO] finish train file data
+[2024-09-03 07:31:33,881][train.py][line:102][INFO] start get file data
+[2024-09-03 07:31:34,631][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 07:34:40,264][train.py][line:123][INFO] finish train file data
+[2024-09-03 07:34:40,265][train.py][line:102][INFO] start get file data
+[2024-09-03 07:34:41,024][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 07:37:46,685][train.py][line:123][INFO] finish train file data
+[2024-09-03 07:37:46,686][train.py][line:102][INFO] start get file data
+[2024-09-03 07:37:47,435][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 07:40:52,412][train.py][line:123][INFO] finish train file data
+[2024-09-03 07:40:52,413][train.py][line:102][INFO] start get file data
+[2024-09-03 07:40:53,168][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 07:43:59,098][train.py][line:123][INFO] finish train file data
+[2024-09-03 07:43:59,098][train.py][line:102][INFO] start get file data
+[2024-09-03 07:43:59,868][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 07:47:05,745][train.py][line:123][INFO] finish train file data
+[2024-09-03 07:47:05,746][train.py][line:102][INFO] start get file data
+[2024-09-03 07:47:06,544][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 07:50:11,417][train.py][line:123][INFO] finish train file data
+[2024-09-03 07:50:11,417][train.py][line:125][INFO] [training]total_num:142618.0, error:3.9309359358950755, cls_error:3.7662737604537746, distil_error:0.16466217485046195 
+[2024-09-03 08:04:53,109][train.py][line:171][INFO] [testing]total_number: 142618,error: 3.7692623313609843,total_acc: 0.06608562916517258
+[2024-09-03 08:04:53,116][train.py][line:94][INFO] ---------------epoch 12---------------
+lr: [0.0005]
+[2024-09-03 08:04:53,118][train.py][line:102][INFO] start get file data
+[2024-09-03 08:04:53,917][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 08:07:58,978][train.py][line:123][INFO] finish train file data
+[2024-09-03 08:07:58,979][train.py][line:102][INFO] start get file data
+[2024-09-03 08:07:59,751][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 08:11:04,831][train.py][line:123][INFO] finish train file data
+[2024-09-03 08:11:04,832][train.py][line:102][INFO] start get file data
+[2024-09-03 08:11:05,600][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 08:14:11,073][train.py][line:123][INFO] finish train file data
+[2024-09-03 08:14:11,074][train.py][line:102][INFO] start get file data
+[2024-09-03 08:14:11,825][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 08:17:16,907][train.py][line:123][INFO] finish train file data
+[2024-09-03 08:17:16,908][train.py][line:102][INFO] start get file data
+[2024-09-03 08:17:17,113][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 08:18:07,650][train.py][line:123][INFO] finish train file data
+[2024-09-03 08:18:07,651][train.py][line:102][INFO] start get file data
+[2024-09-03 08:18:08,416][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 08:21:13,265][train.py][line:123][INFO] finish train file data
+[2024-09-03 08:21:13,266][train.py][line:102][INFO] start get file data
+[2024-09-03 08:21:14,025][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 08:24:19,467][train.py][line:123][INFO] finish train file data
+[2024-09-03 08:24:19,467][train.py][line:102][INFO] start get file data
+[2024-09-03 08:24:20,233][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 08:27:25,374][train.py][line:123][INFO] finish train file data
+[2024-09-03 08:27:25,374][train.py][line:102][INFO] start get file data
+[2024-09-03 08:27:26,125][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 08:30:31,333][train.py][line:123][INFO] finish train file data
+[2024-09-03 08:30:31,333][train.py][line:102][INFO] start get file data
+[2024-09-03 08:30:32,098][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 08:33:37,099][train.py][line:123][INFO] finish train file data
+[2024-09-03 08:33:37,099][train.py][line:102][INFO] start get file data
+[2024-09-03 08:33:37,864][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 08:36:43,045][train.py][line:123][INFO] finish train file data
+[2024-09-03 08:36:43,045][train.py][line:102][INFO] start get file data
+[2024-09-03 08:36:43,795][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 08:39:48,861][train.py][line:123][INFO] finish train file data
+[2024-09-03 08:39:48,862][train.py][line:102][INFO] start get file data
+[2024-09-03 08:39:49,660][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 08:42:54,616][train.py][line:123][INFO] finish train file data
+[2024-09-03 08:42:54,617][train.py][line:102][INFO] start get file data
+[2024-09-03 08:42:55,370][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 08:46:00,445][train.py][line:123][INFO] finish train file data
+[2024-09-03 08:46:00,446][train.py][line:102][INFO] start get file data
+[2024-09-03 08:46:01,200][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 08:49:06,205][train.py][line:123][INFO] finish train file data
+[2024-09-03 08:49:06,206][train.py][line:125][INFO] [training]total_num:142618.0, error:3.930420972486978, cls_error:3.7659950134040634, distil_error:0.16442596043483437 
+[2024-09-03 09:03:47,777][train.py][line:171][INFO] [testing]total_number: 142618,error: 3.76703138953896,total_acc: 0.06614172458648682
+[2024-09-03 09:03:47,783][train.py][line:94][INFO] ---------------epoch 13---------------
+lr: [0.0005]
+[2024-09-03 09:03:47,785][train.py][line:102][INFO] start get file data
+[2024-09-03 09:03:48,582][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 09:06:53,943][train.py][line:123][INFO] finish train file data
+[2024-09-03 09:06:53,944][train.py][line:102][INFO] start get file data
+[2024-09-03 09:06:54,716][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 09:10:00,261][train.py][line:123][INFO] finish train file data
+[2024-09-03 09:10:00,262][train.py][line:102][INFO] start get file data
+[2024-09-03 09:10:01,010][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 09:13:06,093][train.py][line:123][INFO] finish train file data
+[2024-09-03 09:13:06,094][train.py][line:102][INFO] start get file data
+[2024-09-03 09:13:06,844][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 09:16:12,198][train.py][line:123][INFO] finish train file data
+[2024-09-03 09:16:12,199][train.py][line:102][INFO] start get file data
+[2024-09-03 09:16:12,404][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 09:17:02,574][train.py][line:123][INFO] finish train file data
+[2024-09-03 09:17:02,575][train.py][line:102][INFO] start get file data
+[2024-09-03 09:17:03,372][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 09:20:09,085][train.py][line:123][INFO] finish train file data
+[2024-09-03 09:20:09,086][train.py][line:102][INFO] start get file data
+[2024-09-03 09:20:09,844][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 09:23:14,703][train.py][line:123][INFO] finish train file data
+[2024-09-03 09:23:14,704][train.py][line:102][INFO] start get file data
+[2024-09-03 09:23:15,463][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 09:26:21,433][train.py][line:123][INFO] finish train file data
+[2024-09-03 09:26:21,434][train.py][line:102][INFO] start get file data
+[2024-09-03 09:26:22,188][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 09:29:27,436][train.py][line:123][INFO] finish train file data
+[2024-09-03 09:29:27,437][train.py][line:102][INFO] start get file data
+[2024-09-03 09:29:28,191][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 09:32:33,674][train.py][line:123][INFO] finish train file data
+[2024-09-03 09:32:33,674][train.py][line:102][INFO] start get file data
+[2024-09-03 09:32:34,429][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 09:35:39,435][train.py][line:123][INFO] finish train file data
+[2024-09-03 09:35:39,436][train.py][line:102][INFO] start get file data
+[2024-09-03 09:35:40,234][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 09:38:45,440][train.py][line:123][INFO] finish train file data
+[2024-09-03 09:38:45,440][train.py][line:102][INFO] start get file data
+[2024-09-03 09:38:46,192][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 09:41:51,495][train.py][line:123][INFO] finish train file data
+[2024-09-03 09:41:51,496][train.py][line:102][INFO] start get file data
+[2024-09-03 09:41:52,275][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 09:44:57,312][train.py][line:123][INFO] finish train file data
+[2024-09-03 09:44:57,313][train.py][line:102][INFO] start get file data
+[2024-09-03 09:44:58,061][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 09:48:02,715][train.py][line:123][INFO] finish train file data
+[2024-09-03 09:48:02,716][train.py][line:125][INFO] [training]total_num:142618.0, error:3.9303062882901947, cls_error:3.765931854271547, distil_error:0.16437443346786562 
+[2024-09-03 10:02:44,769][train.py][line:171][INFO] [testing]total_number: 142618,error: 3.771839552135023,total_acc: 0.06538445502519608
+[2024-09-03 10:02:44,776][train.py][line:94][INFO] ---------------epoch 14---------------
+lr: [0.0005]
+[2024-09-03 10:02:44,777][train.py][line:102][INFO] start get file data
+[2024-09-03 10:02:45,577][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 10:05:50,916][train.py][line:123][INFO] finish train file data
+[2024-09-03 10:05:50,917][train.py][line:102][INFO] start get file data
+[2024-09-03 10:05:51,776][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 10:09:01,141][train.py][line:123][INFO] finish train file data
+[2024-09-03 10:09:01,141][train.py][line:102][INFO] start get file data
+[2024-09-03 10:09:01,910][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 10:12:09,278][train.py][line:123][INFO] finish train file data
+[2024-09-03 10:12:09,278][train.py][line:102][INFO] start get file data
+[2024-09-03 10:12:10,066][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 10:15:18,337][train.py][line:123][INFO] finish train file data
+[2024-09-03 10:15:18,338][train.py][line:102][INFO] start get file data
+[2024-09-03 10:15:18,562][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 10:16:09,743][train.py][line:123][INFO] finish train file data
+[2024-09-03 10:16:09,743][train.py][line:102][INFO] start get file data
+[2024-09-03 10:16:10,522][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 10:19:20,119][train.py][line:123][INFO] finish train file data
+[2024-09-03 10:19:20,120][train.py][line:102][INFO] start get file data
+[2024-09-03 10:19:20,952][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 10:22:33,964][train.py][line:123][INFO] finish train file data
+[2024-09-03 10:22:33,965][train.py][line:102][INFO] start get file data
+[2024-09-03 10:22:34,844][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 10:25:47,532][train.py][line:123][INFO] finish train file data
+[2024-09-03 10:25:47,533][train.py][line:102][INFO] start get file data
+[2024-09-03 10:25:48,334][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 10:28:58,289][train.py][line:123][INFO] finish train file data
+[2024-09-03 10:28:58,290][train.py][line:102][INFO] start get file data
+[2024-09-03 10:28:59,099][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 10:32:06,839][train.py][line:123][INFO] finish train file data
+[2024-09-03 10:32:06,839][train.py][line:102][INFO] start get file data
+[2024-09-03 10:32:07,653][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 10:35:15,047][train.py][line:123][INFO] finish train file data
+[2024-09-03 10:35:15,048][train.py][line:102][INFO] start get file data
+[2024-09-03 10:35:15,855][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 10:38:23,054][train.py][line:123][INFO] finish train file data
+[2024-09-03 10:38:23,055][train.py][line:102][INFO] start get file data
+[2024-09-03 10:38:23,854][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 10:41:31,312][train.py][line:123][INFO] finish train file data
+[2024-09-03 10:41:31,312][train.py][line:102][INFO] start get file data
+[2024-09-03 10:41:32,112][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 10:44:39,153][train.py][line:123][INFO] finish train file data
+[2024-09-03 10:44:39,154][train.py][line:102][INFO] start get file data
+[2024-09-03 10:44:39,906][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 10:47:47,392][train.py][line:123][INFO] finish train file data
+[2024-09-03 10:47:47,393][train.py][line:125][INFO] [training]total_num:142618.0, error:3.9299372337411382, cls_error:3.7655305682437823, distil_error:0.16440666607484275 
+[2024-09-03 11:02:43,208][train.py][line:171][INFO] [testing]total_number: 142618,error: 3.7718327376577587,total_acc: 0.06538445502519608
+[2024-09-03 11:02:43,215][train.py][line:94][INFO] ---------------epoch 15---------------
+lr: [0.0005]
+[2024-09-03 11:02:43,216][train.py][line:102][INFO] start get file data
+[2024-09-03 11:02:43,987][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 11:05:50,970][train.py][line:123][INFO] finish train file data
+[2024-09-03 11:05:50,970][train.py][line:102][INFO] start get file data
+[2024-09-03 11:05:51,765][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 11:08:59,114][train.py][line:123][INFO] finish train file data
+[2024-09-03 11:08:59,114][train.py][line:102][INFO] start get file data
+[2024-09-03 11:08:59,897][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 11:12:08,446][train.py][line:123][INFO] finish train file data
+[2024-09-03 11:12:08,447][train.py][line:102][INFO] start get file data
+[2024-09-03 11:12:09,244][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 11:15:15,839][train.py][line:123][INFO] finish train file data
+[2024-09-03 11:15:15,840][train.py][line:102][INFO] start get file data
+[2024-09-03 11:15:16,059][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 11:16:07,121][train.py][line:123][INFO] finish train file data
+[2024-09-03 11:16:07,121][train.py][line:102][INFO] start get file data
+[2024-09-03 11:16:07,898][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 11:19:13,900][train.py][line:123][INFO] finish train file data
+[2024-09-03 11:19:13,900][train.py][line:102][INFO] start get file data
+[2024-09-03 11:19:14,704][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 11:22:22,284][train.py][line:123][INFO] finish train file data
+[2024-09-03 11:22:22,285][train.py][line:102][INFO] start get file data
+[2024-09-03 11:22:23,094][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 11:25:29,904][train.py][line:123][INFO] finish train file data
+[2024-09-03 11:25:29,904][train.py][line:102][INFO] start get file data
+[2024-09-03 11:25:30,703][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 11:28:37,334][train.py][line:123][INFO] finish train file data
+[2024-09-03 11:28:37,334][train.py][line:102][INFO] start get file data
+[2024-09-03 11:28:38,134][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 11:31:45,419][train.py][line:123][INFO] finish train file data
+[2024-09-03 11:31:45,420][train.py][line:102][INFO] start get file data
+[2024-09-03 11:31:46,221][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 11:34:53,923][train.py][line:123][INFO] finish train file data
+[2024-09-03 11:34:53,923][train.py][line:102][INFO] start get file data
+[2024-09-03 11:34:54,720][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 11:38:01,395][train.py][line:123][INFO] finish train file data
+[2024-09-03 11:38:01,395][train.py][line:102][INFO] start get file data
+[2024-09-03 11:38:02,194][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 11:41:10,016][train.py][line:123][INFO] finish train file data
+[2024-09-03 11:41:10,017][train.py][line:102][INFO] start get file data
+[2024-09-03 11:41:10,776][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 11:44:17,421][train.py][line:123][INFO] finish train file data
+[2024-09-03 11:44:17,421][train.py][line:102][INFO] start get file data
+[2024-09-03 11:44:18,200][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 11:47:26,749][train.py][line:123][INFO] finish train file data
+[2024-09-03 11:47:26,750][train.py][line:125][INFO] [training]total_num:142618.0, error:3.9296270127685267, cls_error:3.76536971960871, distil_error:0.16425729515264645 
+[2024-09-03 12:02:36,548][train.py][line:171][INFO] [testing]total_number: 142618,error: 3.767587365161988,total_acc: 0.06588228791952133
+[2024-09-03 12:02:36,554][train.py][line:94][INFO] ---------------epoch 16---------------
+lr: [0.0005]
+[2024-09-03 12:02:36,556][train.py][line:102][INFO] start get file data
+[2024-09-03 12:02:37,369][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 12:05:46,414][train.py][line:123][INFO] finish train file data
+[2024-09-03 12:05:46,415][train.py][line:102][INFO] start get file data
+[2024-09-03 12:05:47,218][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 12:08:55,711][train.py][line:123][INFO] finish train file data
+[2024-09-03 12:08:55,712][train.py][line:102][INFO] start get file data
+[2024-09-03 12:08:56,512][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 12:12:05,117][train.py][line:123][INFO] finish train file data
+[2024-09-03 12:12:05,117][train.py][line:102][INFO] start get file data
+[2024-09-03 12:12:05,916][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 12:15:13,480][train.py][line:123][INFO] finish train file data
+[2024-09-03 12:15:13,481][train.py][line:102][INFO] start get file data
+[2024-09-03 12:15:13,698][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 12:16:05,147][train.py][line:123][INFO] finish train file data
+[2024-09-03 12:16:05,148][train.py][line:102][INFO] start get file data
+[2024-09-03 12:16:05,940][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 12:19:14,117][train.py][line:123][INFO] finish train file data
+[2024-09-03 12:19:14,117][train.py][line:102][INFO] start get file data
+[2024-09-03 12:19:14,916][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 12:22:22,982][train.py][line:123][INFO] finish train file data
+[2024-09-03 12:22:22,982][train.py][line:102][INFO] start get file data
+[2024-09-03 12:22:23,806][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 12:25:31,731][train.py][line:123][INFO] finish train file data
+[2024-09-03 12:25:31,732][train.py][line:102][INFO] start get file data
+[2024-09-03 12:25:32,535][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 12:28:40,604][train.py][line:123][INFO] finish train file data
+[2024-09-03 12:28:40,605][train.py][line:102][INFO] start get file data
+[2024-09-03 12:28:41,401][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 12:31:49,329][train.py][line:123][INFO] finish train file data
+[2024-09-03 12:31:49,330][train.py][line:102][INFO] start get file data
+[2024-09-03 12:31:50,155][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 12:34:58,124][train.py][line:123][INFO] finish train file data
+[2024-09-03 12:34:58,125][train.py][line:102][INFO] start get file data
+[2024-09-03 12:34:58,925][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 12:38:06,592][train.py][line:123][INFO] finish train file data
+[2024-09-03 12:38:06,593][train.py][line:102][INFO] start get file data
+[2024-09-03 12:38:07,410][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 12:41:15,176][train.py][line:123][INFO] finish train file data
+[2024-09-03 12:41:15,177][train.py][line:102][INFO] start get file data
+[2024-09-03 12:41:15,971][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 12:44:26,303][train.py][line:123][INFO] finish train file data
+[2024-09-03 12:44:26,303][train.py][line:102][INFO] start get file data
+[2024-09-03 12:44:27,131][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 12:47:38,534][train.py][line:123][INFO] finish train file data
+[2024-09-03 12:47:38,535][train.py][line:125][INFO] [training]total_num:142618.0, error:3.929310964106659, cls_error:3.7650550273797845, distil_error:0.16425593590237014 
+[2024-09-03 13:03:03,387][train.py][line:171][INFO] [testing]total_number: 142618,error: 3.7655097549534187,total_acc: 0.06614172458648682
+[2024-09-03 13:03:04,269][train.py][line:94][INFO] ---------------epoch 17---------------
+lr: [0.0005]
+[2024-09-03 13:03:04,271][train.py][line:102][INFO] start get file data
+[2024-09-03 13:03:05,076][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 13:06:16,851][train.py][line:123][INFO] finish train file data
+[2024-09-03 13:06:16,851][train.py][line:102][INFO] start get file data
+[2024-09-03 13:06:17,688][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 13:09:29,334][train.py][line:123][INFO] finish train file data
+[2024-09-03 13:09:29,335][train.py][line:102][INFO] start get file data
+[2024-09-03 13:09:30,158][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 13:12:41,698][train.py][line:123][INFO] finish train file data
+[2024-09-03 13:12:41,699][train.py][line:102][INFO] start get file data
+[2024-09-03 13:12:42,537][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 13:15:54,320][train.py][line:123][INFO] finish train file data
+[2024-09-03 13:15:54,321][train.py][line:102][INFO] start get file data
+[2024-09-03 13:15:54,552][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 13:16:46,911][train.py][line:123][INFO] finish train file data
+[2024-09-03 13:16:46,911][train.py][line:102][INFO] start get file data
+[2024-09-03 13:16:47,743][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 13:19:59,532][train.py][line:123][INFO] finish train file data
+[2024-09-03 13:19:59,533][train.py][line:102][INFO] start get file data
+[2024-09-03 13:20:00,405][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 13:23:12,275][train.py][line:123][INFO] finish train file data
+[2024-09-03 13:23:12,276][train.py][line:102][INFO] start get file data
+[2024-09-03 13:23:13,124][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 13:26:25,164][train.py][line:123][INFO] finish train file data
+[2024-09-03 13:26:25,165][train.py][line:102][INFO] start get file data
+[2024-09-03 13:26:25,989][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 13:29:37,892][train.py][line:123][INFO] finish train file data
+[2024-09-03 13:29:37,893][train.py][line:102][INFO] start get file data
+[2024-09-03 13:29:38,723][train.py][line:105][INFO] finish get file data,start train
+[2024-09-03 13:32:50,647][train.py][line:123][INFO] finish train file data
+[2024-09-03 13:32:50,648][train.py][line:102][INFO] start get file data
+[2024-09-03 13:32:51,471][train.py][line:105][INFO] finish get file data,start train

@@ -10,7 +10,7 @@ from torch.utils.tensorboard.writer import SummaryWriter
 from utils.dataset import XrdData
 from torchmetrics.classification import MulticlassAccuracy
 
-torch.backends.cudnn.enabled = False
+torch.backends.cudnn.enabled = True
 os.environ['CUDA_LAUNCH_BLOCKING'] = '0'
 
 
@@ -30,11 +30,12 @@ parser.add_argument("--model_save_path",type=str,required=True)
 parser.add_argument("--device",type=str,default="0")
 parser.add_argument("--scheduler_T",type=int)
 parser.add_argument("--num_workers",type=int,default=20)
+parser.add_argument("--refer_model_path",type=str)
 args = parser.parse_args()
 log = Log(__name__,file_dir='log/train/',log_file_name='train_%s'%(args.train_name))
 args.log_name = log.log_name
 logger = log.get_log()
-
+logger.info("start")
 now_seed = 3407
 seed_torch(now_seed)
 
@@ -42,16 +43,24 @@ device_list = [int(i) for i in args.device.split(',')]
 device = torch.device('cuda:%d'%device_list[0] if  torch.cuda.is_available() else 'cpu')
 
 if args.model_path is None :
-   from models.ConvAtt import ConvAtt 
-   model = ConvAtt().to(device)
+    from models.AttDistil import AttDistil 
+    model = AttDistil().to(device)
     
 else :
     model = torch.load(args.model_path,map_location=device)
 
+if args.refer_model_path is not None :
+    refer_model = torch.load(args.refer_model_path,map_location=device)
+    refer_model.TCN.__delitem__(30)
+    refer_model = refer_model.requires_grad_(False)
+
 if len(device_list) >  1 :
     model = torch.nn.DataParallel(model,device_list).to(device)
+    if args.refer_model_path is not None :
+        refer_model = torch.nn.DataParallel(refer_model,device_list).to(device).eval()
 
-lossfn = torch.nn.CrossEntropyLoss().to(device)
+lossfn_ce = torch.nn.CrossEntropyLoss().to(device)
+lossfn_l1 = torch.nn.L1Loss().to(device)
 
 if not os.path.exists(args.model_save_path):
     os.mkdir(args.model_save_path)
@@ -69,15 +78,15 @@ logger.info('-'*15+'args'+'-'*15+'\n'+str(args))
 logger.info('-'*15+'model'+'-'*15+'\n'+str(model))
 logger.info('-'*15+'device'+'-'*15+'\n'+str(device))
 logger.info('-'*15+'optimizer'+'-'*15+'\n'+str(optimizer))
-logger.info('-'*15+'lossfn'+'-'*15+'\n'+str(lossfn))
+logger.info('-'*15+'lossfn'+'-'*15+'\n'+str(lossfn_ce)+','+str(lossfn_l1))
 logger.info('-'*15+'seed'+'-'*15+'\n'+str(now_seed))
 
 file_paths = os.listdir(args.data_path)
 train_files,test_files = [os.path.join(args.data_path,f)  for f in file_paths if f.startswith('train')],[os.path.join(args.data_path,f) for f in file_paths if f.startswith('test')]
 
-writer = SummaryWriter(log_dir='./board_dir/%s'%args.log_name)
+writer = SummaryWriter(log_dir='./hh_board_dir/%s'%args.log_name)
 
-
+logger.info("start_train")
 def train():
     max_acc = 0 
     mini_err = 1e9 
@@ -85,22 +94,40 @@ def train():
         logger.info('-'*15+'epoch '+str(epoch_idx+1)+'-'*15+'\nlr: '+str(lr_scheduler.get_lr()))
         total_num = 0.0
         total_err = 0.0 
+        total_err_cls = 0.0
+        total_err_distil = 0.0 
         batch_cnt = 0
         model.train()
         for file in train_files:
+            logger.info("start get file data")
             xrd_dataset = XrdData(file)
             dataloader = DataLoader(xrd_dataset,batch_size=args.batch_size,shuffle=True,num_workers=args.num_workers)
+            logger.info("finish get file data,start train")
             for data in dataloader:
                 optimizer.zero_grad()
-                intensity,angle,labels230 = data[0].type(torch.float).to(device),data[1].to(device),data[2].to(device)
-                logits = model(intensity,angle) 
-                error = lossfn(logits,labels230)
+                intensity,angle,labels230,index = data[0].type(torch.float).to(device),data[1].to(device),data[2].to(device),data[3].to(device)
+                with torch.no_grad():
+                    refer_model.eval()
+                    refer_features = refer_model(intensity,angle)
+                features,cls = model(intensity,index)
+                error_cls = lossfn_ce(cls,labels230)
+                error_distil = lossfn_l1(features,refer_features)
+                error = (epoch_idx/args.epoch_num)*error_cls + (1-epoch_idx/args.epoch_num)*error_distil
                 error.backward()
                 optimizer.step()
                 total_num += labels230.shape[0]
                 batch_cnt += 1 
                 total_err += error.item()
-        logger.info('[training]total_num: '+str(total_num)+',error: '+str(total_err/batch_cnt))
+                total_err_cls += error_cls.item()
+                total_err_distil += error_distil.item()
+            logger.info("finish train file data")
+        # logger.info('[training]total_num: '+str(total_num)+',error: '+str(total_err/batch_cnt))
+        logger.info('[training]total_num:%s, error:%s, cls_error:%s, distil_error:%s '%(
+            str(total_num),
+            str(total_err/batch_cnt),
+            str(total_err_cls/batch_cnt),
+            str(total_err_distil/batch_cnt)
+        ))
         test_acc,test_err = test()
         writer.add_scalar("train/acc",test_acc,epoch_idx+1)
         writer.add_scalar("train/err",test_err,epoch_idx+1)
@@ -114,7 +141,9 @@ def train():
         elif max_acc < test_acc :
             max_acc = test_acc 
             torch.save(model if not len(device_list)>1  else model.module,model_save_path+'_epoch_%d'%(epoch_idx+1)+'.pth')
-    
+        
+        if epoch_idx % 25 == 0 :
+            os.system('nvidia-smi')
         
 def test():
     model.eval()
@@ -127,14 +156,13 @@ def test():
             xrd_dataset = XrdData(file)
             dataloader = DataLoader(xrd_dataset,args.batch_size,num_workers=args.num_workers)
             for data in dataloader:
-                intensity , angle,labels230 = data[0].type(torch.float).to(device),data[1].type(torch.float).to(device),data[2].to(device)
+                intensity , angle,labels230,index = data[0].type(torch.float).to(device),data[1].type(torch.float).to(device),data[2].to(device),data[3].to(device)
                 # print('labels230 shape',labels230.shape)
-                out = model(intensity,angle)
-                raw_logits = out 
+                _,cls = model(intensity,index)
                 # raw_logits,hkl = out[0],out[1]
-                err = lossfn(raw_logits,labels230)
+                err = lossfn_ce(cls,labels230)
                 total_err += err.item()
-                logits = raw_logits.softmax(dim=1)
+                logits = cls.softmax(dim=1)
                 total_num += labels230.shape[0]
                 total_acc(logits,labels230)
                 batch_cnt += 1 

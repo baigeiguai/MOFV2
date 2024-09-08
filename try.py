@@ -213,13 +213,24 @@ from torchinfo import summary
 # summary(model,[(batch,length),(batch,length)])
 # print(a.shape,b.shape)
 
+# device = torch.device("cuda:6")
+# from models.AttDistil import AttDistil 
+# model = AttDistil().to(device)
+# batch,length = 32,8500
+# index = torch.arange(0,length).view(1,-1).repeat((batch,1)).to(device)
+# intensity = torch.randn(batch,length).to(device)
+# a,b = model(intensity,index)
+# summary(model,[(batch,length),(batch,length)])
+# # print(a.shape)
+# print(a.shape,b.shape)
+
+
 device = torch.device("cuda:6")
-from models.AttDistil import AttDistil 
-model = AttDistil().to(device)
+from models.ConvAtt import ConvAtt
+model = ConvAtt().to(device)
 batch,length = 8,8500
-index = torch.arange(0,length).view(1,-1).repeat((batch,1)).to(device)
+angle = torch.arange(0,length).view(1,-1).repeat((batch,1)).to(device)
 intensity = torch.randn(batch,length).to(device)
-a,b = model(intensity,index)
+a = model(intensity,angle)
 summary(model,[(batch,length),(batch,length)])
-# print(a.shape)
-print(a.shape,b.shape)
+print(a.shape)

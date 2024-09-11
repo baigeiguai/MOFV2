@@ -114,6 +114,9 @@ def train():
         elif max_acc < test_acc :
             max_acc = test_acc 
             torch.save(model if not len(device_list)>1  else model.module,model_save_path+'_epoch_%d'%(epoch_idx+1)+'.pth')
+        
+        if epoch_idx %25 == 0 :
+            os.system("nvidia-smi")
     
         
 def test():

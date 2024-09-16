@@ -1,0 +1,518 @@
+[2024-09-12 15:18:01,060][train.py][line:70][INFO] ---------------args---------------
+Namespace(data_path='./data/Pymatgen_Wrapped/0', train_name='ConvAtt', model_path=None, learning_rate=0.0005, min_learning_rate=1e-06, start_scheduler_step=20, weight_decay=1e-06, momentum=0.99, batch_size=1024, class_num=230, epoch_num=200, model_save_path='/data/ylh/MyExps/MOFV2/checkpoints/ConvAtt', device='1,3,5,7', scheduler_T=None, num_workers=20, log_name='log/train//train_ConvAtt_2024_09_12_15:17:56.log')
+[2024-09-12 15:18:01,063][train.py][line:71][INFO] ---------------model---------------
+DataParallel(
+  (module): ConvAtt(
+    (model): Sequential(
+      (0): CAtBlock(
+        (conv): ResBlock1D(
+          (pre): Conv1d(2, 32, kernel_size=(1,), stride=(1,), bias=False)
+          (conv): Sequential(
+            (0): Conv1d(32, 32, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(32, 32, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (pool): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(0,))
+      )
+      (1): CAtBlock(
+        (conv): ResBlock1D(
+          (pre): Identity()
+          (conv): Sequential(
+            (0): Conv1d(32, 32, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(32, 32, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (pool): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(0,))
+      )
+      (2): CAtBlock(
+        (conv): ResBlock1D(
+          (pre): Conv1d(32, 64, kernel_size=(1,), stride=(1,), bias=False)
+          (conv): Sequential(
+            (0): Conv1d(64, 64, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(64, 64, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (pool): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(1,))
+      )
+      (3): CAtBlock(
+        (conv): ResBlock1D(
+          (pre): Identity()
+          (conv): Sequential(
+            (0): Conv1d(64, 64, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(64, 64, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (pool): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(1,))
+        (att): TransformerEncoder(
+          (positionEnbeding): PositionEmbedding()
+          (encoder_layers): ModuleList(
+            (0): EncoderLayer(
+              (mha): MultiHeadAttention(
+                (WQ): Linear(in_features=64, out_features=64, bias=True)
+                (WK): Linear(in_features=64, out_features=64, bias=True)
+                (WV): Linear(in_features=64, out_features=64, bias=True)
+                (scaled_dot_product_attn): ScaledDotProductAttention()
+                (linear): Linear(in_features=64, out_features=64, bias=True)
+              )
+              (dropout1): Dropout(p=0, inplace=False)
+              (layernorm1): LayerNorm((64,), eps=1e-06, elementwise_affine=True)
+              (ffn): FeedForwardNetwork(
+                (linear1): Linear(in_features=64, out_features=128, bias=True)
+                (linear2): Linear(in_features=128, out_features=64, bias=True)
+                (relu): LeakyReLU(negative_slope=0.01)
+              )
+              (dropout2): Dropout(p=0, inplace=False)
+              (layernorm2): LayerNorm((64,), eps=1e-06, elementwise_affine=True)
+            )
+          )
+        )
+      )
+      (4): CAtBlock(
+        (conv): ResBlock1D(
+          (pre): Conv1d(64, 128, kernel_size=(1,), stride=(1,), bias=False)
+          (conv): Sequential(
+            (0): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (pool): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(0,))
+        (att): TransformerEncoder(
+          (positionEnbeding): PositionEmbedding()
+          (encoder_layers): ModuleList(
+            (0): EncoderLayer(
+              (mha): MultiHeadAttention(
+                (WQ): Linear(in_features=128, out_features=128, bias=True)
+                (WK): Linear(in_features=128, out_features=128, bias=True)
+                (WV): Linear(in_features=128, out_features=128, bias=True)
+                (scaled_dot_product_attn): ScaledDotProductAttention()
+                (linear): Linear(in_features=128, out_features=128, bias=True)
+              )
+              (dropout1): Dropout(p=0, inplace=False)
+              (layernorm1): LayerNorm((128,), eps=1e-06, elementwise_affine=True)
+              (ffn): FeedForwardNetwork(
+                (linear1): Linear(in_features=128, out_features=256, bias=True)
+                (linear2): Linear(in_features=256, out_features=128, bias=True)
+                (relu): LeakyReLU(negative_slope=0.01)
+              )
+              (dropout2): Dropout(p=0, inplace=False)
+              (layernorm2): LayerNorm((128,), eps=1e-06, elementwise_affine=True)
+            )
+          )
+        )
+      )
+      (5): CAtBlock(
+        (conv): ResBlock1D(
+          (pre): Identity()
+          (conv): Sequential(
+            (0): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (pool): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(0,))
+        (att): TransformerEncoder(
+          (positionEnbeding): PositionEmbedding()
+          (encoder_layers): ModuleList(
+            (0): EncoderLayer(
+              (mha): MultiHeadAttention(
+                (WQ): Linear(in_features=128, out_features=128, bias=True)
+                (WK): Linear(in_features=128, out_features=128, bias=True)
+                (WV): Linear(in_features=128, out_features=128, bias=True)
+                (scaled_dot_product_attn): ScaledDotProductAttention()
+                (linear): Linear(in_features=128, out_features=128, bias=True)
+              )
+              (dropout1): Dropout(p=0, inplace=False)
+              (layernorm1): LayerNorm((128,), eps=1e-06, elementwise_affine=True)
+              (ffn): FeedForwardNetwork(
+                (linear1): Linear(in_features=128, out_features=256, bias=True)
+                (linear2): Linear(in_features=256, out_features=128, bias=True)
+                (relu): LeakyReLU(negative_slope=0.01)
+              )
+              (dropout2): Dropout(p=0, inplace=False)
+              (layernorm2): LayerNorm((128,), eps=1e-06, elementwise_affine=True)
+            )
+          )
+        )
+      )
+      (6): CAtBlock(
+        (conv): ResBlock1D(
+          (pre): Conv1d(128, 256, kernel_size=(1,), stride=(1,), bias=False)
+          (conv): Sequential(
+            (0): Conv1d(256, 256, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(256, 256, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (pool): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(1,))
+        (att): TransformerEncoder(
+          (positionEnbeding): PositionEmbedding()
+          (encoder_layers): ModuleList(
+            (0): EncoderLayer(
+              (mha): MultiHeadAttention(
+                (WQ): Linear(in_features=256, out_features=256, bias=True)
+                (WK): Linear(in_features=256, out_features=256, bias=True)
+                (WV): Linear(in_features=256, out_features=256, bias=True)
+                (scaled_dot_product_attn): ScaledDotProductAttention()
+                (linear): Linear(in_features=256, out_features=256, bias=True)
+              )
+              (dropout1): Dropout(p=0, inplace=False)
+              (layernorm1): LayerNorm((256,), eps=1e-06, elementwise_affine=True)
+              (ffn): FeedForwardNetwork(
+                (linear1): Linear(in_features=256, out_features=512, bias=True)
+                (linear2): Linear(in_features=512, out_features=256, bias=True)
+                (relu): LeakyReLU(negative_slope=0.01)
+              )
+              (dropout2): Dropout(p=0, inplace=False)
+              (layernorm2): LayerNorm((256,), eps=1e-06, elementwise_affine=True)
+            )
+          )
+        )
+      )
+      (7): CAtBlock(
+        (conv): ResBlock1D(
+          (pre): Identity()
+          (conv): Sequential(
+            (0): Conv1d(256, 256, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(256, 256, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (pool): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(1,))
+        (att): TransformerEncoder(
+          (positionEnbeding): PositionEmbedding()
+          (encoder_layers): ModuleList(
+            (0): EncoderLayer(
+              (mha): MultiHeadAttention(
+                (WQ): Linear(in_features=256, out_features=256, bias=True)
+                (WK): Linear(in_features=256, out_features=256, bias=True)
+                (WV): Linear(in_features=256, out_features=256, bias=True)
+                (scaled_dot_product_attn): ScaledDotProductAttention()
+                (linear): Linear(in_features=256, out_features=256, bias=True)
+              )
+              (dropout1): Dropout(p=0, inplace=False)
+              (layernorm1): LayerNorm((256,), eps=1e-06, elementwise_affine=True)
+              (ffn): FeedForwardNetwork(
+                (linear1): Linear(in_features=256, out_features=512, bias=True)
+                (linear2): Linear(in_features=512, out_features=256, bias=True)
+                (relu): LeakyReLU(negative_slope=0.01)
+              )
+              (dropout2): Dropout(p=0, inplace=False)
+              (layernorm2): LayerNorm((256,), eps=1e-06, elementwise_affine=True)
+            )
+          )
+        )
+      )
+      (8): CAtBlock(
+        (conv): ResBlock1D(
+          (pre): Conv1d(256, 512, kernel_size=(1,), stride=(1,), bias=False)
+          (conv): Sequential(
+            (0): Conv1d(512, 512, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(512, 512, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (pool): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(0,))
+        (att): TransformerEncoder(
+          (positionEnbeding): PositionEmbedding()
+          (encoder_layers): ModuleList(
+            (0): EncoderLayer(
+              (mha): MultiHeadAttention(
+                (WQ): Linear(in_features=512, out_features=512, bias=True)
+                (WK): Linear(in_features=512, out_features=512, bias=True)
+                (WV): Linear(in_features=512, out_features=512, bias=True)
+                (scaled_dot_product_attn): ScaledDotProductAttention()
+                (linear): Linear(in_features=512, out_features=512, bias=True)
+              )
+              (dropout1): Dropout(p=0, inplace=False)
+              (layernorm1): LayerNorm((512,), eps=1e-06, elementwise_affine=True)
+              (ffn): FeedForwardNetwork(
+                (linear1): Linear(in_features=512, out_features=1024, bias=True)
+                (linear2): Linear(in_features=1024, out_features=512, bias=True)
+                (relu): LeakyReLU(negative_slope=0.01)
+              )
+              (dropout2): Dropout(p=0, inplace=False)
+              (layernorm2): LayerNorm((512,), eps=1e-06, elementwise_affine=True)
+            )
+          )
+        )
+      )
+      (9): CAtBlock(
+        (conv): ResBlock1D(
+          (pre): Identity()
+          (conv): Sequential(
+            (0): Conv1d(512, 512, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(512, 512, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (pool): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(1,))
+        (att): TransformerEncoder(
+          (positionEnbeding): PositionEmbedding()
+          (encoder_layers): ModuleList(
+            (0): EncoderLayer(
+              (mha): MultiHeadAttention(
+                (WQ): Linear(in_features=512, out_features=512, bias=True)
+                (WK): Linear(in_features=512, out_features=512, bias=True)
+                (WV): Linear(in_features=512, out_features=512, bias=True)
+                (scaled_dot_product_attn): ScaledDotProductAttention()
+                (linear): Linear(in_features=512, out_features=512, bias=True)
+              )
+              (dropout1): Dropout(p=0, inplace=False)
+              (layernorm1): LayerNorm((512,), eps=1e-06, elementwise_affine=True)
+              (ffn): FeedForwardNetwork(
+                (linear1): Linear(in_features=512, out_features=1024, bias=True)
+                (linear2): Linear(in_features=1024, out_features=512, bias=True)
+                (relu): LeakyReLU(negative_slope=0.01)
+              )
+              (dropout2): Dropout(p=0, inplace=False)
+              (layernorm2): LayerNorm((512,), eps=1e-06, elementwise_affine=True)
+            )
+          )
+        )
+      )
+      (10): CAtBlock(
+        (conv): ResBlock1D(
+          (pre): Identity()
+          (conv): Sequential(
+            (0): Conv1d(512, 512, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(512, 512, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (pool): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(1,))
+        (att): TransformerEncoder(
+          (positionEnbeding): PositionEmbedding()
+          (encoder_layers): ModuleList(
+            (0): EncoderLayer(
+              (mha): MultiHeadAttention(
+                (WQ): Linear(in_features=512, out_features=512, bias=True)
+                (WK): Linear(in_features=512, out_features=512, bias=True)
+                (WV): Linear(in_features=512, out_features=512, bias=True)
+                (scaled_dot_product_attn): ScaledDotProductAttention()
+                (linear): Linear(in_features=512, out_features=512, bias=True)
+              )
+              (dropout1): Dropout(p=0, inplace=False)
+              (layernorm1): LayerNorm((512,), eps=1e-06, elementwise_affine=True)
+              (ffn): FeedForwardNetwork(
+                (linear1): Linear(in_features=512, out_features=1024, bias=True)
+                (linear2): Linear(in_features=1024, out_features=512, bias=True)
+                (relu): LeakyReLU(negative_slope=0.01)
+              )
+              (dropout2): Dropout(p=0, inplace=False)
+              (layernorm2): LayerNorm((512,), eps=1e-06, elementwise_affine=True)
+            )
+          )
+        )
+      )
+      (11): CAtBlock(
+        (conv): ResBlock1D(
+          (pre): Conv1d(512, 1024, kernel_size=(1,), stride=(1,), bias=False)
+          (conv): Sequential(
+            (0): Conv1d(1024, 1024, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(1024, 1024, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (pool): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(1,))
+        (att): TransformerEncoder(
+          (positionEnbeding): PositionEmbedding()
+          (encoder_layers): ModuleList(
+            (0): EncoderLayer(
+              (mha): MultiHeadAttention(
+                (WQ): Linear(in_features=1024, out_features=1024, bias=True)
+                (WK): Linear(in_features=1024, out_features=1024, bias=True)
+                (WV): Linear(in_features=1024, out_features=1024, bias=True)
+                (scaled_dot_product_attn): ScaledDotProductAttention()
+                (linear): Linear(in_features=1024, out_features=1024, bias=True)
+              )
+              (dropout1): Dropout(p=0, inplace=False)
+              (layernorm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+              (ffn): FeedForwardNetwork(
+                (linear1): Linear(in_features=1024, out_features=2048, bias=True)
+                (linear2): Linear(in_features=2048, out_features=1024, bias=True)
+                (relu): LeakyReLU(negative_slope=0.01)
+              )
+              (dropout2): Dropout(p=0, inplace=False)
+              (layernorm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            )
+          )
+        )
+      )
+      (12): CAtBlock(
+        (conv): ResBlock1D(
+          (pre): Identity()
+          (conv): Sequential(
+            (0): Conv1d(1024, 1024, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(1024, 1024, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (pool): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(1,))
+        (att): TransformerEncoder(
+          (positionEnbeding): PositionEmbedding()
+          (encoder_layers): ModuleList(
+            (0): EncoderLayer(
+              (mha): MultiHeadAttention(
+                (WQ): Linear(in_features=1024, out_features=1024, bias=True)
+                (WK): Linear(in_features=1024, out_features=1024, bias=True)
+                (WV): Linear(in_features=1024, out_features=1024, bias=True)
+                (scaled_dot_product_attn): ScaledDotProductAttention()
+                (linear): Linear(in_features=1024, out_features=1024, bias=True)
+              )
+              (dropout1): Dropout(p=0, inplace=False)
+              (layernorm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+              (ffn): FeedForwardNetwork(
+                (linear1): Linear(in_features=1024, out_features=2048, bias=True)
+                (linear2): Linear(in_features=2048, out_features=1024, bias=True)
+                (relu): LeakyReLU(negative_slope=0.01)
+              )
+              (dropout2): Dropout(p=0, inplace=False)
+              (layernorm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            )
+          )
+        )
+      )
+      (13): CAtBlock(
+        (conv): ResBlock1D(
+          (pre): Identity()
+          (conv): Sequential(
+            (0): Conv1d(1024, 1024, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(1024, 1024, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (pool): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(0,))
+        (att): TransformerEncoder(
+          (positionEnbeding): PositionEmbedding()
+          (encoder_layers): ModuleList(
+            (0): EncoderLayer(
+              (mha): MultiHeadAttention(
+                (WQ): Linear(in_features=1024, out_features=1024, bias=True)
+                (WK): Linear(in_features=1024, out_features=1024, bias=True)
+                (WV): Linear(in_features=1024, out_features=1024, bias=True)
+                (scaled_dot_product_attn): ScaledDotProductAttention()
+                (linear): Linear(in_features=1024, out_features=1024, bias=True)
+              )
+              (dropout1): Dropout(p=0, inplace=False)
+              (layernorm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+              (ffn): FeedForwardNetwork(
+                (linear1): Linear(in_features=1024, out_features=2048, bias=True)
+                (linear2): Linear(in_features=2048, out_features=1024, bias=True)
+                (relu): LeakyReLU(negative_slope=0.01)
+              )
+              (dropout2): Dropout(p=0, inplace=False)
+              (layernorm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            )
+          )
+        )
+      )
+    )
+    (cls): Linear(in_features=1024, out_features=230, bias=True)
+  )
+)
+[2024-09-12 15:18:01,063][train.py][line:72][INFO] ---------------device---------------
+cuda:1
+[2024-09-12 15:18:01,063][train.py][line:73][INFO] ---------------optimizer---------------
+AdamW (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    initial_lr: 0.0005
+    lr: 0.0005
+    maximize: False
+    weight_decay: 1e-06
+)
+[2024-09-12 15:18:01,063][train.py][line:74][INFO] ---------------lossfn---------------
+CrossEntropyLoss()
+[2024-09-12 15:18:01,063][train.py][line:75][INFO] ---------------seed---------------
+3407
+[2024-09-12 15:18:01,067][train.py][line:87][INFO] ---------------epoch 1---------------
+lr: [0.0005]
+[2024-09-12 15:20:55,096][train.py][line:105][INFO] [training]total_num: 142618.0,error: 3.93837578313334
+[2024-09-12 15:22:28,965][train.py][line:148][INFO] [testing]total_number: 142618,error: 8.765054809463608,total_acc: 0.011429131962358952
+[2024-09-12 15:22:30,121][train.py][line:87][INFO] ---------------epoch 2---------------
+lr: [0.0005]
+[2024-09-12 15:25:17,628][train.py][line:105][INFO] [training]total_num: 142618.0,error: 3.50676342657396
+[2024-09-12 15:26:50,013][train.py][line:148][INFO] [testing]total_number: 142618,error: 7.426250991287765,total_acc: 0.03514282777905464
+[2024-09-12 15:26:50,959][train.py][line:87][INFO] ---------------epoch 3---------------
+lr: [0.0005]
+[2024-09-12 15:29:38,499][train.py][line:105][INFO] [training]total_num: 142618.0,error: 3.347958297996254
+[2024-09-12 15:31:10,762][train.py][line:148][INFO] [testing]total_number: 142618,error: 133.74045418692634,total_acc: 0.0008975024102255702
+[2024-09-12 15:31:10,786][train.py][line:87][INFO] ---------------epoch 4---------------
+lr: [0.0005]
+[2024-09-12 15:34:00,479][train.py][line:105][INFO] [training]total_num: 142618.0,error: 3.2859124553787127
+[2024-09-12 15:35:33,334][train.py][line:148][INFO] [testing]total_number: 142618,error: 36.16905780605503,total_acc: 0.0020824861712753773
+[2024-09-12 15:35:33,359][train.py][line:87][INFO] ---------------epoch 5---------------
+lr: [0.0005]
+[2024-09-12 15:38:20,640][train.py][line:105][INFO] [training]total_num: 142618.0,error: 3.208427619267177
+[2024-09-12 15:39:54,446][train.py][line:148][INFO] [testing]total_number: 142618,error: 4.855226943542907,total_acc: 0.06614172458648682
+[2024-09-12 15:39:55,374][train.py][line:87][INFO] ---------------epoch 6---------------
+lr: [0.0005]
+[2024-09-12 15:42:45,210][train.py][line:105][INFO] [training]total_num: 142618.0,error: 3.2499756346215736
+[2024-09-12 15:44:17,113][train.py][line:148][INFO] [testing]total_number: 142618,error: 5.5665728062182875,total_acc: 0.03883100301027298
+[2024-09-12 15:44:17,140][train.py][line:87][INFO] ---------------epoch 7---------------
+lr: [0.0005]
+[2024-09-12 15:47:06,162][train.py][line:105][INFO] [training]total_num: 142618.0,error: 3.2455333146181973
+[2024-09-12 15:48:39,386][train.py][line:148][INFO] [testing]total_number: 142618,error: 186.39864952247459,total_acc: 0.06588228791952133
+[2024-09-12 15:48:39,412][train.py][line:87][INFO] ---------------epoch 8---------------
+lr: [0.0005]
+[2024-09-12 15:51:28,208][train.py][line:105][INFO] [training]total_num: 142618.0,error: 3.202473131926743
+[2024-09-12 15:53:15,369][train.py][line:148][INFO] [testing]total_number: 142618,error: 143.64336816747706,total_acc: 0.0002804695104714483
+[2024-09-12 15:53:15,415][train.py][line:87][INFO] ---------------epoch 9---------------
+lr: [0.0005]
+[2024-09-12 15:56:26,285][train.py][line:105][INFO] [training]total_num: 142618.0,error: 3.257856213963115
+[2024-09-12 15:58:16,561][train.py][line:148][INFO] [testing]total_number: 142618,error: 11.855205535888672,total_acc: 0.035149842500686646
+[2024-09-12 15:58:16,587][train.py][line:87][INFO] ---------------epoch 10---------------
+lr: [0.0005]

@@ -225,9 +225,39 @@ from torchinfo import summary
 # print(a.shape,b.shape)
 
 
+# device = torch.device("cuda:6")
+# from models.ConvAtt import ConvAtt
+# model = ConvAtt().to(device)
+# batch,length = 32,8500
+# angle = torch.arange(0,length).view(1,-1).repeat((batch,1)).to(device)
+# intensity = torch.randn(batch,length).to(device)
+# a = model(intensity,angle)
+# summary(model,[(batch,length),(batch,length)])
+# print(a.shape)
+
+# device = torch.device("cuda:0")
+# from models.NewConv import NewConv
+# model = NewConv().to(device)
+# batch,length = 8,8500
+# angle = torch.arange(0,length).view(1,-1).repeat((batch,1)).to(device)
+# intensity = torch.randn(batch,length).to(device)
+# a = model(intensity,angle)
+# summary(model,[(batch,length),(batch,length)])
+# print(a.shape)
+
+# device = torch.device("cuda:6")
+# from models.RetryViT1D import RetryViT
+# model = RetryViT().to(device)
+# batch,length = 8,8500
+# angle = torch.arange(0,length).view(1,-1).repeat((batch,1)).to(device)
+# intensity = torch.randn(batch,length).to(device)
+# a = model(intensity,angle)
+# summary(model,[(batch,length),(batch,length)])
+# print(a.shape)
+
 device = torch.device("cuda:6")
-from models.ConvAtt import ConvAtt
-model = ConvAtt().to(device)
+from models.ConvAttV2 import ConvAttV2 
+model = ConvAttV2().to(device)
 batch,length = 8,8500
 angle = torch.arange(0,length).view(1,-1).repeat((batch,1)).to(device)
 intensity = torch.randn(batch,length).to(device)

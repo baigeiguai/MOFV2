@@ -42,8 +42,12 @@ device_list = [int(i) for i in args.device.split(',')]
 device = torch.device('cuda:%d'%device_list[0] if  torch.cuda.is_available() else 'cpu')
 
 if args.model_path is None :
-   from models.ConvAtt import ConvAtt 
-   model = ConvAtt().to(device)
+#    from models.RetryViT1D import RetryViT
+#    model = RetryViT().to(device)
+    # from models.ConvAtt import ConvAtt
+    # model = ConvAtt().to(device)
+    from models.ConvAttV2 import ConvAttV2 
+    model = ConvAttV2().to(device)
     
 else :
     model = torch.load(args.model_path,map_location=device)

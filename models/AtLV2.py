@@ -24,5 +24,6 @@ class AtLV2(torch.nn.Module):
         intensity = intensity.view(intensity.shape[0],-1,1)
         x = torch.concat([intensity,angle_features],dim=-1)
         x = self.att(x,att_mask)
+        x = x.mean(dim=1)
         x = self.cls(x)
         return x 

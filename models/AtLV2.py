@@ -20,6 +20,7 @@ class AtLV2(torch.nn.Module):
         angle = angle.view(angle.shape[0],-1).type(torch.float)
         angle_index = (angle-MIN_ANGLE)*(FIXED_1D_LENGTH//(MAX_ANGLE-MIN_ANGLE))*(angle>1e-5)
         angle_index = angle_index.type(torch.long)
+        print(angle_index.max(),angle_index.min())
         angle_features = self.embed(angle_index)
         intensity = intensity.view(intensity.shape[0],-1,1)
         x = torch.concat([intensity,angle_features],dim=-1)

@@ -28,31 +28,35 @@ class ScaledDotProductAttention(torch.nn.Module):
         super(ScaledDotProductAttention,self).__init__()
         self.d_k = d_k 
 
-    def forward(self,q,k,v):
+    def forward(self,q,k,v,att_mask):
         attention_score = torch.matmul(q,k.transpose(-1,-2))/ np.sqrt(self.d_k)
+        # print(attention_score)
+        if att_mask is not None :
+            attention_score = attention_score.masked_fill(att_mask,-1e9)
+        # print(attention_score)
         attn_weights = torch.nn.Softmax(dim=-1)(attention_score)
+        # print(attn_weights)
         output = torch.matmul(attn_weights,v)
         return output
 
 class MultiHeadAttention(torch.nn.Module):
-    def __init__(self,dimension,n_heads):
+    def __init__(self,dimension):
         super(MultiHeadAttention,self).__init__()
-        self.n_heads = n_heads 
-        self.d_k = self.d_v = dimension//n_heads 
+        self.d_k = self.d_v = dimension 
 
         self.WQ = torch.nn.Linear(dimension,dimension)
         self.WK = torch.nn.Linear(dimension,dimension)
         self.WV = torch.nn.Linear(dimension,dimension)
         self.scaled_dot_product_attn = ScaledDotProductAttention(self.d_k)
-        self.linear = torch.nn.Linear(self.d_v*self.n_heads,dimension)
+        self.linear = torch.nn.Linear(self.d_v,dimension)
 
-    def forward(self,X):
+    def forward(self,X,att_mask=None):
         batch_size = X.shape[0]
-        q_heads = self.WQ(X).view(batch_size,-1,self.n_heads,self.d_k).transpose(1,2)
-        k_heads = self.WK(X).view(batch_size,-1,self.n_heads,self.d_k).transpose(1,2)
-        v_heads = self.WV(X).view(batch_size,-1,self.n_heads,self.d_v).transpose(1,2)
-        attn = self.scaled_dot_product_attn(q_heads,k_heads,v_heads)
-        attn = attn.transpose(1,2).contiguous().view(batch_size,-1,self.d_v*self.n_heads)
+        q = self.WQ(X).view(batch_size,-1,self.d_k)
+        k = self.WK(X).view(batch_size,-1,self.d_k)
+        v = self.WV(X).view(batch_size,-1,self.d_v)
+        attn = self.scaled_dot_product_attn(q,k,v,att_mask)
+        attn = attn.contiguous().view(batch_size,-1,self.d_v)
         return self.linear(attn)
 
 class FeedForwardNetwork(torch.nn.Module):
@@ -66,9 +70,9 @@ class FeedForwardNetwork(torch.nn.Module):
         return self.linear2(self.relu(self.linear1(X)))
 
 class EncoderLayer(torch.nn.Module):
-    def __init__(self,dimension,n_heads,p_dropout,d_ff) -> None:
+    def __init__(self,dimension,p_dropout,d_ff) -> None:
         super(EncoderLayer,self).__init__()
-        self.mha = MultiHeadAttention(dimension,n_heads)
+        self.mha = MultiHeadAttention(dimension)
         self.dropout1 = torch.nn.Dropout(p_dropout)
         self.layernorm1 = torch.nn.LayerNorm(dimension,eps=1e-6)
         
@@ -78,9 +82,9 @@ class EncoderLayer(torch.nn.Module):
 
         self.layernorm2 = torch.nn.LayerNorm(dimension,eps=1e-6)
 
-    def forward(self,X):
+    def forward(self,X,att_mask=None):
         # print("[EncoderLayer]X.shape:",X.shape)
-        attn_output = self.mha(X)
+        attn_output = self.mha(X,att_mask)
         # print("[EncoderLayer]X.shape:",attn_output.shape)
         attn_output = self.dropout1(attn_output)
         # print("[EncoderLayer]X.shape:",attn_output.shape)
@@ -95,17 +99,17 @@ class EncoderLayer(torch.nn.Module):
         return ffn_output
 
 class TransformerEncoder(torch.nn.Module):
-    def __init__(self,seq_len,dimension,n_layers,n_heads,p_drop,d_ff) -> None:
+    def __init__(self,seq_len,dimension,n_layers,p_drop,d_ff) -> None:
         super(TransformerEncoder,self).__init__()
         self.positionEnbeding = PositionEmbedding(seq_len,dimension)
-        self.encoder_layers = torch.nn.ModuleList([EncoderLayer(dimension,n_heads,p_drop,d_ff) for _ in range(n_layers)])
+        self.encoder_layers = torch.nn.ModuleList([EncoderLayer(dimension,p_drop,d_ff) for _ in range(n_layers)])
     
-    def forward(self,X):
+    def forward(self,X,att_mask=None):
         # print("X.shape:",X.shape,"X:",X)
         outputs = self.positionEnbeding(X)
         # print("outputs.shape:",outputs.shape,"outputs:",outputs)
         for layer in self.encoder_layers :
-            outputs = layer(outputs)
+            outputs = layer(outputs,att_mask)
             # print("outputs.shape:",outputs.shape,"outputs:",outputs)
         return outputs
 
@@ -113,7 +117,9 @@ class TransformerEncoder(torch.nn.Module):
 if __name__ == '__main__':
     device = torch.device('cuda:2')
     # position_embed = PositionEmbedding().to(device)
-    X = torch.rand((128,500,512)).to(device)
-    # X = position_embed(X)
-    encoder = TransformerEncoder(500,512,1,8,0.01,256).to(device)
-    X = encoder(X)
+    X = torch.rand((2,3,4)).to(device)
+    ma = ((torch.range(1,6).view(2,1,3))>4).to(device)
+    print(X)
+    encoder = TransformerEncoder(3,4,1,0.01,8).to(device)
+    X = encoder(X,ma)
+    print(X.shape)

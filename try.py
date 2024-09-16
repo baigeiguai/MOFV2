@@ -255,11 +255,22 @@ from torchinfo import summary
 # summary(model,[(batch,length),(batch,length)])
 # print(a.shape)
 
-device = torch.device("cuda:6")
-from models.ConvAttV2 import ConvAttV2 
-model = ConvAttV2().to(device)
-batch,length = 8,8500
+# device = torch.device("cuda:6")
+# from models.ConvAttV2 import ConvAttV2 
+# model = ConvAttV2().to(device)
+# batch,length = 8,8500
+# angle = torch.arange(0,length).view(1,-1).repeat((batch,1)).to(device)
+# intensity = torch.randn(batch,length).to(device)
+# a = model(intensity,angle)
+# summary(model,[(batch,length),(batch,length)])
+# print(a.shape)
+
+device = torch.device("cuda:0")
+from models.AtLV2 import AtLV2
+model = AtLV2().to(device)
+batch,length = 16,8500
 angle = torch.arange(0,length).view(1,-1).repeat((batch,1)).to(device)
+angle = angle.type(torch.float)/100 + 5 
 intensity = torch.randn(batch,length).to(device)
 a = model(intensity,angle)
 summary(model,[(batch,length),(batch,length)])

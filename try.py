@@ -268,7 +268,7 @@ from torchinfo import summary
 device = torch.device("cuda:0")
 from models.AtLV2 import AtLV2
 model = AtLV2().to(device)
-batch,length = 16,8500
+batch,length = 4,8500
 angle = torch.arange(0,length).view(1,-1).repeat((batch,1)).to(device)
 angle = angle.type(torch.float)/100 + 5 
 intensity = torch.randn(batch,length).to(device)

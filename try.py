@@ -276,7 +276,7 @@ from torchinfo import summary
 # summary(model,[(batch,length),(batch,length)])
 # print(a.shape)
 
-device = torch.device("cuda:6")
+device = torch.device("cuda:7")
 from models.AtLSmall import AtLSmall
 model = AtLSmall().to(device)
 batch,length,zero_pad_len = 64,8500,22

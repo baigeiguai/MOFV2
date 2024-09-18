@@ -6,14 +6,14 @@ MAX_ANGLE = 90
 FIXED_1D_LENGTH = 8500
 
 class AtLSmall(torch.nn.Module):
-    def __init__(self,patch_len=10,embed_len=32,n_layers=2,p_dropout=0,d_ff=512):
+    def __init__(self,patch_len=10,embed_len=8,n_layers=16,p_dropout=0,d_ff=128):
         super(AtLSmall,self).__init__()
         self.patch_len = patch_len
         self.embed = torch.nn.Embedding(FIXED_1D_LENGTH+1,embed_len-1,padding_idx=0)
         self.att = TransformerEncoder(FIXED_1D_LENGTH//patch_len,patch_len*embed_len,n_layers,p_drop=p_dropout,d_ff=d_ff)
         self.cls = torch.nn.Sequential(
-            torch.nn.Linear(320,256),
-            torch.nn.Linear(256,230),
+            torch.nn.Linear(80,128),
+            torch.nn.Linear(128,230),
         )
     def forward(self,intensity,angle):
         angle = angle.view(angle.shape[0],-1).type(torch.float)

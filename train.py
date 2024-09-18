@@ -48,8 +48,10 @@ if args.model_path is None :
     # model = ConvAtt().to(device)
     # from models.ConvAttV2 import ConvAttV2 
     # model = ConvAttV2().to(device)
-    from models.AtLV2 import AtLV2
-    model = AtLV2().to(device)
+    # from models.AtLV2 import AtLV2
+    # model = AtLV2().to(device)
+    from models.AtLSmall import AtLSmall
+    model = AtLSmall().to(device)
     
 else :
     model = torch.load(args.model_path,map_location=device)

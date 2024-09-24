@@ -70,7 +70,7 @@ class ResTcn(torch.nn.Module):
             torch.nn.AvgPool1d(2,2),
 
             torch.nn.Flatten(),
-            torch.nn.Linear(1024,230),                
+            # torch.nn.Linear(1024,230),                
 
         )
         

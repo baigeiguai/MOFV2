@@ -276,10 +276,51 @@ from torchinfo import summary
 # summary(model,[(batch,length),(batch,length)])
 # print(a.shape)
 
-device = torch.device("cuda:7")
-from models.AtLSmall import AtLSmall
-model = AtLSmall().to(device)
-batch,length,zero_pad_len = 64,8500,22
+# device = torch.device("cuda:2")
+# from models.AtLSmall import AtLSmall
+# model = AtLSmall().to(device)
+# batch,length,zero_pad_len = 16,8500,22
+# angle = torch.arange(0,length-zero_pad_len).view(1,-1)
+# angle = angle.type(torch.float)/100 + 5 
+# zeros = torch.zeros(zero_pad_len).view(1,-1)
+# angle = torch.concat([angle,zeros],dim=-1).repeat((batch,1)).to(device)
+# intensity = torch.randn(batch,length).to(device)
+# a = model(intensity,angle)
+# summary(model,[(batch,length),(batch,length)])
+# print(a.shape)
+
+# device = torch.device("cuda:7")
+# from models.AtLV3 import AtLV3
+# model = AtLV3().to(device)
+# batch,length,zero_pad_len = 8,850,0
+# angle = torch.arange(0,length-zero_pad_len).view(1,-1)
+# angle = angle.type(torch.float)/100 + 5 
+# zeros = torch.zeros(zero_pad_len).view(1,-1)
+# angle = torch.concat([angle,zeros],dim=-1).repeat((batch,1)).to(device)
+# intensity = torch.randn(batch,length).to(device)
+# a = model(intensity,angle)
+# summary(model,[(batch,length),(batch,length)])
+# print(a.shape)
+
+
+# device = torch.device("cuda:2")
+# from models.HopeV1 import AttentionModule
+# model = AttentionModule().to(device)
+# batch,length,zero_pad_len = 8,8500,0
+# angle = torch.arange(0,length-zero_pad_len).view(1,-1)
+# angle = angle.type(torch.float)/100 + 5 
+# zeros = torch.zeros(zero_pad_len).view(1,-1)
+# angle = torch.concat([angle,zeros],dim=-1).repeat((batch,1)).to(device)
+# intensity = torch.randn(batch,length).to(device)
+# a = model(intensity,angle)
+# summary(model,[(batch,length),(batch,length)])
+# print(a.shape)
+
+
+device = torch.device("cuda:2")
+from models.HopeV1 import HopeV1
+model = HopeV1().to(device)
+batch,length,zero_pad_len = 8,8500,0
 angle = torch.arange(0,length-zero_pad_len).view(1,-1)
 angle = angle.type(torch.float)/100 + 5 
 zeros = torch.zeros(zero_pad_len).view(1,-1)

@@ -5,7 +5,7 @@ import torch
 import numpy as np
 
 
-TO_XRD_LENGTH = 8500
+TO_XRD_LENGTH = 850
 ANGLE_START = 5 
 ANGLE_END = 90
  

@@ -1,0 +1,235 @@
+[2024-10-22 22:32:00,197][test.py][line:34][INFO] ---------------args---------------
+Namespace(data_path='./data/Pymatgen_Wrapped/0', batch_size=128, model_path='/data/ylh/MyExps/MOFV2/checkpoints/HopeV1_EMA_Try/HopeV1_EMA_Try_epoch_61.pth', device='2', mode='test', top_k=5, parallel_model=False, test_name='HopeV1_EMA_Try', num_workers=20, log_name='log/test/test_HopeV1_EMA_Try_2024_10_22_22:31:53.log')
+[2024-10-22 22:32:00,199][test.py][line:35][INFO] ---------------model---------------
+HopeV1(
+  (conv_module): ResTcn(
+    (intensity_norm): BatchNorm1d(1, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (TCN): Sequential(
+      (0): ResBlock1D(
+        (pre): Conv1d(2, 32, kernel_size=(1,), stride=(1,), bias=False)
+        (conv): Sequential(
+          (0): Conv1d(32, 32, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+          (1): BatchNorm1d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): LeakyReLU(negative_slope=0.01)
+          (3): Conv1d(32, 32, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+          (4): BatchNorm1d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (relu): LeakyReLU(negative_slope=0.01)
+      )
+      (1): MaxPool1d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (2): ResBlock1D(
+        (pre): Identity()
+        (conv): Sequential(
+          (0): Conv1d(32, 32, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+          (1): BatchNorm1d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): LeakyReLU(negative_slope=0.01)
+          (3): Conv1d(32, 32, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+          (4): BatchNorm1d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (relu): LeakyReLU(negative_slope=0.01)
+      )
+      (3): MaxPool1d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (4): ResBlock1D(
+        (pre): Conv1d(32, 64, kernel_size=(1,), stride=(1,), bias=False)
+        (conv): Sequential(
+          (0): Conv1d(64, 64, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+          (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): LeakyReLU(negative_slope=0.01)
+          (3): Conv1d(64, 64, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+          (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (relu): LeakyReLU(negative_slope=0.01)
+      )
+      (5): MaxPool1d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (6): ResBlock1D(
+        (pre): Conv1d(64, 128, kernel_size=(1,), stride=(1,), bias=False)
+        (conv): Sequential(
+          (0): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+          (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): LeakyReLU(negative_slope=0.01)
+          (3): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+          (4): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (relu): LeakyReLU(negative_slope=0.01)
+      )
+      (7): MaxPool1d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (8): ResBlock1D(
+        (pre): Identity()
+        (conv): Sequential(
+          (0): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+          (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): LeakyReLU(negative_slope=0.01)
+          (3): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+          (4): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (relu): LeakyReLU(negative_slope=0.01)
+      )
+      (9): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(1,))
+      (10): ResBlock1D(
+        (pre): Conv1d(128, 256, kernel_size=(1,), stride=(1,), bias=False)
+        (conv): Sequential(
+          (0): Conv1d(256, 256, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+          (1): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): LeakyReLU(negative_slope=0.01)
+          (3): Conv1d(256, 256, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+          (4): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (relu): LeakyReLU(negative_slope=0.01)
+      )
+      (11): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(0,))
+      (12): ResBlock1D(
+        (pre): Identity()
+        (conv): Sequential(
+          (0): Conv1d(256, 256, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+          (1): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): LeakyReLU(negative_slope=0.01)
+          (3): Conv1d(256, 256, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+          (4): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (relu): LeakyReLU(negative_slope=0.01)
+      )
+      (13): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(1,))
+      (14): ResBlock1D(
+        (pre): Conv1d(256, 512, kernel_size=(1,), stride=(1,), bias=False)
+        (conv): Sequential(
+          (0): Conv1d(512, 512, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+          (1): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): LeakyReLU(negative_slope=0.01)
+          (3): Conv1d(512, 512, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+          (4): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (relu): LeakyReLU(negative_slope=0.01)
+      )
+      (15): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(1,))
+      (16): ResBlock1D(
+        (pre): Identity()
+        (conv): Sequential(
+          (0): Conv1d(512, 512, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+          (1): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): LeakyReLU(negative_slope=0.01)
+          (3): Conv1d(512, 512, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+          (4): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (relu): LeakyReLU(negative_slope=0.01)
+      )
+      (17): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(0,))
+      (18): ResBlock1D(
+        (pre): Conv1d(512, 1024, kernel_size=(1,), stride=(1,), bias=False)
+        (conv): Sequential(
+          (0): Conv1d(1024, 1024, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+          (1): BatchNorm1d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): LeakyReLU(negative_slope=0.01)
+          (3): Conv1d(1024, 1024, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+          (4): BatchNorm1d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (relu): LeakyReLU(negative_slope=0.01)
+      )
+      (19): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(0,))
+      (20): Dropout(p=0.25, inplace=False)
+      (21): ResBlock1D(
+        (pre): Identity()
+        (conv): Sequential(
+          (0): Conv1d(1024, 1024, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+          (1): BatchNorm1d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): LeakyReLU(negative_slope=0.01)
+          (3): Conv1d(1024, 1024, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+          (4): BatchNorm1d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (relu): LeakyReLU(negative_slope=0.01)
+      )
+      (22): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(0,))
+      (23): Dropout(p=0.25, inplace=False)
+      (24): ResBlock1D(
+        (pre): Identity()
+        (conv): Sequential(
+          (0): Conv1d(1024, 1024, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+          (1): BatchNorm1d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): LeakyReLU(negative_slope=0.01)
+          (3): Conv1d(1024, 1024, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+          (4): BatchNorm1d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (relu): LeakyReLU(negative_slope=0.01)
+      )
+      (25): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(0,))
+      (26): Dropout(p=0.25, inplace=False)
+      (27): ResBlock1D(
+        (pre): Identity()
+        (conv): Sequential(
+          (0): Conv1d(1024, 1024, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+          (1): BatchNorm1d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): LeakyReLU(negative_slope=0.01)
+          (3): Conv1d(1024, 1024, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+          (4): BatchNorm1d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (relu): LeakyReLU(negative_slope=0.01)
+      )
+      (28): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(0,))
+      (29): Flatten(start_dim=1, end_dim=-1)
+    )
+  )
+  (att): AttentionModule(
+    (embed): Embedding(850, 15)
+    (patch_conv): PatchConvModule(
+      (conv): Sequential(
+        (0): Conv2d(1, 2, kernel_size=(1, 3), stride=(1, 1), padding=(0, 1))
+        (1): AvgPool2d(kernel_size=(1, 2), stride=(1, 2), padding=0)
+        (2): Conv2d(2, 4, kernel_size=(1, 3), stride=(1, 1), padding=(0, 1))
+        (3): AvgPool2d(kernel_size=(1, 2), stride=(1, 2), padding=(0, 1))
+        (4): Conv2d(4, 8, kernel_size=(1, 3), stride=(1, 1), padding=(0, 1))
+        (5): AvgPool2d(kernel_size=(1, 2), stride=(1, 2), padding=(0, 1))
+        (6): Conv2d(8, 16, kernel_size=(1, 3), stride=(1, 1), padding=(0, 1))
+        (7): AvgPool2d(kernel_size=(1, 2), stride=(1, 2), padding=0)
+      )
+    )
+    (att): TransformerEncoder(
+      (positionEnbeding): PositionEmbedding()
+      (encoder_layers): ModuleList(
+        (0-7): 8 x EncoderLayer(
+          (mha): MultiHeadAttention(
+            (WQ): Linear(in_features=32, out_features=32, bias=True)
+            (WK): Linear(in_features=32, out_features=32, bias=True)
+            (WV): Linear(in_features=32, out_features=32, bias=True)
+            (scaled_dot_product_attn): ScaledDotProductAttention()
+            (linear): Linear(in_features=32, out_features=32, bias=True)
+          )
+          (dropout1): Dropout(p=0.25, inplace=False)
+          (layernorm1): LayerNorm((32,), eps=1e-06, elementwise_affine=True)
+          (ffn): FeedForwardNetwork(
+            (linear1): Linear(in_features=32, out_features=256, bias=True)
+            (linear2): Linear(in_features=256, out_features=32, bias=True)
+            (relu): LeakyReLU(negative_slope=0.01)
+          )
+          (dropout2): Dropout(p=0.25, inplace=False)
+          (layernorm2): LayerNorm((32,), eps=1e-06, elementwise_affine=True)
+        )
+      )
+    )
+  )
+  (cls_sp): Sequential(
+    (0): Linear(in_features=1056, out_features=230, bias=True)
+  )
+  (cls_cs): Sequential(
+    (0): Linear(in_features=1056, out_features=7, bias=True)
+  )
+  (cls_lt): Sequential(
+    (0): Linear(in_features=1056, out_features=6, bias=True)
+  )
+)
+[2024-10-22 22:32:00,199][test.py][line:36][INFO] ---------------device---------------
+cuda:2
+[2024-10-22 22:32:00,199][test.py][line:37][INFO] ---------------lossfn---------------
+CrossEntropyLoss()
+[2024-10-22 22:36:55,814][test.py][line:88][INFO] ---------------performance---------------
+total_num:142729
+error:1.173171
+total_acc:0.7626550793647766
+f1_score:0.5276638269424438
+top5_acc:0.9583686590194702
+head_acc:0.8198110955915141
+medium_acc:0.7382554895604929
+tail_add:0.5822245333095908
+crystal_system_acc:0.9127577543258667
+lattice_type_acc:0.9329078197479248
+
+[2024-10-22 22:36:55,814][test.py][line:101][INFO] ---------------per_class_acc---------------
+[0.7636146, 0.748145, 0.17105263, 0.88253075, 0.86346453, 0.2777778, 0.675298, 0.25, 0.7819442, 0.32786885, 0.68670076, 0.48893806, 0.57782817, 0.8079779, 0.7172714, 0.6956522, 0.31578946, 0.75977653, 0.9204375, 0.70568925, 0.28125, 0.10526316, 0.63779527, 0.11764706, 0.0, 0.38157895, 0.29411766, 0.11111111, 0.76732314, 0.33802816, 0.67391306, 0.18888889, 0.82840157, 0.4, 0.2, 0.67146975, 0.3898305, 0.5, 0.0, 0.36734694, 0.0, 0.5, 0.80419195, 0.4864865, 0.6198083, 0.5138889, 0.6, 0.4054054, 0.4, 0.2777778, 0.26923078, 0.5296108, 0.6197183, 0.23828125, 0.3178808, 0.6167284, 0.43661973, 0.5536723, 0.46616542, 0.64947766, 0.9399745, 0.7307692, 0.65696466, 0.0, 0.6699029, 0.34848484, 0.0, 0.0, 0.50793654, 0.664966, 0.5277778, 0.6232558, 0.43949044, 0.73426574, 0.13793103, 0.6737288, 0.2580645, 0.30403802, 0.08208955, 0.62204725, 0.6034483, 0.81303114, 0.125, 0.5416667, 0.8040089, 0.8273273, 0.7368421, 0.89660573, 0.0, 0.30769232, 0.22222222, 0.3425358, 0.0, 0.4528302, 0.21276596, 0.67025864, 0.22916667, 0.71568626, 0.0, 0.0, 0.0, 0.15384616, 0.3529412, 0.704918, 1.0, 0.6603774, 0.083333336, 0.31578946, 0.2173913, 0.8262911, 0.0, 0.3529412, 0.74820143, 0.9072, 0.0, 0.14285715, 0.45454547, 0.4574468, 0.1875, 0.53571427, 0.4827586, 0.8115942, 0.7307692, 0.82978725, 0.9, 0.73214287, 0.2857143, 0.5824176, 0.6966292, 0.8130081, 0.7714286, 0.3, 0.28, 0.53571427, 0.34, 0.65217394, 0.7017544, 0.5753425, 0.28695652, 0.6111111, 0.53968257, 0.7765568, 0.5, 0.37628865, 0.4792746, 0.6396648, 0.7471637, 0.9464326, 0.33333334, 0.11111111, 0.0, 0.563147, 0.09090909, 0.22513089, 0.30923694, 0.0, 0.11111111, 0.48076922, 0.72432435, 0.609375, 0.85465115, 0.5862069, 0.6831276, 0.5102041, 0.82857144, 0.63897765, 0.84539473, 0.0, 0.5267606, 0.33429396, 0.125, 0.0, 0.65847, 0.0625, 0.375, 0.77135676, 0.73333335, 0.59183675, 0.36, 0.3, 0.4, 0.5670103, 0.0, 0.2857143, 0.21052632, 0.35416666, 0.6818182, 0.125, 0.36363637, 0.375, 0.6515151, 0.7966102, 0.6052632, 0.71270716, 0.2, 0.79310346, 0.23809524, 0.9417808, 0.70149255, 0.23076923, 0.32, 0.041666668, 0.96363634, 0.703125, 0.997669, 0.91549295, 0.3846154, 0.0, 0.14285715, 0.8064516, 0.55172414, 0.41666666, 0.90909094, 0.85714287, 0.54545456, 0.0, 0.80368096, 0.943662, 0.875, 0.9726027, 0.9212598, 0.98717946, 0.84210527, 0.8125, 0.9588235, 0.8095238, 0.7386364, 0.9861111, 0.4090909, 1.0]

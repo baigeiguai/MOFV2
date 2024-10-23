@@ -64,9 +64,9 @@ class AttentionModule(torch.nn.Module):
         return x
         
     
-class HopeV1(torch.nn.Module):    
+class HopeV1_Con(torch.nn.Module):    
     def __init__(self):
-        super(HopeV1,self).__init__()
+        super(HopeV1_Con,self).__init__()
         self.conv_module = ResTcn(p_dropout=0.25)
         self.att = AttentionModule()
         self.conv_feature_len = 1024
@@ -94,7 +94,8 @@ class HopeV1(torch.nn.Module):
         atten_feature = self.att(intensity,angle)
         x = torch.concat([conv_feature,atten_feature],dim=-1)
         # x = self.cls(x)
-        return self.cls_sp(x),self.cls_cs(x),self.cls_lt(x)
+        # return self.cls_sp(x),self.cls_cs(x),self.cls_lt(x)
+        return x 
     
 if __name__ == '__main__':
     device = torch.device("cuda:4")

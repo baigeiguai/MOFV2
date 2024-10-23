@@ -40,6 +40,8 @@ def test():
     model.eval()
     h_acc,m_acc,t_acc,top_k_acc_val = None,None,None,None 
     total_acc = MulticlassAccuracy(num_classes=230,average='micro').to(device)
+    crystal_system_accuracy = MulticlassAccuracy(num_classes=7,average='micro').to(device)
+    lattice_type_accuracy = MulticlassAccuracy(num_classes=6,average='micro').to(device)
     f1_score = MulticlassF1Score(num_classes=230,top_k=1).to(device)
     top_k_acc = MulticlassAccuracy(num_classes=230,top_k=args.top_k,average='micro').to(device)
 
@@ -54,14 +56,20 @@ def test():
             xrd_dataset = XrdData(file)
             dataloader = DataLoader(xrd_dataset,batch_size=args.batch_size,num_workers=args.num_workers)
             for data in dataloader:
-                intensity , angle,labels230,index = data[0].type(torch.float).to(device),data[1].type(torch.float).to(device),data[2].to(device),data[3].to(device)
-                raw_logits = model(intensity,angle)
+                intensity , angle,labels230,index,labels7,labels6= data[0].type(torch.float).to(device),data[1].type(torch.float).to(device),data[2].to(device),data[3].to(device),data[4].to(device),data[5].to(device)
+                
+                raw_logits,cs_raw_logits,lt_raw_logits = model(intensity,angle)
                 
                 # raw_logits,hkl = out[0],out[1]
                 # raw_logits = model(intensity,angle)
                 err = lossfn(raw_logits,labels230)
                 logits = raw_logits.softmax(dim=1)
-                total_acc(logits,labels230)
+                cs_logits = cs_raw_logits.softmax(dim=1)
+                lt_logits = lt_raw_logits.softmax(dim=1)
+                total_acc(logits,labels230,)
+                crystal_system_accuracy(cs_logits,labels7)
+                # print(lt_logits.shape,labels6.shape,labels7.shape,lt_raw_logits.shape)
+                lattice_type_accuracy(lt_logits,labels6)
                 f1_score(logits,labels230)
                 top_k_acc(logits,labels230)
                 acc_per_class(logits,labels230)
@@ -70,12 +78,14 @@ def test():
                 total_num += labels230.shape[0]
                 batch_cnt += 1
         total_acc_val = total_acc.compute().cpu().item()
+        crystal_system_acc_val = crystal_system_accuracy.compute().cpu().item()
+        lattice_type_acc_val = lattice_type_accuracy.compute().cpu().item()
         f1_score = f1_score.compute().cpu().item()
         top_k_acc_val = top_k_acc.compute().cpu().item()
         per_class_acc = list(acc_per_class.compute().cpu().numpy())
         h_acc,m_acc,t_acc = per_class_acc2hmt_acc(per_class_acc) 
     
-    logger.info('-'*15+'performance'+'-'*15+'\ntotal_num:%d\nerror:%f\ntotal_acc:%s\nf1_score:%s\ntop%d_acc:%s\nhead_acc:%s\nmedium_acc:%s\ntail_add:%s\n'%(
+    logger.info('-'*15+'performance'+'-'*15+'\ntotal_num:%d\nerror:%f\ntotal_acc:%s\nf1_score:%s\ntop%d_acc:%s\nhead_acc:%s\nmedium_acc:%s\ntail_add:%s\ncrystal_system_acc:%s\nlattice_type_acc:%s\n'%(
         total_num,
         total_err/batch_cnt,
         total_acc_val,
@@ -84,7 +94,9 @@ def test():
         top_k_acc_val,
         h_acc,
         m_acc,
-        t_acc
+        t_acc,
+        crystal_system_acc_val,
+        lattice_type_acc_val,
     ))
     logger.info('-'*15+'per_class_acc'+'-'*15+'\n%s'%per_class_acc)
 

@@ -326,6 +326,45 @@ angle = angle.type(torch.float)/100 + 5
 zeros = torch.zeros(zero_pad_len).view(1,-1)
 angle = torch.concat([angle,zeros],dim=-1).repeat((batch,1)).to(device)
 intensity = torch.randn(batch,length).to(device)
-a = model(intensity,angle)
+(a,b) = model(intensity,angle)
 summary(model,[(batch,length),(batch,length)])
-print(a.shape)
+print(a.shape,b.shape)
+
+# device = torch.device("cuda:3")
+# from models.HopeV1_ResOnly import HopeV1ResOnly
+# model = HopeV1ResOnly().to(device)
+# batch,length,zero_pad_len = 8,8500,0
+# angle = torch.arange(0,length-zero_pad_len).view(1,-1)
+# angle = angle.type(torch.float)/100 + 5 
+# zeros = torch.zeros(zero_pad_len).view(1,-1)
+# angle = torch.concat([angle,zeros],dim=-1).repeat((batch,1)).to(device)
+# intensity = torch.randn(batch,length).to(device)
+# a = model(intensity,angle)
+# summary(model,[(batch,length),(batch,length)])
+# print(a.shape)
+
+# device = torch.device("cuda:3")
+# from models.HopeV1_AttOnly import HopeV1AttOnly
+# model = HopeV1AttOnly().to(device)
+# batch,length,zero_pad_len = 8,8500,0
+# angle = torch.arange(0,length-zero_pad_len).view(1,-1)
+# angle = angle.type(torch.float)/100 + 5 
+# zeros = torch.zeros(zero_pad_len).view(1,-1)
+# angle = torch.concat([angle,zeros],dim=-1).repeat((batch,1)).to(device)
+# intensity = torch.randn(batch,length).to(device)
+# a = model(intensity,angle)
+# summary(model,[(batch,length),(batch,length)])
+# print(a.shape)
+
+# device = torch.device("cuda:0")
+# from models.HopeV1_InsAt import HopeV1InsAt
+# model = HopeV1InsAt(64).to(device)
+# batch,length,zero_pad_len = 64,8500,0
+# angle = torch.arange(0,length-zero_pad_len).view(1,-1)
+# angle = angle.type(torch.float)/100 + 5 
+# zeros = torch.zeros(zero_pad_len).view(1,-1)
+# angle = torch.concat([angle,zeros],dim=-1).repeat((batch,1)).to(device)
+# intensity = torch.randn(batch,length).to(device)
+# a = model(intensity,angle)
+# summary(model,[(batch,length),(batch,length)])
+# print(a.shape)

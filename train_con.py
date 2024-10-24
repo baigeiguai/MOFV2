@@ -70,7 +70,7 @@ if len(device_list) >  1 :
 
 ema = EMA(model=model, decay=0.995)
 ema.register()
-lossfn = SupConLoss(temperature=0.7,base_temperature=0.7,device=device).to(device)
+lossfn = SupConLoss(temperature=700,base_temperature=7000,contrast_mode='one',device=device).to(device)
 # from losses.CBLoss import CBLoss
 # lossfn = CBLoss().to(device)
 
@@ -121,7 +121,8 @@ def train():
                 error_sp = lossfn(x,labels230)
                 error_cs = lossfn(x,labels7)
                 error_lt = lossfn(x,labels6)
-                error = error_sp + error_cs + error_lt
+                error = (error_sp + error_cs + error_lt)
+                # print(error_sp,error_cs,error_lt)
                 error.backward()
                 optimizer.step()
                 ema.update()

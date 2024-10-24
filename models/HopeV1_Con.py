@@ -91,7 +91,9 @@ class HopeV1_Con(torch.nn.Module):
         )
     def forward(self,intensity,angle):
         conv_feature = self.conv_module(intensity,angle)
+        # print("conv_feature_max",torch.max(conv_feature))
         atten_feature = self.att(intensity,angle)
+        # print("atten_feature_max",torch.max(atten_feature))
         x = torch.concat([conv_feature,atten_feature],dim=-1)
         # x = self.cls(x)
         # return self.cls_sp(x),self.cls_cs(x),self.cls_lt(x)

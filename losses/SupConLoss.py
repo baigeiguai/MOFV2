@@ -2,7 +2,7 @@
 Author: Yonglong Tian (yonglong@mit.edu)
 Date: May 07, 2020
 """
-from __future__ import print_function
+# from __future__ import print_function
 
 import torch
 import torch.nn as nn
@@ -34,7 +34,7 @@ class SupConLoss(nn.Module):
         """
         
         device = self.device
-        
+        # print("max_val",torch.max(features))
         if len(features.shape)==2:
             features = features.view(features.shape[0],1,-1)
         elif len(features.shape) < 2:
@@ -68,6 +68,7 @@ class SupConLoss(nn.Module):
             raise ValueError('Unknown mode: {}'.format(self.contrast_mode))
 
         # compute logits
+        # print("anchor_max",torch.max(torch.matmul(anchor_feature, contrast_feature.T)))
         anchor_dot_contrast = torch.div(
             torch.matmul(anchor_feature, contrast_feature.T),
             self.temperature)

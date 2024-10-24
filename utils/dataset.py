@@ -3,6 +3,7 @@ from torch.utils.data import Dataset
 from torch.utils.data import DataLoader
 import torch 
 import numpy as np
+import os 
 
 
 TO_XRD_LENGTH = 8500
@@ -50,6 +51,20 @@ class XrdData(Dataset):
     def __len__(self):
         return len(self.labels230)
     
+    
+class AllXrdDataset(Dataset):
+    def __init__(self,file_path_dir,mode='train'):
+        cls_cnt = [0 for i in range(230)]
+        self.sp2data = {i:[] for i in range(230)}
+        self.angle = np.arange(ANGLE_START,ANGLE_END,(ANGLE_END-ANGLE_START)/TO_XRD_LENGTH).astype(np.float32)
+        for file in os.listdir(file_path_dir):
+            if not (file.endswith('npy') and file.startswith(mode)):
+                continue
+            file_path = os.path.join(file_path_dir,file)
+            data= np.load(file,allow_pickle=True)
+            
+                
+
 if __name__ == '__main__':
     t = XrdData('/home/ylh/code/MyExps/MOFV2/data/Pymatgen_Wrapped/0/train_0.npy')
     dataloader = DataLoader(t,16,True)

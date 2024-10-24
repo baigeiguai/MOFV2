@@ -6,7 +6,7 @@ import torch
 import argparse
 from utils.init import seed_torch
 from utils.logger import Log
-# from torch.utils.tensorboard.writer import SummaryWriter
+from torch.utils.tensorboard.writer import SummaryWriter
 from utils.dataset import XrdData
 from torchmetrics.classification import MulticlassAccuracy
 from utils.ema import EMA
@@ -44,24 +44,8 @@ device_list = [int(i) for i in args.device.split(',')]
 device = torch.device('cuda:%d'%device_list[0] if  torch.cuda.is_available() else 'cpu')
 
 if args.model_path is None :
-#    from models.RetryViT1D import RetryViT
-#    model = RetryViT().to(device)
-    # from models.ConvAtt import ConvAtt
-    # model = ConvAtt().to(device)
-    # from models.ConvAttV2 import ConvAttV2 
-    # model = ConvAttV2().to(device)
-    # from models.AtLV3 import AtLV3
-    # model = AtLV3().to(device)
-    # from models.AtLSmall import AtLSmall
-    # model = AtLSmall().to(device)
-    # from models.HopeV1_ResOnly import HopeV1ResOnly 
-    # model = HopeV1ResOnly().to(device)
-    # from models.HopeV1_AttOnly import HopeV1AttOnly 
-    # model = HopeV1AttOnly().to(device)
     from models.HopeV1_Con import HopeV1_Con 
     model = HopeV1_Con().to(device)
-    # from models.HopeV1_InsAt import HopeV1InsAt
-    # model = HopeV1InsAt(args.batch_size).to(device)
 else :
     model = torch.load(args.model_path,map_location=device)
 
@@ -70,9 +54,7 @@ if len(device_list) >  1 :
 
 ema = EMA(model=model, decay=0.995)
 ema.register()
-lossfn = SupConLoss(temperature=700,base_temperature=7000,contrast_mode='one',device=device).to(device)
-# from losses.CBLoss import CBLoss
-# lossfn = CBLoss().to(device)
+lossfn = torch.nn.CrossEntropyLoss().to(device)
 
 if not os.path.exists(args.model_save_path):
     os.mkdir(args.model_save_path)
@@ -96,7 +78,7 @@ logger.info('-'*15+'seed'+'-'*15+'\n'+str(now_seed))
 file_paths = os.listdir(args.data_path)
 train_files,test_files = [os.path.join(args.data_path,f)  for f in file_paths if f.startswith('train')],[os.path.join(args.data_path,f) for f in file_paths if f.startswith('test')]
 
-# writer = SummaryWriter(log_dir='./board_dir/%s'%args.log_name)
+writer = SummaryWriter(log_dir='./board_dir/%s'%args.log_name)
 
 
 def train():
@@ -136,7 +118,7 @@ def train():
         logger.info('[training]total_num: '+str(total_num)+',error: '+str(total_err/batch_cnt)+',error_sp: '+str(err_sp/batch_cnt)+',error_cs: '+str(err_cs/batch_cnt)+',error_lt: '+str(err_lt/batch_cnt))
         test_err = test()
         # writer.add_scalar("train/acc",test_acc,epoch_idx+1)
-        # writer.add_scalar("train/err",test_err,epoch_idx+1)
+        writer.add_scalar("train/err",test_err,epoch_idx+1)
         if epoch_idx >= args.start_scheduler_step:
             lr_scheduler.step()
         
@@ -182,4 +164,4 @@ def test():
                 
 if __name__ == '__main__':
     train()
-    # writer.close()
+    writer.close()

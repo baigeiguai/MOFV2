@@ -22,8 +22,8 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--data_path',type=str,required=True)
 parser.add_argument('--train_name',type=str,required=True)
 parser.add_argument('--model_path',type=str)
-parser.add_argument('--learning_rate',type=float,default=0.01)
-parser.add_argument('--min_learning_rate',type=float,default=5e-4)
+parser.add_argument('--learning_rate',type=float,default=5e-4)
+parser.add_argument('--min_learning_rate',type=float,default=1e-6)
 parser.add_argument('--start_scheduler_step',type=int,default=0)
 parser.add_argument('--weight_decay',type=float,default=4e-5)
 parser.add_argument('--momentum',type=float,default=0.99)
@@ -88,8 +88,8 @@ lossfn = torch.nn.CrossEntropyLoss().to(device)
 if not os.path.exists(args.model_save_path):
     os.mkdir(args.model_save_path)
 
-with open(os.path.join(args.model_save_path,'config.json'),'w') as json_file :
-    json_file.write(json.dumps(vars(args)))
+# with open(os.path.join(args.model_save_path,'config.json'),'w') as json_file :
+#     json_file.write(json.dumps(vars(args)))
     
 model_save_path = os.path.join(args.model_save_path,args.train_name)
 

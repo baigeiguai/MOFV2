@@ -97,7 +97,7 @@ class HopeV1_Con(torch.nn.Module):
         x = torch.concat([conv_feature,atten_feature],dim=-1)
         # x = self.cls(x)
         # return self.cls_sp(x),self.cls_cs(x),self.cls_lt(x)
-        return x 
+        return x,self.cls_sp(x)
     
 if __name__ == '__main__':
     device = torch.device("cuda:4")

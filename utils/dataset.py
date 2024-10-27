@@ -52,29 +52,68 @@ class XrdData(Dataset):
         return len(self.labels230)
     
     
-class AllXrdDataset(Dataset):
-    def __init__(self,file_path_dir,mode='train'):
+class ClassedXrdDataset(Dataset):
+    def __init__(self,files_dir:str):
         cls_cnt = [0 for i in range(230)]
-        self.sp2data = {i:[] for i in range(230)}
-        self.angle = np.arange(ANGLE_START,ANGLE_END,(ANGLE_END-ANGLE_START)/TO_XRD_LENGTH).astype(np.float32)
-        for file in os.listdir(file_path_dir):
-            if not (file.endswith('npy') and file.startswith(mode)):
+        labels230 = []
+        features = []
+        for sp_idx in range(230):
+            file_path = os.path.join(files_dir,str(sp_idx),"%d.npy"%sp_idx)
+            if not os.path.exists(file_path):
                 continue
-            file_path = os.path.join(file_path_dir,file)
-            data= np.load(file,allow_pickle=True)
-            
-                
+            data = np.load(file_path)
+            # print(data.shape)
+            cls_cnt[sp_idx]=data.shape[0]
+            if sp_idx == 0 :
+                features = data
+            else:
+                features = np.append(features,data,axis=0)
+            labels230 += [sp_idx for i in range(data.shape[0])]
+        self.features = features
+        self.labels230 = labels230 
+        self.angle = np.arange(ANGLE_START,ANGLE_END,(ANGLE_END-ANGLE_START)/TO_XRD_LENGTH).astype(np.float32)
+        self.cls_cnt = cls_cnt
+        self.new_labels230 = []
+        # np.save('/data/ylh/MyExps/MOFV2/data/All_Wrapped/train_features.npy',self.features)
+        # np.save('/data/ylh/MyExps/MOFV2/data/All_Wrapped/train_labels230.npy',self.labels230)
+    def __getitem__(self, index) :
+        return [
+            self.features[index],
+            self.angle,
+            self.labels230[index],
+            self.new_labels230[index] if self.new_labels230!=[] else -1,
+        ]
+    
+    def __len__(self):
+        return len(self.labels230)
+
+class AllXrdDataset(Dataset) :
+    def __init__(self,dir_path):
+        self.features = np.load(os.path.join(dir_path,'train_features.npy'),allow_pickle=True)
+        self.labels230 = np.load(os.path.join(dir_path,'train_labels230.npy'),allow_pickle=True)
+        self.cls_cnt = np.load(os.path.join(dir_path,'train_cls_cnt.npy'),allow_pickle=True)
+        self.angle = np.arange(ANGLE_START,ANGLE_END,(ANGLE_END-ANGLE_START)/TO_XRD_LENGTH).astype(np.float32)
+        self.new_labels230 = []
+    
+    def __getitem__(self, index):
+        
+        return [
+            self.features[index],
+            self.angle,
+            self.labels230[index],
+            self.new_labels230[index] if self.new_labels230!=[] else -1,
+        ]
+    
+    def __len__(self):
+        return len(self.labels230)
+                 
+
 
 if __name__ == '__main__':
-    t = XrdData('/home/ylh/code/MyExps/MOFV2/data/Pymatgen_Wrapped/0/train_0.npy')
-    dataloader = DataLoader(t,16,True)
-    for data in dataloader :
-        [a,b,c,d,e,f] = data 
-        print(a.shape,b.shape,c.shape,d.shape,e.shape,f.shape)
-        print(f)
-        # [a,b,c,d,e,f,g] = data 
-        # print(a.shape,b.shape,c.shape,d.shape,e.shape,f.shape,g.shape)
-        # print(torch.concat([e.view(e.shape[0],-1,1),g],dim=-1).shape)
-        # torch.Size([16, 850]) torch.Size([16, 850]) torch.Size([16]) torch.Size([16, 3, 3]) torch.Size([16, 500]) torch.Size([16, 500]) torch.Size([16, 500, 3])
+    dataset = AllXrdDataset('/data/ylh/MyExps/MOFV2/data/All_Wrapped')
+    print(dataset.__len__())
+    print(dataset.cls_cnt)
+    dataloader = DataLoader(dataset,8,shuffle=True,num_workers=30,pin_memory=True)
+    for [a,b,c,d] in dataloader:
+        print(a.shape,b.shape,c.shape,d.shape)
         break
-    

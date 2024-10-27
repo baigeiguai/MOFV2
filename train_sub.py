@@ -23,20 +23,20 @@ parser.add_argument('--data_path',type=str,required=True)
 parser.add_argument('--train_name',type=str,required=True)
 parser.add_argument('--model_path',type=str)
 parser.add_argument('--learning_rate',type=float,default=0.01)
-parser.add_argument('--min_learning_rate',type=float,default=0.001)
+parser.add_argument('--min_learning_rate',type=float,default=5e-4)
 parser.add_argument('--start_scheduler_step',type=int,default=0)
-parser.add_argument('--weight_decay',type=float,default=1e-5)
+parser.add_argument('--weight_decay',type=float,default=4e-5)
 parser.add_argument('--momentum',type=float,default=0.99)
-parser.add_argument('--batch_size',type=int,default=64)
+parser.add_argument('--batch_size',type=int,default=512)
 parser.add_argument("--class_num",type=int,default=230)
-parser.add_argument("--epoch_num",type=int,default=1)
-# parser.add_argument("--model_save_path",type=str,required=True)
+parser.add_argument("--epoch_num",type=int,default=150)
+parser.add_argument("--model_save_path",type=str,required=True)
 parser.add_argument("--device",type=str,default="0")
 parser.add_argument("--scheduler_T",type=int)
 parser.add_argument("--num_workers",type=int,default=20)
 parser.add_argument("--cluster_limit",type=int,default=200)
-parser.add_argument("--warm_epoch",type=int,default=0)
-parser.add_argument("--epoch_step",type=int,default=1)
+parser.add_argument("--warm_epoch",type=int,default=10)
+parser.add_argument("--epoch_step",type=int,default=10)
 args = parser.parse_args()
 
 log = Log(__name__,file_dir='log/train/',log_file_name='train_%s'%(args.train_name))
@@ -119,8 +119,10 @@ def train():
         total_num = 0.0
         if epoch_idx >= args.warm_epoch:
             if epoch_idx % args.epoch_step == 0 :
+                logger.info("cluster starts")
                 targets = cluster(train_loader_cluster,cluster_number)
                 train_dataset.new_labels230 = targets
+                logger.info("cluster ends")
         model.train()            
         for idx,(intensity,angle,labels230,cluster_label) in enumerate(train_loader):
             optimizer.zero_grad()
@@ -176,7 +178,7 @@ def cluster(train_loader_cluster,cluster_number):
         if cluster_number[i]== 0 :
             continue
         elif cluster_number[i] > 1 :
-            cluster_ids_x ,_ = kmeans(X=features[i],num_clusters=cluster_number[i],distance='cosine',tol=1e-3,iter_limit=40,device=device)
+            cluster_ids_x ,_ = kmeans(X=features[i],num_clusters=cluster_number[i],distance='cosine',tol=1e-3,iter_limit=40,device=device,tqdm_flag=False)
             targets[i] = cluster_ids_x
             # print("cluster",i,"cluster_ids_x.shape",cluster_ids_x.shape)
         else:

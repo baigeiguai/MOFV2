@@ -196,8 +196,6 @@ def pairwise_cosine(data1, data2, device=torch.device('cpu')):
     A_normalized = A / A.norm(dim=-1, keepdim=True)
     B_normalized = B / B.norm(dim=-1, keepdim=True)
 
-    print(A_normalized.shape,B_normalized.shape)
-
     cosine = A_normalized * B_normalized
 
     # return N*N matrix for pairwise distance

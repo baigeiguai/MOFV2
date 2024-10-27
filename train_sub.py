@@ -215,7 +215,8 @@ def test():
             total_acc(logits,labels230)
             batch_cnt+=1 
     total_acc_val = total_acc.compute().cpu().item()
-    print("test_acc:%s,test_err:%s"%(str(total_acc_val),str(avg_err/batch_cnt)))
+    # print("test_acc:%s,test_err:%s"%(str(total_acc_val),str(avg_err/batch_cnt)))
+    logger.info("test_acc:%s,test_err:%s"%(str(total_acc_val),str(avg_err/batch_cnt)))
     ema.restore()
     
     return total_acc_val,avg_err/batch_cnt

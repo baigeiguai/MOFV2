@@ -105,7 +105,7 @@ logger.info('-'*15+'lossfn'+'-'*15+'\n'+str(lossfn))
 logger.info('-'*15+'seed'+'-'*15+'\n'+str(now_seed))
 
 
-writer = SummaryWriter(log_dir='./board_dir/%s'%args.log_name)
+writer = SummaryWriter(log_dir='./hh_board_dir/%s'%args.log_name)
 
 
 def train():
@@ -138,8 +138,11 @@ def train():
             ema.update()
             batch_cnt+=1 
             total_num += labels230.shape[0]
+            
+        logger.info('[training]total_num: '+str(total_num)+',error: '+str(avg_error/batch_cnt))
         test_acc,test_err = test()
-        
+        writer.add_scalar("train/acc",test_acc,epoch_idx+1)
+        writer.add_scalar("train/err",test_err,epoch_idx+1)
         if mini_err > test_err :
             mini_err = test_err 
             max_acc = max(max_acc,test_acc)
@@ -166,8 +169,7 @@ def cluster(train_loader_cluster,cluster_number):
         angle = angle.to(device).type(torch.float32)
         target = target.to(device)
         with torch.no_grad():
-            # features,_,_ = model(intensity,angle)
-            features = torch.rand((intensity.shape[0],128)).to(device)
+            features,_,_ = model(intensity,angle)
             features = features.detach()
             features_sum.append(features)
     features = torch.cat(features_sum,dim=0)

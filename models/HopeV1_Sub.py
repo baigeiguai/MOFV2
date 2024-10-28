@@ -72,16 +72,16 @@ class HopeV1_Sub(torch.nn.Module):
         self.conv_feature_len = 1024
         self.att_feature_len = 32 
         
-        self.projection = torch.nn.Sequential(
-            torch.nn.Linear(self.conv_feature_len+self.att_feature_len,512),
-            torch.nn.LeakyReLU(),
-            torch.nn.Linear(512,256),
-        )
+        # self.projection = torch.nn.Sequential(
+        #     torch.nn.Linear(self.conv_feature_len+self.att_feature_len,512),
+        #     torch.nn.LeakyReLU(),
+        #     torch.nn.Linear(512,256),
+        # )
         self.sp_cls = torch.nn.Sequential(
-            torch.nn.Linear(256,230),
+            torch.nn.Linear(self.conv_feature_len+self.att_feature_len,230),
         )
         self.cluster_cls = torch.nn.Sequential(
-            torch.nn.Linear(256,cluster_class_number),
+            torch.nn.Linear(self.conv_feature_len+self.att_feature_len,cluster_class_number),
         )
 
     def forward(self,intensity,angle):
@@ -92,7 +92,6 @@ class HopeV1_Sub(torch.nn.Module):
         x = torch.concat([conv_feature,atten_feature],dim=-1)
         # x = self.cls(x)
         # return self.cls_sp(x),self.cls_cs(x),self.cls_lt(x)
-        x = self.projection(x)
         return x,self.sp_cls(x),self.cluster_cls(x)
     
 if __name__ == '__main__':

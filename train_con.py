@@ -32,7 +32,7 @@ parser.add_argument("--model_save_path",type=str,required=True)
 parser.add_argument("--device",type=str,default="0")
 parser.add_argument("--scheduler_T",type=int)
 parser.add_argument("--num_workers",type=int,default=20)
-parser.add_argument("--alpha",type=float,default=100)
+parser.add_argument("--alpha",type=float,default=0.05)
 args = parser.parse_args()
 log = Log(__name__,file_dir='log/train/',log_file_name='train_%s'%(args.train_name))
 args.log_name = log.log_name
@@ -105,7 +105,7 @@ def train():
                 x,sp = model(intensity,angle) 
                 error_cls = lossfn_CE(sp,labels230)
                 error_sc  = lossfn_SC(x,labels230)
-                beta = epoch_idx/args.epoch_num
+                beta = max(epoch_idx-50.0,0.0)/(float(args.epoch_num)-50.0)
                 error = (beta)*error_cls + args.alpha(1-beta)*error_sc
                 error.backward()
                 optimizer.step()

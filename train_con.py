@@ -106,7 +106,7 @@ def train():
                 error_cls = lossfn_CE(sp,labels230)
                 error_sc  = lossfn_SC(x,labels230)
                 beta = max(epoch_idx-50.0,0.0)/(float(args.epoch_num)-50.0)
-                error = (beta)*error_cls + args.alpha(1-beta)*error_sc
+                error = (beta)*error_cls + args.alpha*(1-beta)*error_sc
                 error.backward()
                 optimizer.step()
                 ema.update()

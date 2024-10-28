@@ -1,0 +1,53 @@
+[2024-08-28 16:15:17,867][train.py][line:76][INFO] ---------------args---------------
+Namespace(data_path='./data/Pymatgen_Wrapped/0', train_name='AttDistil', model_path=None, learning_rate=0.005, min_learning_rate=0.0001, start_scheduler_step=30, weight_decay=1e-06, momentum=0.99, batch_size=256, class_num=230, epoch_num=200, model_save_path='./checkpoints/AttDistil', device='0,1,2,3', scheduler_T=None, num_workers=45, refer_model_path='../temp_files/RawConv_epoch_93.pth', log_name='log/train//train_AttDistil_2024_08_28_16:14:19.log')
+[2024-08-28 16:15:17,870][train.py][line:77][INFO] ---------------model---------------
+DataParallel(
+  (module): AttDistil(
+    (embed): Embedding(8500, 16)
+    (encoders): ModuleList(
+      (0-23): 24 x EncoderLayer(
+        (mha): MultiHeadAttention(
+          (WQ): Linear(in_features=160, out_features=160, bias=True)
+          (WK): Linear(in_features=160, out_features=160, bias=True)
+          (WV): Linear(in_features=160, out_features=160, bias=True)
+          (scaled_dot_product_attn): ScaledDotProductAttention()
+          (linear): Linear(in_features=160, out_features=160, bias=True)
+        )
+        (dropout1): Dropout(p=0, inplace=False)
+        (layernorm1): LayerNorm((160,), eps=1e-06, elementwise_affine=True)
+        (ffn): FeedForwardNetwork(
+          (linear1): Linear(in_features=160, out_features=256, bias=True)
+          (linear2): Linear(in_features=256, out_features=160, bias=True)
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (dropout2): Dropout(p=0, inplace=False)
+        (layernorm2): LayerNorm((160,), eps=1e-06, elementwise_affine=True)
+      )
+    )
+    (to_features): Linear(in_features=136000, out_features=1024, bias=True)
+    (to_cls): Linear(in_features=1024, out_features=230, bias=True)
+  )
+)
+[2024-08-28 16:15:17,871][train.py][line:78][INFO] ---------------device---------------
+cuda:0
+[2024-08-28 16:15:17,871][train.py][line:79][INFO] ---------------optimizer---------------
+AdamW (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    initial_lr: 0.005
+    lr: 0.005
+    maximize: False
+    weight_decay: 1e-06
+)
+[2024-08-28 16:15:17,871][train.py][line:80][INFO] ---------------lossfn---------------
+CrossEntropyLoss(),L1Loss()
+[2024-08-28 16:15:17,871][train.py][line:81][INFO] ---------------seed---------------
+3407
+[2024-08-28 16:15:27,043][train.py][line:93][INFO] ---------------epoch 1---------------
+lr: [0.005]

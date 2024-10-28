@@ -1,0 +1,919 @@
+[2024-09-09 11:41:02,278][train.py][line:68][INFO] ---------------args---------------
+Namespace(data_path='./data/Pymatgen_Wrapped/0', train_name='ConvAtt', model_path=None, learning_rate=0.0001, min_learning_rate=1e-05, start_scheduler_step=20, weight_decay=1e-06, momentum=0.99, batch_size=128, class_num=230, epoch_num=200, model_save_path='./checkpoints/ConvAtt', device='0,1,2,3', scheduler_T=None, num_workers=30, log_name='log/train//train_ConvAtt_2024_09_09_11:40:56.log')
+[2024-09-09 11:41:02,283][train.py][line:69][INFO] ---------------model---------------
+DataParallel(
+  (module): ConvAtt(
+    (model): Sequential(
+      (0): CAtBlock(
+        (conv): ResBlock1D(
+          (pre): Conv1d(2, 16, kernel_size=(1,), stride=(1,), bias=False)
+          (conv): Sequential(
+            (0): Conv1d(16, 16, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(16, 16, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (pool): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(0,))
+        (att): TransformerEncoder(
+          (positionEnbeding): PositionEmbedding()
+          (encoder_layers): ModuleList(
+            (0): EncoderLayer(
+              (mha): MultiHeadAttention(
+                (WQ): Linear(in_features=16, out_features=16, bias=True)
+                (WK): Linear(in_features=16, out_features=16, bias=True)
+                (WV): Linear(in_features=16, out_features=16, bias=True)
+                (scaled_dot_product_attn): ScaledDotProductAttention()
+                (linear): Linear(in_features=16, out_features=16, bias=True)
+              )
+              (dropout1): Dropout(p=0, inplace=False)
+              (layernorm1): LayerNorm((16,), eps=1e-06, elementwise_affine=True)
+              (ffn): FeedForwardNetwork(
+                (linear1): Linear(in_features=16, out_features=32, bias=True)
+                (linear2): Linear(in_features=32, out_features=16, bias=True)
+                (relu): LeakyReLU(negative_slope=0.01)
+              )
+              (dropout2): Dropout(p=0, inplace=False)
+              (layernorm2): LayerNorm((16,), eps=1e-06, elementwise_affine=True)
+            )
+          )
+        )
+      )
+      (1): CAtBlock(
+        (conv): ResBlock1D(
+          (pre): Identity()
+          (conv): Sequential(
+            (0): Conv1d(16, 16, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(16, 16, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (pool): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(0,))
+        (att): TransformerEncoder(
+          (positionEnbeding): PositionEmbedding()
+          (encoder_layers): ModuleList(
+            (0): EncoderLayer(
+              (mha): MultiHeadAttention(
+                (WQ): Linear(in_features=16, out_features=16, bias=True)
+                (WK): Linear(in_features=16, out_features=16, bias=True)
+                (WV): Linear(in_features=16, out_features=16, bias=True)
+                (scaled_dot_product_attn): ScaledDotProductAttention()
+                (linear): Linear(in_features=16, out_features=16, bias=True)
+              )
+              (dropout1): Dropout(p=0, inplace=False)
+              (layernorm1): LayerNorm((16,), eps=1e-06, elementwise_affine=True)
+              (ffn): FeedForwardNetwork(
+                (linear1): Linear(in_features=16, out_features=32, bias=True)
+                (linear2): Linear(in_features=32, out_features=16, bias=True)
+                (relu): LeakyReLU(negative_slope=0.01)
+              )
+              (dropout2): Dropout(p=0, inplace=False)
+              (layernorm2): LayerNorm((16,), eps=1e-06, elementwise_affine=True)
+            )
+          )
+        )
+      )
+      (2): CAtBlock(
+        (conv): ResBlock1D(
+          (pre): Conv1d(16, 32, kernel_size=(1,), stride=(1,), bias=False)
+          (conv): Sequential(
+            (0): Conv1d(32, 32, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(32, 32, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (pool): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(1,))
+        (att): TransformerEncoder(
+          (positionEnbeding): PositionEmbedding()
+          (encoder_layers): ModuleList(
+            (0): EncoderLayer(
+              (mha): MultiHeadAttention(
+                (WQ): Linear(in_features=32, out_features=32, bias=True)
+                (WK): Linear(in_features=32, out_features=32, bias=True)
+                (WV): Linear(in_features=32, out_features=32, bias=True)
+                (scaled_dot_product_attn): ScaledDotProductAttention()
+                (linear): Linear(in_features=32, out_features=32, bias=True)
+              )
+              (dropout1): Dropout(p=0, inplace=False)
+              (layernorm1): LayerNorm((32,), eps=1e-06, elementwise_affine=True)
+              (ffn): FeedForwardNetwork(
+                (linear1): Linear(in_features=32, out_features=64, bias=True)
+                (linear2): Linear(in_features=64, out_features=32, bias=True)
+                (relu): LeakyReLU(negative_slope=0.01)
+              )
+              (dropout2): Dropout(p=0, inplace=False)
+              (layernorm2): LayerNorm((32,), eps=1e-06, elementwise_affine=True)
+            )
+          )
+        )
+      )
+      (3): CAtBlock(
+        (conv): ResBlock1D(
+          (pre): Identity()
+          (conv): Sequential(
+            (0): Conv1d(32, 32, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(32, 32, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (pool): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(1,))
+        (att): TransformerEncoder(
+          (positionEnbeding): PositionEmbedding()
+          (encoder_layers): ModuleList(
+            (0): EncoderLayer(
+              (mha): MultiHeadAttention(
+                (WQ): Linear(in_features=32, out_features=32, bias=True)
+                (WK): Linear(in_features=32, out_features=32, bias=True)
+                (WV): Linear(in_features=32, out_features=32, bias=True)
+                (scaled_dot_product_attn): ScaledDotProductAttention()
+                (linear): Linear(in_features=32, out_features=32, bias=True)
+              )
+              (dropout1): Dropout(p=0, inplace=False)
+              (layernorm1): LayerNorm((32,), eps=1e-06, elementwise_affine=True)
+              (ffn): FeedForwardNetwork(
+                (linear1): Linear(in_features=32, out_features=64, bias=True)
+                (linear2): Linear(in_features=64, out_features=32, bias=True)
+                (relu): LeakyReLU(negative_slope=0.01)
+              )
+              (dropout2): Dropout(p=0, inplace=False)
+              (layernorm2): LayerNorm((32,), eps=1e-06, elementwise_affine=True)
+            )
+          )
+        )
+      )
+      (4): CAtBlock(
+        (conv): ResBlock1D(
+          (pre): Conv1d(32, 64, kernel_size=(1,), stride=(1,), bias=False)
+          (conv): Sequential(
+            (0): Conv1d(64, 64, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(64, 64, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (pool): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(0,))
+        (att): TransformerEncoder(
+          (positionEnbeding): PositionEmbedding()
+          (encoder_layers): ModuleList(
+            (0): EncoderLayer(
+              (mha): MultiHeadAttention(
+                (WQ): Linear(in_features=64, out_features=64, bias=True)
+                (WK): Linear(in_features=64, out_features=64, bias=True)
+                (WV): Linear(in_features=64, out_features=64, bias=True)
+                (scaled_dot_product_attn): ScaledDotProductAttention()
+                (linear): Linear(in_features=64, out_features=64, bias=True)
+              )
+              (dropout1): Dropout(p=0, inplace=False)
+              (layernorm1): LayerNorm((64,), eps=1e-06, elementwise_affine=True)
+              (ffn): FeedForwardNetwork(
+                (linear1): Linear(in_features=64, out_features=128, bias=True)
+                (linear2): Linear(in_features=128, out_features=64, bias=True)
+                (relu): LeakyReLU(negative_slope=0.01)
+              )
+              (dropout2): Dropout(p=0, inplace=False)
+              (layernorm2): LayerNorm((64,), eps=1e-06, elementwise_affine=True)
+            )
+          )
+        )
+      )
+      (5): CAtBlock(
+        (conv): ResBlock1D(
+          (pre): Identity()
+          (conv): Sequential(
+            (0): Conv1d(64, 64, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(64, 64, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (pool): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(0,))
+        (att): TransformerEncoder(
+          (positionEnbeding): PositionEmbedding()
+          (encoder_layers): ModuleList(
+            (0): EncoderLayer(
+              (mha): MultiHeadAttention(
+                (WQ): Linear(in_features=64, out_features=64, bias=True)
+                (WK): Linear(in_features=64, out_features=64, bias=True)
+                (WV): Linear(in_features=64, out_features=64, bias=True)
+                (scaled_dot_product_attn): ScaledDotProductAttention()
+                (linear): Linear(in_features=64, out_features=64, bias=True)
+              )
+              (dropout1): Dropout(p=0, inplace=False)
+              (layernorm1): LayerNorm((64,), eps=1e-06, elementwise_affine=True)
+              (ffn): FeedForwardNetwork(
+                (linear1): Linear(in_features=64, out_features=128, bias=True)
+                (linear2): Linear(in_features=128, out_features=64, bias=True)
+                (relu): LeakyReLU(negative_slope=0.01)
+              )
+              (dropout2): Dropout(p=0, inplace=False)
+              (layernorm2): LayerNorm((64,), eps=1e-06, elementwise_affine=True)
+            )
+          )
+        )
+      )
+      (6): CAtBlock(
+        (conv): ResBlock1D(
+          (pre): Conv1d(64, 128, kernel_size=(1,), stride=(1,), bias=False)
+          (conv): Sequential(
+            (0): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (pool): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(1,))
+        (att): TransformerEncoder(
+          (positionEnbeding): PositionEmbedding()
+          (encoder_layers): ModuleList(
+            (0): EncoderLayer(
+              (mha): MultiHeadAttention(
+                (WQ): Linear(in_features=128, out_features=128, bias=True)
+                (WK): Linear(in_features=128, out_features=128, bias=True)
+                (WV): Linear(in_features=128, out_features=128, bias=True)
+                (scaled_dot_product_attn): ScaledDotProductAttention()
+                (linear): Linear(in_features=128, out_features=128, bias=True)
+              )
+              (dropout1): Dropout(p=0, inplace=False)
+              (layernorm1): LayerNorm((128,), eps=1e-06, elementwise_affine=True)
+              (ffn): FeedForwardNetwork(
+                (linear1): Linear(in_features=128, out_features=256, bias=True)
+                (linear2): Linear(in_features=256, out_features=128, bias=True)
+                (relu): LeakyReLU(negative_slope=0.01)
+              )
+              (dropout2): Dropout(p=0, inplace=False)
+              (layernorm2): LayerNorm((128,), eps=1e-06, elementwise_affine=True)
+            )
+          )
+        )
+      )
+      (7): CAtBlock(
+        (conv): ResBlock1D(
+          (pre): Identity()
+          (conv): Sequential(
+            (0): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (pool): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(1,))
+        (att): TransformerEncoder(
+          (positionEnbeding): PositionEmbedding()
+          (encoder_layers): ModuleList(
+            (0): EncoderLayer(
+              (mha): MultiHeadAttention(
+                (WQ): Linear(in_features=128, out_features=128, bias=True)
+                (WK): Linear(in_features=128, out_features=128, bias=True)
+                (WV): Linear(in_features=128, out_features=128, bias=True)
+                (scaled_dot_product_attn): ScaledDotProductAttention()
+                (linear): Linear(in_features=128, out_features=128, bias=True)
+              )
+              (dropout1): Dropout(p=0, inplace=False)
+              (layernorm1): LayerNorm((128,), eps=1e-06, elementwise_affine=True)
+              (ffn): FeedForwardNetwork(
+                (linear1): Linear(in_features=128, out_features=256, bias=True)
+                (linear2): Linear(in_features=256, out_features=128, bias=True)
+                (relu): LeakyReLU(negative_slope=0.01)
+              )
+              (dropout2): Dropout(p=0, inplace=False)
+              (layernorm2): LayerNorm((128,), eps=1e-06, elementwise_affine=True)
+            )
+          )
+        )
+      )
+      (8): CAtBlock(
+        (conv): ResBlock1D(
+          (pre): Conv1d(128, 256, kernel_size=(1,), stride=(1,), bias=False)
+          (conv): Sequential(
+            (0): Conv1d(256, 256, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(256, 256, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (pool): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(0,))
+        (att): TransformerEncoder(
+          (positionEnbeding): PositionEmbedding()
+          (encoder_layers): ModuleList(
+            (0): EncoderLayer(
+              (mha): MultiHeadAttention(
+                (WQ): Linear(in_features=256, out_features=256, bias=True)
+                (WK): Linear(in_features=256, out_features=256, bias=True)
+                (WV): Linear(in_features=256, out_features=256, bias=True)
+                (scaled_dot_product_attn): ScaledDotProductAttention()
+                (linear): Linear(in_features=256, out_features=256, bias=True)
+              )
+              (dropout1): Dropout(p=0, inplace=False)
+              (layernorm1): LayerNorm((256,), eps=1e-06, elementwise_affine=True)
+              (ffn): FeedForwardNetwork(
+                (linear1): Linear(in_features=256, out_features=512, bias=True)
+                (linear2): Linear(in_features=512, out_features=256, bias=True)
+                (relu): LeakyReLU(negative_slope=0.01)
+              )
+              (dropout2): Dropout(p=0, inplace=False)
+              (layernorm2): LayerNorm((256,), eps=1e-06, elementwise_affine=True)
+            )
+          )
+        )
+      )
+      (9): CAtBlock(
+        (conv): ResBlock1D(
+          (pre): Identity()
+          (conv): Sequential(
+            (0): Conv1d(256, 256, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(256, 256, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (pool): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(1,))
+        (att): TransformerEncoder(
+          (positionEnbeding): PositionEmbedding()
+          (encoder_layers): ModuleList(
+            (0): EncoderLayer(
+              (mha): MultiHeadAttention(
+                (WQ): Linear(in_features=256, out_features=256, bias=True)
+                (WK): Linear(in_features=256, out_features=256, bias=True)
+                (WV): Linear(in_features=256, out_features=256, bias=True)
+                (scaled_dot_product_attn): ScaledDotProductAttention()
+                (linear): Linear(in_features=256, out_features=256, bias=True)
+              )
+              (dropout1): Dropout(p=0, inplace=False)
+              (layernorm1): LayerNorm((256,), eps=1e-06, elementwise_affine=True)
+              (ffn): FeedForwardNetwork(
+                (linear1): Linear(in_features=256, out_features=512, bias=True)
+                (linear2): Linear(in_features=512, out_features=256, bias=True)
+                (relu): LeakyReLU(negative_slope=0.01)
+              )
+              (dropout2): Dropout(p=0, inplace=False)
+              (layernorm2): LayerNorm((256,), eps=1e-06, elementwise_affine=True)
+            )
+          )
+        )
+      )
+      (10): CAtBlock(
+        (conv): ResBlock1D(
+          (pre): Conv1d(256, 512, kernel_size=(1,), stride=(1,), bias=False)
+          (conv): Sequential(
+            (0): Conv1d(512, 512, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(512, 512, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (pool): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(1,))
+        (att): TransformerEncoder(
+          (positionEnbeding): PositionEmbedding()
+          (encoder_layers): ModuleList(
+            (0): EncoderLayer(
+              (mha): MultiHeadAttention(
+                (WQ): Linear(in_features=512, out_features=512, bias=True)
+                (WK): Linear(in_features=512, out_features=512, bias=True)
+                (WV): Linear(in_features=512, out_features=512, bias=True)
+                (scaled_dot_product_attn): ScaledDotProductAttention()
+                (linear): Linear(in_features=512, out_features=512, bias=True)
+              )
+              (dropout1): Dropout(p=0, inplace=False)
+              (layernorm1): LayerNorm((512,), eps=1e-06, elementwise_affine=True)
+              (ffn): FeedForwardNetwork(
+                (linear1): Linear(in_features=512, out_features=1024, bias=True)
+                (linear2): Linear(in_features=1024, out_features=512, bias=True)
+                (relu): LeakyReLU(negative_slope=0.01)
+              )
+              (dropout2): Dropout(p=0, inplace=False)
+              (layernorm2): LayerNorm((512,), eps=1e-06, elementwise_affine=True)
+            )
+          )
+        )
+      )
+      (11): CAtBlock(
+        (conv): ResBlock1D(
+          (pre): Identity()
+          (conv): Sequential(
+            (0): Conv1d(512, 512, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(512, 512, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (pool): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(1,))
+        (att): TransformerEncoder(
+          (positionEnbeding): PositionEmbedding()
+          (encoder_layers): ModuleList(
+            (0): EncoderLayer(
+              (mha): MultiHeadAttention(
+                (WQ): Linear(in_features=512, out_features=512, bias=True)
+                (WK): Linear(in_features=512, out_features=512, bias=True)
+                (WV): Linear(in_features=512, out_features=512, bias=True)
+                (scaled_dot_product_attn): ScaledDotProductAttention()
+                (linear): Linear(in_features=512, out_features=512, bias=True)
+              )
+              (dropout1): Dropout(p=0, inplace=False)
+              (layernorm1): LayerNorm((512,), eps=1e-06, elementwise_affine=True)
+              (ffn): FeedForwardNetwork(
+                (linear1): Linear(in_features=512, out_features=1024, bias=True)
+                (linear2): Linear(in_features=1024, out_features=512, bias=True)
+                (relu): LeakyReLU(negative_slope=0.01)
+              )
+              (dropout2): Dropout(p=0, inplace=False)
+              (layernorm2): LayerNorm((512,), eps=1e-06, elementwise_affine=True)
+            )
+          )
+        )
+      )
+      (12): CAtBlock(
+        (conv): ResBlock1D(
+          (pre): Conv1d(512, 1024, kernel_size=(1,), stride=(1,), bias=False)
+          (conv): Sequential(
+            (0): Conv1d(1024, 1024, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(1024, 1024, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (pool): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(1,))
+        (att): TransformerEncoder(
+          (positionEnbeding): PositionEmbedding()
+          (encoder_layers): ModuleList(
+            (0): EncoderLayer(
+              (mha): MultiHeadAttention(
+                (WQ): Linear(in_features=1024, out_features=1024, bias=True)
+                (WK): Linear(in_features=1024, out_features=1024, bias=True)
+                (WV): Linear(in_features=1024, out_features=1024, bias=True)
+                (scaled_dot_product_attn): ScaledDotProductAttention()
+                (linear): Linear(in_features=1024, out_features=1024, bias=True)
+              )
+              (dropout1): Dropout(p=0, inplace=False)
+              (layernorm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+              (ffn): FeedForwardNetwork(
+                (linear1): Linear(in_features=1024, out_features=2048, bias=True)
+                (linear2): Linear(in_features=2048, out_features=1024, bias=True)
+                (relu): LeakyReLU(negative_slope=0.01)
+              )
+              (dropout2): Dropout(p=0, inplace=False)
+              (layernorm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            )
+          )
+        )
+      )
+      (13): CAtBlock(
+        (conv): ResBlock1D(
+          (pre): Identity()
+          (conv): Sequential(
+            (0): Conv1d(1024, 1024, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(1024, 1024, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (pool): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(0,))
+        (att): TransformerEncoder(
+          (positionEnbeding): PositionEmbedding()
+          (encoder_layers): ModuleList(
+            (0): EncoderLayer(
+              (mha): MultiHeadAttention(
+                (WQ): Linear(in_features=1024, out_features=1024, bias=True)
+                (WK): Linear(in_features=1024, out_features=1024, bias=True)
+                (WV): Linear(in_features=1024, out_features=1024, bias=True)
+                (scaled_dot_product_attn): ScaledDotProductAttention()
+                (linear): Linear(in_features=1024, out_features=1024, bias=True)
+              )
+              (dropout1): Dropout(p=0, inplace=False)
+              (layernorm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+              (ffn): FeedForwardNetwork(
+                (linear1): Linear(in_features=1024, out_features=2048, bias=True)
+                (linear2): Linear(in_features=2048, out_features=1024, bias=True)
+                (relu): LeakyReLU(negative_slope=0.01)
+              )
+              (dropout2): Dropout(p=0, inplace=False)
+              (layernorm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            )
+          )
+        )
+      )
+    )
+    (cls): Linear(in_features=1024, out_features=230, bias=True)
+  )
+)
+[2024-09-09 11:41:02,286][train.py][line:70][INFO] ---------------device---------------
+cuda:0
+[2024-09-09 11:41:02,286][train.py][line:71][INFO] ---------------optimizer---------------
+AdamW (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    initial_lr: 0.0001
+    lr: 0.0001
+    maximize: False
+    weight_decay: 1e-06
+)
+[2024-09-09 11:41:02,286][train.py][line:72][INFO] ---------------lossfn---------------
+CrossEntropyLoss()
+[2024-09-09 11:41:02,287][train.py][line:73][INFO] ---------------seed---------------
+3407
+[2024-09-09 11:41:02,983][train.py][line:85][INFO] ---------------epoch 1---------------
+lr: [0.0001]
+[2024-09-09 11:50:53,354][train.py][line:103][INFO] [training]total_num: 142618.0,error: 3.471393805430225
+[2024-09-09 11:55:30,888][train.py][line:143][INFO] [testing]total_number: 142618,error: 5.852497916149691,total_acc: 0.04952390119433403
+[2024-09-09 11:55:31,074][train.py][line:85][INFO] ---------------epoch 2---------------
+lr: [0.0001]
+[2024-09-09 12:05:21,371][train.py][line:103][INFO] [training]total_num: 142618.0,error: 3.0458468366959717
+[2024-09-09 12:10:06,115][train.py][line:143][INFO] [testing]total_number: 142618,error: 17.530341479243063,total_acc: 0.03510776907205582
+[2024-09-09 12:10:06,163][train.py][line:85][INFO] ---------------epoch 3---------------
+lr: [0.0001]
+[2024-09-09 12:20:00,829][train.py][line:103][INFO] [training]total_num: 142618.0,error: 2.8552531732747064
+[2024-09-09 12:24:42,731][train.py][line:143][INFO] [testing]total_number: 142618,error: 17.540921823049715,total_acc: 0.029112733900547028
+[2024-09-09 12:24:42,814][train.py][line:85][INFO] ---------------epoch 4---------------
+lr: [0.0001]
+[2024-09-09 12:34:36,484][train.py][line:103][INFO] [training]total_num: 142618.0,error: 2.7046276494900314
+[2024-09-09 12:39:22,324][train.py][line:143][INFO] [testing]total_number: 142618,error: 5.0788106647549,total_acc: 0.06614172458648682
+[2024-09-09 12:39:22,566][train.py][line:85][INFO] ---------------epoch 5---------------
+lr: [0.0001]
+[2024-09-09 12:49:14,320][train.py][line:103][INFO] [training]total_num: 142618.0,error: 2.622117682907998
+[2024-09-09 12:53:54,675][train.py][line:143][INFO] [testing]total_number: 142618,error: 60.549965974389714,total_acc: 0.001206018845550716
+[2024-09-09 12:53:54,718][train.py][line:85][INFO] ---------------epoch 6---------------
+lr: [0.0001]
+[2024-09-09 13:03:46,432][train.py][line:103][INFO] [training]total_num: 142618.0,error: 2.6046741926892203
+[2024-09-09 13:08:23,665][train.py][line:143][INFO] [testing]total_number: 142618,error: 10.1756969602529,total_acc: 0.0341050922870636
+[2024-09-09 13:08:23,750][train.py][line:85][INFO] ---------------epoch 7---------------
+lr: [0.0001]
+[2024-09-09 13:18:12,989][train.py][line:103][INFO] [training]total_num: 142618.0,error: 2.347810102016818
+[2024-09-09 13:22:57,542][train.py][line:143][INFO] [testing]total_number: 142618,error: 57.5174152404731,total_acc: 0.0011849836446344852
+[2024-09-09 13:22:57,626][train.py][line:85][INFO] ---------------epoch 8---------------
+lr: [0.0001]
+[2024-09-09 13:32:51,987][train.py][line:103][INFO] [training]total_num: 142618.0,error: 2.2100132646662214
+[2024-09-09 13:37:35,980][train.py][line:143][INFO] [testing]total_number: 142618,error: 4.503534685116271,total_acc: 0.055638138204813004
+[2024-09-09 13:37:36,167][train.py][line:85][INFO] ---------------epoch 9---------------
+lr: [0.0001]
+[2024-09-09 13:47:23,293][train.py][line:103][INFO] [training]total_num: 142618.0,error: 2.1490418188531737
+[2024-09-09 13:52:01,279][train.py][line:143][INFO] [testing]total_number: 142618,error: 47.82869096974303,total_acc: 0.01543984655290842
+[2024-09-09 13:52:01,361][train.py][line:85][INFO] ---------------epoch 10---------------
+lr: [0.0001]
+[2024-09-09 14:01:55,208][train.py][line:103][INFO] [training]total_num: 142618.0,error: 2.1399398842213317
+[2024-09-09 14:06:38,008][train.py][line:143][INFO] [testing]total_number: 142618,error: 33.93784887555858,total_acc: 0.0021105329506099224
+[2024-09-09 14:06:38,082][train.py][line:85][INFO] ---------------epoch 11---------------
+lr: [0.0001]
+[2024-09-09 14:16:26,265][train.py][line:103][INFO] [training]total_num: 142618.0,error: 2.1375474097354283
+[2024-09-09 14:21:04,584][train.py][line:143][INFO] [testing]total_number: 142618,error: 4.9748024221215505,total_acc: 0.012172376736998558
+[2024-09-09 14:21:04,624][train.py][line:85][INFO] ---------------epoch 12---------------
+lr: [0.0001]
+[2024-09-09 14:30:50,406][train.py][line:103][INFO] [training]total_num: 142618.0,error: 1.8553367723060479
+[2024-09-09 14:35:34,434][train.py][line:143][INFO] [testing]total_number: 142618,error: 18.651411735175877,total_acc: 0.016000784933567047
+[2024-09-09 14:35:34,478][train.py][line:85][INFO] ---------------epoch 13---------------
+lr: [0.0001]
+[2024-09-09 14:45:28,252][train.py][line:103][INFO] [training]total_num: 142618.0,error: 1.7164930579084787
+[2024-09-09 14:50:12,670][train.py][line:143][INFO] [testing]total_number: 142618,error: 5.4868288310947095,total_acc: 0.06105821207165718
+[2024-09-09 14:50:12,753][train.py][line:85][INFO] ---------------epoch 14---------------
+lr: [0.0001]
+[2024-09-09 15:00:04,974][train.py][line:103][INFO] [training]total_num: 142618.0,error: 1.6603676361009518
+[2024-09-09 15:04:49,374][train.py][line:143][INFO] [testing]total_number: 142618,error: 54.64695645309489,total_acc: 0.003365634009242058
+[2024-09-09 15:04:49,418][train.py][line:85][INFO] ---------------epoch 15---------------
+lr: [0.0001]
+[2024-09-09 15:14:38,030][train.py][line:103][INFO] [training]total_num: 142618.0,error: 1.560761927923695
+[2024-09-09 15:19:22,948][train.py][line:143][INFO] [testing]total_number: 142618,error: 65.82903653663561,total_acc: 0.03334782272577286
+[2024-09-09 15:19:22,995][train.py][line:85][INFO] ---------------epoch 16---------------
+lr: [0.0001]
+[2024-09-09 15:29:14,143][train.py][line:103][INFO] [training]total_num: 142618.0,error: 1.7518353809163754
+[2024-09-09 15:33:57,903][train.py][line:143][INFO] [testing]total_number: 142618,error: 56.9061629660064,total_acc: 0.004207042511552572
+[2024-09-09 15:33:57,946][train.py][line:85][INFO] ---------------epoch 17---------------
+lr: [0.0001]
+[2024-09-09 15:43:51,012][train.py][line:103][INFO] [training]total_num: 142618.0,error: 1.4921717741580378
+[2024-09-09 15:48:32,888][train.py][line:143][INFO] [testing]total_number: 142618,error: 4.994034104994577,total_acc: 0.05082808807492256
+[2024-09-09 15:48:32,930][train.py][line:85][INFO] ---------------epoch 18---------------
+lr: [0.0001]
+[2024-09-09 15:58:22,620][train.py][line:103][INFO] [training]total_num: 142618.0,error: 1.3484190674407777
+[2024-09-09 16:03:08,902][train.py][line:143][INFO] [testing]total_number: 142618,error: 35.20039333658295,total_acc: 0.0062123993411660194
+[2024-09-09 16:03:08,987][train.py][line:85][INFO] ---------------epoch 19---------------
+lr: [0.0001]
+[2024-09-09 16:13:02,719][train.py][line:103][INFO] [training]total_num: 142618.0,error: 1.5382546104999804
+[2024-09-09 16:17:45,637][train.py][line:143][INFO] [testing]total_number: 142618,error: 10.593102280820696,total_acc: 0.011884895153343678
+[2024-09-09 16:17:45,720][train.py][line:85][INFO] ---------------epoch 20---------------
+lr: [0.0001]
+[2024-09-09 16:27:30,688][train.py][line:103][INFO] [training]total_num: 142618.0,error: 1.4304473711096721
+[2024-09-09 16:32:15,039][train.py][line:143][INFO] [testing]total_number: 142618,error: 52.08454747779663,total_acc: 0.0033025285229086876
+[2024-09-09 16:32:15,125][train.py][line:85][INFO] ---------------epoch 21---------------
+lr: [0.0001]
+[2024-09-09 16:42:08,792][train.py][line:103][INFO] [training]total_num: 142618.0,error: 1.210072743384946
+[2024-09-09 16:46:54,799][train.py][line:143][INFO] [testing]total_number: 142618,error: 52.107731363047726,total_acc: 0.0033516106195747852
+[2024-09-09 16:46:54,880][train.py][line:85][INFO] ---------------epoch 22---------------
+lr: [9.998629308600244e-05]
+[2024-09-09 16:56:41,635][train.py][line:103][INFO] [training]total_num: 142618.0,error: 1.1115304215248434
+[2024-09-09 17:01:27,595][train.py][line:143][INFO] [testing]total_number: 142618,error: 7.149340220860073,total_acc: 0.035051677376031876
+[2024-09-09 17:01:27,679][train.py][line:85][INFO] ---------------epoch 23---------------
+lr: [9.995203284642982e-05]
+[2024-09-09 17:11:22,585][train.py][line:103][INFO] [training]total_num: 142618.0,error: 1.0881138100704475
+[2024-09-09 17:16:05,930][train.py][line:143][INFO] [testing]total_number: 142618,error: 4.6162197621607,total_acc: 0.06169627979397774
+[2024-09-09 17:16:05,975][train.py][line:85][INFO] ---------------epoch 24---------------
+lr: [9.990408395625843e-05]
+[2024-09-09 17:25:52,974][train.py][line:103][INFO] [training]total_num: 142618.0,error: 1.0075383295818252
+[2024-09-09 17:30:38,729][train.py][line:143][INFO] [testing]total_number: 142618,error: 6.293620475119156,total_acc: 0.035149842500686646
+[2024-09-09 17:30:38,809][train.py][line:85][INFO] ---------------epoch 25---------------
+lr: [9.984246102023064e-05]
+[2024-09-09 17:40:30,580][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.9471154190738749
+[2024-09-09 17:45:11,967][train.py][line:143][INFO] [testing]total_number: 142618,error: 5.847960450105574,total_acc: 0.03491845354437828
+[2024-09-09 17:45:12,012][train.py][line:85][INFO] ---------------epoch 26---------------
+lr: [9.976718280833502e-05]
+[2024-09-09 17:55:03,285][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.9230018169243143
+[2024-09-09 17:59:47,890][train.py][line:143][INFO] [testing]total_number: 142618,error: 11.859692755481683,total_acc: 0.032141804695129395
+[2024-09-09 17:59:47,974][train.py][line:85][INFO] ---------------epoch 27---------------
+lr: [9.967827225008871e-05]
+[2024-09-09 18:09:40,676][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.9163084238529629
+[2024-09-09 18:14:21,625][train.py][line:143][INFO] [testing]total_number: 142618,error: 9.16663241322948,total_acc: 0.03517087548971176
+[2024-09-09 18:14:21,668][train.py][line:85][INFO] ---------------epoch 28---------------
+lr: [9.957575642755255e-05]
+[2024-09-09 18:24:12,819][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.7975394454484718
+[2024-09-09 18:28:59,074][train.py][line:143][INFO] [testing]total_number: 142618,error: 7.24585466841839,total_acc: 0.034771207720041275
+[2024-09-09 18:28:59,144][train.py][line:85][INFO] ---------------epoch 29---------------
+lr: [9.94596665670812e-05]
+[2024-09-09 18:38:52,161][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.7961623609436225
+[2024-09-09 18:43:37,889][train.py][line:143][INFO] [testing]total_number: 142618,error: 74.68610445714779,total_acc: 0.0027486011385917664
+[2024-09-09 18:43:37,953][train.py][line:85][INFO] ---------------epoch 30---------------
+lr: [9.933003802981118e-05]
+[2024-09-09 18:53:31,458][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.7124109546378744
+[2024-09-09 18:58:15,144][train.py][line:143][INFO] [testing]total_number: 142618,error: 94.23581687433062,total_acc: 0.026567474007606506
+[2024-09-09 18:58:15,231][train.py][line:85][INFO] ---------------epoch 31---------------
+lr: [9.918691030088909e-05]
+[2024-09-09 19:08:10,595][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.7903895654980864
+[2024-09-09 19:12:53,499][train.py][line:143][INFO] [testing]total_number: 142618,error: 55.66210929714904,total_acc: 0.012340658344328403
+[2024-09-09 19:12:53,537][train.py][line:85][INFO] ---------------epoch 32---------------
+lr: [9.903032697744381e-05]
+[2024-09-09 19:22:41,768][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.6467146658749314
+[2024-09-09 19:27:27,453][train.py][line:143][INFO] [testing]total_number: 142618,error: 92.97331247947443,total_acc: 0.002734577748924494
+[2024-09-09 19:27:27,527][train.py][line:85][INFO] ---------------epoch 33---------------
+lr: [9.88603357553061e-05]
+[2024-09-09 19:37:21,692][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.6528939738830001
+[2024-09-09 19:42:06,215][train.py][line:143][INFO] [testing]total_number: 142618,error: 5.070825607457199,total_acc: 0.11911539733409882
+[2024-09-09 19:42:48,280][train.py][line:85][INFO] ---------------epoch 34---------------
+lr: [9.867698841447965e-05]
+[2024-09-09 19:52:40,905][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.8104795641410425
+[2024-09-09 19:57:25,302][train.py][line:143][INFO] [testing]total_number: 142618,error: 12.367024211832772,total_acc: 0.040906477719545364
+[2024-09-09 19:57:25,376][train.py][line:85][INFO] ---------------epoch 35---------------
+lr: [9.848034080336802e-05]
+[2024-09-09 20:07:16,205][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.574943544622428
+[2024-09-09 20:12:02,323][train.py][line:143][INFO] [testing]total_number: 142618,error: 6.6445304418731395,total_acc: 0.06562285125255585
+[2024-09-09 20:12:02,398][train.py][line:85][INFO] ---------------epoch 36---------------
+lr: [9.827045282176265e-05]
+[2024-09-09 20:21:51,246][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.5341646240787794
+[2024-09-09 20:26:33,528][train.py][line:143][INFO] [testing]total_number: 142618,error: 6.149662888568381,total_acc: 0.06138075143098831
+[2024-09-09 20:26:33,573][train.py][line:85][INFO] ---------------epoch 37---------------
+lr: [9.804738840259607e-05]
+[2024-09-09 20:36:18,622][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.4858173213654529
+[2024-09-09 20:41:05,304][train.py][line:143][INFO] [testing]total_number: 142618,error: 8.05416773099654,total_acc: 0.04885077476501465
+[2024-09-09 20:41:05,349][train.py][line:85][INFO] ---------------epoch 38---------------
+lr: [9.781121549246727e-05]
+[2024-09-09 20:50:58,347][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.4507855638636883
+[2024-09-09 20:55:41,141][train.py][line:143][INFO] [testing]total_number: 142618,error: 18.15753550135994,total_acc: 0.039062391966581345
+[2024-09-09 20:55:41,184][train.py][line:85][INFO] ---------------epoch 39---------------
+lr: [9.756200603094416e-05]
+[2024-09-09 21:05:27,401][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.461069667587898
+[2024-09-09 21:10:13,643][train.py][line:143][INFO] [testing]total_number: 142618,error: 54.87834067966627,total_acc: 0.035149842500686646
+[2024-09-09 21:10:13,731][train.py][line:85][INFO] ---------------epoch 40---------------
+lr: [9.729983592864966e-05]
+[2024-09-09 21:20:04,678][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.6445563879548287
+[2024-09-09 21:24:46,898][train.py][line:143][INFO] [testing]total_number: 142618,error: 15.776800985767869,total_acc: 0.03673449531197548
+[2024-09-09 21:24:46,983][train.py][line:85][INFO] ---------------epoch 41---------------
+lr: [9.702478504413828e-05]
+[2024-09-09 21:34:41,516][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.4002936279736691
+[2024-09-09 21:39:28,047][train.py][line:143][INFO] [testing]total_number: 142618,error: 8.371529888874043,total_acc: 0.06393302232027054
+[2024-09-09 21:39:28,133][train.py][line:85][INFO] ---------------epoch 42---------------
+lr: [9.673693715957023e-05]
+[2024-09-09 21:49:18,054][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.38083072283041614
+[2024-09-09 21:54:04,271][train.py][line:143][INFO] [testing]total_number: 142618,error: 51.55685629586573,total_acc: 0.01103647518903017
+[2024-09-09 21:54:04,327][train.py][line:85][INFO] ---------------epoch 43---------------
+lr: [9.643637995518997e-05]
+[2024-09-09 22:03:53,444][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.37245565886215076
+[2024-09-09 22:08:36,050][train.py][line:143][INFO] [testing]total_number: 142618,error: 7.273076382377239,total_acc: 0.06848364323377609
+[2024-09-09 22:08:36,093][train.py][line:85][INFO] ---------------epoch 44---------------
+lr: [9.612320498261784e-05]
+[2024-09-09 22:18:26,472][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.3545403041957011
+[2024-09-09 22:23:11,270][train.py][line:143][INFO] [testing]total_number: 142618,error: 8.530835840061055,total_acc: 0.06440982222557068
+[2024-09-09 22:23:11,315][train.py][line:85][INFO] ---------------epoch 45---------------
+lr: [9.579750763696196e-05]
+[2024-09-09 22:33:01,127][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.46713478747547044
+[2024-09-09 22:37:47,973][train.py][line:143][INFO] [testing]total_number: 142618,error: 6.921178951449593,total_acc: 0.07955517619848251
+[2024-09-09 22:37:48,061][train.py][line:85][INFO] ---------------epoch 46---------------
+lr: [9.545938712775992e-05]
+[2024-09-09 22:47:37,828][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.3904641133525674
+[2024-09-09 22:52:22,697][train.py][line:143][INFO] [testing]total_number: 142618,error: 20.38658934984994,total_acc: 0.03642597794532776
+[2024-09-09 22:52:22,741][train.py][line:85][INFO] ---------------epoch 47---------------
+lr: [9.51089464487578e-05]
+[2024-09-09 23:02:13,170][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.29508385400039067
+[2024-09-09 23:06:56,760][train.py][line:143][INFO] [testing]total_number: 142618,error: 20.804138957026158,total_acc: 0.030367836356163025
+[2024-09-09 23:06:56,803][train.py][line:85][INFO] ---------------epoch 48---------------
+lr: [9.474629234653728e-05]
+[2024-09-09 23:16:44,881][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.28210611057657
+[2024-09-09 23:21:28,867][train.py][line:143][INFO] [testing]total_number: 142618,error: 11.23416744594354,total_acc: 0.03970747068524361
+[2024-09-09 23:21:28,950][train.py][line:85][INFO] ---------------epoch 49---------------
+lr: [9.437153528799897e-05]
+[2024-09-09 23:31:17,205][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.323381535378355
+[2024-09-09 23:36:01,916][train.py][line:143][INFO] [testing]total_number: 142618,error: 30.333899371901126,total_acc: 0.029484357684850693
+[2024-09-09 23:36:01,959][train.py][line:85][INFO] ---------------epoch 50---------------
+lr: [9.398478942671275e-05]
+[2024-09-09 23:45:51,082][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.2771743692609729
+[2024-09-09 23:50:26,898][train.py][line:143][INFO] [testing]total_number: 142618,error: 19.976758603195016,total_acc: 0.0036811623722314835
+[2024-09-09 23:50:26,990][train.py][line:85][INFO] ---------------epoch 51---------------
+lr: [9.358617256814523e-05]
+[2024-09-10 00:00:16,617][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.2767086088221054
+[2024-09-10 00:05:00,337][train.py][line:143][INFO] [testing]total_number: 142618,error: 15.968355237221232,total_acc: 0.04257526993751526
+[2024-09-10 00:05:00,376][train.py][line:85][INFO] ---------------epoch 52---------------
+lr: [9.317580613377439e-05]
+[2024-09-10 00:14:45,066][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.26450851018860366
+[2024-09-10 00:19:30,615][train.py][line:143][INFO] [testing]total_number: 142618,error: 8.458564508246868,total_acc: 0.07299219071865082
+[2024-09-10 00:19:30,657][train.py][line:85][INFO] ---------------epoch 53---------------
+lr: [9.275381512410324e-05]
+[2024-09-10 00:29:20,639][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.2818061809560421
+[2024-09-10 00:34:06,837][train.py][line:143][INFO] [testing]total_number: 142618,error: 30.298365358557444,total_acc: 0.0034217280335724354
+[2024-09-10 00:34:06,880][train.py][line:85][INFO] ---------------epoch 54---------------
+lr: [9.23203280805829e-05]
+[2024-09-10 00:43:56,153][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.22758030319898764
+[2024-09-10 00:48:43,049][train.py][line:143][INFO] [testing]total_number: 142618,error: 11.938288912058088,total_acc: 0.08741533011198044
+[2024-09-10 00:48:43,112][train.py][line:85][INFO] ---------------epoch 55---------------
+lr: [9.187547704645704e-05]
+[2024-09-10 00:58:33,415][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.23274664847244705
+[2024-09-10 01:03:16,708][train.py][line:143][INFO] [testing]total_number: 142618,error: 23.652059455201385,total_acc: 0.018973762169480324
+[2024-09-10 01:03:16,754][train.py][line:85][INFO] ---------------epoch 56---------------
+lr: [9.141939752654002e-05]
+[2024-09-10 01:13:05,850][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.22986565964311334
+[2024-09-10 01:17:49,982][train.py][line:143][INFO] [testing]total_number: 142618,error: 21.46710285467708,total_acc: 0.02608366496860981
+[2024-09-10 01:17:50,065][train.py][line:85][INFO] ---------------epoch 57---------------
+lr: [9.095222844594015e-05]
+[2024-09-10 01:27:37,345][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.20507219155461998
+[2024-09-10 01:32:22,792][train.py][line:143][INFO] [testing]total_number: 142618,error: 26.311938093738842,total_acc: 0.028060974553227425
+[2024-09-10 01:32:22,877][train.py][line:85][INFO] ---------------epoch 58---------------
+lr: [9.04741121077413e-05]
+[2024-09-10 01:42:12,344][train.py][line:103][INFO] [training]total_num: 142618.0,error: 2.041334002165532
+[2024-09-10 01:46:52,340][train.py][line:143][INFO] [testing]total_number: 142618,error: 4.471570187791217,total_acc: 0.052062153816223145
+[2024-09-10 01:47:32,225][train.py][line:85][INFO] ---------------epoch 59---------------
+lr: [8.998519414965551e-05]
+[2024-09-10 01:57:18,990][train.py][line:103][INFO] [training]total_num: 142618.0,error: 1.0865084430683791
+[2024-09-10 02:02:02,798][train.py][line:143][INFO] [testing]total_number: 142618,error: 21.872791930015044,total_acc: 0.035402264446020126
+[2024-09-10 02:02:02,882][train.py][line:85][INFO] ---------------epoch 60---------------
+lr: [8.948562349965977e-05]
+[2024-09-10 02:11:52,430][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.3139041886791362
+[2024-09-10 02:16:35,006][train.py][line:143][INFO] [testing]total_number: 142618,error: 9.221218238600398,total_acc: 0.0636104866862297
+[2024-09-10 02:16:35,090][train.py][line:85][INFO] ---------------epoch 61---------------
+lr: [8.897555233063058e-05]
+[2024-09-10 02:26:23,894][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.2665010857947019
+[2024-09-10 02:31:09,659][train.py][line:143][INFO] [testing]total_number: 142618,error: 20.440430457547585,total_acc: 0.020761754363775253
+[2024-09-10 02:31:09,742][train.py][line:85][INFO] ---------------epoch 62---------------
+lr: [8.845513601399012e-05]
+[2024-09-10 02:40:57,991][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.24776050039197664
+[2024-09-10 02:45:40,689][train.py][line:143][INFO] [testing]total_number: 142618,error: 4.692131976692044,total_acc: 0.21943232417106628
+[2024-09-10 02:45:40,875][train.py][line:85][INFO] ---------------epoch 63---------------
+lr: [8.79245330723778e-05]
+[2024-09-10 02:55:27,527][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.21319509049697374
+[2024-09-10 03:00:09,881][train.py][line:143][INFO] [testing]total_number: 142618,error: 24.228785109498805,total_acc: 0.034995581954717636
+[2024-09-10 03:00:09,924][train.py][line:85][INFO] ---------------epoch 64---------------
+lr: [8.738390513136248e-05]
+[2024-09-10 03:10:00,104][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.22228637439493806
+[2024-09-10 03:14:47,431][train.py][line:143][INFO] [testing]total_number: 142618,error: 12.373993073931391,total_acc: 0.05328219383955002
+[2024-09-10 03:14:47,474][train.py][line:85][INFO] ---------------epoch 65---------------
+lr: [8.683341687020875e-05]
+[2024-09-10 03:24:38,538][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.20830239653058463
+[2024-09-10 03:29:19,396][train.py][line:143][INFO] [testing]total_number: 142618,error: 6.9870944327766535,total_acc: 0.06971770524978638
+[2024-09-10 03:29:19,471][train.py][line:85][INFO] ---------------epoch 66---------------
+lr: [8.627323597171376e-05]
+[2024-09-10 03:39:06,336][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.20908972407098672
+[2024-09-10 03:43:53,549][train.py][line:143][INFO] [testing]total_number: 142618,error: 9.228471369688343,total_acc: 0.051641449332237244
+[2024-09-10 03:43:53,594][train.py][line:85][INFO] ---------------epoch 67---------------
+lr: [8.57035330711284e-05]
+[2024-09-10 03:53:40,699][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.1816273580049929
+[2024-09-10 03:58:25,925][train.py][line:143][INFO] [testing]total_number: 142618,error: 24.220900402729132,total_acc: 0.030423929914832115
+[2024-09-10 03:58:26,011][train.py][line:85][INFO] ---------------epoch 68---------------
+lr: [8.512448170417973e-05]
+[2024-09-10 04:08:15,155][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.1921466540416311
+[2024-09-10 04:12:53,990][train.py][line:143][INFO] [testing]total_number: 142618,error: 5.554909842778014,total_acc: 0.16679520905017853
+[2024-09-10 04:12:54,074][train.py][line:85][INFO] ---------------epoch 69---------------
+lr: [8.453625825420931e-05]
+[2024-09-10 04:22:39,955][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.19209529886215582
+[2024-09-10 04:27:24,690][train.py][line:143][INFO] [testing]total_number: 142618,error: 23.613518010015074,total_acc: 0.03343897685408592
+[2024-09-10 04:27:24,776][train.py][line:85][INFO] ---------------epoch 70---------------
+lr: [8.393904189844473e-05]
+[2024-09-10 04:37:15,447][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.17307595584868804
+[2024-09-10 04:41:55,803][train.py][line:143][INFO] [testing]total_number: 142618,error: 8.622334704107168,total_acc: 0.06351231783628464
+[2024-09-10 04:41:55,844][train.py][line:85][INFO] ---------------epoch 71---------------
+lr: [8.333301455341939e-05]
+[2024-09-10 04:51:45,297][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.16615206189288328
+[2024-09-10 04:56:31,375][train.py][line:143][INFO] [testing]total_number: 142618,error: 6.34105325274057,total_acc: 0.13410648703575134
+[2024-09-10 04:56:31,419][train.py][line:85][INFO] ---------------epoch 72---------------
+lr: [8.271836081955843e-05]
+[2024-09-10 05:06:17,971][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.1655191738115493
+[2024-09-10 05:11:04,277][train.py][line:143][INFO] [testing]total_number: 142618,error: 18.316843773267284,total_acc: 0.045898836106061935
+[2024-09-10 05:11:04,322][train.py][line:85][INFO] ---------------epoch 73---------------
+lr: [8.209526792494646e-05]
+[2024-09-10 05:20:55,508][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.16194780849865717
+[2024-09-10 05:25:39,600][train.py][line:143][INFO] [testing]total_number: 142618,error: 10.461804675971287,total_acc: 0.05530858784914017
+[2024-09-10 05:25:39,686][train.py][line:85][INFO] ---------------epoch 74---------------
+lr: [8.146392566829567e-05]
+[2024-09-10 05:35:25,358][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.15046435140384015
+[2024-09-10 05:40:10,782][train.py][line:143][INFO] [testing]total_number: 142618,error: 9.183478604192318,total_acc: 0.052230432629585266
+[2024-09-10 05:40:10,825][train.py][line:85][INFO] ---------------epoch 75---------------
+lr: [8.082452636112988e-05]
+[2024-09-10 05:50:00,948][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.16270117241039728
+[2024-09-10 05:54:47,559][train.py][line:143][INFO] [testing]total_number: 142618,error: 20.38132500838895,total_acc: 0.04180397838354111
+[2024-09-10 05:54:47,633][train.py][line:85][INFO] ---------------epoch 76---------------
+lr: [8.017726476920412e-05]
+[2024-09-10 06:04:36,985][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.1511885356438985
+[2024-09-10 06:09:17,131][train.py][line:143][INFO] [testing]total_number: 142618,error: 9.308696544159803,total_acc: 0.1495533585548401
+[2024-09-10 06:09:17,196][train.py][line:85][INFO] ---------------epoch 77---------------
+lr: [7.952233805317577e-05]
+[2024-09-10 06:19:04,717][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.1480173396596151
+[2024-09-10 06:23:45,959][train.py][line:143][INFO] [testing]total_number: 142618,error: 29.366349265124803,total_acc: 0.014261874370276928
+[2024-09-10 06:23:46,008][train.py][line:85][INFO] ---------------epoch 78---------------
+lr: [7.885994570854663e-05]
+[2024-09-10 06:33:34,264][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.14020367370655606
+[2024-09-10 06:38:21,044][train.py][line:143][INFO] [testing]total_number: 142618,error: 8.722838366253775,total_acc: 0.03132143244147301
+[2024-09-10 06:38:21,137][train.py][line:85][INFO] ---------------epoch 79---------------
+lr: [7.819028950489351e-05]
+[2024-09-10 06:48:10,675][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.14464872428269754
+[2024-09-10 06:52:57,512][train.py][line:143][INFO] [testing]total_number: 142618,error: 9.7265532340428,total_acc: 0.016211137175559998
+[2024-09-10 06:52:57,553][train.py][line:85][INFO] ---------------epoch 80---------------
+lr: [7.751357342440633e-05]
+[2024-09-10 07:02:45,844][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.19317673273159797
+[2024-09-10 07:07:32,524][train.py][line:143][INFO] [testing]total_number: 142618,error: 13.834566270342524,total_acc: 0.03323563560843468
+[2024-09-10 07:07:32,568][train.py][line:85][INFO] ---------------epoch 81---------------
+lr: [7.683000359975173e-05]
+[2024-09-10 07:17:22,125][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.1733909963887142
+[2024-09-10 07:22:07,124][train.py][line:143][INFO] [testing]total_number: 142618,error: 6.347961067836054,total_acc: 0.26257553696632385
+[2024-09-10 07:22:45,450][train.py][line:85][INFO] ---------------epoch 82---------------
+lr: [7.613978825128206e-05]
+[2024-09-10 07:32:34,559][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.1284706514649351
+[2024-09-10 07:37:20,207][train.py][line:143][INFO] [testing]total_number: 142618,error: 6.3295585751639285,total_acc: 0.25629302859306335
+[2024-09-10 07:37:20,294][train.py][line:85][INFO] ---------------epoch 83---------------
+lr: [7.544313762360803e-05]
+[2024-09-10 07:47:08,242][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.12467672308773041
+[2024-09-10 07:51:53,743][train.py][line:143][INFO] [testing]total_number: 142618,error: 7.731878064433981,total_acc: 0.05117166042327881
+[2024-09-10 07:51:53,788][train.py][line:85][INFO] ---------------epoch 84---------------
+lr: [7.474026392155499e-05]
+[2024-09-10 08:01:45,377][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.099573554765324
+[2024-09-10 08:06:26,708][train.py][line:143][INFO] [testing]total_number: 142618,error: 9.03694635000288,total_acc: 0.0931018516421318
+[2024-09-10 08:06:26,750][train.py][line:85][INFO] ---------------epoch 85---------------
+lr: [7.40313812455217e-05]
+[2024-09-10 08:16:11,751][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.11926090079686127
+[2024-09-10 08:20:57,638][train.py][line:143][INFO] [testing]total_number: 142618,error: 22.984290139063756,total_acc: 0.033249661326408386
+[2024-09-10 08:20:57,682][train.py][line:85][INFO] ---------------epoch 86---------------
+lr: [7.331670552626193e-05]
+[2024-09-10 08:30:45,844][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.11308441028336084
+[2024-09-10 08:35:31,330][train.py][line:143][INFO] [testing]total_number: 142618,error: 7.8238729030131875,total_acc: 0.07763396203517914
+[2024-09-10 08:35:31,372][train.py][line:85][INFO] ---------------epoch 87---------------
+lr: [7.259645445910833e-05]
+[2024-09-10 08:45:24,636][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.1139098021871978
+[2024-09-10 08:50:09,866][train.py][line:143][INFO] [testing]total_number: 142618,error: 19.8298583762669,total_acc: 0.04852823540568352
+[2024-09-10 08:50:09,952][train.py][line:85][INFO] ---------------epoch 88---------------
+lr: [7.187084743765878e-05]
+[2024-09-10 08:59:56,492][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.09956109007951054
+[2024-09-10 09:04:40,816][train.py][line:143][INFO] [testing]total_number: 142618,error: 7.402480786314239,total_acc: 0.2247752696275711
+[2024-09-10 09:04:40,893][train.py][line:85][INFO] ---------------epoch 89---------------
+lr: [7.114010548694501e-05]
+[2024-09-10 09:14:30,578][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.10359319041961575
+[2024-09-10 09:19:15,688][train.py][line:143][INFO] [testing]total_number: 142618,error: 34.84491512430592,total_acc: 0.005069486331194639
+[2024-09-10 09:19:15,743][train.py][line:85][INFO] ---------------epoch 90---------------
+lr: [7.040445119610496e-05]
+[2024-09-10 09:29:00,554][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.1016631934762054
+[2024-09-10 09:33:40,915][train.py][line:143][INFO] [testing]total_number: 142618,error: 10.08242909889255,total_acc: 0.12424799054861069
+[2024-09-10 09:33:40,997][train.py][line:85][INFO] ---------------epoch 91---------------
+lr: [6.966410865057756e-05]
+[2024-09-10 09:43:27,566][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.11100909688626519
+[2024-09-10 09:48:11,934][train.py][line:143][INFO] [testing]total_number: 142618,error: 8.146801186538736,total_acc: 0.07810374349355698
+[2024-09-10 09:48:11,972][train.py][line:85][INFO] ---------------epoch 92---------------
+lr: [6.89193033638427e-05]
+[2024-09-10 09:57:59,952][train.py][line:103][INFO] [training]total_num: 142618.0,error: 0.09197680031039489
+[2024-09-10 10:02:45,407][train.py][line:143][INFO] [testing]total_number: 142618,error: 9.758471879053666,total_acc: 0.05948758125305176
+[2024-09-10 10:02:45,477][train.py][line:85][INFO] ---------------epoch 93---------------
+lr: [6.817026220872528e-05]

@@ -1,0 +1,103 @@
+[2024-08-16 16:19:07,229][train.py][line:84][INFO] ---------------args---------------
+Namespace(data_path='./data/Pymatgen_Wrapped_Plus/0/', train_name='AtLBase', model_path=None, learning_rate=0.005, min_learning_rate=1e-06, start_scheduler_step=0, weight_decay=1e-06, momentum=0.99, batch_size=256, class_num=230, epoch_num=200, model_save_path='./checkpoints/AtLBase', device='0,1,2,3', scheduler_T=None, num_workers=50, log_name='log/train//train_AtLBase_2024_08_16_16:18:10.log')
+[2024-08-16 16:19:07,232][train.py][line:85][INFO] ---------------model---------------
+DataParallel(
+  (module): AtLBase(
+    (embed): Embedding(850, 128)
+    (encoders): ModuleList(
+      (0-23): 24 x EncoderLayer(
+        (att): Attention(
+          (WQ): Linear(in_features=128, out_features=128, bias=True)
+          (WK): Linear(in_features=128, out_features=128, bias=True)
+          (WV): Linear(in_features=128, out_features=128, bias=True)
+          (linear): Linear(in_features=128, out_features=128, bias=True)
+        )
+        (dropout1): Dropout(p=0.05, inplace=False)
+        (layernorm1): LayerNorm((128,), eps=1e-06, elementwise_affine=True)
+        (ffn): FeedForwardNetwork(
+          (linear1): Linear(in_features=128, out_features=256, bias=True)
+          (linear2): Linear(in_features=256, out_features=128, bias=True)
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (dropout2): Dropout(p=0.05, inplace=False)
+        (layernorm2): LayerNorm((128,), eps=1e-06, elementwise_affine=True)
+      )
+    )
+    (cls_sp): MLP(
+      (mlp): Sequential(
+        (0): Linear(in_features=128, out_features=512, bias=True)
+        (1): LeakyReLU(negative_slope=0.01)
+        (2): Linear(in_features=512, out_features=1024, bias=True)
+        (3): LeakyReLU(negative_slope=0.01)
+        (4): Linear(in_features=1024, out_features=230, bias=True)
+      )
+    )
+    (reg_lattice): MLP(
+      (mlp): Sequential(
+        (0): Linear(in_features=128, out_features=512, bias=True)
+        (1): LeakyReLU(negative_slope=0.01)
+        (2): Linear(in_features=512, out_features=1024, bias=True)
+        (3): LeakyReLU(negative_slope=0.01)
+        (4): Linear(in_features=1024, out_features=9, bias=True)
+      )
+    )
+    (reg_coord): MLP(
+      (mlp): Sequential(
+        (0): Linear(in_features=128, out_features=512, bias=True)
+        (1): LeakyReLU(negative_slope=0.01)
+        (2): Linear(in_features=512, out_features=1024, bias=True)
+        (3): LeakyReLU(negative_slope=0.01)
+        (4): Linear(in_features=1024, out_features=2000, bias=True)
+      )
+    )
+  )
+)
+[2024-08-16 16:19:07,232][train.py][line:86][INFO] ---------------device---------------
+cuda:0
+[2024-08-16 16:19:07,232][train.py][line:87][INFO] ---------------optimizer---------------
+AdamW (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    initial_lr: 0.005
+    lr: 0.005
+    maximize: False
+    weight_decay: 1e-06
+)
+[2024-08-16 16:19:07,232][train.py][line:88][INFO] ---------------seed---------------
+3407
+[2024-08-16 16:20:38,567][train.py][line:100][INFO] ---------------epoch 1---------------
+lr: [0.005]
+[2024-08-16 16:24:20,960][train.py][line:127][INFO] [training]total_num:142614.0 ,err_sp:3.8016187782151114 ,err_lattice:86.29990713615963 ,err_coord:2.7544203996497787
+[2024-08-16 16:26:20,450][train.py][line:171][INFO] [testing]total_number: 142614,error: 65.31709696269846,total_acc: 0.0012972078984603286
+[2024-08-16 16:26:58,510][train.py][line:100][INFO] ---------------epoch 2---------------
+lr: [0.004999383304796447]
+[2024-08-16 16:30:35,223][train.py][line:127][INFO] [training]total_num:142614.0 ,err_sp:3.7803561056236035 ,err_lattice:85.75754074988647 ,err_coord:2.737978931648407
+[2024-08-16 16:32:33,446][train.py][line:171][INFO] [testing]total_number: 142614,error: 186.35086035003388,total_acc: 0.00174597161822021
+[2024-08-16 16:32:33,565][train.py][line:100][INFO] ---------------epoch 3---------------
+lr: [0.0049978418235484155]
+[2024-08-16 16:36:11,331][train.py][line:127][INFO] [training]total_num:142614.0 ,err_sp:3.7774849283460643 ,err_lattice:85.6054035300744 ,err_coord:2.7332246121941752
+[2024-08-16 16:38:07,605][train.py][line:171][INFO] [testing]total_number: 142614,error: 315.8737884685264,total_acc: 0.0002804773685056716
+[2024-08-16 16:38:07,648][train.py][line:100][INFO] ---------------epoch 4---------------
+lr: [0.004995684312699068]
+[2024-08-16 16:41:45,225][train.py][line:127][INFO] [training]total_num:142614.0 ,err_sp:3.7722608036559895 ,err_lattice:85.54478884562788 ,err_coord:2.731385001831597
+[2024-08-16 16:43:41,715][train.py][line:171][INFO] [testing]total_number: 142614,error: 510.2535429325001,total_acc: 0.0002804773685056716
+[2024-08-16 16:43:41,759][train.py][line:100][INFO] ---------------epoch 5---------------
+lr: [0.0049929113045537555]
+[2024-08-16 16:47:17,655][train.py][line:127][INFO] [training]total_num:142614.0 ,err_sp:3.7708258539278305 ,err_lattice:85.51403197712712 ,err_coord:2.7314087319234974
+[2024-08-16 16:49:14,275][train.py][line:171][INFO] [testing]total_number: 142614,error: 493.2633457900373,total_acc: 0.0002804773685056716
+[2024-08-16 16:49:14,319][train.py][line:100][INFO] ---------------epoch 6---------------
+lr: [0.004989523483282572]
+[2024-08-16 16:52:51,546][train.py][line:127][INFO] [training]total_num:142614.0 ,err_sp:3.7725506144474146 ,err_lattice:85.51343915030131 ,err_coord:2.7311274396312606
+[2024-08-16 16:54:50,294][train.py][line:171][INFO] [testing]total_number: 142614,error: 702.2674097596853,total_acc: 0.0002804773685056716
+[2024-08-16 16:54:50,338][train.py][line:100][INFO] ---------------epoch 7---------------
+lr: [0.004985521684751527]
+[2024-08-16 16:58:28,348][train.py][line:127][INFO] [training]total_num:142614.0 ,err_sp:3.769672218503594 ,err_lattice:85.46553355700625 ,err_coord:2.730063226366371
+[2024-08-16 17:00:25,099][train.py][line:171][INFO] [testing]total_number: 142614,error: 678.0523980811158,total_acc: 0.0008835037006065249
+[2024-08-16 17:00:25,143][train.py][line:100][INFO] ---------------epoch 8---------------
+lr: [0.004980906896316308]

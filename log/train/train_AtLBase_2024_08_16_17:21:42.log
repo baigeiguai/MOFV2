@@ -1,0 +1,73 @@
+[2024-08-16 17:21:47,472][train.py][line:84][INFO] ---------------args---------------
+Namespace(data_path='./data/Pymatgen_Wrapped_Plus/0/', train_name='AtLBase', model_path=None, learning_rate=0.005, min_learning_rate=1e-06, start_scheduler_step=0, weight_decay=1e-06, momentum=0.99, batch_size=256, class_num=230, epoch_num=200, model_save_path='./checkpoints/AtLBase', device='0', scheduler_T=None, num_workers=50, log_name='log/train//train_AtLBase_2024_08_16_17:21:42.log')
+[2024-08-16 17:21:47,477][train.py][line:85][INFO] ---------------model---------------
+AtLBase(
+  (embed): Embedding(850, 128)
+  (encoders): ModuleList(
+    (0-23): 24 x EncoderLayer(
+      (att): Attention(
+        (WQ): Linear(in_features=128, out_features=128, bias=True)
+        (WK): Linear(in_features=128, out_features=128, bias=True)
+        (WV): Linear(in_features=128, out_features=128, bias=True)
+        (linear): Linear(in_features=128, out_features=128, bias=True)
+      )
+      (dropout1): Dropout(p=0.05, inplace=False)
+      (layernorm1): LayerNorm((128,), eps=1e-06, elementwise_affine=True)
+      (ffn): FeedForwardNetwork(
+        (linear1): Linear(in_features=128, out_features=256, bias=True)
+        (linear2): Linear(in_features=256, out_features=128, bias=True)
+        (relu): LeakyReLU(negative_slope=0.01)
+      )
+      (dropout2): Dropout(p=0.05, inplace=False)
+      (layernorm2): LayerNorm((128,), eps=1e-06, elementwise_affine=True)
+    )
+  )
+  (cls_sp): MLP(
+    (mlp): Sequential(
+      (0): Linear(in_features=128, out_features=512, bias=True)
+      (1): LeakyReLU(negative_slope=0.01)
+      (2): Linear(in_features=512, out_features=1024, bias=True)
+      (3): LeakyReLU(negative_slope=0.01)
+      (4): Linear(in_features=1024, out_features=230, bias=True)
+    )
+  )
+  (reg_lattice): MLP(
+    (mlp): Sequential(
+      (0): Linear(in_features=128, out_features=512, bias=True)
+      (1): LeakyReLU(negative_slope=0.01)
+      (2): Linear(in_features=512, out_features=1024, bias=True)
+      (3): LeakyReLU(negative_slope=0.01)
+      (4): Linear(in_features=1024, out_features=9, bias=True)
+    )
+  )
+  (reg_coord): MLP(
+    (mlp): Sequential(
+      (0): Linear(in_features=128, out_features=512, bias=True)
+      (1): LeakyReLU(negative_slope=0.01)
+      (2): Linear(in_features=512, out_features=1024, bias=True)
+      (3): LeakyReLU(negative_slope=0.01)
+      (4): Linear(in_features=1024, out_features=2000, bias=True)
+    )
+  )
+)
+[2024-08-16 17:21:47,477][train.py][line:86][INFO] ---------------device---------------
+cuda:0
+[2024-08-16 17:21:47,477][train.py][line:87][INFO] ---------------optimizer---------------
+AdamW (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    initial_lr: 0.005
+    lr: 0.005
+    maximize: False
+    weight_decay: 1e-06
+)
+[2024-08-16 17:21:47,477][train.py][line:88][INFO] ---------------seed---------------
+3407
+[2024-08-16 17:21:47,492][train.py][line:100][INFO] ---------------epoch 1---------------
+lr: [0.005]

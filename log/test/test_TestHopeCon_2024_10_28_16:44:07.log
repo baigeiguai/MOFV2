@@ -1,7 +1,6 @@
-/bin/bash: /opt/miniconda/3/lib/libtinfo.so.6: no version information available (required by /bin/bash)
-[2024-10-28 16:41:40,306][train_con.py][line:75][INFO] ---------------args---------------
-Namespace(data_path='./data/Pymatgen_Wrapped/0', train_name='HopeV1_con', model_path=None, learning_rate=0.0005, min_learning_rate=1e-05, start_scheduler_step=10, weight_decay=0.0001, momentum=0.99, batch_size=768, class_num=230, epoch_num=120, model_save_path='./checkpoints/HopeV1_con', device='0', scheduler_T=None, num_workers=20, alpha=100, log_name='log/train//train_HopeV1_con_2024_10_28_16:41:34.log')
-[2024-10-28 16:41:40,307][train_con.py][line:76][INFO] ---------------model---------------
+[2024-10-28 16:44:19,696][test_con.py][line:34][INFO] ---------------args---------------
+Namespace(data_path='./data/Pymatgen_Wrapped/0/', batch_size=1024, model_path='checkpoints/HopeV1_con/HopeV1_con_epoch_90.pth', device='0', mode='test', top_k=5, parallel_model=False, test_name='TestHopeCon', num_workers=20, log_name='log/test/test_TestHopeCon_2024_10_28_16:44:07.log')
+[2024-10-28 16:44:19,702][test_con.py][line:35][INFO] ---------------model---------------
 HopeV1_Con(
   (conv_module): ResTcn(
     (intensity_norm): BatchNorm1d(1, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
@@ -216,34 +215,19 @@ HopeV1_Con(
     (0): Linear(in_features=1056, out_features=6, bias=True)
   )
 )
-[2024-10-28 16:41:40,311][train_con.py][line:77][INFO] ---------------device---------------
+[2024-10-28 16:44:19,705][test_con.py][line:36][INFO] ---------------device---------------
 cuda:0
-[2024-10-28 16:41:40,311][train_con.py][line:78][INFO] ---------------optimizer---------------
-AdamW (
-Parameter Group 0
-    amsgrad: False
-    betas: (0.9, 0.999)
-    capturable: False
-    differentiable: False
-    eps: 1e-08
-    foreach: None
-    fused: None
-    initial_lr: 0.0005
-    lr: 0.0005
-    maximize: False
-    weight_decay: 0.0001
-)
-[2024-10-28 16:41:40,311][train_con.py][line:79][INFO] ---------------seed---------------
-3407
-/home/pengkungroup/wushuang/.local/lib/python3.9/site-packages/torch/optim/lr_scheduler.py:809: UserWarning: To get the last learning rate computed by the scheduler, please use `get_last_lr()`.
-  warnings.warn("To get the last learning rate computed by the scheduler, "
-[2024-10-28 16:41:40,329][train_con.py][line:91][INFO] ---------------epoch 1---------------
-lr: [0.0005]
-__main__ log/train/ train_HopeV1_con
-Traceback (most recent call last):
-  File "/gpfs/home/pengkungroup/wushuang/code/MOFV2/train_con.py", line 167, in <module>
-    train()
-  File "/gpfs/home/pengkungroup/wushuang/code/MOFV2/train_con.py", line 109, in train
-    error = (beta)*error_cls + args.alpha(1-beta)*error_sc
-TypeError: 'int' object is not callable
-slurmstepd: error: *** JOB 270134 ON gnode05 CANCELLED AT 2024-10-28T16:42:57 ***
+[2024-10-28 16:44:19,706][test_con.py][line:37][INFO] ---------------lossfn---------------
+CrossEntropyLoss()
+[2024-10-28 16:46:12,522][test_con.py][line:77][INFO] ---------------performance---------------
+total_num:142729
+error:0.854386
+total_acc:0.7454126477241516
+f1_score:0.4753827154636383
+top5_acc:0.9593214988708496
+head_acc:0.8070958763920584
+medium_acc:0.7265678352581332
+tail_acc:0.5335758815362678
+
+[2024-10-28 16:46:12,522][test_con.py][line:88][INFO] ---------------per_class_acc---------------
+[0.82844603, 0.79393685, 0.10526316, 0.84279853, 0.79875475, 0.22222222, 0.6267982, 0.4375, 0.7650613, 0.32786885, 0.68712705, 0.6482301, 0.57357526, 0.8078718, 0.64661574, 0.65217394, 0.4473684, 0.70437616, 0.94992495, 0.5, 0.09375, 0.10526316, 0.62204725, 0.14705883, 0.0, 0.6447368, 0.1764706, 0.11111111, 0.7979577, 0.53521127, 0.41666666, 0.18888889, 0.72165924, 0.38709676, 0.2, 0.64553314, 0.33898306, 0.27272728, 0.0, 0.26530612, 0.0, 0.4473684, 0.7937121, 0.4054054, 0.600639, 0.44444445, 0.4, 0.43243244, 0.3, 0.25925925, 0.34615386, 0.55499154, 0.2535211, 0.265625, 0.25165564, 0.5304394, 0.4144869, 0.45762712, 0.36842105, 0.7017115, 0.9374202, 0.7117308, 0.5239085, 0.0, 0.7184466, 0.1969697, 0.0, 0.0, 0.3015873, 0.77210885, 0.41666666, 0.59069765, 0.42038217, 0.54545456, 0.10344828, 0.3792373, 0.33870968, 0.49168646, 0.104477614, 0.53543305, 0.61206895, 0.85552406, 0.0625, 0.5416667, 0.792873, 0.8213213, 0.62880886, 0.8668407, 0.0, 0.21153846, 0.044444446, 0.26891616, 0.0, 0.4056604, 0.3617021, 0.67456895, 0.16666667, 0.64705884, 0.0, 0.0, 0.0, 0.07692308, 0.29411766, 0.8032787, 1.0, 0.5283019, 0.083333336, 0.47368422, 0.17391305, 0.69014084, 0.0, 0.05882353, 0.705036, 0.8256, 0.0, 0.23809524, 0.36363637, 0.5531915, 0.125, 0.4642857, 0.14942528, 0.6898551, 0.85897434, 0.80851066, 0.8666667, 0.6785714, 0.33333334, 0.47252747, 0.58426964, 0.8130081, 0.7, 0.3, 0.08, 0.53571427, 0.26, 0.65217394, 0.31578946, 0.56164384, 0.5043478, 0.4027778, 0.47619048, 0.7069597, 0.4122807, 0.57474226, 0.3316062, 0.70810056, 0.7714749, 0.92527574, 0.33333334, 0.037037037, 0.0, 0.378882, 0.0, 0.43979058, 0.124497995, 0.0, 0.0, 0.42307693, 0.5891892, 0.375, 0.89728683, 0.4827586, 0.6666667, 0.3265306, 0.8363636, 0.58146966, 0.8355263, 0.0, 0.28450704, 0.59654176, 0.1, 0.032258064, 0.7021858, 0.0625, 0.20833333, 0.6834171, 0.33333334, 0.40816328, 0.44, 0.35, 0.52, 0.4226804, 0.0, 0.2857143, 0.15789473, 0.29166666, 0.54545456, 0.25, 0.22727273, 0.27272728, 0.46969697, 0.84745765, 0.5263158, 0.74585634, 0.2, 0.9137931, 0.035714287, 0.97602737, 0.9104478, 0.07692308, 0.6, 0.083333336, 0.8181818, 0.09375, 0.98834497, 0.91549295, 0.23076923, 0.0, 0.37142858, 0.7741935, 0.1724138, 0.625, 0.45454547, 0.71428573, 0.45454547, 0.0, 0.595092, 0.87323946, 0.8541667, 0.9931507, 0.8503937, 1.0, 0.84210527, 0.5, 0.8264706, 0.8095238, 0.8863636, 0.9166667, 0.09090909, 0.9491525]

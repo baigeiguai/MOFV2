@@ -1,7 +1,6 @@
-/bin/bash: /opt/miniconda/3/lib/libtinfo.so.6: no version information available (required by /bin/bash)
-[2024-10-28 16:41:40,306][train_con.py][line:75][INFO] ---------------args---------------
-Namespace(data_path='./data/Pymatgen_Wrapped/0', train_name='HopeV1_con', model_path=None, learning_rate=0.0005, min_learning_rate=1e-05, start_scheduler_step=10, weight_decay=0.0001, momentum=0.99, batch_size=768, class_num=230, epoch_num=120, model_save_path='./checkpoints/HopeV1_con', device='0', scheduler_T=None, num_workers=20, alpha=100, log_name='log/train//train_HopeV1_con_2024_10_28_16:41:34.log')
-[2024-10-28 16:41:40,307][train_con.py][line:76][INFO] ---------------model---------------
+[2024-10-28 17:02:31,099][train_con.py][line:75][INFO] ---------------args---------------
+Namespace(data_path='./data/Pymatgen_Wrapped/0', train_name='HopeV1_Con_AG', model_path=None, learning_rate=0.0005, min_learning_rate=1e-06, start_scheduler_step=30, weight_decay=0.0001, momentum=0.99, batch_size=768, class_num=230, epoch_num=200, model_save_path='./checkpoints/HopeV1_Con_AG', device='0', scheduler_T=None, num_workers=20, alpha=0.05, log_name='log/train//train_HopeV1_Con_AG_2024_10_28_17:02:27.log')
+[2024-10-28 17:02:31,101][train_con.py][line:76][INFO] ---------------model---------------
 HopeV1_Con(
   (conv_module): ResTcn(
     (intensity_norm): BatchNorm1d(1, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
@@ -216,9 +215,9 @@ HopeV1_Con(
     (0): Linear(in_features=1056, out_features=6, bias=True)
   )
 )
-[2024-10-28 16:41:40,311][train_con.py][line:77][INFO] ---------------device---------------
+[2024-10-28 17:02:31,105][train_con.py][line:77][INFO] ---------------device---------------
 cuda:0
-[2024-10-28 16:41:40,311][train_con.py][line:78][INFO] ---------------optimizer---------------
+[2024-10-28 17:02:31,105][train_con.py][line:78][INFO] ---------------optimizer---------------
 AdamW (
 Parameter Group 0
     amsgrad: False
@@ -233,17 +232,7 @@ Parameter Group 0
     maximize: False
     weight_decay: 0.0001
 )
-[2024-10-28 16:41:40,311][train_con.py][line:79][INFO] ---------------seed---------------
+[2024-10-28 17:02:31,105][train_con.py][line:79][INFO] ---------------seed---------------
 3407
-/home/pengkungroup/wushuang/.local/lib/python3.9/site-packages/torch/optim/lr_scheduler.py:809: UserWarning: To get the last learning rate computed by the scheduler, please use `get_last_lr()`.
-  warnings.warn("To get the last learning rate computed by the scheduler, "
-[2024-10-28 16:41:40,329][train_con.py][line:91][INFO] ---------------epoch 1---------------
+[2024-10-28 17:02:31,110][train_con.py][line:91][INFO] ---------------epoch 1---------------
 lr: [0.0005]
-__main__ log/train/ train_HopeV1_con
-Traceback (most recent call last):
-  File "/gpfs/home/pengkungroup/wushuang/code/MOFV2/train_con.py", line 167, in <module>
-    train()
-  File "/gpfs/home/pengkungroup/wushuang/code/MOFV2/train_con.py", line 109, in train
-    error = (beta)*error_cls + args.alpha(1-beta)*error_sc
-TypeError: 'int' object is not callable
-slurmstepd: error: *** JOB 270134 ON gnode05 CANCELLED AT 2024-10-28T16:42:57 ***

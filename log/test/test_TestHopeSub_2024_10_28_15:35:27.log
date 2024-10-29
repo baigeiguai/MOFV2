@@ -1,8 +1,7 @@
-/bin/bash: /opt/miniconda/3/lib/libtinfo.so.6: no version information available (required by /bin/bash)
-[2024-10-28 16:41:40,306][train_con.py][line:75][INFO] ---------------args---------------
-Namespace(data_path='./data/Pymatgen_Wrapped/0', train_name='HopeV1_con', model_path=None, learning_rate=0.0005, min_learning_rate=1e-05, start_scheduler_step=10, weight_decay=0.0001, momentum=0.99, batch_size=768, class_num=230, epoch_num=120, model_save_path='./checkpoints/HopeV1_con', device='0', scheduler_T=None, num_workers=20, alpha=100, log_name='log/train//train_HopeV1_con_2024_10_28_16:41:34.log')
-[2024-10-28 16:41:40,307][train_con.py][line:76][INFO] ---------------model---------------
-HopeV1_Con(
+[2024-10-28 15:35:31,790][test_sub.py][line:34][INFO] ---------------args---------------
+Namespace(data_path='./data/Pymatgen_Wrapped/0/', batch_size=1024, model_path='./checkpoints/Hope_SubClass/Hope_SubClass_epoch_76.pth', device='0', mode='test', top_k=5, parallel_model=False, test_name='TestHopeSub', num_workers=20, log_name='log/test/test_TestHopeSub_2024_10_28_15:35:27.log')
+[2024-10-28 15:35:31,795][test_sub.py][line:35][INFO] ---------------model---------------
+HopeV1_Sub(
   (conv_module): ResTcn(
     (intensity_norm): BatchNorm1d(1, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
     (TCN): Sequential(
@@ -206,44 +205,31 @@ HopeV1_Con(
       )
     )
   )
-  (cls_sp): Sequential(
-    (0): Linear(in_features=1056, out_features=230, bias=True)
+  (projection): Sequential(
+    (0): Linear(in_features=1056, out_features=512, bias=True)
+    (1): LeakyReLU(negative_slope=0.01)
+    (2): Linear(in_features=512, out_features=256, bias=True)
   )
-  (cls_cs): Sequential(
-    (0): Linear(in_features=1056, out_features=7, bias=True)
+  (sp_cls): Sequential(
+    (0): Linear(in_features=256, out_features=230, bias=True)
   )
-  (cls_lt): Sequential(
-    (0): Linear(in_features=1056, out_features=6, bias=True)
+  (cluster_cls): Sequential(
+    (0): Linear(in_features=256, out_features=798, bias=True)
   )
 )
-[2024-10-28 16:41:40,311][train_con.py][line:77][INFO] ---------------device---------------
+[2024-10-28 15:35:31,798][test_sub.py][line:36][INFO] ---------------device---------------
 cuda:0
-[2024-10-28 16:41:40,311][train_con.py][line:78][INFO] ---------------optimizer---------------
-AdamW (
-Parameter Group 0
-    amsgrad: False
-    betas: (0.9, 0.999)
-    capturable: False
-    differentiable: False
-    eps: 1e-08
-    foreach: None
-    fused: None
-    initial_lr: 0.0005
-    lr: 0.0005
-    maximize: False
-    weight_decay: 0.0001
-)
-[2024-10-28 16:41:40,311][train_con.py][line:79][INFO] ---------------seed---------------
-3407
-/home/pengkungroup/wushuang/.local/lib/python3.9/site-packages/torch/optim/lr_scheduler.py:809: UserWarning: To get the last learning rate computed by the scheduler, please use `get_last_lr()`.
-  warnings.warn("To get the last learning rate computed by the scheduler, "
-[2024-10-28 16:41:40,329][train_con.py][line:91][INFO] ---------------epoch 1---------------
-lr: [0.0005]
-__main__ log/train/ train_HopeV1_con
-Traceback (most recent call last):
-  File "/gpfs/home/pengkungroup/wushuang/code/MOFV2/train_con.py", line 167, in <module>
-    train()
-  File "/gpfs/home/pengkungroup/wushuang/code/MOFV2/train_con.py", line 109, in train
-    error = (beta)*error_cls + args.alpha(1-beta)*error_sc
-TypeError: 'int' object is not callable
-slurmstepd: error: *** JOB 270134 ON gnode05 CANCELLED AT 2024-10-28T16:42:57 ***
+[2024-10-28 15:35:31,798][test_sub.py][line:37][INFO] ---------------lossfn---------------
+CrossEntropyLoss()
+[2024-10-28 15:37:25,008][test_sub.py][line:77][INFO] ---------------performance---------------
+total_num:142729
+error:2.292116
+total_acc:0.6781242489814758
+f1_score:0.4636681079864502
+top5_acc:0.9215576648712158
+head_acc:0.7517576164539357
+medium_acc:0.6160807724049496
+tail_acc:0.5156444896304914
+
+[2024-10-28 15:37:25,009][test_sub.py][line:88][INFO] ---------------per_class_acc---------------
+[0.82924396, 0.72853506, 0.078947365, 0.7485424, 0.6777852, 0.16666667, 0.4706124, 0.4715909, 0.6950418, 0.26229507, 0.53069055, 0.5586283, 0.3498724, 0.78792703, 0.54742205, 0.65217394, 0.18421052, 0.5949721, 0.86296374, 0.49234137, 0.21875, 0.10526316, 0.47244096, 0.29411766, 0.0, 0.35526314, 0.23529412, 0.22222222, 0.62241673, 0.28169015, 0.6086956, 0.22222222, 0.7374679, 0.36129034, 0.4, 0.56340057, 0.22033899, 0.54545456, 0.0, 0.25510204, 0.0, 0.47368422, 0.57915056, 0.2972973, 0.485623, 0.44444445, 0.26666668, 0.16216215, 0.2, 0.3888889, 0.23076923, 0.4314721, 0.47887325, 0.21484375, 0.21854305, 0.46956062, 0.39034206, 0.43502825, 0.36842105, 0.62280506, 0.91209024, 0.6223077, 0.49064448, 0.0, 0.47572815, 0.25757575, 0.0, 0.0, 0.42857143, 0.6258503, 0.4027778, 0.47906977, 0.25477707, 0.45454547, 0.03448276, 0.44279662, 0.29032257, 0.49881235, 0.30597016, 0.6692913, 0.36206895, 0.79886687, 0.125, 0.1875, 0.66815144, 0.7192192, 0.4875346, 0.86527413, 0.0, 0.26923078, 0.11111111, 0.3813906, 0.0, 0.31132075, 0.19148937, 0.49030173, 0.35416666, 0.627451, 0.0, 0.0, 0.0, 0.15384616, 0.23529412, 0.6393443, 1.0, 0.35849056, 0.0, 0.47368422, 0.17391305, 0.69483566, 0.0, 0.1764706, 0.62589926, 0.7632, 0.0, 0.14285715, 0.54545456, 0.5744681, 0.25, 0.5, 0.3908046, 0.6173913, 0.6025641, 0.80851066, 0.93333334, 0.5535714, 0.23809524, 0.62637365, 0.6179775, 0.7520325, 0.62857145, 0.2, 0.2, 0.53571427, 0.18, 0.54347825, 0.3859649, 0.5205479, 0.45217392, 0.43055555, 0.515873, 0.63003665, 0.5350877, 0.4329897, 0.5051814, 0.8044693, 0.60777956, 0.84717536, 0.33333334, 0.18518518, 0.0, 0.4679089, 0.09090909, 0.17015707, 0.32128513, 0.0, 0.22222222, 0.3653846, 0.6486486, 0.5390625, 0.8624031, 0.6551724, 0.6131687, 0.53061223, 0.74805194, 0.5686901, 0.77960527, 0.0, 0.49014086, 0.3371758, 0.1, 0.032258064, 0.6229508, 0.0625, 0.29166666, 0.5703518, 0.4, 0.43537414, 0.408, 0.275, 0.12, 0.4329897, 0.0, 0.2857143, 0.15789473, 0.375, 0.6363636, 0.375, 0.09090909, 0.36363637, 0.45454547, 0.7966102, 0.55263156, 0.58563536, 0.1, 0.87931037, 0.5833333, 0.97602737, 0.7910448, 0.30769232, 0.64, 0.083333336, 0.8, 0.453125, 0.983683, 0.90140843, 0.46153846, 0.33333334, 0.4857143, 0.7096774, 0.6551724, 0.33333334, 0.5151515, 0.78571427, 0.54545456, 0.4090909, 0.67484665, 0.90140843, 0.875, 0.9931507, 0.81889766, 0.98717946, 0.7105263, 0.6875, 0.87941176, 0.61904764, 0.78409094, 0.9305556, 0.36363637, 0.9491525]

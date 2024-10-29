@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=MOFV2
-#SBATCH --output=Hope_Con.log
+#SBATCH --output=Hope_Con_AG.log
 #SBATCH --nodes=1
 #SBATCH --gres=gpu:1
 #SBATCH --cpus-per-task=25
@@ -26,6 +26,6 @@ module load /opt/MODULES/compiler/cuda/12.1
 #/opt/Anaconda3/2022.05/bin/python3 train_con.py --data_path=./data/Pymatgen_Wrapped/0  --train_name=HopeV1_SupConLoss  --learning_rate=5e-4 --min_learning_rate=1e-6 --start_scheduler_step=10 --batch_size=1024  --model_save_path=./checkpoints/HopeV1_SupConLoss  --device=0  --epoch_num=120  --weight_decay=1e-5 --num_workers=40
 #pip list 
 #python train_sub.py --data_path=./data/All_Wrapped --train_name=Hope_SubClass --model_save_path=./checkpoints/Hope_SubClass  --batch_size=768  --device=0 --learning_rate=5e-4 --min_learning_rate=1e-5 
-python train_con.py --data_path=./data/Pymatgen_Wrapped/0  --train_name=HopeV1_con  --learning_rate=5e-4 --min_learning_rate=1e-5  --start_scheduler_step=10 --batch_size=768  --model_save_path=./checkpoints/HopeV1_con --device=0  --epoch_num=120  --weight_decay=1e-4
+python train_con.py --data_path=./data/Pymatgen_Wrapped/0  --train_name=HopeV1_Con_AG --learning_rate=5e-4 --min_learning_rate=1e-6  --start_scheduler_step=30 --batch_size=768  --model_save_path=./checkpoints/HopeV1_Con_AG --device=0  --epoch_num=200 --weight_decay=1e-4
 
 

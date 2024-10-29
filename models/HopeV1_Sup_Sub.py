@@ -64,9 +64,9 @@ class AttentionModule(torch.nn.Module):
         return x
         
     
-class HopeV1_Sub(torch.nn.Module):    
+class HopeV1_Sup_Sub(torch.nn.Module):    
     def __init__(self,cluster_class_number):
-        super(HopeV1_Sub,self).__init__()
+        super(HopeV1_Sup_Sub,self).__init__()
         self.conv_module = ResTcn(p_dropout=0.25)
         self.att = AttentionModule()
         self.conv_feature_len = 1024
@@ -77,17 +77,17 @@ class HopeV1_Sub(torch.nn.Module):
         #     torch.nn.LeakyReLU(),
         #     torch.nn.Linear(512,256),
         # )
-        # self.sp_cls = torch.nn.Sequential(
-        #     torch.nn.Linear(256,230),
-        # )
-        # self.cluster_cls = torch.nn.Sequential(
-        #     torch.nn.Linear(256,cluster_class_number),
-        # )
         self.sp_cls = torch.nn.Sequential(
             torch.nn.Linear(self.conv_feature_len+self.att_feature_len,230),
         )
         self.cluster_cls = torch.nn.Sequential(
             torch.nn.Linear(self.conv_feature_len+self.att_feature_len,cluster_class_number),
+        )
+        self.cs_cls = torch.nn.Sequential(
+            torch.nn.Linear(self.conv_feature_len+self.att_feature_len,7),
+        )
+        self.lt_cls = torch.nn.Sequential(
+            torch.nn.Linear(self.conv_feature_len+self.att_feature_len,6),   
         )
 
     def forward(self,intensity,angle):
@@ -96,9 +96,8 @@ class HopeV1_Sub(torch.nn.Module):
         atten_feature = self.att(intensity,angle)
         # print("atten_feature_max",torch.max(atten_feature))
         x = torch.concat([conv_feature,atten_feature],dim=-1)
-        x = self.projection(x)
         # return self.cls_sp(x),self.cls_cs(x),self.cls_lt(x)
-        return x,self.sp_cls(x),self.cluster_cls(x)
+        return x,self.sp_cls(x),self.cluster_cls(x),self.cs_cls(x),self.lt_cls(x)
     
 if __name__ == '__main__':
     device = torch.device("cuda:4")

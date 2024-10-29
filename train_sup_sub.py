@@ -24,19 +24,19 @@ parser.add_argument('--train_name',type=str,required=True)
 parser.add_argument('--model_path',type=str)
 parser.add_argument('--learning_rate',type=float,default=5e-4)
 parser.add_argument('--min_learning_rate',type=float,default=1e-6)
-parser.add_argument('--start_scheduler_step',type=int,default=0)
+parser.add_argument('--start_scheduler_step',type=int,default=10)
 parser.add_argument('--weight_decay',type=float,default=4e-5)
 parser.add_argument('--momentum',type=float,default=0.99)
 parser.add_argument('--batch_size',type=int,default=512)
 parser.add_argument("--class_num",type=int,default=230)
-parser.add_argument("--epoch_num",type=int,default=150)
+parser.add_argument("--epoch_num",type=int,default=200)
 parser.add_argument("--model_save_path",type=str,required=True)
 parser.add_argument("--device",type=str,default="0")
 parser.add_argument("--scheduler_T",type=int)
 parser.add_argument("--num_workers",type=int,default=20)
 parser.add_argument("--cluster_limit",type=int,default=50)
-parser.add_argument("--warm_epoch",type=int,default=40)
-parser.add_argument("--epoch_step",type=int,default=10)
+parser.add_argument("--warm_epoch",type=int,default=0)
+parser.add_argument("--epoch_step",type=int,default=1)
 args = parser.parse_args()
 
 log = Log(__name__,file_dir='log/train/',log_file_name='train_%s'%(args.train_name))
@@ -73,8 +73,10 @@ train_loader = DataLoader(train_dataset,batch_size=args.batch_size,shuffle=True,
 
 
 if args.model_path is None :
-    from models.HopeV1_Sub import HopeV1_Sub 
-    model = HopeV1_Sub(sum(cluster_number)).to(device)
+    # from models.HopeV1_Sub import HopeV1_Sub 
+    # model = HopeV1_Sub(sum(cluster_number)).to(device)
+    from models.HopeV1_Sup_Sub import HopeV1_Sup_Sub 
+    model = HopeV1_Sup_Sub(sum(cluster_number)).to(device)
 else :
     model = torch.load(args.model_path,map_location=device)
 
@@ -114,7 +116,12 @@ def train():
     max_acc = 0.0    
     for epoch_idx in range(args.epoch_num):
         logger.info('-'*15+'epoch '+str(epoch_idx+1)+'-'*15+'\nlr: '+str(lr_scheduler.get_lr()))
-        avg_error = 0.0
+        total_avg_error = 0.0
+        total_sp_error = 0.0 
+        total_cluster_error = 0.0 
+        total_cs_error = 0.0 
+        total_lt_error = 0.0
+        
         batch_cnt = 0   
         total_num = 0.0
         if epoch_idx >= args.warm_epoch:
@@ -124,22 +131,38 @@ def train():
                 train_dataset.new_labels230 = targets
                 logger.info("cluster ends")
         model.train()            
-        for idx,(intensity,angle,labels230,cluster_label) in enumerate(train_loader):
+        for idx,(intensity,angle,labels230,cluster_label,cs_label,lt_label) in enumerate(train_loader):
             optimizer.zero_grad()
             intensity,angle,labels230,cluster_label = intensity.to(device).type(torch.float32),angle.to(device).type(torch.float32),labels230.to(device).type(torch.long),cluster_label.to(device).type(torch.long)
-            _,sp_cls,cluster_cls = model(intensity,angle)
-            error = lossfn(sp_cls,labels230)
+            cs_label,lt_label = cs_label.to(device).type(torch.long),lt_label.to(device).type(torch.long)
+            _,sp_cls,cluster_cls,cs_cls,lt_cls = model(intensity,angle)
+
+            sp_error = lossfn(sp_cls,labels230)
+            cs_error = lossfn(cs_cls,cs_label)
+            lt_error = lossfn(lt_cls,lt_label)
+            error = sp_error + cs_error + lt_error 
             if cluster_label[0] != -1 :
-                error += lossfn(cluster_cls,cluster_label)
-            
+                cluster_error = lossfn(cluster_cls,cluster_label)
+                total_cluster_error += cluster_error.item()
+                error += cluster_error
+                        
             error.backward()
-            avg_error += error.item()            
             optimizer.step()
             ema.update()
+            total_avg_error += error.item()            
+            total_sp_error += sp_error.item()
+            total_cs_error += cs_error.item()
+            total_lt_error += lt_error.item()
             batch_cnt+=1 
             total_num += labels230.shape[0]
             
-        logger.info('[training]total_num: '+str(total_num)+',error: '+str(avg_error/batch_cnt))
+        logger.info('[training]total_num: '+str(total_num)+
+                    ',error: '+str(total_avg_error/batch_cnt)+
+                    ',sp_error: '+str(total_sp_error/batch_cnt)+
+                    ',cluster_error: '+str(total_cluster_error/batch_cnt)+
+                    ',cs_error: '+str(total_cs_error/batch_cnt)+
+                    ',lt_error: '+str(total_lt_error/batch_cnt))
+        
         test_acc,test_err = test()
         writer.add_scalar("train/acc",test_acc,epoch_idx+1)
         writer.add_scalar("train/err",test_err,epoch_idx+1)
@@ -164,12 +187,12 @@ def cluster(train_loader_cluster,cluster_number):
     model.eval()
     features_sum = []
     
-    for i,(intensity,angle,target,cluster_target) in enumerate(train_loader_cluster):
+    for i,(intensity,angle,target,cluster_target,_,_) in enumerate(train_loader_cluster):
         intensity = intensity.to(device).type(torch.float32)
         angle = angle.to(device).type(torch.float32)
         target = target.to(device)
         with torch.no_grad():
-            features,_,_ = model(intensity,angle)
+            features,_,_,_,_ = model(intensity,angle)
             features = features.detach()
             features_sum.append(features)
     features = torch.cat(features_sum,dim=0)
@@ -200,26 +223,51 @@ def cluster(train_loader_cluster,cluster_number):
 def test():
     model.eval()
     ema.apply_shadow()
-    total_acc = MulticlassAccuracy(args.class_num,average='micro').to(device)
+    total_sp_acc = MulticlassAccuracy(args.class_num,average='micro').to(device)
+    total_cs_acc = MulticlassAccuracy(7,average='micro').to(device)
+    total_lt_acc = MulticlassAccuracy(6,average='micro').to(device)
+    
     total_num = 0 
-    avg_err = 0.0 
+    total_cs_err = 0.0 
+    total_sp_err = 0.0 
+    total_lt_err = 0.0
     batch_cnt = 0 
     with torch.no_grad():
-        for i,(intensity,angle,labels230,_) in enumerate(train_loader_cluster):
+        for i,(intensity,angle,labels230,_,label_cs,label_lt ) in enumerate(train_loader_cluster):
             intensity,angle,labels230 = intensity.to(device).type(torch.float32),angle.to(device).type(torch.float32),labels230.to(device).type(torch.long)
-            _,sp,_ = model(intensity,angle)
-            err = lossfn(sp,labels230)
-            avg_err += err.item()
-            logits = sp.softmax(dim=1)
+            label_cs,label_lt = label_cs.to(device).type(torch.long),label_lt.to(device).type(torch.long)
+            _,sp,_,cs,lt = model(intensity,angle)
+            sp_err = lossfn(sp,labels230)
+            cs_err = lossfn(cs,label_cs)
+            lt_err = lossfn(lt,label_lt)
+            total_sp_err += sp_err.item()
+            total_cs_err += cs_err.item()
+            total_lt_err += lt_err.item()
+            
+            sp_logits = sp.softmax(dim=1)
+            lt_logits = lt.softmax(dim=1)
+            cs_logits = cs.softmax(dim=1)
+            
             total_num += labels230.shape[0]
-            total_acc(logits,labels230)
+            total_sp_acc(sp_logits,labels230)
+            total_cs_acc(cs_logits,label_cs)
+            total_lt_acc(lt_logits,label_lt)
             batch_cnt+=1 
-    total_acc_val = total_acc.compute().cpu().item()
+    total_sp_acc_val = total_sp_acc.compute().cpu().item()
+    total_lt_acc_val = total_lt_acc.compute().cpu().item()
+    total_cs_acc_val = total_cs_acc.compute().cpu().item()
     # print("test_acc:%s,test_err:%s"%(str(total_acc_val),str(avg_err/batch_cnt)))
-    logger.info("test_acc:%s,test_err:%s"%(str(total_acc_val),str(avg_err/batch_cnt)))
+    logger.info("sp_acc:%s,sp_err:%s|cs_acc:%s,cs_err:%s|lt_acc:%s,lt_err:%s"%(
+        str(total_sp_acc_val),
+        str(total_sp_err/batch_cnt),
+        str(total_cs_acc_val),
+        str(total_cs_err/batch_cnt),
+        str(total_lt_acc_val),
+        str(total_lt_err/batch_cnt),
+                ))
     ema.restore()
     
-    return total_acc_val,avg_err/batch_cnt
+    return total_sp_acc_val,total_sp_err/batch_cnt
 if __name__ == '__main__':
     train()
     writer.close()

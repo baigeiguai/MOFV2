@@ -317,18 +317,18 @@ from torchinfo import summary
 # print(a.shape)
 
 
-device = torch.device("cuda:2")
-from models.HopeV1 import HopeV1
-model = HopeV1().to(device)
-batch,length,zero_pad_len = 8,8500,0
-angle = torch.arange(0,length-zero_pad_len).view(1,-1)
-angle = angle.type(torch.float)/100 + 5 
-zeros = torch.zeros(zero_pad_len).view(1,-1)
-angle = torch.concat([angle,zeros],dim=-1).repeat((batch,1)).to(device)
-intensity = torch.randn(batch,length).to(device)
-(a,b) = model(intensity,angle)
-summary(model,[(batch,length),(batch,length)])
-print(a.shape,b.shape)
+# device = torch.device("cuda:2")
+# from models.HopeV1 import HopeV1
+# model = HopeV1().to(device)
+# batch,length,zero_pad_len = 8,8500,0
+# angle = torch.arange(0,length-zero_pad_len).view(1,-1)
+# angle = angle.type(torch.float)/100 + 5 
+# zeros = torch.zeros(zero_pad_len).view(1,-1)
+# angle = torch.concat([angle,zeros],dim=-1).repeat((batch,1)).to(device)
+# intensity = torch.randn(batch,length).to(device)
+# (a,b) = model(intensity,angle)
+# summary(model,[(batch,length),(batch,length)])
+# print(a.shape,b.shape)
 
 # device = torch.device("cuda:3")
 # from models.HopeV1_ResOnly import HopeV1ResOnly
@@ -368,3 +368,17 @@ print(a.shape,b.shape)
 # a = model(intensity,angle)
 # summary(model,[(batch,length),(batch,length)])
 # print(a.shape)
+
+device = torch.device("cuda:7")
+from models.HopeV1_Sup_Sub import HopeV1_Sup_Sub
+model = HopeV1_Sup_Sub(64).to(device)
+batch,length,zero_pad_len = 64,8500,0
+angle = torch.arange(0,length-zero_pad_len).view(1,-1)
+angle = angle.type(torch.float)/100 + 5 
+zeros = torch.zeros(zero_pad_len).view(1,-1)
+angle = torch.concat([angle,zeros],dim=-1).repeat((batch,1)).to(device)
+intensity = torch.randn(batch,length).to(device)
+a = model(intensity,angle)
+summary(model,[(batch,length),(batch,length)])
+for v in a :
+    print(v.shape)

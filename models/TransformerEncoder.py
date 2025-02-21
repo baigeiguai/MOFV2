@@ -37,7 +37,7 @@ class ScaledDotProductAttention(torch.nn.Module):
         attn_weights = torch.nn.Softmax(dim=-1)(attention_score)
         # print(attn_weights)
         output = torch.matmul(attn_weights,v)
-        return output
+        return output,attention_score
 
 class MultiHeadAttention(torch.nn.Module):
     def __init__(self,dimension):
@@ -55,9 +55,9 @@ class MultiHeadAttention(torch.nn.Module):
         q = self.WQ(X).view(batch_size,-1,self.d_k)
         k = self.WK(X).view(batch_size,-1,self.d_k)
         v = self.WV(X).view(batch_size,-1,self.d_v)
-        attn = self.scaled_dot_product_attn(q,k,v,att_mask)
+        attn,atw= self.scaled_dot_product_attn(q,k,v,att_mask)
         attn = attn.contiguous().view(batch_size,-1,self.d_v)
-        return self.linear(attn)
+        return self.linear(attn),atw
 
 class FeedForwardNetwork(torch.nn.Module):
     def __init__(self,dimension,d_ff) -> None:
@@ -84,7 +84,7 @@ class EncoderLayer(torch.nn.Module):
 
     def forward(self,X,att_mask=None):
         # print("[EncoderLayer]X.shape:",X.shape)
-        attn_output = self.mha(X,att_mask)
+        attn_output,atw= self.mha(X,att_mask)
         # print("[EncoderLayer]X.shape:",attn_output.shape)
         attn_output = self.dropout1(attn_output)
         # print("[EncoderLayer]X.shape:",attn_output.shape)
@@ -96,7 +96,7 @@ class EncoderLayer(torch.nn.Module):
         # print("[EncoderLayer]X.shape:",ffn_output.shape)
         ffn_output = self.layernorm2(ffn_output+attn_output)
         # print("[EncoderLayer]X.shape:",ffn_output.shape)
-        return ffn_output
+        return ffn_output,atw
 
 class TransformerEncoder(torch.nn.Module):
     def __init__(self,seq_len,dimension,n_layers,p_drop,d_ff) -> None:
@@ -109,7 +109,7 @@ class TransformerEncoder(torch.nn.Module):
         outputs = self.positionEnbeding(X)
         # print("outputs.shape:",outputs.shape,"outputs:",outputs)
         for layer in self.encoder_layers :
-            outputs = layer(outputs,att_mask)
+            outputs,atw = layer(outputs,att_mask)
             # print("outputs.shape:",outputs.shape,"outputs:",outputs)
         return outputs
 

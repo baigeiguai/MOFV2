@@ -44,24 +44,8 @@ device_list = [int(i) for i in args.device.split(',')]
 device = torch.device('cuda:%d'%device_list[0] if  torch.cuda.is_available() else 'cpu')
 
 if args.model_path is None :
-#    from models.RetryViT1D import RetryViT
-#    model = RetryViT().to(device)
-    # from models.ConvAtt import ConvAtt
-    # model = ConvAtt().to(device)
-    # from models.ConvAttV2 import ConvAttV2 
-    # model = ConvAttV2().to(device)
-    # from models.AtLV3 import AtLV3
-    # model = AtLV3().to(device)
-    # from models.AtLSmall import AtLSmall
-    # model = AtLSmall().to(device)
-    # from models.HopeV1_ResOnly import HopeV1ResOnly 
-    # model = HopeV1ResOnly().to(device)
-    # from models.HopeV1_AttOnly import HopeV1AttOnly 
-    # model = HopeV1AttOnly().to(device)
-    from models.HopeV1 import HopeV1 
-    model = HopeV1().to(device)
-    # from models.HopeV1_InsAt import HopeV1InsAt
-    # model = HopeV1InsAt(args.batch_size).to(device)
+    from models.HopeV1_3Sup2Sp import HopeV1_3Sup2Sp
+    model = HopeV1_3Sup2Sp().to(device)
 else :
     model = torch.load(args.model_path,map_location=device)
 
@@ -121,7 +105,7 @@ def train():
                 error_sp = lossfn(sp,labels230)
                 error_cs = lossfn(cs,labels7)
                 error_lt = lossfn(lt,labels6)
-                error = error_sp + error_cs + 2.0*error_lt
+                error = error_sp + error_cs + error_lt
                 error.backward()
                 optimizer.step()
                 ema.update()
@@ -154,29 +138,51 @@ def train():
 def test():
     model.eval()
     ema.apply_shadow()
-    total_acc =  MulticlassAccuracy(args.class_num,average='micro').to(device)    
+    sp_total_acc =  MulticlassAccuracy(args.class_num,average='micro').to(device)    
+    cs_total_acc =  MulticlassAccuracy(7,average='micro').to(device)    
+    lt_total_acc =  MulticlassAccuracy(6,average='micro').to(device)    
     total_num = 0 
-    total_err = 0.0 
+    total_sp_err = 0.0 
+    total_cs_err = 0.0 
+    total_lt_err = 0.0 
+    
     batch_cnt = 0 
     with torch.no_grad():
         for file in train_files:
             xrd_dataset = XrdData(file)
             dataloader = DataLoader(xrd_dataset,args.batch_size,num_workers=args.num_workers)
             for data in dataloader:
-                intensity , angle,labels230 = data[0].type(torch.float).to(device),data[1].type(torch.float).to(device),data[2].to(device)
-                # print('labels230 shape',labels230.shape)
-                raw_logits , _ , _ = model(intensity,angle)
-                err = lossfn(raw_logits,labels230)
-                total_err += err.item()
-                logits = raw_logits.softmax(dim=1)
+                intensity , angle,labels230,labels7,labels6 = data[0].type(torch.float).to(device),data[1].type(torch.float).to(device),data[2].to(device),data[4].to(device),data[5].to(device)
+                sp_raw_logits , cs_raw_logits , lt_raw_logits = model(intensity,angle)
+                sp_err = lossfn(sp_raw_logits,labels230)
+                cs_err = lossfn(cs_raw_logits,labels7)
+                lt_err = lossfn(lt_raw_logits,labels6)
+                total_sp_err += sp_err.item()
+                total_cs_err += cs_err.item()
+                total_lt_err += lt_err.item()
+                
+                sp_logits = sp_raw_logits.softmax(dim=1)
+                cs_logits = cs_raw_logits.softmax(dim=1)
+                lt_logits = lt_raw_logits.softmax(dim=1)
                 total_num += labels230.shape[0]
-                total_acc(logits,labels230)
+                sp_total_acc(sp_logits,labels230)
+                cs_total_acc(cs_logits,labels7)
+                lt_total_acc(lt_logits,labels6)
                 batch_cnt += 1 
     
-    total_acc_val = total_acc.compute().cpu().item()
-    logger.info('[testing]total_number: '+str(total_num)+',error: '+str(total_err/batch_cnt)+',total_acc: '+str(total_acc_val))
+    sp_acc_val = sp_total_acc.compute().cpu().item()
+    lt_acc_val = lt_total_acc.compute().cpu().item()
+    cs_acc_val = cs_total_acc.compute().cpu().item()
+    logger.info('[testing]total_number: '+str(total_num)+
+                ',sp_error: '+str(total_sp_err/batch_cnt)+
+                ',total_sp_acc: '+str(sp_acc_val)+
+                ',cs_error: '+str(total_cs_err/batch_cnt)+
+                ',total_cs_acc: '+str(cs_acc_val)+
+                ',lt_error: '+str(total_lt_err/batch_cnt)+
+                ',total_lt_acc: '+str(lt_acc_val)
+                )
     ema.restore()
-    return total_acc_val,total_err/batch_cnt
+    return sp_acc_val,total_sp_err/batch_cnt
                 
 if __name__ == '__main__':
     train()

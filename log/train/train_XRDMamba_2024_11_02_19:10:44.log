@@ -1,0 +1,1010 @@
+[2024-11-02 19:10:49,454][train_xrdmamba.py][line:71][INFO] ---------------args---------------
+Namespace(data_path='./data/Pymatgen_Wrapped/0/', train_name='XRDMamba', model_path=None, learning_rate=0.0005, min_learning_rate=1e-06, start_scheduler_step=10, weight_decay=1e-05, momentum=0.99, batch_size=128, class_num=230, epoch_num=200, model_save_path='/data/ylh/MyExps/MOFV2/checkpoints/XRDMamba', device='2,3', scheduler_T=None, num_workers=20, log_name='log/train//train_XRDMamba_2024_11_02_19:10:44.log')
+[2024-11-02 19:10:49,455][train_xrdmamba.py][line:72][INFO] ---------------model---------------
+DataParallel(
+  (module): XRDMamba(
+    (embed): Embedding(8500, 8)
+    (conv): ResConv(
+      (conv): Sequential(
+        (0): ResBlock1D(
+          (pre): Conv1d(8, 32, kernel_size=(1,), stride=(1,), bias=False)
+          (conv): Sequential(
+            (0): Conv1d(32, 32, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(32, 32, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (1): MaxPool1d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+        (2): ResBlock1D(
+          (pre): Identity()
+          (conv): Sequential(
+            (0): Conv1d(32, 32, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(32, 32, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (3): MaxPool1d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+        (4): ResBlock1D(
+          (pre): Conv1d(32, 64, kernel_size=(1,), stride=(1,), bias=False)
+          (conv): Sequential(
+            (0): Conv1d(64, 64, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(64, 64, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (5): MaxPool1d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+        (6): ResBlock1D(
+          (pre): Conv1d(64, 128, kernel_size=(1,), stride=(1,), bias=False)
+          (conv): Sequential(
+            (0): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (7): MaxPool1d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+        (8): ResBlock1D(
+          (pre): Identity()
+          (conv): Sequential(
+            (0): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (9): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(1,))
+        (10): ResBlock1D(
+          (pre): Conv1d(128, 256, kernel_size=(1,), stride=(1,), bias=False)
+          (conv): Sequential(
+            (0): Conv1d(256, 256, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(256, 256, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (11): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(0,))
+        (12): ResBlock1D(
+          (pre): Identity()
+          (conv): Sequential(
+            (0): Conv1d(256, 256, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(256, 256, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (13): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(1,))
+        (14): ResBlock1D(
+          (pre): Conv1d(256, 512, kernel_size=(1,), stride=(1,), bias=False)
+          (conv): Sequential(
+            (0): Conv1d(512, 512, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(512, 512, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (15): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(1,))
+        (16): ResBlock1D(
+          (pre): Identity()
+          (conv): Sequential(
+            (0): Conv1d(512, 512, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(512, 512, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (17): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(0,))
+        (18): ResBlock1D(
+          (pre): Conv1d(512, 1024, kernel_size=(1,), stride=(1,), bias=False)
+          (conv): Sequential(
+            (0): Conv1d(1024, 1024, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(1024, 1024, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (19): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(0,))
+        (20): Dropout(p=0.15, inplace=False)
+        (21): ResBlock1D(
+          (pre): Identity()
+          (conv): Sequential(
+            (0): Conv1d(1024, 1024, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(1024, 1024, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (22): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(0,))
+        (23): Dropout(p=0.15, inplace=False)
+        (24): ResBlock1D(
+          (pre): Identity()
+          (conv): Sequential(
+            (0): Conv1d(1024, 1024, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(1024, 1024, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (25): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(0,))
+        (26): Dropout(p=0.15, inplace=False)
+        (27): ResBlock1D(
+          (pre): Identity()
+          (conv): Sequential(
+            (0): Conv1d(1024, 1024, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(1024, 1024, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (28): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(0,))
+      )
+      (cls): Sequential(
+        (0): Linear(in_features=1024, out_features=512, bias=True)
+        (1): Linear(in_features=512, out_features=230, bias=True)
+      )
+    )
+    (mamba_embed): Mamba(
+      (layers): ModuleList(
+        (0-3): 4 x ResidualBlock(
+          (mixer): MambaBlock(
+            (in_proj): Linear(in_features=8, out_features=32, bias=False)
+            (conv1d): Conv1d(16, 16, kernel_size=(3,), stride=(1,), padding=(2,), groups=16)
+            (x_proj): Linear(in_features=16, out_features=33, bias=False)
+            (dt_proj): Linear(in_features=1, out_features=16, bias=True)
+            (out_proj): Linear(in_features=16, out_features=8, bias=False)
+          )
+          (norm): RMSNorm()
+        )
+      )
+    )
+  )
+)
+[2024-11-02 19:10:49,456][train_xrdmamba.py][line:73][INFO] ---------------device---------------
+cuda:2
+[2024-11-02 19:10:49,456][train_xrdmamba.py][line:74][INFO] ---------------optimizer---------------
+AdamW (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    initial_lr: 0.0005
+    lr: 0.0005
+    maximize: False
+    weight_decay: 1e-05
+)
+[2024-11-02 19:10:49,456][train_xrdmamba.py][line:75][INFO] ---------------lossfn---------------
+CrossEntropyLoss()
+[2024-11-02 19:10:49,456][train_xrdmamba.py][line:76][INFO] ---------------seed---------------
+3407
+[2024-11-02 19:10:49,459][train_xrdmamba.py][line:88][INFO] ---------------epoch 1---------------
+lr: [0.0005]
+[2024-11-02 19:25:58,130][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 2.9383967988979744,error_sp: 2.9383967988979744
+[2024-11-02 19:31:46,013][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 6.673253024692755,total_sp_acc: 0.0313074104487896
+[2024-11-02 19:31:46,899][train_xrdmamba.py][line:88][INFO] ---------------epoch 2---------------
+lr: [0.0005]
+[2024-11-02 19:46:54,623][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 2.254604664119663,error_sp: 2.254604664119663
+[2024-11-02 19:52:48,063][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 6.512891201181759,total_sp_acc: 0.034182220697402954
+[2024-11-02 19:52:48,430][train_xrdmamba.py][line:88][INFO] ---------------epoch 3---------------
+lr: [0.0005]
+[2024-11-02 20:07:48,612][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 1.947275358486091,error_sp: 1.947275358486091
+[2024-11-02 20:13:41,597][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 3.5638742250156485,total_sp_acc: 0.21519023180007935
+[2024-11-02 20:13:42,405][train_xrdmamba.py][line:88][INFO] ---------------epoch 4---------------
+lr: [0.0005]
+[2024-11-02 20:28:51,907][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 1.775947469679148,error_sp: 1.775947469679148
+[2024-11-02 20:34:36,201][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 1.8959502777168997,total_sp_acc: 0.4397761821746826
+[2024-11-02 20:34:36,592][train_xrdmamba.py][line:88][INFO] ---------------epoch 5---------------
+lr: [0.0005]
+[2024-11-02 20:49:51,427][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 1.6037115345195847,error_sp: 1.6037115345195847
+[2024-11-02 20:55:41,111][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 1.8649669462532308,total_sp_acc: 0.4486880898475647
+[2024-11-02 20:55:41,448][train_xrdmamba.py][line:88][INFO] ---------------epoch 6---------------
+lr: [0.0005]
+[2024-11-02 21:10:43,501][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 1.4802525643236149,error_sp: 1.4802525643236149
+[2024-11-02 21:16:35,155][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 1.7719914410742597,total_sp_acc: 0.4678301513195038
+[2024-11-02 21:16:35,507][train_xrdmamba.py][line:88][INFO] ---------------epoch 7---------------
+lr: [0.0005]
+[2024-11-02 21:31:46,321][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 1.3914640304147403,error_sp: 1.3914640304147403
+[2024-11-02 21:37:39,680][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 1.97690124065345,total_sp_acc: 0.444060355424881
+[2024-11-02 21:37:39,686][train_xrdmamba.py][line:88][INFO] ---------------epoch 8---------------
+lr: [0.0005]
+[2024-11-02 21:52:43,182][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 1.2901848417102708,error_sp: 1.2901848417102708
+[2024-11-02 21:58:35,274][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 2.5145116580093236,total_sp_acc: 0.3779607117176056
+[2024-11-02 21:58:35,280][train_xrdmamba.py][line:88][INFO] ---------------epoch 9---------------
+lr: [0.0005]
+[2024-11-02 22:13:43,701][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 1.2192001126461993,error_sp: 1.2192001126461993
+[2024-11-02 22:19:25,306][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 1.2614351501481769,total_sp_acc: 0.6013266444206238
+[2024-11-02 22:19:25,660][train_xrdmamba.py][line:88][INFO] ---------------epoch 10---------------
+lr: [0.0005]
+[2024-11-02 22:34:37,470][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 1.1481993294650723,error_sp: 1.1481993294650723
+[2024-11-02 22:40:30,024][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.8540061519753118,total_sp_acc: 0.730083167552948
+[2024-11-02 22:40:30,382][train_xrdmamba.py][line:88][INFO] ---------------epoch 11---------------
+lr: [0.0005]
+[2024-11-02 22:55:32,983][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 1.0804010810530493,error_sp: 1.0804010810530493
+[2024-11-02 23:01:24,385][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 1.470030322472607,total_sp_acc: 0.5454500913619995
+[2024-11-02 23:01:24,406][train_xrdmamba.py][line:88][INFO] ---------------epoch 12---------------
+lr: [0.0004999317915222613]
+[2024-11-02 23:16:40,677][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 1.0397337789861312,error_sp: 1.0397337789861312
+[2024-11-02 23:22:30,250][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 1.0385876949000592,total_sp_acc: 0.6634436249732971
+[2024-11-02 23:22:30,256][train_xrdmamba.py][line:88][INFO] ---------------epoch 13---------------
+lr: [0.0004997613017942846]
+[2024-11-02 23:37:32,354][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.9797613074955098,error_sp: 0.9797613074955098
+[2024-11-02 23:43:25,081][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 1.5105330873191516,total_sp_acc: 0.5611703991889954
+[2024-11-02 23:43:25,088][train_xrdmamba.py][line:88][INFO] ---------------epoch 14---------------
+lr: [0.000499522685157993]
+[2024-11-02 23:58:25,522][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.933713674122185,error_sp: 0.933713674122185
+[2024-11-03 00:04:16,926][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.8186427361423607,total_sp_acc: 0.7331753373146057
+[2024-11-03 00:04:17,279][train_xrdmamba.py][line:88][INFO] ---------------epoch 15---------------
+lr: [0.0004992160068449682]
+[2024-11-03 00:19:29,182][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.9145447024753269,error_sp: 0.9145447024753269
+[2024-11-03 00:25:18,039][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.7989261540408249,total_sp_acc: 0.7383710145950317
+[2024-11-03 00:25:18,432][train_xrdmamba.py][line:88][INFO] ---------------epoch 16---------------
+lr: [0.000498841350694172]
+[2024-11-03 00:40:18,017][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.8500971923174854,error_sp: 0.8500971923174854
+[2024-11-03 00:46:07,772][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.859067450478316,total_sp_acc: 0.719677746295929
+[2024-11-03 00:46:07,776][train_xrdmamba.py][line:88][INFO] ---------------epoch 17---------------
+lr: [0.0004983988191290262]
+[2024-11-03 01:01:19,987][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.8186785601998391,error_sp: 0.8186785601998391
+[2024-11-03 01:07:10,464][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 1.1908079862277277,total_sp_acc: 0.6221234202384949
+[2024-11-03 01:07:10,470][train_xrdmamba.py][line:88][INFO] ---------------epoch 18---------------
+lr: [0.0004978885331294088]
+[2024-11-03 01:22:11,245][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.7919167415590126,error_sp: 0.7919167415590126
+[2024-11-03 01:28:03,795][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.6953565952200327,total_sp_acc: 0.7670560479164124
+[2024-11-03 01:28:04,165][train_xrdmamba.py][line:88][INFO] ---------------epoch 19---------------
+lr: [0.0004973106321985789]
+[2024-11-03 01:43:05,665][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.755602790146881,error_sp: 0.755602790146881
+[2024-11-03 01:48:57,611][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.9878938548207389,total_sp_acc: 0.6760857701301575
+[2024-11-03 01:48:57,616][train_xrdmamba.py][line:88][INFO] ---------------epoch 20---------------
+lr: [0.0004966652743250365]
+[2024-11-03 02:04:13,803][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.7181618263368175,error_sp: 0.7181618263368175
+[2024-11-03 02:10:16,655][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.7343790724728101,total_sp_acc: 0.755893349647522
+[2024-11-03 02:10:16,661][train_xrdmamba.py][line:88][INFO] ---------------epoch 21---------------
+lr: [0.0004959526359393291]
+[2024-11-03 02:25:40,560][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.6865590192780837,error_sp: 0.6865590192780837
+[2024-11-03 02:31:45,953][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.4850687344542836,total_sp_acc: 0.8404479026794434
+[2024-11-03 02:31:46,329][train_xrdmamba.py][line:88][INFO] ---------------epoch 22---------------
+lr: [0.0004951729118658162]
+[2024-11-03 02:47:03,760][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.6613956835805154,error_sp: 0.6613956835805154
+[2024-11-03 02:52:45,083][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.5414614777255079,total_sp_acc: 0.815906822681427
+[2024-11-03 02:52:45,088][train_xrdmamba.py][line:88][INFO] ---------------epoch 23---------------
+lr: [0.0004943263152694054]
+[2024-11-03 03:07:56,314][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.6199896562226388,error_sp: 0.6199896562226388
+[2024-11-03 03:13:46,520][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.854290664830669,total_sp_acc: 0.7169361710548401
+[2024-11-03 03:13:46,525][train_xrdmamba.py][line:88][INFO] ---------------epoch 24---------------
+lr: [0.0004934130775972739]
+[2024-11-03 03:28:33,927][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.6047355897043697,error_sp: 0.6047355897043697
+[2024-11-03 03:34:23,943][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.5145446352442493,total_sp_acc: 0.8243489861488342
+[2024-11-03 03:34:23,948][train_xrdmamba.py][line:88][INFO] ---------------epoch 25---------------
+lr: [0.000492433448515592]
+[2024-11-03 03:49:34,570][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.5786846872706697,error_sp: 0.5786846872706697
+[2024-11-03 03:55:25,504][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.7233167407040905,total_sp_acc: 0.7636553645133972
+[2024-11-03 03:55:25,510][train_xrdmamba.py][line:88][INFO] ---------------epoch 26---------------
+lr: [0.000491387695841266]
+[2024-11-03 04:10:23,377][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.5512463921398427,error_sp: 0.5512463921398427
+[2024-11-03 04:16:09,907][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.3659256086903752,total_sp_acc: 0.8739219307899475
+[2024-11-03 04:16:10,729][train_xrdmamba.py][line:88][INFO] ---------------epoch 27---------------
+lr: [0.0004902761054687187]
+[2024-11-03 04:31:22,147][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.5280846445668347,error_sp: 0.5280846445668347
+[2024-11-03 04:37:05,074][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.854692286215954,total_sp_acc: 0.7380344867706299
+[2024-11-03 04:37:05,079][train_xrdmamba.py][line:88][INFO] ---------------epoch 28---------------
+lr: [0.0004890989812917273]
+[2024-11-03 04:52:17,944][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.511936799418958,error_sp: 0.511936799418958
+[2024-11-03 04:58:06,935][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.6116878371272557,total_sp_acc: 0.7962669730186462
+[2024-11-03 04:58:06,940][train_xrdmamba.py][line:88][INFO] ---------------epoch 29---------------
+lr: [0.0004878566451203403]
+[2024-11-03 05:13:05,660][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.4848305850612874,error_sp: 0.4848305850612874
+[2024-11-03 05:18:58,051][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.36564483256232133,total_sp_acc: 0.8775891065597534
+[2024-11-03 05:18:58,396][train_xrdmamba.py][line:88][INFO] ---------------epoch 30---------------
+lr: [0.0004865494365928982]
+[2024-11-03 05:34:11,865][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.4495177172990425,error_sp: 0.4495177172990425
+[2024-11-03 05:40:15,502][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.3005862024603635,total_sp_acc: 0.8955040574073792
+[2024-11-03 05:40:15,887][train_xrdmamba.py][line:88][INFO] ---------------epoch 31---------------
+lr: [0.00048517771308317654]
+[2024-11-03 05:55:24,584][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.42677921520838613,error_sp: 0.42677921520838613
+[2024-11-03 06:01:25,952][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.6569694438098063,total_sp_acc: 0.7764587998390198
+[2024-11-03 06:01:25,957][train_xrdmamba.py][line:88][INFO] ---------------epoch 32---------------
+lr: [0.0004837418496026844]
+[2024-11-03 06:16:39,121][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.4188123006099288,error_sp: 0.4188123006099288
+[2024-11-03 06:22:26,573][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.22255533256674617,total_sp_acc: 0.9270148277282715
+[2024-11-03 06:22:26,954][train_xrdmamba.py][line:88][INFO] ---------------epoch 33---------------
+lr: [0.0004822422386981366]
+[2024-11-03 06:37:37,560][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.3973015733625155,error_sp: 0.3973015733625155
+[2024-11-03 06:43:28,673][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.27612911344579394,total_sp_acc: 0.9058323502540588
+[2024-11-03 06:43:28,680][train_xrdmamba.py][line:88][INFO] ---------------epoch 34---------------
+lr: [0.00048067929034413575]
+[2024-11-03 06:58:28,315][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.3755078705121906,error_sp: 0.3755078705121906
+[2024-11-03 07:04:23,698][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.29558774221361267,total_sp_acc: 0.8938353061676025
+[2024-11-03 07:04:23,704][train_xrdmamba.py][line:88][INFO] ---------------epoch 35---------------
+lr: [0.0004790534318310878]
+[2024-11-03 07:19:33,184][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.35695921885512416,error_sp: 0.35695921885512416
+[2024-11-03 07:25:27,238][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.34555167553429067,total_sp_acc: 0.8783393502235413
+[2024-11-03 07:25:27,243][train_xrdmamba.py][line:88][INFO] ---------------epoch 36---------------
+lr: [0.00047736510764838266]
+[2024-11-03 07:40:32,618][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.3780098229302912,error_sp: 0.3780098229302912
+[2024-11-03 07:46:26,197][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.23861252737976116,total_sp_acc: 0.9184885621070862
+[2024-11-03 07:46:26,202][train_xrdmamba.py][line:88][INFO] ---------------epoch 37---------------
+lr: [0.0004756147793628757]
+[2024-11-03 08:01:41,266][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.3179537773185212,error_sp: 0.3179537773185212
+[2024-11-03 08:07:26,624][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.1700877119368066,total_sp_acc: 0.9429314732551575
+[2024-11-03 08:07:27,011][train_xrdmamba.py][line:88][INFO] ---------------epoch 38---------------
+lr: [0.0004738029254926969]
+[2024-11-03 08:22:42,137][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.3138986304071802,error_sp: 0.3138986304071802
+[2024-11-03 08:28:32,667][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.15461544585748913,total_sp_acc: 0.9465845823287964
+[2024-11-03 08:28:33,030][train_xrdmamba.py][line:88][INFO] ---------------epoch 39---------------
+lr: [0.00047193004137642856]
+[2024-11-03 08:43:35,245][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.30879393110205455,error_sp: 0.30879393110205455
+[2024-11-03 08:49:34,029][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.12923741430050786,total_sp_acc: 0.9573335647583008
+[2024-11-03 08:49:34,393][train_xrdmamba.py][line:88][INFO] ---------------epoch 40---------------
+lr: [0.00046999663903768315]
+[2024-11-03 09:04:48,164][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.2845296346530411,error_sp: 0.2845296346530411
+[2024-11-03 09:10:41,308][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.12053423664121894,total_sp_acc: 0.9599349498748779
+[2024-11-03 09:10:41,687][train_xrdmamba.py][line:88][INFO] ---------------epoch 41---------------
+lr: [0.00046800324704511905]
+[2024-11-03 09:25:49,114][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.2967795172264963,error_sp: 0.2967795172264963
+[2024-11-03 09:31:41,662][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.14839671569039256,total_sp_acc: 0.9486249685287476
+[2024-11-03 09:31:41,669][train_xrdmamba.py][line:88][INFO] ---------------epoch 42---------------
+lr: [0.0004659504103679344]
+[2024-11-03 09:46:58,504][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.24884383612458644,error_sp: 0.24884383612458644
+[2024-11-03 09:52:41,235][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.11174347096791337,total_sp_acc: 0.9634969234466553
+[2024-11-03 09:52:41,603][train_xrdmamba.py][line:88][INFO] ---------------epoch 43---------------
+lr: [0.00046383869022687647]
+[2024-11-03 10:07:56,923][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.2703572482981297,error_sp: 0.2703572482981297
+[2024-11-03 10:13:49,668][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.4365059696765949,total_sp_acc: 0.8569394946098328
+[2024-11-03 10:13:49,673][train_xrdmamba.py][line:88][INFO] ---------------epoch 44---------------
+lr: [0.0004616686639408072]
+[2024-11-03 10:28:52,176][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.2432561103707409,error_sp: 0.2432561103707409
+[2024-11-03 10:34:49,005][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.15814052918015217,total_sp_acc: 0.9438640475273132
+[2024-11-03 10:34:49,010][train_xrdmamba.py][line:88][INFO] ---------------epoch 45---------------
+lr: [0.0004594409247688692]
+[2024-11-03 10:50:02,137][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.2434461548025352,error_sp: 0.2434461548025352
+[2024-11-03 10:55:53,519][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.10229997445532545,total_sp_acc: 0.9658879041671753
+[2024-11-03 10:55:53,861][train_xrdmamba.py][line:88][INFO] ---------------epoch 46---------------
+lr: [0.00045715608174829315]
+[2024-11-03 11:10:57,668][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.22023306870312423,error_sp: 0.22023306870312423
+[2024-11-03 11:16:49,859][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.09704771656757874,total_sp_acc: 0.9658037424087524
+[2024-11-03 11:16:50,217][train_xrdmamba.py][line:88][INFO] ---------------epoch 47---------------
+lr: [0.0004548147595278903]
+[2024-11-03 11:32:03,572][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.2354943050268274,error_sp: 0.2354943050268274
+[2024-11-03 11:37:45,968][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.07045931822538522,total_sp_acc: 0.9781584143638611
+[2024-11-03 11:37:46,312][train_xrdmamba.py][line:88][INFO] ---------------epoch 48---------------
+lr: [0.0004524175981972792]
+[2024-11-03 11:53:03,364][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.2090724115330187,error_sp: 0.2090724115330187
+[2024-11-03 11:58:55,202][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.15288547275731706,total_sp_acc: 0.9452803730964661
+[2024-11-03 11:58:55,207][train_xrdmamba.py][line:88][INFO] ---------------epoch 49---------------
+lr: [0.0004499652531118895]
+[2024-11-03 12:13:55,029][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.22028503243703174,error_sp: 0.22028503243703174
+[2024-11-03 12:19:50,175][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.08844751484705318,total_sp_acc: 0.9712659120559692
+[2024-11-03 12:19:50,181][train_xrdmamba.py][line:88][INFO] ---------------epoch 50---------------
+lr: [0.00044745839471379206]
+[2024-11-03 12:35:01,855][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.2144818611330656,error_sp: 0.2144818611330656
+[2024-11-03 12:40:48,980][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.07270162410996094,total_sp_acc: 0.9779480695724487
+[2024-11-03 12:40:48,984][train_xrdmamba.py][line:88][INFO] ---------------epoch 51---------------
+lr: [0.00044489770834840584]
+[2024-11-03 12:55:59,199][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.17070202785936625,error_sp: 0.17070202785936625
+[2024-11-03 13:01:51,298][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.08348611966845643,total_sp_acc: 0.9715813994407654
+[2024-11-03 13:01:51,811][train_xrdmamba.py][line:88][INFO] ---------------epoch 52---------------
+lr: [0.00044228389407712805]
+[2024-11-03 13:17:08,376][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.18777453037311043,error_sp: 0.18777453037311043
+[2024-11-03 13:22:51,821][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.08460711460178776,total_sp_acc: 0.9715813994407654
+[2024-11-03 13:22:51,825][train_xrdmamba.py][line:88][INFO] ---------------epoch 53---------------
+lr: [0.0004396176664859441]
+[2024-11-03 13:38:07,496][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.1723447983163907,error_sp: 0.1723447983163907
+[2024-11-03 13:44:00,751][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.07149531617397054,total_sp_acc: 0.9774221777915955
+[2024-11-03 13:44:00,756][train_xrdmamba.py][line:88][INFO] ---------------epoch 54---------------
+lr: [0.00043689975449006323]
+[2024-11-03 13:59:02,789][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.17612075173653854,error_sp: 0.17612075173653854
+[2024-11-03 14:04:56,076][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.05748223989686293,total_sp_acc: 0.9825618267059326
+[2024-11-03 14:04:56,446][train_xrdmamba.py][line:88][INFO] ---------------epoch 55---------------
+lr: [0.0004341309011346395]
+[2024-11-03 14:20:08,853][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.15976896294836407,error_sp: 0.15976896294836407
+[2024-11-03 14:26:07,433][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.05175632825836096,total_sp_acc: 0.9838800430297852
+[2024-11-03 14:26:07,848][train_xrdmamba.py][line:88][INFO] ---------------epoch 56---------------
+lr: [0.0004313118633916278]
+[2024-11-03 14:41:32,058][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.153711146171789,error_sp: 0.153711146171789
+[2024-11-03 14:47:24,067][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.1529657159607193,total_sp_acc: 0.9466546773910522
+[2024-11-03 14:47:24,073][train_xrdmamba.py][line:88][INFO] ---------------epoch 57---------------
+lr: [0.0004284434119528334]
+[2024-11-03 15:02:44,927][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.1529603245359876,error_sp: 0.1529603245359876
+[2024-11-03 15:08:41,333][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.11989973931711335,total_sp_acc: 0.9577893614768982
+[2024-11-03 15:08:41,372][train_xrdmamba.py][line:88][INFO] ---------------epoch 58---------------
+lr: [0.00042552633101921]
+[2024-11-03 15:23:55,772][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.1569848517443532,error_sp: 0.1569848517443532
+[2024-11-03 15:29:52,638][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.05836879051420193,total_sp_acc: 0.9812296032905579
+[2024-11-03 15:29:52,643][train_xrdmamba.py][line:88][INFO] ---------------epoch 59---------------
+lr: [0.0004225614180864647]
+[2024-11-03 15:44:55,509][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.14534899298541293,error_sp: 0.14534899298541293
+[2024-11-03 15:50:48,466][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.06690087121313879,total_sp_acc: 0.978754460811615
+[2024-11-03 15:50:48,471][train_xrdmamba.py][line:88][INFO] ---------------epoch 60---------------
+lr: [0.00041954948372702856]
+[2024-11-03 16:06:02,285][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.13805397337975234,error_sp: 0.13805397337975234
+[2024-11-03 16:11:45,999][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.07164737466328547,total_sp_acc: 0.9767000079154968
+[2024-11-03 16:11:46,004][train_xrdmamba.py][line:88][INFO] ---------------epoch 61---------------
+lr: [0.0004164913513684506]
+[2024-11-03 16:27:02,366][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.1443534434658162,error_sp: 0.1443534434658162
+[2024-11-03 16:32:56,831][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.1232605258923457,total_sp_acc: 0.9560714364051819
+[2024-11-03 16:32:56,851][train_xrdmamba.py][line:88][INFO] ---------------epoch 62---------------
+lr: [0.0004133878570682792]
+[2024-11-03 16:48:02,336][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.11810098991240933,error_sp: 0.11810098991240933
+[2024-11-03 16:53:56,321][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.08832691748855435,total_sp_acc: 0.9696462154388428
+[2024-11-03 16:53:56,326][train_xrdmamba.py][line:88][INFO] ---------------epoch 63---------------
+lr: [0.00041023984928548966]
+[2024-11-03 17:09:09,249][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.12011092683563163,error_sp: 0.12011092683563163
+[2024-11-03 17:15:02,942][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.09588877417638025,total_sp_acc: 0.9680264592170715
+[2024-11-03 17:15:02,948][train_xrdmamba.py][line:88][INFO] ---------------epoch 64---------------
+lr: [0.00040704818864852055]
+[2024-11-03 17:30:00,217][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.1513823474201224,error_sp: 0.1513823474201224
+[2024-11-03 17:35:53,922][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.05296464001833434,total_sp_acc: 0.9833260774612427
+[2024-11-03 17:35:53,928][train_xrdmamba.py][line:88][INFO] ---------------epoch 65---------------
+lr: [0.0004038137477199838]
+[2024-11-03 17:51:04,453][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.11180910268119192,error_sp: 0.11180910268119192
+[2024-11-03 17:56:48,559][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.03838325542159802,total_sp_acc: 0.9876313209533691
+[2024-11-03 17:56:48,920][train_xrdmamba.py][line:88][INFO] ---------------epoch 66---------------
+lr: [0.00040053741075811173]
+[2024-11-03 18:12:00,949][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.11199697245907339,error_sp: 0.11199697245907339
+[2024-11-03 18:17:52,678][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.09119769192557739,total_sp_acc: 0.9690922498703003
+[2024-11-03 18:17:52,687][train_xrdmamba.py][line:88][INFO] ---------------epoch 67---------------
+lr: [0.00039722007347500646]
+[2024-11-03 18:33:00,116][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.11383282488745826,error_sp: 0.11383282488745826
+[2024-11-03 18:38:52,450][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.06111523128480724,total_sp_acc: 0.9800866842269897
+[2024-11-03 18:38:52,455][train_xrdmamba.py][line:88][INFO] ---------------epoch 68---------------
+lr: [0.0003938626427917585]
+[2024-11-03 18:54:06,210][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.12518640101689782,error_sp: 0.12518640101689782
+[2024-11-03 19:00:01,859][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.02979423437082021,total_sp_acc: 0.9923852682113647
+[2024-11-03 19:00:02,246][train_xrdmamba.py][line:88][INFO] ---------------epoch 69---------------
+lr: [0.0003904660365904984]
+[2024-11-03 19:15:08,416][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.10845602920217755,error_sp: 0.10845602920217755
+[2024-11-03 19:21:02,760][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.03556816379941286,total_sp_acc: 0.989594578742981
+[2024-11-03 19:21:02,766][train_xrdmamba.py][line:88][INFO] ---------------epoch 70---------------
+lr: [0.0003870311834634562]
+[2024-11-03 19:36:15,703][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.098850059644472,error_sp: 0.098850059644472
+[2024-11-03 19:41:56,193][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.01922349309159927,total_sp_acc: 0.9952881336212158
+[2024-11-03 19:41:56,568][train_xrdmamba.py][line:88][INFO] ---------------epoch 71---------------
+lr: [0.00038355902245908684]
+[2024-11-03 19:57:11,504][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.09905439331473083,error_sp: 0.09905439331473083
+[2024-11-03 20:03:03,723][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.018321221501185512,total_sp_acc: 0.9958209991455078
+[2024-11-03 20:03:04,088][train_xrdmamba.py][line:88][INFO] ---------------epoch 72---------------
+lr: [0.0003800505028253417]
+[2024-11-03 20:18:03,586][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.09006576724689265,error_sp: 0.09006576724689265
+[2024-11-03 20:23:54,145][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.020319696310806372,total_sp_acc: 0.9943695664405823
+[2024-11-03 20:23:54,154][train_xrdmamba.py][line:88][INFO] ---------------epoch 73---------------
+lr: [0.00037650658375014987]
+[2024-11-03 20:39:08,809][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.09428913437388672,error_sp: 0.09428913437388672
+[2024-11-03 20:45:06,366][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.06942501350594378,total_sp_acc: 0.9758585691452026
+[2024-11-03 20:45:06,371][train_xrdmamba.py][line:88][INFO] ---------------epoch 74---------------
+lr: [0.0003729282340991799]
+[2024-11-03 21:00:01,816][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.09494686028205301,error_sp: 0.09494686028205301
+[2024-11-03 21:05:56,908][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.010485845389932297,total_sp_acc: 0.9977632761001587
+[2024-11-03 21:05:57,292][train_xrdmamba.py][line:88][INFO] ---------------epoch 75---------------
+lr: [0.0003693164321509592]
+[2024-11-03 21:21:05,589][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.09910909831441259,error_sp: 0.09910909831441259
+[2024-11-03 21:26:42,748][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.04134518209701865,total_sp_acc: 0.9868530035018921
+[2024-11-03 21:26:42,756][train_xrdmamba.py][line:88][INFO] ---------------epoch 76---------------
+lr: [0.0003656721653294166]
+[2024-11-03 21:41:52,864][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.08155279669798282,error_sp: 0.08155279669798282
+[2024-11-03 21:47:43,464][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.01212757610196447,total_sp_acc: 0.9973355531692505
+[2024-11-03 21:47:44,010][train_xrdmamba.py][line:88][INFO] ---------------epoch 77---------------
+lr: [0.0003619964299339258]
+[2024-11-03 22:02:44,230][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.0808933189650295,error_sp: 0.0808933189650295
+[2024-11-03 22:08:35,688][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.05762923759211618,total_sp_acc: 0.9810963273048401
+[2024-11-03 22:08:35,693][train_xrdmamba.py][line:88][INFO] ---------------epoch 78---------------
+lr: [0.0003582902308669232]
+[2024-11-03 22:23:48,542][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.0874683578550723,error_sp: 0.0874683578550723
+[2024-11-03 22:29:40,593][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.014540946050861085,total_sp_acc: 0.9960103034973145
+[2024-11-03 22:29:40,598][train_xrdmamba.py][line:88][INFO] ---------------epoch 79---------------
+lr: [0.00035455458135917134]
+[2024-11-03 22:44:42,281][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.08491967088181754,error_sp: 0.08491967088181754
+[2024-11-03 22:50:37,272][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.04728199330182496,total_sp_acc: 0.983536422252655
+[2024-11-03 22:50:37,278][train_xrdmamba.py][line:88][INFO] ---------------epoch 80---------------
+lr: [0.00035079050269274726]
+[2024-11-03 23:05:36,433][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.08290868923034991,error_sp: 0.08290868923034991
+[2024-11-03 23:11:29,866][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.024554667179472744,total_sp_acc: 0.9930654168128967
+[2024-11-03 23:11:29,871][train_xrdmamba.py][line:88][INFO] ---------------epoch 81---------------
+lr: [0.0003469990239218273]
+[2024-11-03 23:26:39,000][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.07527337872324893,error_sp: 0.07527337872324893
+[2024-11-03 23:32:32,964][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.055383067099297356,total_sp_acc: 0.9808018803596497
+[2024-11-03 23:32:32,969][train_xrdmamba.py][line:88][INFO] ---------------epoch 82---------------
+lr: [0.00034318118159134913]
+[2024-11-03 23:47:33,114][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.08045448839685945,error_sp: 0.08045448839685945
+[2024-11-03 23:53:27,037][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.04683139196331774,total_sp_acc: 0.9838800430297852
+[2024-11-03 23:53:27,042][train_xrdmamba.py][line:88][INFO] ---------------epoch 83---------------
+lr: [0.0003393380194536246]
+[2024-11-04 00:08:44,622][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.07983972098159388,error_sp: 0.07983972098159388
+[2024-11-04 00:14:38,740][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.02478967023054394,total_sp_acc: 0.9917612075805664
+[2024-11-04 00:14:38,757][train_xrdmamba.py][line:88][INFO] ---------------epoch 84---------------
+lr: [0.0003354705881829812]
+[2024-11-04 00:31:33,173][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.06184241684201606,error_sp: 0.06184241684201606
+[2024-11-04 00:38:47,965][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.010523533053312306,total_sp_acc: 0.9973005056381226
+[2024-11-04 00:38:47,970][train_xrdmamba.py][line:88][INFO] ---------------epoch 85---------------
+lr: [0.0003315799450885112]
+[2024-11-04 00:55:46,122][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.07105302359303914,error_sp: 0.07105302359303914
+[2024-11-04 01:02:37,857][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.05234481438336615,total_sp_acc: 0.9816362857818604
+[2024-11-04 01:02:37,863][train_xrdmamba.py][line:88][INFO] ---------------epoch 86---------------
+lr: [0.00032766715382500874]
+[2024-11-04 01:21:20,448][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.06906858709754014,error_sp: 0.06906858709754014
+[2024-11-04 01:28:27,491][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.11455191447653253,total_sp_acc: 0.9598647952079773
+[2024-11-04 01:28:27,496][train_xrdmamba.py][line:88][INFO] ---------------epoch 87---------------
+lr: [0.0003237332841021666]
+[2024-11-04 01:47:51,545][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.06444105192210721,error_sp: 0.06444105192210721
+[2024-11-04 01:54:57,271][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.027574467542560602,total_sp_acc: 0.9911932349205017
+[2024-11-04 01:54:57,276][train_xrdmamba.py][line:88][INFO] ---------------epoch 88---------------
+lr: [0.0003197794113921239]
+[2024-11-04 02:14:05,062][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.06968264408060866,error_sp: 0.06968264408060866
+[2024-11-04 02:20:01,612][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.037550031875056476,total_sp_acc: 0.9868950843811035
+[2024-11-04 02:20:01,616][train_xrdmamba.py][line:88][INFO] ---------------epoch 89---------------
+lr: [0.00031580661663543197]
+[2024-11-04 02:34:59,912][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.0692844113079664,error_sp: 0.0692844113079664
+[2024-11-04 02:40:53,680][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.006474891507727549,total_sp_acc: 0.9985836148262024
+[2024-11-04 02:40:54,035][train_xrdmamba.py][line:88][INFO] ---------------epoch 90---------------
+lr: [0.0003118159859455288]
+[2024-11-04 02:56:07,127][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.04928065679955834,error_sp: 0.04928065679955834
+[2024-11-04 03:02:00,578][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.011650656413045416,total_sp_acc: 0.9969358444213867
+[2024-11-04 03:02:00,583][train_xrdmamba.py][line:88][INFO] ---------------epoch 91---------------
+lr: [0.0003078086103117974]
+[2024-11-04 03:16:58,313][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.06126845483635093,error_sp: 0.06126845483635093
+[2024-11-04 03:22:50,913][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.10037014675784249,total_sp_acc: 0.9659019112586975
+[2024-11-04 03:22:50,918][train_xrdmamba.py][line:88][INFO] ---------------epoch 92---------------
+lr: [0.00030378558530128996]
+[2024-11-04 03:37:55,458][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.05706876047829888,error_sp: 0.05706876047829888
+[2024-11-04 03:45:19,738][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.007075413860337368,total_sp_acc: 0.998555600643158
+[2024-11-04 03:45:19,743][train_xrdmamba.py][line:88][INFO] ---------------epoch 93---------------
+lr: [0.00029974801075920187]
+[2024-11-04 04:04:19,237][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.057344538060090475,error_sp: 0.057344538060090475
+[2024-11-04 04:11:41,579][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.02091221447407864,total_sp_acc: 0.9939839243888855
+[2024-11-04 04:11:41,584][train_xrdmamba.py][line:88][INFO] ---------------epoch 94---------------
+lr: [0.0002956969905081732]
+[2024-11-04 04:30:42,213][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.054429703542075145,error_sp: 0.054429703542075145
+[2024-11-04 04:38:03,234][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.005267593887618668,total_sp_acc: 0.998955249786377
+[2024-11-04 04:38:03,599][train_xrdmamba.py][line:88][INFO] ---------------epoch 95---------------
+lr: [0.00029163363204650586]
+[2024-11-04 04:57:09,644][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.052657677064391104,error_sp: 0.052657677064391104
+[2024-11-04 05:04:33,425][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.00600149810829293,total_sp_acc: 0.9986327290534973
+[2024-11-04 05:04:33,431][train_xrdmamba.py][line:88][INFO] ---------------epoch 96---------------
+lr: [0.00028755904624537]
+[2024-11-04 05:23:35,734][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.05985815386691138,error_sp: 0.05985815386691138
+[2024-11-04 05:30:55,702][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.012275937069805518,total_sp_acc: 0.9964801073074341
+[2024-11-04 05:30:55,707][train_xrdmamba.py][line:88][INFO] ---------------epoch 97---------------
+lr: [0.00028347434704509327]
+[2024-11-04 05:49:51,704][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.05087954365496896,error_sp: 0.05087954365496896
+[2024-11-04 05:57:13,892][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.009249718483895256,total_sp_acc: 0.9975178241729736
+[2024-11-04 05:57:13,897][train_xrdmamba.py][line:88][INFO] ---------------epoch 98---------------
+lr: [0.0002793806511506067]
+[2024-11-04 06:16:16,476][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.06074768849156843,error_sp: 0.06074768849156843
+[2024-11-04 06:23:41,622][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.0049816704326231375,total_sp_acc: 0.9989131689071655
+[2024-11-04 06:23:42,037][train_xrdmamba.py][line:88][INFO] ---------------epoch 99---------------
+lr: [0.000275279077726135]
+[2024-11-04 06:42:50,992][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.0545310963113803,error_sp: 0.0545310963113803
+[2024-11-04 06:50:22,605][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.005988923849056297,total_sp_acc: 0.9987098574638367
+[2024-11-04 06:50:22,644][train_xrdmamba.py][line:88][INFO] ---------------epoch 100---------------
+lr: [0.0002711707480892142]
+[2024-11-04 07:09:41,464][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.044705402382055316,error_sp: 0.044705402382055316
+[2024-11-04 07:17:22,141][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.1916565689516106,total_sp_acc: 0.9362492561340332
+[2024-11-04 07:17:22,146][train_xrdmamba.py][line:88][INFO] ---------------epoch 101---------------
+lr: [0.00026705678540411994]
+[2024-11-04 07:36:30,162][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.046833734496594955,error_sp: 0.046833734496594955
+[2024-11-04 07:43:59,874][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.0036372891647104425,total_sp_acc: 0.9991936683654785
+[2024-11-04 07:44:00,746][train_xrdmamba.py][line:88][INFO] ---------------epoch 102---------------
+lr: [0.000262938314374788]
+[2024-11-04 08:03:05,033][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.04445332287337231,error_sp: 0.04445332287337231
+[2024-11-04 08:10:27,355][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.0035069330996147234,total_sp_acc: 0.9992497563362122
+[2024-11-04 08:10:27,732][train_xrdmamba.py][line:88][INFO] ---------------epoch 103---------------
+lr: [0.00025881646093731694]
+[2024-11-04 08:29:25,776][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.04331512791009582,error_sp: 0.04331512791009582
+[2024-11-04 08:36:47,027][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.01558054670918846,total_sp_acc: 0.9952110052108765
+[2024-11-04 08:36:47,035][train_xrdmamba.py][line:88][INFO] ---------------epoch 104---------------
+lr: [0.0002546923519521278]
+[2024-11-04 08:55:45,005][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.03633373810882005,error_sp: 0.03633373810882005
+[2024-11-04 09:03:05,893][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.07646664281949209,total_sp_acc: 0.9734675884246826
+[2024-11-04 09:03:05,898][train_xrdmamba.py][line:88][INFO] ---------------epoch 105---------------
+lr: [0.0002505671148958751]
+[2024-11-04 09:22:05,824][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.03797518578688544,error_sp: 0.03797518578688544
+[2024-11-04 09:29:32,182][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.028581771037879938,total_sp_acc: 0.9902957677841187
+[2024-11-04 09:29:32,188][train_xrdmamba.py][line:88][INFO] ---------------epoch 106---------------
+lr: [0.00024644187755318455]
+[2024-11-04 09:48:32,975][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.042074859009257386,error_sp: 0.042074859009257386
+[2024-11-04 09:55:59,015][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.015773421562739136,total_sp_acc: 0.9951338768005371
+[2024-11-04 09:55:59,020][train_xrdmamba.py][line:88][INFO] ---------------epoch 107---------------
+lr: [0.00024231776770830676]
+[2024-11-04 10:14:59,675][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.04539305177554835,error_sp: 0.04539305177554835
+[2024-11-04 10:22:21,784][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.0045435699505514075,total_sp_acc: 0.9988991618156433
+[2024-11-04 10:22:21,841][train_xrdmamba.py][line:88][INFO] ---------------epoch 108---------------
+lr: [0.00023819591283677044]
+[2024-11-04 10:41:24,262][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.03494767863115423,error_sp: 0.03494767863115423
+[2024-11-04 10:48:48,409][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.005069526479076557,total_sp_acc: 0.998955249786377
+[2024-11-04 10:48:48,414][train_xrdmamba.py][line:88][INFO] ---------------epoch 109---------------
+lr: [0.0002340774397971168]
+[2024-11-04 11:07:58,063][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.031314493027538845,error_sp: 0.031314493027538845
+[2024-11-04 11:15:20,156][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.013801879216664816,total_sp_acc: 0.9955825805664062
+[2024-11-04 11:15:20,161][train_xrdmamba.py][line:88][INFO] ---------------epoch 110---------------
+lr: [0.00022996347452280315]
+[2024-11-04 11:34:18,875][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.028029284029325162,error_sp: 0.028029284029325162
+[2024-11-04 11:41:44,979][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.0025024844953135043,total_sp_acc: 0.9994460940361023
+[2024-11-04 11:41:45,336][train_xrdmamba.py][line:88][INFO] ---------------epoch 111---------------
+lr: [0.0002258551417143566]
+[2024-11-04 12:00:49,701][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.03080336952738186,error_sp: 0.03080336952738186
+[2024-11-04 12:08:12,670][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.003276267429141049,total_sp_acc: 0.9991726279258728
+[2024-11-04 12:08:12,676][train_xrdmamba.py][line:88][INFO] ---------------epoch 112---------------
+lr: [0.00022175356453186225]
+[2024-11-04 12:25:29,048][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.03153123150223464,error_sp: 0.03153123150223464
+[2024-11-04 12:31:12,528][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.005170163667032535,total_sp_acc: 0.9986116886138916
+[2024-11-04 12:31:12,533][train_xrdmamba.py][line:88][INFO] ---------------epoch 113---------------
+lr: [0.0002176598642878738]
+[2024-11-04 12:46:32,212][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.028118122953090224,error_sp: 0.028118122953090224
+[2024-11-04 12:52:29,466][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.0019300400560028944,total_sp_acc: 0.999586284160614
+[2024-11-04 12:52:29,823][train_xrdmamba.py][line:88][INFO] ---------------epoch 114---------------
+lr: [0.0002135751601408231]
+[2024-11-04 13:07:44,050][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.02784793165503293,error_sp: 0.02784793165503293
+[2024-11-04 13:13:40,355][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.006936920731178234,total_sp_acc: 0.9980367422103882
+[2024-11-04 13:13:40,360][train_xrdmamba.py][line:88][INFO] ---------------epoch 115---------------
+lr: [0.00020950056878902006]
+[2024-11-04 13:29:00,231][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.031395182738654125,error_sp: 0.031395182738654125
+[2024-11-04 13:34:58,921][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.002810758022167465,total_sp_acc: 0.9994040131568909
+[2024-11-04 13:34:58,926][train_xrdmamba.py][line:88][INFO] ---------------epoch 116---------------
+lr: [0.00020543720416532084]
+[2024-11-04 13:50:08,324][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.031223530925756828,error_sp: 0.031223530925756828
+[2024-11-04 13:56:05,721][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.017223788720496517,total_sp_acc: 0.9939839243888855
+[2024-11-04 13:56:05,728][train_xrdmamba.py][line:88][INFO] ---------------epoch 117---------------
+lr: [0.00020138617713254907]
+[2024-11-04 14:11:27,976][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.024083886382816864,error_sp: 0.024083886382816864
+[2024-11-04 14:17:11,638][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.00464584657808806,total_sp_acc: 0.9988009929656982
+[2024-11-04 14:17:11,643][train_xrdmamba.py][line:88][INFO] ---------------epoch 118---------------
+lr: [0.00019734859517975617]
+[2024-11-04 14:32:35,293][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.02784999066532735,error_sp: 0.02784999066532735
+[2024-11-04 14:38:30,347][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.002641094465363741,total_sp_acc: 0.9993829727172852
+[2024-11-04 14:38:30,352][train_xrdmamba.py][line:88][INFO] ---------------epoch 119---------------
+lr: [0.00019332556211939828]
+[2024-11-04 14:53:33,938][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.027112343571373588,error_sp: 0.027112343571373588
+[2024-11-04 14:59:31,111][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.029196782223343147,total_sp_acc: 0.9900783896446228
+[2024-11-04 14:59:31,116][train_xrdmamba.py][line:88][INFO] ---------------epoch 120---------------
+lr: [0.00018931817778551695]
+[2024-11-04 15:14:48,618][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.02501350339330004,error_sp: 0.02501350339330004
+[2024-11-04 15:20:31,056][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.006512955468131181,total_sp_acc: 0.997973620891571
+[2024-11-04 15:20:31,061][train_xrdmamba.py][line:88][INFO] ---------------epoch 121---------------
+lr: [0.00018532753773300282]
+[2024-11-04 15:35:55,203][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.02438050857037529,error_sp: 0.02438050857037529
+[2024-11-04 15:41:51,569][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.0034201780741458096,total_sp_acc: 0.9991936683654785
+[2024-11-04 15:41:51,575][train_xrdmamba.py][line:88][INFO] ---------------epoch 122---------------
+lr: [0.00018135473293802697]
+[2024-11-04 15:57:12,380][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.02858599320764942,error_sp: 0.02858599320764942
+[2024-11-04 16:02:57,950][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.00844898347123024,total_sp_acc: 0.9971252083778381
+[2024-11-04 16:02:57,955][train_xrdmamba.py][line:88][INFO] ---------------epoch 123---------------
+lr: [0.00017740084949971794]
+[2024-11-04 16:18:16,235][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.023961428525569844,error_sp: 0.023961428525569844
+[2024-11-04 16:24:12,414][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.0016218480105646027,total_sp_acc: 0.9996844530105591
+[2024-11-04 16:24:12,807][train_xrdmamba.py][line:88][INFO] ---------------epoch 124---------------
+lr: [0.0001734669683431686]
+[2024-11-04 16:39:14,680][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.021676300920421273,error_sp: 0.021676300920421273
+[2024-11-04 16:45:09,831][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.0013945325146097374,total_sp_acc: 0.9997265338897705
+[2024-11-04 16:45:10,208][train_xrdmamba.py][line:88][INFO] ---------------epoch 125---------------
+lr: [0.0001695541649238542]
+[2024-11-04 17:00:28,182][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.017348387745181562,error_sp: 0.017348387745181562
+[2024-11-04 17:06:14,480][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.001099942089640027,total_sp_acc: 0.9997546076774597
+[2024-11-04 17:06:14,877][train_xrdmamba.py][line:88][INFO] ---------------epoch 126---------------
+lr: [0.00016566350893353673]
+[2024-11-04 17:21:37,954][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.022251755790955393,error_sp: 0.022251755790955393
+[2024-11-04 17:27:39,355][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.0019851193438354107,total_sp_acc: 0.9996073246002197
+[2024-11-04 17:27:39,929][train_xrdmamba.py][line:88][INFO] ---------------epoch 127---------------
+lr: [0.0001617960640077437]
+[2024-11-04 17:42:42,293][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.02313497922328863,error_sp: 0.02313497922328863
+[2024-11-04 17:48:34,040][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.029175378432388765,total_sp_acc: 0.989692747592926
+[2024-11-04 17:48:34,046][train_xrdmamba.py][line:88][INFO] ---------------epoch 128---------------
+lr: [0.00015795288743489274]
+[2024-11-04 18:03:47,692][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.022693751524101295,error_sp: 0.022693751524101295
+[2024-11-04 18:09:44,519][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.001746159305865959,total_sp_acc: 0.9996353983879089
+[2024-11-04 18:09:44,525][train_xrdmamba.py][line:88][INFO] ---------------epoch 129---------------
+lr: [0.00015413502986714585]
+[2024-11-04 18:24:47,103][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.019514051463776008,error_sp: 0.019514051463776008
+[2024-11-04 18:30:44,663][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.0049824704836455465,total_sp_acc: 0.9984503984451294
+[2024-11-04 18:30:44,668][train_xrdmamba.py][line:88][INFO] ---------------epoch 130---------------
+lr: [0.0001503435350330715]
+[2024-11-04 18:45:59,989][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.018530149660202857,error_sp: 0.018530149660202857
+[2024-11-04 18:51:43,252][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.008651126300965761,total_sp_acc: 0.9969639182090759
+[2024-11-04 18:51:43,257][train_xrdmamba.py][line:88][INFO] ---------------epoch 131---------------
+lr: [0.0001465794394521891]
+[2024-11-04 19:07:05,345][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.016984429795703228,error_sp: 0.016984429795703228
+[2024-11-04 19:13:05,958][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.021215144499989746,total_sp_acc: 0.9924203157424927
+[2024-11-04 19:13:05,965][train_xrdmamba.py][line:88][INFO] ---------------epoch 132---------------
+lr: [0.0001428437721514766]
+[2024-11-04 19:28:12,493][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.015986610795419267,error_sp: 0.015986610795419267
+[2024-11-04 19:34:10,525][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.0025437215165499127,total_sp_acc: 0.9992707967758179
+[2024-11-04 19:34:10,530][train_xrdmamba.py][line:88][INFO] ---------------epoch 133---------------
+lr: [0.00013913755438391638]
+[2024-11-04 19:49:32,520][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.022349560919485097,error_sp: 0.022349560919485097
+[2024-11-04 19:55:35,552][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.0500836846859084,total_sp_acc: 0.9829544425010681
+[2024-11-04 19:55:35,558][train_xrdmamba.py][line:88][INFO] ---------------epoch 134---------------
+lr: [0.00013546179934915503]
+[2024-11-04 20:10:41,143][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.012687730860277196,error_sp: 0.012687730860277196
+[2024-11-04 20:16:42,615][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.010793335956323313,total_sp_acc: 0.9962627291679382
+[2024-11-04 20:16:42,620][train_xrdmamba.py][line:88][INFO] ---------------epoch 135---------------
+lr: [0.00013181751191635276]
+[2024-11-04 20:32:06,903][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.014870103407801379,error_sp: 0.014870103407801379
+[2024-11-04 20:37:55,798][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.0005871045537842598,total_sp_acc: 0.9998597502708435
+[2024-11-04 20:37:56,209][train_xrdmamba.py][line:88][INFO] ---------------epoch 136---------------
+lr: [0.00012820568834929656]
+[2024-11-04 20:53:20,413][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.015119440270331214,error_sp: 0.015119440270331214
+[2024-11-04 20:59:23,781][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.0011049766798961805,total_sp_acc: 0.9997265338897705
+[2024-11-04 20:59:23,787][train_xrdmamba.py][line:88][INFO] ---------------epoch 137---------------
+lr: [0.0001246273160338523]
+[2024-11-04 21:14:25,250][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.016859345027429345,error_sp: 0.016859345027429345
+[2024-11-04 21:20:20,149][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.0009066683914079234,total_sp_acc: 0.9997966885566711
+[2024-11-04 21:20:20,154][train_xrdmamba.py][line:88][INFO] ---------------epoch 138---------------
+lr: [0.00012108337320782544]
+[2024-11-04 21:35:28,478][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.019995009479326333,error_sp: 0.019995009479326333
+[2024-11-04 21:41:22,107][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.01374015269022603,total_sp_acc: 0.9949725866317749
+[2024-11-04 21:41:22,111][train_xrdmamba.py][line:88][INFO] ---------------epoch 139---------------
+lr: [0.00011757482869330652]
+[2024-11-04 21:56:22,198][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.015080590148763133,error_sp: 0.015080590148763133
+[2024-11-04 22:02:13,494][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.001217708120854002,total_sp_acc: 0.9997265338897705
+[2024-11-04 22:02:13,499][train_xrdmamba.py][line:88][INFO] ---------------epoch 140---------------
+lr: [0.00011410264163156919]
+[2024-11-04 22:17:19,998][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.011348056446741731,error_sp: 0.011348056446741731
+[2024-11-04 22:23:09,822][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.0008063178505926206,total_sp_acc: 0.9998738169670105
+[2024-11-04 22:23:10,195][train_xrdmamba.py][line:88][INFO] ---------------epoch 141---------------
+lr: [0.00011066776122059216]
+[2024-11-04 22:38:25,873][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.011851100778808266,error_sp: 0.011851100778808266
+[2024-11-04 22:44:19,060][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.032960994182318626,total_sp_acc: 0.9883394837379456
+[2024-11-04 22:44:19,065][train_xrdmamba.py][line:88][INFO] ---------------epoch 142---------------
+lr: [0.00010727112645527591]
+[2024-11-04 22:59:18,106][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.010524307094655266,error_sp: 0.010524307094655266
+[2024-11-04 23:05:13,972][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.0478469355058137,total_sp_acc: 0.9830877184867859
+[2024-11-04 23:05:13,977][train_xrdmamba.py][line:88][INFO] ---------------epoch 143---------------
+lr: [0.00010391366587041918]
+[2024-11-04 23:20:32,500][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.011499280659643027,error_sp: 0.011499280659643027
+[2024-11-04 23:26:34,961][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.0007638398621770587,total_sp_acc: 0.9997966885566711
+[2024-11-04 23:26:34,998][train_xrdmamba.py][line:88][INFO] ---------------epoch 144---------------
+lr: [0.00010059629728652276]
+[2024-11-04 23:41:34,052][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.00988578334438946,error_sp: 0.00988578334438946
+[2024-11-04 23:47:28,972][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.0010361269593136683,total_sp_acc: 0.9997756481170654
+[2024-11-04 23:47:28,977][train_xrdmamba.py][line:88][INFO] ---------------epoch 145---------------
+lr: [9.73199275584904e-05]
+[2024-11-05 00:02:29,403][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.012147598160012851,error_sp: 0.012147598160012851
+[2024-11-05 00:08:23,484][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.040277194403905356,total_sp_acc: 0.9856890439987183
+[2024-11-05 00:08:23,489][train_xrdmamba.py][line:88][INFO] ---------------epoch 146---------------
+lr: [9.408545232728472e-05]
+[2024-11-05 00:23:52,313][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.012494437919549543,error_sp: 0.012494437919549543
+[2024-11-05 00:30:42,582][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.0013360001319850758,total_sp_acc: 0.9996634125709534
+[2024-11-05 00:30:42,588][train_xrdmamba.py][line:88][INFO] ---------------epoch 147---------------
+lr: [9.089375577460568e-05]
+[2024-11-05 00:46:05,396][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.010604722437343386,error_sp: 0.010604722437343386
+[2024-11-05 00:52:18,547][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.0009185376343294773,total_sp_acc: 0.999733567237854
+[2024-11-05 00:52:18,607][train_xrdmamba.py][line:88][INFO] ---------------epoch 148---------------
+lr: [8.774571038065138e-05]
+[2024-11-05 01:07:32,670][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.010148980822575045,error_sp: 0.010148980822575045
+[2024-11-05 01:13:20,750][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.00036684715137775517,total_sp_acc: 0.9998807907104492
+[2024-11-05 01:13:21,089][train_xrdmamba.py][line:88][INFO] ---------------epoch 149---------------
+lr: [8.464217668502106e-05]
+[2024-11-05 01:28:43,295][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.011046956568163728,error_sp: 0.011046956568163728
+[2024-11-05 01:34:37,078][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.001087395099845781,total_sp_acc: 0.9997265338897705
+[2024-11-05 01:34:37,082][train_xrdmamba.py][line:88][INFO] ---------------epoch 150---------------
+lr: [8.158400305081775e-05]
+[2024-11-05 01:49:34,210][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.00893883029374945,error_sp: 0.00893883029374945
+[2024-11-05 01:55:30,599][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.0006179338639725,total_sp_acc: 0.999866783618927
+[2024-11-05 01:55:30,604][train_xrdmamba.py][line:88][INFO] ---------------epoch 151---------------
+lr: [7.857202543200637e-05]
+[2024-11-05 02:10:44,261][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.007572292831898413,error_sp: 0.007572292831898413
+[2024-11-05 02:16:40,407][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.00032171998212614304,total_sp_acc: 0.9999018311500549
+[2024-11-05 02:16:41,271][train_xrdmamba.py][line:88][INFO] ---------------epoch 152---------------
+lr: [7.560706714408265e-05]
+[2024-11-05 02:31:51,787][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.009873679875741694,error_sp: 0.009873679875741694
+[2024-11-05 02:37:45,836][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.0003408253760220519,total_sp_acc: 0.9999018311500549
+[2024-11-05 02:37:45,841][train_xrdmamba.py][line:88][INFO] ---------------epoch 153---------------
+lr: [7.26899386381e-05]
+[2024-11-05 02:52:58,973][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.008160322981781667,error_sp: 0.008160322981781667
+[2024-11-05 02:58:37,037][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.0006768535729336109,total_sp_acc: 0.9997966885566711
+[2024-11-05 02:58:37,043][train_xrdmamba.py][line:88][INFO] ---------------epoch 154---------------
+lr: [6.982143727810575e-05]
+[2024-11-05 03:13:51,757][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.007011560096455726,error_sp: 0.007011560096455726
+[2024-11-05 03:19:45,767][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.00039196591889435593,total_sp_acc: 0.9998807907104492
+[2024-11-05 03:19:45,774][train_xrdmamba.py][line:88][INFO] ---------------epoch 155---------------
+lr: [6.70023471220304e-05]
+[2024-11-05 03:34:50,341][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.008769757359273603,error_sp: 0.008769757359273603
+[2024-11-05 03:40:44,190][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.00040094978451173433,total_sp_acc: 0.9999088644981384
+[2024-11-05 03:40:44,516][train_xrdmamba.py][line:88][INFO] ---------------epoch 156---------------
+lr: [6.423343870607118e-05]
+[2024-11-05 03:55:58,375][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.006230957472939958,error_sp: 0.006230957472939958
+[2024-11-05 04:01:52,050][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.00030345620936880356,total_sp_acc: 0.9999158382415771
+[2024-11-05 04:01:52,410][train_xrdmamba.py][line:88][INFO] ---------------epoch 157---------------
+lr: [6.151546883260613e-05]
+[2024-11-05 04:16:53,743][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.005926725536834845,error_sp: 0.005926725536834845
+[2024-11-05 04:22:49,022][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.0004073330357023111,total_sp_acc: 0.9998738169670105
+[2024-11-05 04:22:49,027][train_xrdmamba.py][line:88][INFO] ---------------epoch 158---------------
+lr: [5.884918036167141e-05]
+[2024-11-05 04:37:46,994][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.007526258998020175,error_sp: 0.007526258998020175
+[2024-11-05 04:43:42,075][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.00034323320523878346,total_sp_acc: 0.9999018311500549
+[2024-11-05 04:43:42,115][train_xrdmamba.py][line:88][INFO] ---------------epoch 159---------------
+lr: [5.623530200602932e-05]
+[2024-11-05 04:58:56,828][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.009429289319651724,error_sp: 0.009429289319651724
+[2024-11-05 05:04:49,142][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.00029477749999370874,total_sp_acc: 0.9999018311500549
+[2024-11-05 05:04:49,480][train_xrdmamba.py][line:88][INFO] ---------------epoch 160---------------
+lr: [5.367454812984208e-05]
+[2024-11-05 05:19:49,371][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.006206902879906421,error_sp: 0.006206902879906421
+[2024-11-05 05:25:41,162][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.00043351347337290794,total_sp_acc: 0.9998878240585327
+[2024-11-05 05:25:41,167][train_xrdmamba.py][line:88][INFO] ---------------epoch 161---------------
+lr: [5.11676185509677e-05]
+[2024-11-05 05:40:58,962][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.005541929867820343,error_sp: 0.005541929867820343
+[2024-11-05 05:46:53,383][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.00036662109609477566,total_sp_acc: 0.9998738169670105
+[2024-11-05 05:46:53,389][train_xrdmamba.py][line:88][INFO] ---------------epoch 162---------------
+lr: [4.8715198346877636e-05]
+[2024-11-05 06:01:52,426][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.006591662564193302,error_sp: 0.006591662564193302
+[2024-11-05 06:07:50,357][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.00027224963356989714,total_sp_acc: 0.9999088644981384
+[2024-11-05 06:07:50,724][train_xrdmamba.py][line:88][INFO] ---------------epoch 163---------------
+lr: [4.6317957664184773e-05]
+[2024-11-05 06:22:51,402][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.006488494973677694,error_sp: 0.006488494973677694
+[2024-11-05 06:28:49,110][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.000343539496448443,total_sp_acc: 0.9998947978019714
+[2024-11-05 06:28:49,115][train_xrdmamba.py][line:88][INFO] ---------------epoch 164---------------
+lr: [4.3976551531759886e-05]
+[2024-11-05 06:44:01,360][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.00421264983792765,error_sp: 0.00421264983792765
+[2024-11-05 06:49:52,321][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.00026071279521989625,total_sp_acc: 0.9999088644981384
+[2024-11-05 06:49:52,689][train_xrdmamba.py][line:88][INFO] ---------------epoch 165---------------
+lr: [4.169161967739439e-05]
+[2024-11-05 07:04:55,090][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.006629931037840597,error_sp: 0.006629931037840597
+[2024-11-05 07:10:47,955][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.00029165798859919986,total_sp_acc: 0.9999228715896606
+[2024-11-05 07:10:48,315][train_xrdmamba.py][line:88][INFO] ---------------epoch 166---------------
+lr: [3.9463786347946744e-05]
+[2024-11-05 07:26:05,290][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.006398500461939398,error_sp: 0.006398500461939398
+[2024-11-05 07:31:58,398][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.000240194425311563,total_sp_acc: 0.9999088644981384
+[2024-11-05 07:31:58,765][train_xrdmamba.py][line:88][INFO] ---------------epoch 167---------------
+lr: [3.729366013288311e-05]
+[2024-11-05 07:46:58,830][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.005582689368889816,error_sp: 0.005582689368889816
+[2024-11-05 07:52:49,986][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.00023871816121827247,total_sp_acc: 0.9999228715896606
+[2024-11-05 07:52:50,352][train_xrdmamba.py][line:88][INFO] ---------------epoch 168---------------
+lr: [3.51818337910907e-05]
+[2024-11-05 08:07:49,547][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.003930988791657268,error_sp: 0.003930988791657268
+[2024-11-05 08:13:48,359][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.00022692716758467094,total_sp_acc: 0.9999228715896606
+[2024-11-05 08:13:48,770][train_xrdmamba.py][line:88][INFO] ---------------epoch 169---------------
+lr: [3.312888408079935e-05]
+[2024-11-05 08:29:06,034][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.00546082719123089,error_sp: 0.00546082719123089
+[2024-11-05 08:35:03,682][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.00022700965437021805,total_sp_acc: 0.9999228715896606
+[2024-11-05 08:35:03,687][train_xrdmamba.py][line:88][INFO] ---------------epoch 170---------------
+lr: [3.1135371592394915e-05]
+[2024-11-05 08:50:07,000][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.0038829999151633572,error_sp: 0.0038829999151633572
+[2024-11-05 08:55:59,748][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.0002329528530996003,total_sp_acc: 0.9999088644981384
+[2024-11-05 08:55:59,753][train_xrdmamba.py][line:88][INFO] ---------------epoch 171---------------
+lr: [2.9201840583836634e-05]
+[2024-11-05 09:11:19,762][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.004975052988037594,error_sp: 0.004975052988037594
+[2024-11-05 09:16:59,923][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.00024983472394181166,total_sp_acc: 0.9999158382415771
+[2024-11-05 09:16:59,975][train_xrdmamba.py][line:88][INFO] ---------------epoch 172---------------
+lr: [2.7328818818310152e-05]
+[2024-11-05 09:32:16,319][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.0049699725988689904,error_sp: 0.0049699725988689904
+[2024-11-05 09:38:12,206][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.00022505542343107822,total_sp_acc: 0.9999228715896606
+[2024-11-05 09:38:12,613][train_xrdmamba.py][line:88][INFO] ---------------epoch 173---------------
+lr: [2.551681740362316e-05]
+[2024-11-05 09:53:24,144][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.0062992030853750115,error_sp: 0.0062992030853750115
+[2024-11-05 09:59:39,069][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.0007966188696988578,total_sp_acc: 0.9998036623001099
+[2024-11-05 09:59:39,110][train_xrdmamba.py][line:88][INFO] ---------------epoch 174---------------
+lr: [2.376633063270786e-05]
+[2024-11-05 10:15:30,490][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.004274939625817244,error_sp: 0.004274939625817244
+[2024-11-05 10:22:26,506][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.000219212738448672,total_sp_acc: 0.9999228715896606
+[2024-11-05 10:22:26,921][train_xrdmamba.py][line:88][INFO] ---------------epoch 175---------------
+lr: [2.2077835824390398e-05]
+[2024-11-05 10:37:50,798][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.004465383108217051,error_sp: 0.004465383108217051
+[2024-11-05 10:44:01,976][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.00022372014102075202,total_sp_acc: 0.9999228715896606
+[2024-11-05 10:44:01,997][train_xrdmamba.py][line:88][INFO] ---------------epoch 176---------------
+lr: [2.045179316332046e-05]
+[2024-11-05 10:59:19,123][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.003951950220364988,error_sp: 0.003951950220364988
+[2024-11-05 11:05:44,240][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.00020966679522920522,total_sp_acc: 0.9999228715896606
+[2024-11-05 11:05:45,203][train_xrdmamba.py][line:88][INFO] ---------------epoch 177---------------
+lr: [1.8888645537589156e-05]
+[2024-11-05 11:23:20,262][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.004715244045166663,error_sp: 0.004715244045166663
+[2024-11-05 11:30:29,679][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.00021414269788180517,total_sp_acc: 0.9999158382415771
+[2024-11-05 11:30:29,714][train_xrdmamba.py][line:88][INFO] ---------------epoch 178---------------
+lr: [1.7388818372067406e-05]
+[2024-11-05 11:45:49,035][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.004463557905417663,error_sp: 0.004463557905417663
+[2024-11-05 11:52:13,453][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.00021517789854684982,total_sp_acc: 0.9999228715896606
+[2024-11-05 11:52:13,503][train_xrdmamba.py][line:88][INFO] ---------------epoch 179---------------
+lr: [1.5952719454805257e-05]
+[2024-11-05 12:07:22,758][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.003562334712699613,error_sp: 0.003562334712699613
+[2024-11-05 12:13:33,349][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.00020222263595826007,total_sp_acc: 0.9999228715896606
+[2024-11-05 12:13:33,764][train_xrdmamba.py][line:88][INFO] ---------------epoch 180---------------
+lr: [1.45807387528668e-05]
+[2024-11-05 12:28:52,236][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.0032363432911489943,error_sp: 0.0032363432911489943
+[2024-11-05 12:34:49,152][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.0002010327090399446,total_sp_acc: 0.9999228715896606
+[2024-11-05 12:34:49,513][train_xrdmamba.py][line:88][INFO] ---------------epoch 181---------------
+lr: [1.3273248212594905e-05]
+[2024-11-05 12:49:50,166][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.0039314609637790794,error_sp: 0.0039314609637790794
+[2024-11-05 12:55:47,587][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.00019357820953722857,total_sp_acc: 0.9999228715896606
+[2024-11-05 12:55:47,965][train_xrdmamba.py][line:88][INFO] ---------------epoch 182---------------
+lr: [1.2030601537317099e-05]
+[2024-11-05 13:11:24,687][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.0034041333625409783,error_sp: 0.0034041333625409783
+[2024-11-05 13:17:19,976][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.00019894203002551446,total_sp_acc: 0.9999228715896606
+[2024-11-05 13:17:19,982][train_xrdmamba.py][line:88][INFO] ---------------epoch 183---------------
+lr: [1.0853133932582787e-05]
+[2024-11-05 13:32:52,921][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.004109825181436679,error_sp: 0.004109825181436679
+[2024-11-05 13:39:07,912][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.00019665795104987984,total_sp_acc: 0.9999228715896606
+[2024-11-05 13:39:07,956][train_xrdmamba.py][line:88][INFO] ---------------epoch 184---------------
+lr: [9.741161804679717e-06]
+[2024-11-05 13:54:58,695][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.0022809943597782087,error_sp: 0.0022809943597782087
+[2024-11-05 14:01:21,505][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.00019652855164959375,total_sp_acc: 0.9999299049377441
+[2024-11-05 14:01:21,923][train_xrdmamba.py][line:88][INFO] ---------------epoch 185---------------
+lr: [8.694982391558364e-06]
+[2024-11-05 14:17:04,746][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.004142797260437075,error_sp: 0.004142797260437075
+[2024-11-05 14:23:12,902][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.00019484744593817153,total_sp_acc: 0.9999228715896606
+[2024-11-05 14:23:12,909][train_xrdmamba.py][line:88][INFO] ---------------epoch 186---------------
+lr: [7.714873295030284e-06]
+[2024-11-05 14:38:49,714][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.0027314587266410234,error_sp: 0.0027314587266410234
+[2024-11-05 14:44:59,264][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.0001949209027392716,total_sp_acc: 0.9999228715896606
+[2024-11-05 14:44:59,313][train_xrdmamba.py][line:88][INFO] ---------------epoch 187---------------
+lr: [6.80109186679168e-06]
+[2024-11-05 15:00:11,433][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.0022613760962806873,error_sp: 0.0022613760962806873
+[2024-11-05 15:06:24,291][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.00019400075269982133,total_sp_acc: 0.9999228715896606
+[2024-11-05 15:06:24,298][train_xrdmamba.py][line:88][INFO] ---------------epoch 188---------------
+lr: [5.953874374243575e-06]
+[2024-11-05 15:21:56,762][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.00280134512543118,error_sp: 0.00280134512543118
+[2024-11-05 15:28:14,933][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.00019304914675299245,total_sp_acc: 0.9999228715896606
+[2024-11-05 15:28:15,347][train_xrdmamba.py][line:88][INFO] ---------------epoch 189---------------
+lr: [5.173434827499868e-06]
+[2024-11-05 15:44:46,789][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.0035486334294249416,error_sp: 0.0035486334294249416
+[2024-11-05 15:51:02,378][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.00019333265825707512,total_sp_acc: 0.9999228715896606
+[2024-11-05 15:51:02,417][train_xrdmamba.py][line:88][INFO] ---------------epoch 190---------------
+lr: [4.459963271765487e-06]
+[2024-11-05 16:06:19,549][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.003634417603601463,error_sp: 0.003634417603601463
+[2024-11-05 16:12:35,559][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.00019039350157442893,total_sp_acc: 0.9999228715896606
+[2024-11-05 16:12:35,957][train_xrdmamba.py][line:88][INFO] ---------------epoch 191---------------
+lr: [3.813623210571995e-06]
+[2024-11-05 16:28:12,147][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.0030146254682650725,error_sp: 0.0030146254682650725
+[2024-11-05 16:34:14,888][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.0001895041518862415,total_sp_acc: 0.9999299049377441
+[2024-11-05 16:34:15,280][train_xrdmamba.py][line:88][INFO] ---------------epoch 192---------------
+lr: [3.234547565522747e-06]
+[2024-11-05 16:49:48,728][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.0023038304908193324,error_sp: 0.0023038304908193324
+[2024-11-05 16:56:04,428][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.0001938624027301107,total_sp_acc: 0.9999228715896606
+[2024-11-05 16:56:04,462][train_xrdmamba.py][line:88][INFO] ---------------epoch 193---------------
+lr: [2.722832067198015e-06]
+[2024-11-05 17:11:20,930][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.002288639507053864,error_sp: 0.002288639507053864
+[2024-11-05 17:17:31,021][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.00018991288113414027,total_sp_acc: 0.9999228715896606
+[2024-11-05 17:17:31,030][train_xrdmamba.py][line:88][INFO] ---------------epoch 194---------------
+lr: [2.278523907906553e-06]
+[2024-11-05 17:33:06,530][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.0030346952413736745,error_sp: 0.0030346952413736745
+[2024-11-05 17:39:17,111][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.00018955930327812907,total_sp_acc: 0.9999299049377441
+[2024-11-05 17:39:17,116][train_xrdmamba.py][line:88][INFO] ---------------epoch 195---------------
+lr: [1.901601115903491e-06]
+[2024-11-05 17:54:04,092][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.0030179509792276097,error_sp: 0.0030179509792276097
+[2024-11-05 17:59:55,827][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.00019284678369217243,total_sp_acc: 0.9999228715896606
+[2024-11-05 17:59:55,832][train_xrdmamba.py][line:88][INFO] ---------------epoch 196---------------
+lr: [1.5919323722998722e-06]
+[2024-11-05 18:15:01,106][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.0022519374675679053,error_sp: 0.0022519374675679053
+[2024-11-05 18:20:38,263][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.00018739587668869324,total_sp_acc: 0.9999228715896606
+[2024-11-05 18:20:38,631][train_xrdmamba.py][line:88][INFO] ---------------epoch 197---------------
+lr: [1.349191605808657e-06]
+[2024-11-05 18:35:47,794][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.002564689316654574,error_sp: 0.002564689316654574
+[2024-11-05 18:41:41,706][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.00018971213152922802,total_sp_acc: 0.9999299049377441
+[2024-11-05 18:41:41,712][train_xrdmamba.py][line:88][INFO] ---------------epoch 198---------------
+lr: [1.1726546768803225e-06]
+[2024-11-05 18:56:19,429][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.0017647447737346486,error_sp: 0.0017647447737346486
+[2024-11-05 19:02:14,920][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.0001887894455449871,total_sp_acc: 0.9999228715896606
+[2024-11-05 19:02:14,924][train_xrdmamba.py][line:88][INFO] ---------------epoch 199---------------
+lr: [1.0606345929798454e-06]
+[2024-11-05 19:17:26,733][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.003504592776030339,error_sp: 0.003504592776030339
+[2024-11-05 19:23:20,576][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.00018805146993710478,total_sp_acc: 0.9999228715896606
+[2024-11-05 19:23:20,581][train_xrdmamba.py][line:88][INFO] ---------------epoch 200---------------
+lr: [1.0085269338893898e-06]
+[2024-11-05 19:38:16,396][train_xrdmamba.py][line:111][INFO] [training]total_num: 142618.0,error: 0.003300456477063159,error_sp: 0.003300456477063159
+[2024-11-05 19:44:08,519][train_xrdmamba.py][line:154][INFO] [testing]total_number: 142618,sp_error: 0.00018820743504993105,total_sp_acc: 0.9999228715896606

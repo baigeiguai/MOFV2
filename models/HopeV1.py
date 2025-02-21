@@ -71,29 +71,35 @@ class HopeV1(torch.nn.Module):
         self.att = AttentionModule()
         self.conv_feature_len = 1024
         self.att_feature_len = 32 
-        self.cls_sp = torch.nn.Sequential(   
-            torch.nn.Linear(self.conv_feature_len+self.att_feature_len,230),
-            # torch.nn.Linear(512,230),
+        
+        self.cls = torch.nn.Sequential(
+            torch.nn.Linear(1056,512),
+            torch.nn.Linear(512,230),
         )
-        self.cls_cs = torch.nn.Sequential(   
-            torch.nn.Linear(self.conv_feature_len+self.att_feature_len,7),
-            # torch.nn.LeakyReLU(),
-            # torch.nn.Linear(256,64),
-            # torch.nn.LeakyReLU(),
-            # torch.nn.Linear(64,7),
-        )
-        self.cls_lt = torch.nn.Sequential(   
-            torch.nn.Linear(self.conv_feature_len+self.att_feature_len,6),
-            # torch.nn.LeakyReLU(),
-            # torch.nn.Linear(256,64),
-            # torch.nn.LeakyReLU(),
-            # torch.nn.Linear(64,6),
-        )
+        # self.cls_sp = torch.nn.Sequential(   
+        #     torch.nn.Linear(self.conv_feature_len+self.att_feature_len,230),
+        #     # torch.nn.Linear(512,230),
+        # )
+        # self.cls_cs = torch.nn.Sequential(   
+        #     torch.nn.Linear(self.conv_feature_len+self.att_feature_len,7),
+        #     # torch.nn.LeakyReLU(),
+        #     # torch.nn.Linear(256,64),
+        #     # torch.nn.LeakyReLU(),
+        #     # torch.nn.Linear(64,7),
+        # )
+        # self.cls_lt = torch.nn.Sequential(   
+        #     torch.nn.Linear(self.conv_feature_len+self.att_feature_len,6),
+        #     # torch.nn.LeakyReLU(),
+        #     # torch.nn.Linear(256,64),
+        #     # torch.nn.LeakyReLU(),
+        #     # torch.nn.Linear(64,6),
+        # )
     def forward(self,intensity,angle):
         conv_feature = self.conv_module(intensity,angle)
         atten_feature = self.att(intensity,angle)
         x = torch.concat([conv_feature,atten_feature],dim=-1)
-        # x = self.cls(x)
+        x = self.cls(x)
+        return x 
         return self.cls_sp(x),self.cls_cs(x),self.cls_lt(x)
     
 if __name__ == '__main__':

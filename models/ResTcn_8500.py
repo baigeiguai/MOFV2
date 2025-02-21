@@ -70,7 +70,7 @@ class ResTcn(torch.nn.Module):
             torch.nn.AvgPool1d(2,2),
 
             torch.nn.Flatten(),
-            # torch.nn.Linear(1024,230),                
+            torch.nn.Linear(1024,32),                
 
         )
         
@@ -84,21 +84,7 @@ class ResTcn(torch.nn.Module):
         return self.TCN(data)
 
 
-if __name__ =='__main__':
 
-    # total_params = sum(p.numel() for p in model.parameters())
-    # total_params += sum(p.numel() for p in model.buffers())
-    # print(total_params/1024/1024)
-    # inp = torch.randn((4,2,8500)).type(torch.float)
-    # print(inp.shape)
-    # inp = model(inp)
-    # print(inp.shape)
-    device = torch.device('cuda:2')
-    model = ResTcn(2).to(device)
-    inten = torch.randn(4,1,8500).to(device)
-    angle = torch.randn(4,1,8500).to(device)
-    out = model(inten,angle)
-    print(out.shape)
     
     
      

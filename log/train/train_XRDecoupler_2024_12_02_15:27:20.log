@@ -1,0 +1,1821 @@
+[2024-12-02 15:27:25,145][train_mtl.py][line:85][INFO] ---------------args---------------
+Namespace(data_path='./data/Pymatgen_Wrapped/0', train_name='XRDecoupler', model_path=None, learning_rate=0.0005, min_learning_rate=1e-06, start_scheduler_step=0, weight_decay=5e-05, momentum=0.99, batch_size=512, class_num=230, epoch_num=150, model_save_path='/data/ylh/MyExps/MOFV2/checkpoints/XRDecoupler', device='2,3', scheduler_T=None, num_workers=20, log_name='log/train//train_XRDecoupler_2024_12_02_15:27:20.log')
+[2024-12-02 15:27:25,145][train_mtl.py][line:86][INFO] ---------------device---------------
+cuda:2
+[2024-12-02 15:27:25,145][train_mtl.py][line:87][INFO] ---------------optimizer---------------
+Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    initial_lr: 0.0005
+    lr: 0.0005
+    maximize: False
+    weight_decay: 0
+)
+[2024-12-02 15:27:25,145][train_mtl.py][line:88][INFO] ---------------seed---------------
+3407
+[2024-12-02 15:27:25,148][train_mtl.py][line:100][INFO] ---------------epoch 1---------------
+lr: [0.0005]
+[2024-12-02 15:34:12,982][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 15:34:12,983][train_mtl.py][line:161][INFO] task:sp,err:3.1975061518329007
+[2024-12-02 15:34:12,983][train_mtl.py][line:161][INFO] task:lt,err:0.8085790320293053
+[2024-12-02 15:34:12,983][train_mtl.py][line:161][INFO] task:cs,err:1.1008561251463589
+[2024-12-02 15:34:12,983][train_mtl.py][line:161][INFO] task:pg,err:2.138645683135186
+[2024-12-02 15:36:44,957][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 15:36:45,083][train_mtl.py][line:217][INFO] task:sp,err:tensor(4.4823, device='cuda:2'),acc:0.11298713833093643
+[2024-12-02 15:36:45,085][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.9901, device='cuda:2'),acc:0.6226353049278259
+[2024-12-02 15:36:45,086][train_mtl.py][line:217][INFO] task:cs,err:tensor(1.4276, device='cuda:2'),acc:0.4538347125053406
+[2024-12-02 15:36:45,088][train_mtl.py][line:217][INFO] task:pg,err:tensor(3.1308, device='cuda:2'),acc:0.17775456607341766
+[2024-12-02 15:36:45,940][train_mtl.py][line:100][INFO] ---------------epoch 2---------------
+lr: [0.0004933688000888889]
+[2024-12-02 15:55:00,151][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 15:55:00,152][train_mtl.py][line:161][INFO] task:sp,err:2.4245965339087108
+[2024-12-02 15:55:00,152][train_mtl.py][line:161][INFO] task:lt,err:0.6949684842899962
+[2024-12-02 15:55:00,152][train_mtl.py][line:161][INFO] task:cs,err:0.8310686374877716
+[2024-12-02 15:55:00,152][train_mtl.py][line:161][INFO] task:pg,err:1.5194596927482764
+[2024-12-02 15:57:29,735][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 15:57:29,740][train_mtl.py][line:217][INFO] task:sp,err:tensor(5.6983, device='cuda:2'),acc:0.12461259961128235
+[2024-12-02 15:57:29,742][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.8932, device='cuda:2'),acc:0.7128833532333374
+[2024-12-02 15:57:29,744][train_mtl.py][line:217][INFO] task:cs,err:tensor(1.7164, device='cuda:2'),acc:0.33258774876594543
+[2024-12-02 15:57:29,746][train_mtl.py][line:217][INFO] task:pg,err:tensor(3.7491, device='cuda:2'),acc:0.2296694666147232
+[2024-12-02 15:57:30,104][train_mtl.py][line:100][INFO] ---------------epoch 3---------------
+lr: [0.0004900422816695974]
+[2024-12-02 16:03:50,840][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 16:03:50,840][train_mtl.py][line:161][INFO] task:sp,err:2.1008659688742846
+[2024-12-02 16:03:50,840][train_mtl.py][line:161][INFO] task:lt,err:0.6513371102876596
+[2024-12-02 16:03:50,840][train_mtl.py][line:161][INFO] task:cs,err:0.7438488861063978
+[2024-12-02 16:03:50,840][train_mtl.py][line:161][INFO] task:pg,err:1.2883548328092882
+[2024-12-02 16:06:18,253][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 16:06:18,256][train_mtl.py][line:217][INFO] task:sp,err:tensor(2.6925, device='cuda:2'),acc:0.2715996503829956
+[2024-12-02 16:06:18,258][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.6804, device='cuda:2'),acc:0.7324601411819458
+[2024-12-02 16:06:18,259][train_mtl.py][line:217][INFO] task:cs,err:tensor(1.0002, device='cuda:2'),acc:0.5643957853317261
+[2024-12-02 16:06:18,260][train_mtl.py][line:217][INFO] task:pg,err:tensor(1.7537, device='cuda:2'),acc:0.38864660263061523
+[2024-12-02 16:06:18,627][train_mtl.py][line:100][INFO] ---------------epoch 4---------------
+lr: [0.0004867157652495879]
+[2024-12-02 16:12:26,059][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 16:12:26,060][train_mtl.py][line:161][INFO] task:sp,err:1.9086319158127258
+[2024-12-02 16:12:26,060][train_mtl.py][line:161][INFO] task:lt,err:0.6184856508161638
+[2024-12-02 16:12:26,060][train_mtl.py][line:161][INFO] task:cs,err:0.6873444389630031
+[2024-12-02 16:12:26,060][train_mtl.py][line:161][INFO] task:pg,err:1.1592339168895374
+[2024-12-02 16:14:39,905][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 16:14:39,908][train_mtl.py][line:217][INFO] task:sp,err:tensor(2.2286, device='cuda:2'),acc:0.37119439244270325
+[2024-12-02 16:14:39,910][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.6181, device='cuda:2'),acc:0.7540913224220276
+[2024-12-02 16:14:39,911][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.7392, device='cuda:2'),acc:0.6872554421424866
+[2024-12-02 16:14:39,913][train_mtl.py][line:217][INFO] task:pg,err:tensor(1.4334, device='cuda:2'),acc:0.5052517652511597
+[2024-12-02 16:14:40,314][train_mtl.py][line:100][INFO] ---------------epoch 5---------------
+lr: [0.00048338925086957905]
+[2024-12-02 16:20:45,429][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 16:20:45,429][train_mtl.py][line:161][INFO] task:sp,err:1.783555004563365
+[2024-12-02 16:20:45,429][train_mtl.py][line:161][INFO] task:lt,err:0.5904731184660972
+[2024-12-02 16:20:45,429][train_mtl.py][line:161][INFO] task:cs,err:0.6495522177302754
+[2024-12-02 16:20:45,429][train_mtl.py][line:161][INFO] task:pg,err:1.0827721086415378
+[2024-12-02 16:22:55,012][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 16:22:55,015][train_mtl.py][line:217][INFO] task:sp,err:tensor(2.3726, device='cuda:2'),acc:0.33762919902801514
+[2024-12-02 16:22:55,016][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.6369, device='cuda:2'),acc:0.7395069599151611
+[2024-12-02 16:22:55,017][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.7105, device='cuda:2'),acc:0.7011667490005493
+[2024-12-02 16:22:55,019][train_mtl.py][line:217][INFO] task:pg,err:tensor(1.4396, device='cuda:2'),acc:0.5214489102363586
+[2024-12-02 16:22:55,028][train_mtl.py][line:100][INFO] ---------------epoch 6---------------
+lr: [0.0004800627385714025]
+[2024-12-02 16:28:58,802][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 16:28:58,802][train_mtl.py][line:161][INFO] task:sp,err:1.6800357678553441
+[2024-12-02 16:28:58,803][train_mtl.py][line:161][INFO] task:lt,err:0.5646622690495912
+[2024-12-02 16:28:58,803][train_mtl.py][line:161][INFO] task:cs,err:0.6132036389170826
+[2024-12-02 16:28:58,803][train_mtl.py][line:161][INFO] task:pg,err:1.0202652697379773
+[2024-12-02 16:31:07,171][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 16:31:07,175][train_mtl.py][line:217][INFO] task:sp,err:tensor(2.2138, device='cuda:2'),acc:0.39229971170425415
+[2024-12-02 16:31:07,176][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.6200, device='cuda:2'),acc:0.758017897605896
+[2024-12-02 16:31:07,178][train_mtl.py][line:217][INFO] task:cs,err:tensor(1.0028, device='cuda:2'),acc:0.5991459488868713
+[2024-12-02 16:31:07,179][train_mtl.py][line:217][INFO] task:pg,err:tensor(1.5731, device='cuda:2'),acc:0.48763829469680786
+[2024-12-02 16:31:07,556][train_mtl.py][line:100][INFO] ---------------epoch 7---------------
+lr: [0.0004767362283980416]
+[2024-12-02 16:37:15,866][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 16:37:15,867][train_mtl.py][line:161][INFO] task:sp,err:1.5730435560633254
+[2024-12-02 16:37:15,867][train_mtl.py][line:161][INFO] task:lt,err:0.5355344029156478
+[2024-12-02 16:37:15,867][train_mtl.py][line:161][INFO] task:cs,err:0.5747584953799948
+[2024-12-02 16:37:15,867][train_mtl.py][line:161][INFO] task:pg,err:0.9594135680398741
+[2024-12-02 16:39:25,745][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 16:39:25,749][train_mtl.py][line:217][INFO] task:sp,err:tensor(1.6681, device='cuda:2'),acc:0.5057986974716187
+[2024-12-02 16:39:25,751][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.5077, device='cuda:2'),acc:0.7970312237739563
+[2024-12-02 16:39:25,752][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.5512, device='cuda:2'),acc:0.7667965888977051
+[2024-12-02 16:39:25,754][train_mtl.py][line:217][INFO] task:pg,err:tensor(1.1063, device='cuda:2'),acc:0.6179865002632141
+[2024-12-02 16:39:26,135][train_mtl.py][line:100][INFO] ---------------epoch 8---------------
+lr: [0.00047340972039367087]
+[2024-12-02 16:45:33,462][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 16:45:33,463][train_mtl.py][line:161][INFO] task:sp,err:1.4885754785337648
+[2024-12-02 16:45:33,463][train_mtl.py][line:161][INFO] task:lt,err:0.5091335652591465
+[2024-12-02 16:45:33,463][train_mtl.py][line:161][INFO] task:cs,err:0.5426981840933953
+[2024-12-02 16:45:33,463][train_mtl.py][line:161][INFO] task:pg,err:0.9096511412750591
+[2024-12-02 16:47:45,034][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 16:47:45,038][train_mtl.py][line:217][INFO] task:sp,err:tensor(1.6178, device='cuda:2'),acc:0.5198782682418823
+[2024-12-02 16:47:45,039][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.4948, device='cuda:2'),acc:0.804141104221344
+[2024-12-02 16:47:45,041][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.5545, device='cuda:2'),acc:0.7659622430801392
+[2024-12-02 16:47:45,042][train_mtl.py][line:217][INFO] task:pg,err:tensor(1.0120, device='cuda:2'),acc:0.6498969197273254
+[2024-12-02 16:47:45,409][train_mtl.py][line:100][INFO] ---------------epoch 9---------------
+lr: [0.0004700832146036985]
+[2024-12-02 16:53:53,640][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 16:53:53,641][train_mtl.py][line:161][INFO] task:sp,err:1.4077167898624927
+[2024-12-02 16:53:53,641][train_mtl.py][line:161][INFO] task:lt,err:0.48154090678358413
+[2024-12-02 16:53:53,641][train_mtl.py][line:161][INFO] task:cs,err:0.5089864210857378
+[2024-12-02 16:53:53,641][train_mtl.py][line:161][INFO] task:pg,err:0.8604287482224978
+[2024-12-02 16:56:06,764][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 16:56:06,767][train_mtl.py][line:217][INFO] task:sp,err:tensor(7.3138, device='cuda:2'),acc:0.04704875871539116
+[2024-12-02 16:56:06,769][train_mtl.py][line:217][INFO] task:lt,err:tensor(1.0563, device='cuda:2'),acc:0.7169992327690125
+[2024-12-02 16:56:06,770][train_mtl.py][line:217][INFO] task:cs,err:tensor(1.5867, device='cuda:2'),acc:0.339648574590683
+[2024-12-02 16:56:06,771][train_mtl.py][line:217][INFO] task:pg,err:tensor(5.8617, device='cuda:2'),acc:0.058954689651727676
+[2024-12-02 16:56:06,780][train_mtl.py][line:100][INFO] ---------------epoch 10---------------
+lr: [0.0004667567110748085]
+[2024-12-02 17:02:14,718][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 17:02:14,719][train_mtl.py][line:161][INFO] task:sp,err:1.3510586040003316
+[2024-12-02 17:02:14,719][train_mtl.py][line:161][INFO] task:lt,err:0.458124823399357
+[2024-12-02 17:02:14,719][train_mtl.py][line:161][INFO] task:cs,err:0.48179767859148814
+[2024-12-02 17:02:14,719][train_mtl.py][line:161][INFO] task:pg,err:0.826057204208174
+[2024-12-02 17:04:26,721][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 17:04:26,724][train_mtl.py][line:217][INFO] task:sp,err:tensor(1.4470, device='cuda:2'),acc:0.5522093772888184
+[2024-12-02 17:04:26,726][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.4629, device='cuda:2'),acc:0.8131792545318604
+[2024-12-02 17:04:26,727][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.4469, device='cuda:2'),acc:0.8166711330413818
+[2024-12-02 17:04:26,729][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.9181, device='cuda:2'),acc:0.6746553778648376
+[2024-12-02 17:04:27,116][train_mtl.py][line:100][INFO] ---------------epoch 11---------------
+lr: [0.0004634302098550067]
+[2024-12-02 17:10:35,758][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 17:10:35,759][train_mtl.py][line:161][INFO] task:sp,err:1.2648662958111796
+[2024-12-02 17:10:35,759][train_mtl.py][line:161][INFO] task:lt,err:0.4313306175953858
+[2024-12-02 17:10:35,759][train_mtl.py][line:161][INFO] task:cs,err:0.44884563930384763
+[2024-12-02 17:10:35,759][train_mtl.py][line:161][INFO] task:pg,err:0.7742453625985792
+[2024-12-02 17:12:47,307][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 17:12:47,311][train_mtl.py][line:217][INFO] task:sp,err:tensor(1.4850, device='cuda:2'),acc:0.5466420650482178
+[2024-12-02 17:12:47,312][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.4645, device='cuda:2'),acc:0.8098556995391846
+[2024-12-02 17:12:47,313][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.4940, device='cuda:2'),acc:0.7932939529418945
+[2024-12-02 17:12:47,315][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.9497, device='cuda:2'),acc:0.6695438027381897
+[2024-12-02 17:12:47,323][train_mtl.py][line:100][INFO] ---------------epoch 12---------------
+lr: [0.00046010371099366754]
+[2024-12-02 17:18:55,475][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 17:18:55,476][train_mtl.py][line:161][INFO] task:sp,err:1.2045470388619217
+[2024-12-02 17:18:55,476][train_mtl.py][line:161][INFO] task:lt,err:0.4111742492947545
+[2024-12-02 17:18:55,476][train_mtl.py][line:161][INFO] task:cs,err:0.42350719004244236
+[2024-12-02 17:18:55,476][train_mtl.py][line:161][INFO] task:pg,err:0.7363490074664563
+[2024-12-02 17:21:05,284][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 17:21:05,287][train_mtl.py][line:217][INFO] task:sp,err:tensor(5.6735, device='cuda:2'),acc:0.0465509258210659
+[2024-12-02 17:21:05,289][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.9190, device='cuda:2'),acc:0.725104808807373
+[2024-12-02 17:21:05,290][train_mtl.py][line:217][INFO] task:cs,err:tensor(2.4100, device='cuda:2'),acc:0.1780981421470642
+[2024-12-02 17:21:05,292][train_mtl.py][line:217][INFO] task:pg,err:tensor(4.8608, device='cuda:2'),acc:0.05195697769522667
+[2024-12-02 17:21:05,302][train_mtl.py][line:100][INFO] ---------------epoch 13---------------
+lr: [0.0004567772145415833]
+[2024-12-02 17:27:13,415][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 17:27:13,416][train_mtl.py][line:161][INFO] task:sp,err:1.1479028430018392
+[2024-12-02 17:27:13,416][train_mtl.py][line:161][INFO] task:lt,err:0.3864226991480047
+[2024-12-02 17:27:13,416][train_mtl.py][line:161][INFO] task:cs,err:0.40145024594727097
+[2024-12-02 17:27:13,416][train_mtl.py][line:161][INFO] task:pg,err:0.7055906463753093
+[2024-12-02 17:29:25,786][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 17:29:25,790][train_mtl.py][line:217][INFO] task:sp,err:tensor(1.6838, device='cuda:2'),acc:0.5054060220718384
+[2024-12-02 17:29:25,791][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.4257, device='cuda:2'),acc:0.8296568393707275
+[2024-12-02 17:29:25,792][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.4419, device='cuda:2'),acc:0.8192514181137085
+[2024-12-02 17:29:25,794][train_mtl.py][line:217][INFO] task:pg,err:tensor(1.2503, device='cuda:2'),acc:0.5895258784294128
+[2024-12-02 17:29:25,804][train_mtl.py][line:100][INFO] ---------------epoch 14---------------
+lr: [0.0004534507205510152]
+[2024-12-02 17:35:34,561][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 17:35:34,561][train_mtl.py][line:161][INFO] task:sp,err:1.0802732289254249
+[2024-12-02 17:35:34,562][train_mtl.py][line:161][INFO] task:lt,err:0.3623315968088337
+[2024-12-02 17:35:34,562][train_mtl.py][line:161][INFO] task:cs,err:0.3754186278039759
+[2024-12-02 17:35:34,562][train_mtl.py][line:161][INFO] task:pg,err:0.6610311819956853
+[2024-12-02 17:37:46,333][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 17:37:46,336][train_mtl.py][line:217][INFO] task:sp,err:tensor(4.7690, device='cuda:2'),acc:0.13003267347812653
+[2024-12-02 17:37:46,338][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.7564, device='cuda:2'),acc:0.7237796187400818
+[2024-12-02 17:37:46,339][train_mtl.py][line:217][INFO] task:cs,err:tensor(1.8271, device='cuda:2'),acc:0.3817470371723175
+[2024-12-02 17:37:46,340][train_mtl.py][line:217][INFO] task:pg,err:tensor(3.8344, device='cuda:2'),acc:0.191238135099411
+[2024-12-02 17:37:46,353][train_mtl.py][line:100][INFO] ---------------epoch 15---------------
+lr: [0.0004501242290757472]
+[2024-12-02 17:43:54,577][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 17:43:54,577][train_mtl.py][line:161][INFO] task:sp,err:1.20905102549733
+[2024-12-02 17:43:54,578][train_mtl.py][line:161][INFO] task:lt,err:0.382109554601716
+[2024-12-02 17:43:54,578][train_mtl.py][line:161][INFO] task:cs,err:0.41659151663730193
+[2024-12-02 17:43:54,578][train_mtl.py][line:161][INFO] task:pg,err:0.7558858179962719
+[2024-12-02 17:46:03,302][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 17:46:03,305][train_mtl.py][line:217][INFO] task:sp,err:tensor(3.0976, device='cuda:2'),acc:0.2780434489250183
+[2024-12-02 17:46:03,307][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.5186, device='cuda:2'),acc:0.7998008728027344
+[2024-12-02 17:46:03,308][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.6765, device='cuda:2'),acc:0.7386234402656555
+[2024-12-02 17:46:03,310][train_mtl.py][line:217][INFO] task:pg,err:tensor(1.7992, device='cuda:2'),acc:0.49585607647895813
+[2024-12-02 17:46:03,319][train_mtl.py][line:100][INFO] ---------------epoch 16---------------
+lr: [0.00044679774017114125]
+[2024-12-02 17:52:09,831][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 17:52:09,832][train_mtl.py][line:161][INFO] task:sp,err:1.0827995957611325
+[2024-12-02 17:52:09,832][train_mtl.py][line:161][INFO] task:lt,err:0.35016433186047563
+[2024-12-02 17:52:09,832][train_mtl.py][line:161][INFO] task:cs,err:0.3700273061965729
+[2024-12-02 17:52:09,832][train_mtl.py][line:161][INFO] task:pg,err:0.6701707710752954
+[2024-12-02 17:54:22,021][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 17:54:22,024][train_mtl.py][line:217][INFO] task:sp,err:tensor(1.0087, device='cuda:2'),acc:0.6826066970825195
+[2024-12-02 17:54:22,026][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.3652, device='cuda:2'),acc:0.854976236820221
+[2024-12-02 17:54:22,027][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.3485, device='cuda:2'),acc:0.8596951365470886
+[2024-12-02 17:54:22,028][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.6396, device='cuda:2'),acc:0.7790881991386414
+[2024-12-02 17:54:22,400][train_mtl.py][line:100][INFO] ---------------epoch 17---------------
+lr: [0.0004434712538941964]
+[2024-12-02 18:00:30,682][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 18:00:30,683][train_mtl.py][line:161][INFO] task:sp,err:0.9842017351330578
+[2024-12-02 18:00:30,683][train_mtl.py][line:161][INFO] task:lt,err:0.32091433711193657
+[2024-12-02 18:00:30,683][train_mtl.py][line:161][INFO] task:cs,err:0.33781439112824996
+[2024-12-02 18:00:30,683][train_mtl.py][line:161][INFO] task:pg,err:0.6066592510763582
+[2024-12-02 18:02:43,265][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 18:02:43,268][train_mtl.py][line:217][INFO] task:sp,err:tensor(1.4616, device='cuda:2'),acc:0.5711060166358948
+[2024-12-02 18:02:43,270][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.3499, device='cuda:2'),acc:0.8647786378860474
+[2024-12-02 18:02:43,271][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.4728, device='cuda:2'),acc:0.813515841960907
+[2024-12-02 18:02:43,273][train_mtl.py][line:217][INFO] task:pg,err:tensor(1.0211, device='cuda:2'),acc:0.664158821105957
+[2024-12-02 18:02:43,281][train_mtl.py][line:100][INFO] ---------------epoch 18---------------
+lr: [0.00044014477030360915]
+[2024-12-02 18:08:51,844][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 18:08:51,845][train_mtl.py][line:161][INFO] task:sp,err:0.9416268011489948
+[2024-12-02 18:08:51,845][train_mtl.py][line:161][INFO] task:lt,err:0.30714438063698213
+[2024-12-02 18:08:51,845][train_mtl.py][line:161][INFO] task:cs,err:0.31816597710122596
+[2024-12-02 18:08:51,845][train_mtl.py][line:161][INFO] task:pg,err:0.578925444112791
+[2024-12-02 18:11:04,104][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 18:11:04,107][train_mtl.py][line:217][INFO] task:sp,err:tensor(1.2696, device='cuda:2'),acc:0.6111711263656616
+[2024-12-02 18:11:04,109][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.3016, device='cuda:2'),acc:0.8821607232093811
+[2024-12-02 18:11:04,110][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.2995, device='cuda:2'),acc:0.8807023167610168
+[2024-12-02 18:11:04,111][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.8474, device='cuda:2'),acc:0.7115792036056519
+[2024-12-02 18:11:04,121][train_mtl.py][line:100][INFO] ---------------epoch 19---------------
+lr: [0.00043681828945983734]
+[2024-12-02 18:17:12,521][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 18:17:12,522][train_mtl.py][line:161][INFO] task:sp,err:0.8746242648238068
+[2024-12-02 18:17:12,522][train_mtl.py][line:161][INFO] task:lt,err:0.28910520261192657
+[2024-12-02 18:17:12,522][train_mtl.py][line:161][INFO] task:cs,err:0.29740202088247647
+[2024-12-02 18:17:12,522][train_mtl.py][line:161][INFO] task:pg,err:0.5370381000367078
+[2024-12-02 18:19:23,816][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 18:19:23,820][train_mtl.py][line:217][INFO] task:sp,err:tensor(1.8660, device='cuda:2'),acc:0.48639723658561707
+[2024-12-02 18:19:23,821][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.4663, device='cuda:2'),acc:0.8149392008781433
+[2024-12-02 18:19:23,823][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.8672, device='cuda:2'),acc:0.669634997844696
+[2024-12-02 18:19:23,824][train_mtl.py][line:217][INFO] task:pg,err:tensor(1.4042, device='cuda:2'),acc:0.5578328371047974
+[2024-12-02 18:19:23,832][train_mtl.py][line:100][INFO] ---------------epoch 20---------------
+lr: [0.00043349181142516685]
+[2024-12-02 18:25:31,583][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 18:25:31,584][train_mtl.py][line:161][INFO] task:sp,err:0.872190199948691
+[2024-12-02 18:25:31,584][train_mtl.py][line:161][INFO] task:lt,err:0.2774234427647157
+[2024-12-02 18:25:31,584][train_mtl.py][line:161][INFO] task:cs,err:0.2940973951057954
+[2024-12-02 18:25:31,584][train_mtl.py][line:161][INFO] task:pg,err:0.5400825383571478
+[2024-12-02 18:27:44,114][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 18:27:44,117][train_mtl.py][line:217][INFO] task:sp,err:tensor(2.3265, device='cuda:2'),acc:0.4075922966003418
+[2024-12-02 18:27:44,119][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.4420, device='cuda:2'),acc:0.8253796696662903
+[2024-12-02 18:27:44,120][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.4698, device='cuda:2'),acc:0.8194407224655151
+[2024-12-02 18:27:44,121][train_mtl.py][line:217][INFO] task:pg,err:tensor(1.2644, device='cuda:2'),acc:0.6227755546569824
+[2024-12-02 18:27:44,131][train_mtl.py][line:100][INFO] ---------------epoch 21---------------
+lr: [0.000430165336263781]
+[2024-12-02 18:33:52,113][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 18:33:52,113][train_mtl.py][line:161][INFO] task:sp,err:0.789442019237505
+[2024-12-02 18:33:52,114][train_mtl.py][line:161][INFO] task:lt,err:0.2565829179191089
+[2024-12-02 18:33:52,114][train_mtl.py][line:161][INFO] task:cs,err:0.26640127026117766
+[2024-12-02 18:33:52,114][train_mtl.py][line:161][INFO] task:pg,err:0.48732283086209865
+[2024-12-02 18:36:03,814][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 18:36:03,817][train_mtl.py][line:217][INFO] task:sp,err:tensor(2.3574, device='cuda:2'),acc:0.40726977586746216
+[2024-12-02 18:36:03,819][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.4041, device='cuda:2'),acc:0.8434979915618896
+[2024-12-02 18:36:03,820][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.5879, device='cuda:2'),acc:0.7695382237434387
+[2024-12-02 18:36:03,821][train_mtl.py][line:217][INFO] task:pg,err:tensor(1.7254, device='cuda:2'),acc:0.4950917959213257
+[2024-12-02 18:36:03,830][train_mtl.py][line:100][INFO] ---------------epoch 22---------------
+lr: [0.00042683886404183333]
+[2024-12-02 18:42:12,607][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 18:42:12,608][train_mtl.py][line:161][INFO] task:sp,err:0.7555358255659783
+[2024-12-02 18:42:12,608][train_mtl.py][line:161][INFO] task:lt,err:0.24404146256563547
+[2024-12-02 18:42:12,608][train_mtl.py][line:161][INFO] task:cs,err:0.2550794090945404
+[2024-12-02 18:42:12,608][train_mtl.py][line:161][INFO] task:pg,err:0.46858819735633744
+[2024-12-02 18:44:24,803][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 18:44:24,806][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.8501, device='cuda:2'),acc:0.7242984771728516
+[2024-12-02 18:44:24,808][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.2485, device='cuda:2'),acc:0.9024807810783386
+[2024-12-02 18:44:24,809][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.2835, device='cuda:2'),acc:0.8849093317985535
+[2024-12-02 18:44:24,811][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.5347, device='cuda:2'),acc:0.8127515316009521
+[2024-12-02 18:44:25,190][train_mtl.py][line:100][INFO] ---------------epoch 23---------------
+lr: [0.00042351239482752383]
+[2024-12-02 18:50:33,761][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 18:50:33,762][train_mtl.py][line:161][INFO] task:sp,err:0.7303565636381403
+[2024-12-02 18:50:33,762][train_mtl.py][line:161][INFO] task:lt,err:0.23405069446230267
+[2024-12-02 18:50:33,762][train_mtl.py][line:161][INFO] task:cs,err:0.24385838247054106
+[2024-12-02 18:50:33,762][train_mtl.py][line:161][INFO] task:pg,err:0.4514690888719959
+[2024-12-02 18:52:46,181][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 18:52:46,185][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.7956, device='cuda:2'),acc:0.7453126311302185
+[2024-12-02 18:52:46,186][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.2407, device='cuda:2'),acc:0.9090787768363953
+[2024-12-02 18:52:46,188][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.3066, device='cuda:2'),acc:0.8840328454971313
+[2024-12-02 18:52:46,190][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.5172, device='cuda:2'),acc:0.8242998719215393
+[2024-12-02 18:52:46,561][train_mtl.py][line:100][INFO] ---------------epoch 24---------------
+lr: [0.0004201859286911791]
+[2024-12-02 18:58:53,457][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 18:58:53,457][train_mtl.py][line:161][INFO] task:sp,err:0.6984898368795435
+[2024-12-02 18:58:53,457][train_mtl.py][line:161][INFO] task:lt,err:0.22464490473478824
+[2024-12-02 18:58:53,457][train_mtl.py][line:161][INFO] task:cs,err:0.2338241490867588
+[2024-12-02 18:58:53,457][train_mtl.py][line:161][INFO] task:pg,err:0.43384924176689627
+[2024-12-02 19:01:04,022][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 19:01:04,026][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.7525, device='cuda:2'),acc:0.75789874792099
+[2024-12-02 19:01:04,028][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.2243, device='cuda:2'),acc:0.9136714935302734
+[2024-12-02 19:01:04,029][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.2648, device='cuda:2'),acc:0.8967381119728088
+[2024-12-02 19:01:04,030][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.5038, device='cuda:2'),acc:0.8260387778282166
+[2024-12-02 19:01:04,392][train_mtl.py][line:100][INFO] ---------------epoch 25---------------
+lr: [0.0004168594657053351]
+[2024-12-02 19:07:11,930][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 19:07:11,931][train_mtl.py][line:161][INFO] task:sp,err:0.650085555402549
+[2024-12-02 19:07:11,931][train_mtl.py][line:161][INFO] task:lt,err:0.20958955554695397
+[2024-12-02 19:07:11,931][train_mtl.py][line:161][INFO] task:cs,err:0.21891051525627817
+[2024-12-02 19:07:11,931][train_mtl.py][line:161][INFO] task:pg,err:0.4069120052394333
+[2024-12-02 19:09:24,003][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 19:09:24,006][train_mtl.py][line:217][INFO] task:sp,err:tensor(1.3003, device='cuda:2'),acc:0.6382083892822266
+[2024-12-02 19:09:24,008][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.2556, device='cuda:2'),acc:0.9012677073478699
+[2024-12-02 19:09:24,009][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.3101, device='cuda:2'),acc:0.8817049860954285
+[2024-12-02 19:09:24,010][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.9148, device='cuda:2'),acc:0.7278884649276733
+[2024-12-02 19:09:24,020][train_mtl.py][line:100][INFO] ---------------epoch 26---------------
+lr: [0.0004135330059448252]
+[2024-12-02 19:15:32,545][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 19:15:32,546][train_mtl.py][line:161][INFO] task:sp,err:0.6236178876011522
+[2024-12-02 19:15:32,546][train_mtl.py][line:161][INFO] task:lt,err:0.19731865773772025
+[2024-12-02 19:15:32,546][train_mtl.py][line:161][INFO] task:cs,err:0.20566739298246958
+[2024-12-02 19:15:32,546][train_mtl.py][line:161][INFO] task:pg,err:0.3874817725036528
+[2024-12-02 19:17:41,651][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 19:17:41,655][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.5229, device='cuda:2'),acc:0.8273640275001526
+[2024-12-02 19:17:41,656][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.1620, device='cuda:2'),acc:0.9397551417350769
+[2024-12-02 19:17:41,657][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.1746, device='cuda:2'),acc:0.9336408972740173
+[2024-12-02 19:17:41,659][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.3479, device='cuda:2'),acc:0.8834368586540222
+[2024-12-02 19:17:42,500][train_mtl.py][line:100][INFO] ---------------epoch 27---------------
+lr: [0.0004102065494868719]
+[2024-12-02 19:23:51,023][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 19:23:51,023][train_mtl.py][line:161][INFO] task:sp,err:0.592088259912871
+[2024-12-02 19:23:51,023][train_mtl.py][line:161][INFO] task:lt,err:0.18887805446357162
+[2024-12-02 19:23:51,023][train_mtl.py][line:161][INFO] task:cs,err:0.1977032158341441
+[2024-12-02 19:23:51,023][train_mtl.py][line:161][INFO] task:pg,err:0.3699517584555633
+[2024-12-02 19:25:59,788][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 19:25:59,791][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.9290, device='cuda:2'),acc:0.7174129486083984
+[2024-12-02 19:25:59,793][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.2371, device='cuda:2'),acc:0.9094854593276978
+[2024-12-02 19:25:59,794][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.4385, device='cuda:2'),acc:0.8317813873291016
+[2024-12-02 19:25:59,795][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.6657, device='cuda:2'),acc:0.7760381102561951
+[2024-12-02 19:25:59,804][train_mtl.py][line:100][INFO] ---------------epoch 28---------------
+lr: [0.00040688009641118235]
+[2024-12-02 19:32:08,459][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 19:32:08,459][train_mtl.py][line:161][INFO] task:sp,err:0.6101102844610081
+[2024-12-02 19:32:08,460][train_mtl.py][line:161][INFO] task:lt,err:0.19120422787182814
+[2024-12-02 19:32:08,460][train_mtl.py][line:161][INFO] task:cs,err:0.2015544438956084
+[2024-12-02 19:32:08,460][train_mtl.py][line:161][INFO] task:pg,err:0.38312373951181666
+[2024-12-02 19:34:20,189][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 19:34:20,192][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.8774, device='cuda:2'),acc:0.7303776741027832
+[2024-12-02 19:34:20,194][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.2049, device='cuda:2'),acc:0.9222538471221924
+[2024-12-02 19:34:20,195][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.3386, device='cuda:2'),acc:0.8680881857872009
+[2024-12-02 19:34:20,196][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.6131, device='cuda:2'),acc:0.7939250469207764
+[2024-12-02 19:34:20,205][train_mtl.py][line:100][INFO] ---------------epoch 29---------------
+lr: [0.00040355364680004984]
+[2024-12-02 19:40:28,874][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 19:40:28,875][train_mtl.py][line:161][INFO] task:sp,err:0.5414916702083774
+[2024-12-02 19:40:28,875][train_mtl.py][line:161][INFO] task:lt,err:0.1704108437874934
+[2024-12-02 19:40:28,875][train_mtl.py][line:161][INFO] task:cs,err:0.18194068262314464
+[2024-12-02 19:40:28,875][train_mtl.py][line:161][INFO] task:pg,err:0.34124500632702887
+[2024-12-02 19:42:36,735][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 19:42:36,739][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.6774, device='cuda:2'),acc:0.7725251913070679
+[2024-12-02 19:42:36,740][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.1570, device='cuda:2'),acc:0.9393624663352966
+[2024-12-02 19:42:36,741][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.1962, device='cuda:2'),acc:0.9222468137741089
+[2024-12-02 19:42:36,743][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.5203, device='cuda:2'),acc:0.8137401938438416
+[2024-12-02 19:42:36,753][train_mtl.py][line:100][INFO] ---------------epoch 30---------------
+lr: [0.0004002272007384588]
+[2024-12-02 19:48:46,108][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 19:48:46,109][train_mtl.py][line:161][INFO] task:sp,err:0.5162038891673921
+[2024-12-02 19:48:46,109][train_mtl.py][line:161][INFO] task:lt,err:0.1638353934342211
+[2024-12-02 19:48:46,109][train_mtl.py][line:161][INFO] task:cs,err:0.1684647674275028
+[2024-12-02 19:48:46,109][train_mtl.py][line:161][INFO] task:pg,err:0.32294406074952414
+[2024-12-02 19:51:00,519][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 19:51:00,522][train_mtl.py][line:217][INFO] task:sp,err:tensor(1.1257, device='cuda:2'),acc:0.670483410358429
+[2024-12-02 19:51:00,524][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.2037, device='cuda:2'),acc:0.9239226579666138
+[2024-12-02 19:51:00,525][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.3791, device='cuda:2'),acc:0.8584470152854919
+[2024-12-02 19:51:00,526][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.8459, device='cuda:2'),acc:0.7345917224884033
+[2024-12-02 19:51:00,537][train_mtl.py][line:100][INFO] ---------------epoch 31---------------
+lr: [0.00039690075831419643]
+[2024-12-02 19:57:09,223][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 19:57:09,224][train_mtl.py][line:161][INFO] task:sp,err:0.556129921983172
+[2024-12-02 19:57:09,224][train_mtl.py][line:161][INFO] task:lt,err:0.1707388262127663
+[2024-12-02 19:57:09,224][train_mtl.py][line:161][INFO] task:cs,err:0.18452595291542007
+[2024-12-02 19:57:09,224][train_mtl.py][line:161][INFO] task:pg,err:0.35335522379491713
+[2024-12-02 19:59:20,828][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 19:59:20,832][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.5717, device='cuda:2'),acc:0.8068686723709106
+[2024-12-02 19:59:20,834][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.1693, device='cuda:2'),acc:0.935702383518219
+[2024-12-02 19:59:20,836][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.2119, device='cuda:2'),acc:0.9171773791313171
+[2024-12-02 19:59:20,837][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.3778, device='cuda:2'),acc:0.8686491250991821
+[2024-12-02 19:59:20,846][train_mtl.py][line:100][INFO] ---------------epoch 32---------------
+lr: [0.00039357431961796864]
+[2024-12-02 20:05:30,023][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 20:05:30,024][train_mtl.py][line:161][INFO] task:sp,err:0.48497826986379555
+[2024-12-02 20:05:30,024][train_mtl.py][line:161][INFO] task:lt,err:0.1519627008665275
+[2024-12-02 20:05:30,024][train_mtl.py][line:161][INFO] task:cs,err:0.15842062615222866
+[2024-12-02 20:05:30,024][train_mtl.py][line:161][INFO] task:pg,err:0.30525226172033726
+[2024-12-02 20:07:43,946][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 20:07:43,950][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.6709, device='cuda:2'),acc:0.7824257612228394
+[2024-12-02 20:07:43,951][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.1710, device='cuda:2'),acc:0.9336479306221008
+[2024-12-02 20:07:43,953][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.2207, device='cuda:2'),acc:0.9158802032470703
+[2024-12-02 20:07:43,954][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.4225, device='cuda:2'),acc:0.8547658920288086
+[2024-12-02 20:07:43,963][train_mtl.py][line:100][INFO] ---------------epoch 33---------------
+lr: [0.0003902478847435229]
+[2024-12-02 20:13:53,642][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 20:13:53,643][train_mtl.py][line:161][INFO] task:sp,err:0.44957541679585733
+[2024-12-02 20:13:53,643][train_mtl.py][line:161][INFO] task:lt,err:0.14292633760121318
+[2024-12-02 20:13:53,643][train_mtl.py][line:161][INFO] task:cs,err:0.14750714761602296
+[2024-12-02 20:13:53,643][train_mtl.py][line:161][INFO] task:pg,err:0.28494106931286256
+[2024-12-02 20:16:06,514][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 20:16:06,518][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.7269, device='cuda:2'),acc:0.7674767374992371
+[2024-12-02 20:16:06,519][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.1700, device='cuda:2'),acc:0.9343491196632385
+[2024-12-02 20:16:06,520][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.1856, device='cuda:2'),acc:0.928501307964325
+[2024-12-02 20:16:06,522][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.5192, device='cuda:2'),acc:0.8241035342216492
+[2024-12-02 20:16:06,531][train_mtl.py][line:100][INFO] ---------------epoch 34---------------
+lr: [0.00038692145378777605]
+[2024-12-02 20:22:15,607][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 20:22:15,608][train_mtl.py][line:161][INFO] task:sp,err:0.42479323663494806
+[2024-12-02 20:22:15,608][train_mtl.py][line:161][INFO] task:lt,err:0.13392554515308433
+[2024-12-02 20:22:15,608][train_mtl.py][line:161][INFO] task:cs,err:0.14060491849700887
+[2024-12-02 20:22:15,608][train_mtl.py][line:161][INFO] task:pg,err:0.26806156691554545
+[2024-12-02 20:24:28,974][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 20:24:28,978][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.9873, device='cuda:2'),acc:0.7190467119216919
+[2024-12-02 20:24:28,979][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.1764, device='cuda:2'),acc:0.9345313906669617
+[2024-12-02 20:24:28,981][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.2376, device='cuda:2'),acc:0.9088404178619385
+[2024-12-02 20:24:28,983][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.8224, device='cuda:2'),acc:0.7481804490089417
+[2024-12-02 20:24:28,992][train_mtl.py][line:100][INFO] ---------------epoch 35---------------
+lr: [0.00038359502685095004]
+[2024-12-02 20:30:39,094][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 20:30:39,095][train_mtl.py][line:161][INFO] task:sp,err:0.4045542042988997
+[2024-12-02 20:30:39,095][train_mtl.py][line:161][INFO] task:lt,err:0.1299217841685652
+[2024-12-02 20:30:39,095][train_mtl.py][line:161][INFO] task:cs,err:0.13447598042292194
+[2024-12-02 20:30:39,095][train_mtl.py][line:161][INFO] task:pg,err:0.25572748659373995
+[2024-12-02 20:32:50,548][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 20:32:50,561][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.3842, device='cuda:2'),acc:0.8669873476028442
+[2024-12-02 20:32:50,563][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.1077, device='cuda:2'),acc:0.9615406394004822
+[2024-12-02 20:32:50,564][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.1561, device='cuda:2'),acc:0.9396079182624817
+[2024-12-02 20:32:50,565][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.2662, device='cuda:2'),acc:0.9073048233985901
+[2024-12-02 20:32:50,939][train_mtl.py][line:100][INFO] ---------------epoch 36---------------
+lr: [0.000380268604036714]
+[2024-12-02 20:38:59,494][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 20:38:59,495][train_mtl.py][line:161][INFO] task:sp,err:0.37889683048625095
+[2024-12-02 20:38:59,495][train_mtl.py][line:161][INFO] task:lt,err:0.11986870245708452
+[2024-12-02 20:38:59,495][train_mtl.py][line:161][INFO] task:cs,err:0.1259290866970599
+[2024-12-02 20:38:59,495][train_mtl.py][line:161][INFO] task:pg,err:0.24302529939613143
+[2024-12-02 20:41:11,565][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 20:41:11,569][train_mtl.py][line:217][INFO] task:sp,err:tensor(1.3310, device='cuda:2'),acc:0.681288480758667
+[2024-12-02 20:41:11,570][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.2741, device='cuda:2'),acc:0.9072347283363342
+[2024-12-02 20:41:11,571][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.2908, device='cuda:2'),acc:0.903770923614502
+[2024-12-02 20:41:11,573][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.6549, device='cuda:2'),acc:0.8099188208580017
+[2024-12-02 20:41:11,581][train_mtl.py][line:100][INFO] ---------------epoch 37---------------
+lr: [0.0003769421854523332]
+[2024-12-02 20:47:20,546][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 20:47:20,547][train_mtl.py][line:161][INFO] task:sp,err:0.37101374712440516
+[2024-12-02 20:47:20,547][train_mtl.py][line:161][INFO] task:lt,err:0.11793596047413099
+[2024-12-02 20:47:20,547][train_mtl.py][line:161][INFO] task:cs,err:0.12364059928934891
+[2024-12-02 20:47:20,547][train_mtl.py][line:161][INFO] task:pg,err:0.2355171302919621
+[2024-12-02 20:49:34,184][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 20:49:34,187][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.4447, device='cuda:2'),acc:0.8533635139465332
+[2024-12-02 20:49:34,189][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0914, device='cuda:2'),acc:0.9668976068496704
+[2024-12-02 20:49:34,190][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.1024, device='cuda:2'),acc:0.9615967273712158
+[2024-12-02 20:49:34,192][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.2909, device='cuda:2'),acc:0.9028173089027405
+[2024-12-02 20:49:34,200][train_mtl.py][line:100][INFO] ---------------epoch 38---------------
+lr: [0.00037361577120882704]
+[2024-12-02 20:55:43,766][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 20:55:43,767][train_mtl.py][line:161][INFO] task:sp,err:0.34514208784053374
+[2024-12-02 20:55:43,767][train_mtl.py][line:161][INFO] task:lt,err:0.10893612322430093
+[2024-12-02 20:55:43,767][train_mtl.py][line:161][INFO] task:cs,err:0.11416127488433898
+[2024-12-02 20:55:43,767][train_mtl.py][line:161][INFO] task:pg,err:0.21898706663738599
+[2024-12-02 20:57:56,736][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 20:57:56,739][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.4074, device='cuda:2'),acc:0.8698270916938782
+[2024-12-02 20:57:56,740][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.1064, device='cuda:2'),acc:0.9609236121177673
+[2024-12-02 20:57:56,742][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.2165, device='cuda:2'),acc:0.9259350299835205
+[2024-12-02 20:57:56,743][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.3339, device='cuda:2'),acc:0.8902803063392639
+[2024-12-02 20:57:57,109][train_mtl.py][line:100][INFO] ---------------epoch 39---------------
+lr: [0.00037028936142113417]
+[2024-12-02 21:04:06,790][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 21:04:06,791][train_mtl.py][line:161][INFO] task:sp,err:0.34631210263375634
+[2024-12-02 21:04:06,791][train_mtl.py][line:161][INFO] task:lt,err:0.11203157379441744
+[2024-12-02 21:04:06,791][train_mtl.py][line:161][INFO] task:cs,err:0.11774944047723616
+[2024-12-02 21:04:06,791][train_mtl.py][line:161][INFO] task:pg,err:0.21812112397559874
+[2024-12-02 21:06:19,901][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 21:06:19,904][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.3086, device='cuda:2'),acc:0.890378475189209
+[2024-12-02 21:06:19,906][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0901, device='cuda:2'),acc:0.9663646817207336
+[2024-12-02 21:06:19,907][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0918, device='cuda:2'),acc:0.9659650325775146
+[2024-12-02 21:06:19,908][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.2034, device='cuda:2'),acc:0.9283400177955627
+[2024-12-02 21:06:20,264][train_mtl.py][line:100][INFO] ---------------epoch 40---------------
+lr: [0.00036696295620828706]
+[2024-12-02 21:12:28,981][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 21:12:28,982][train_mtl.py][line:161][INFO] task:sp,err:0.31214593767702997
+[2024-12-02 21:12:28,982][train_mtl.py][line:161][INFO] task:lt,err:0.10144622836235936
+[2024-12-02 21:12:28,982][train_mtl.py][line:161][INFO] task:cs,err:0.10477550864428073
+[2024-12-02 21:12:28,982][train_mtl.py][line:161][INFO] task:pg,err:0.1981667884840415
+[2024-12-02 21:14:44,086][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 21:14:44,089][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.5070, device='cuda:2'),acc:0.8313677310943604
+[2024-12-02 21:14:44,091][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.1144, device='cuda:2'),acc:0.9574808478355408
+[2024-12-02 21:14:44,092][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.2464, device='cuda:2'),acc:0.9098500609397888
+[2024-12-02 21:14:44,093][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.3948, device='cuda:2'),acc:0.8641966581344604
+[2024-12-02 21:14:44,104][train_mtl.py][line:100][INFO] ---------------epoch 41---------------
+lr: [0.0003636365556935965]
+[2024-12-02 21:20:52,812][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 21:20:52,813][train_mtl.py][line:161][INFO] task:sp,err:0.31600167508517113
+[2024-12-02 21:20:52,813][train_mtl.py][line:161][INFO] task:lt,err:0.10243355170204922
+[2024-12-02 21:20:52,813][train_mtl.py][line:161][INFO] task:cs,err:0.10513148361725824
+[2024-12-02 21:20:52,813][train_mtl.py][line:161][INFO] task:pg,err:0.2012974303085487
+[2024-12-02 21:23:05,991][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 21:23:05,995][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.6500, device='cuda:2'),acc:0.788371741771698
+[2024-12-02 21:23:05,996][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.1533, device='cuda:2'),acc:0.9437448382377625
+[2024-12-02 21:23:05,997][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.1923, device='cuda:2'),acc:0.9273583889007568
+[2024-12-02 21:23:05,999][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.3749, device='cuda:2'),acc:0.8698410987854004
+[2024-12-02 21:23:06,008][train_mtl.py][line:100][INFO] ---------------epoch 42---------------
+lr: [0.0003603101600048448]
+[2024-12-02 21:29:15,976][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 21:29:15,977][train_mtl.py][line:161][INFO] task:sp,err:0.2991285610136452
+[2024-12-02 21:29:15,977][train_mtl.py][line:161][INFO] task:lt,err:0.09567143940008603
+[2024-12-02 21:29:15,977][train_mtl.py][line:161][INFO] task:cs,err:0.10322780752150745
+[2024-12-02 21:29:15,977][train_mtl.py][line:161][INFO] task:pg,err:0.19253214683149245
+[2024-12-02 21:31:29,176][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 21:31:29,179][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.4894, device='cuda:2'),acc:0.837699294090271
+[2024-12-02 21:31:29,180][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0981, device='cuda:2'),acc:0.9631392955780029
+[2024-12-02 21:31:29,182][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.1264, device='cuda:2'),acc:0.9520607590675354
+[2024-12-02 21:31:29,183][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.3490, device='cuda:2'),acc:0.8820485472679138
+[2024-12-02 21:31:29,193][train_mtl.py][line:100][INFO] ---------------epoch 43---------------
+lr: [0.00035698376927449063]
+[2024-12-02 21:37:39,126][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 21:37:39,127][train_mtl.py][line:161][INFO] task:sp,err:0.27756888705950516
+[2024-12-02 21:37:39,127][train_mtl.py][line:161][INFO] task:lt,err:0.09137617773213587
+[2024-12-02 21:37:39,127][train_mtl.py][line:161][INFO] task:cs,err:0.09852298069094027
+[2024-12-02 21:37:39,127][train_mtl.py][line:161][INFO] task:pg,err:0.18081022210262873
+[2024-12-02 21:39:52,971][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 21:39:52,974][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.2438, device='cuda:2'),acc:0.9119465947151184
+[2024-12-02 21:39:52,975][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0711, device='cuda:2'),acc:0.9738321900367737
+[2024-12-02 21:39:52,977][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.1273, device='cuda:2'),acc:0.9510370492935181
+[2024-12-02 21:39:52,978][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.1938, device='cuda:2'),acc:0.9308642745018005
+[2024-12-02 21:39:53,349][train_mtl.py][line:100][INFO] ---------------epoch 44---------------
+lr: [0.00035365738363988495]
+[2024-12-02 21:46:02,807][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 21:46:02,808][train_mtl.py][line:161][INFO] task:sp,err:0.26331979786599435
+[2024-12-02 21:46:02,808][train_mtl.py][line:161][INFO] task:lt,err:0.08542945346684305
+[2024-12-02 21:46:02,808][train_mtl.py][line:161][INFO] task:cs,err:0.09156501350494531
+[2024-12-02 21:46:02,808][train_mtl.py][line:161][INFO] task:pg,err:0.16841822526567465
+[2024-12-02 21:48:15,781][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 21:48:15,784][train_mtl.py][line:217][INFO] task:sp,err:tensor(1.4159, device='cuda:2'),acc:0.6842053532600403
+[2024-12-02 21:48:15,786][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.2049, device='cuda:2'),acc:0.9280946254730225
+[2024-12-02 21:48:15,787][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.4997, device='cuda:2'),acc:0.83915776014328
+[2024-12-02 21:48:15,788][train_mtl.py][line:217][INFO] task:pg,err:tensor(1.0375, device='cuda:2'),acc:0.7490428686141968
+[2024-12-02 21:48:15,799][train_mtl.py][line:100][INFO] ---------------epoch 45---------------
+lr: [0.00035033100324349895]
+[2024-12-02 21:54:24,291][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 21:54:24,292][train_mtl.py][line:161][INFO] task:sp,err:0.29859429045573815
+[2024-12-02 21:54:24,292][train_mtl.py][line:161][INFO] task:lt,err:0.09458048236588915
+[2024-12-02 21:54:24,292][train_mtl.py][line:161][INFO] task:cs,err:0.09969062039016427
+[2024-12-02 21:54:24,292][train_mtl.py][line:161][INFO] task:pg,err:0.1884816941525136
+[2024-12-02 21:56:36,645][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 21:56:36,648][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.3223, device='cuda:2'),acc:0.8827357292175293
+[2024-12-02 21:56:36,649][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0665, device='cuda:2'),acc:0.9755430817604065
+[2024-12-02 21:56:36,650][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.1011, device='cuda:2'),acc:0.9614284038543701
+[2024-12-02 21:56:36,652][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.2352, device='cuda:2'),acc:0.9130474328994751
+[2024-12-02 21:56:36,660][train_mtl.py][line:100][INFO] ---------------epoch 46---------------
+lr: [0.00034700462823316486]
+[2024-12-02 22:02:45,651][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 22:02:45,652][train_mtl.py][line:161][INFO] task:sp,err:0.2322550022622922
+[2024-12-02 22:02:45,652][train_mtl.py][line:161][INFO] task:lt,err:0.07728434955844513
+[2024-12-02 22:02:45,652][train_mtl.py][line:161][INFO] task:cs,err:0.07975696134087923
+[2024-12-02 22:02:45,652][train_mtl.py][line:161][INFO] task:pg,err:0.14914512972940097
+[2024-12-02 22:04:58,614][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 22:04:58,618][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.1767, device='cuda:2'),acc:0.934075653553009
+[2024-12-02 22:04:58,619][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0504, device='cuda:2'),acc:0.9822533130645752
+[2024-12-02 22:04:58,620][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0611, device='cuda:2'),acc:0.9781935214996338
+[2024-12-02 22:04:58,622][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.1209, device='cuda:2'),acc:0.958539605140686
+[2024-12-02 22:04:58,981][train_mtl.py][line:100][INFO] ---------------epoch 47---------------
+lr: [0.0003436782587623306]
+[2024-12-02 22:11:07,985][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 22:11:07,986][train_mtl.py][line:161][INFO] task:sp,err:0.32736535479764006
+[2024-12-02 22:11:07,986][train_mtl.py][line:161][INFO] task:lt,err:0.09972817812870433
+[2024-12-02 22:11:07,986][train_mtl.py][line:161][INFO] task:cs,err:0.11672258086606756
+[2024-12-02 22:11:07,986][train_mtl.py][line:161][INFO] task:pg,err:0.21503861024454757
+[2024-12-02 22:13:21,227][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 22:13:21,230][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.2992, device='cuda:2'),acc:0.8934426307678223
+[2024-12-02 22:13:21,232][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0772, device='cuda:2'),acc:0.9715744256973267
+[2024-12-02 22:13:21,233][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.1339, device='cuda:2'),acc:0.9500694274902344
+[2024-12-02 22:13:21,234][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.2055, device='cuda:2'),acc:0.9286134839057922
+[2024-12-02 22:13:21,243][train_mtl.py][line:100][INFO] ---------------epoch 48---------------
+lr: [0.000340351894990329]
+[2024-12-02 22:19:31,465][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 22:19:31,466][train_mtl.py][line:161][INFO] task:sp,err:0.21306119108950342
+[2024-12-02 22:19:31,466][train_mtl.py][line:161][INFO] task:lt,err:0.07209668833423745
+[2024-12-02 22:19:31,466][train_mtl.py][line:161][INFO] task:cs,err:0.0762841568126545
+[2024-12-02 22:19:31,466][train_mtl.py][line:161][INFO] task:pg,err:0.13974116945808585
+[2024-12-02 22:21:46,920][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 22:21:46,924][train_mtl.py][line:217][INFO] task:sp,err:tensor(1.1877, device='cuda:2'),acc:0.7414491772651672
+[2024-12-02 22:21:46,925][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.2281, device='cuda:2'),acc:0.9292865991592407
+[2024-12-02 22:21:46,927][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.2849, device='cuda:2'),acc:0.9161956906318665
+[2024-12-02 22:21:46,928][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.5548, device='cuda:2'),acc:0.8492476344108582
+[2024-12-02 22:21:46,939][train_mtl.py][line:100][INFO] ---------------epoch 49---------------
+lr: [0.0003370255370826624]
+[2024-12-02 22:27:57,335][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 22:27:57,336][train_mtl.py][line:161][INFO] task:sp,err:0.21554262459382312
+[2024-12-02 22:27:57,336][train_mtl.py][line:161][INFO] task:lt,err:0.07309187755926505
+[2024-12-02 22:27:57,336][train_mtl.py][line:161][INFO] task:cs,err:0.07692978364395929
+[2024-12-02 22:27:57,336][train_mtl.py][line:161][INFO] task:pg,err:0.13882162091094297
+[2024-12-02 22:30:09,663][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 22:30:09,669][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.3025, device='cuda:2'),acc:0.8939124345779419
+[2024-12-02 22:30:09,672][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0812, device='cuda:2'),acc:0.9699617028236389
+[2024-12-02 22:30:09,675][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.1769, device='cuda:2'),acc:0.9335216879844666
+[2024-12-02 22:30:09,678][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.2528, device='cuda:2'),acc:0.9104461073875427
+[2024-12-02 22:30:09,696][train_mtl.py][line:100][INFO] ---------------epoch 50---------------
+lr: [0.0003336991852113043]
+[2024-12-02 22:36:19,951][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 22:36:19,953][train_mtl.py][line:161][INFO] task:sp,err:0.19318243876829014
+[2024-12-02 22:36:19,953][train_mtl.py][line:161][INFO] task:lt,err:0.06614799749340627
+[2024-12-02 22:36:19,953][train_mtl.py][line:161][INFO] task:cs,err:0.07045852990781927
+[2024-12-02 22:36:19,953][train_mtl.py][line:161][INFO] task:pg,err:0.12622474756586802
+[2024-12-02 22:38:34,009][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 22:38:34,012][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.1767, device='cuda:2'),acc:0.9347347617149353
+[2024-12-02 22:38:34,013][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0526, device='cuda:2'),acc:0.9809771776199341
+[2024-12-02 22:38:34,014][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0548, device='cuda:2'),acc:0.9798833131790161
+[2024-12-02 22:38:34,016][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.1065, device='cuda:2'),acc:0.9631743431091309
+[2024-12-02 22:38:34,372][train_mtl.py][line:100][INFO] ---------------epoch 51---------------
+lr: [0.0003303728395550191]
+[2024-12-02 22:44:43,978][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 22:44:43,979][train_mtl.py][line:161][INFO] task:sp,err:0.1929107157292066
+[2024-12-02 22:44:43,979][train_mtl.py][line:161][INFO] task:lt,err:0.06627033706233426
+[2024-12-02 22:44:43,979][train_mtl.py][line:161][INFO] task:cs,err:0.07038189412153267
+[2024-12-02 22:44:43,979][train_mtl.py][line:161][INFO] task:pg,err:0.12630245527187428
+[2024-12-02 22:46:57,500][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 22:46:57,504][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.1669, device='cuda:2'),acc:0.9373711347579956
+[2024-12-02 22:46:57,506][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0477, device='cuda:2'),acc:0.9829544425010681
+[2024-12-02 22:46:57,507][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0623, device='cuda:2'),acc:0.9767841100692749
+[2024-12-02 22:46:57,509][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.1060, device='cuda:2'),acc:0.9631112217903137
+[2024-12-02 22:46:58,337][train_mtl.py][line:100][INFO] ---------------epoch 52---------------
+lr: [0.00032704650029970027]
+[2024-12-02 22:53:07,166][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 22:53:07,167][train_mtl.py][line:161][INFO] task:sp,err:0.20001369641794192
+[2024-12-02 22:53:07,167][train_mtl.py][line:161][INFO] task:lt,err:0.06728299434290275
+[2024-12-02 22:53:07,167][train_mtl.py][line:161][INFO] task:cs,err:0.0704742755636677
+[2024-12-02 22:53:07,167][train_mtl.py][line:161][INFO] task:pg,err:0.1262151704957852
+[2024-12-02 22:55:19,282][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 22:55:19,285][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.1355, device='cuda:2'),acc:0.9499431848526001
+[2024-12-02 22:55:19,286][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0388, device='cuda:2'),acc:0.986474335193634
+[2024-12-02 22:55:19,288][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0719, device='cuda:2'),acc:0.9735517501831055
+[2024-12-02 22:55:19,289][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.1036, device='cuda:2'),acc:0.9648081064224243
+[2024-12-02 22:55:19,639][train_mtl.py][line:100][INFO] ---------------epoch 53---------------
+lr: [0.00032372016763872907]
+[2024-12-02 23:01:29,551][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 23:01:29,552][train_mtl.py][line:161][INFO] task:sp,err:0.17944007919176475
+[2024-12-02 23:01:29,552][train_mtl.py][line:161][INFO] task:lt,err:0.05986526715927399
+[2024-12-02 23:01:29,552][train_mtl.py][line:161][INFO] task:cs,err:0.06427121419667989
+[2024-12-02 23:01:29,552][train_mtl.py][line:161][INFO] task:pg,err:0.1145698023582255
+[2024-12-02 23:03:41,914][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 23:03:41,917][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.3571, device='cuda:2'),acc:0.8868866562843323
+[2024-12-02 23:03:41,919][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0798, device='cuda:2'),acc:0.972198486328125
+[2024-12-02 23:03:41,920][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0955, device='cuda:2'),acc:0.9660912156105042
+[2024-12-02 23:03:41,922][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.2010, device='cuda:2'),acc:0.9330729842185974
+[2024-12-02 23:03:41,932][train_mtl.py][line:100][INFO] ---------------epoch 54---------------
+lr: [0.00032039384177335613]
+[2024-12-02 23:09:51,440][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 23:09:51,441][train_mtl.py][line:161][INFO] task:sp,err:0.17112016513735265
+[2024-12-02 23:09:51,441][train_mtl.py][line:161][INFO] task:lt,err:0.05829870117294205
+[2024-12-02 23:09:51,441][train_mtl.py][line:161][INFO] task:cs,err:0.06402694794733624
+[2024-12-02 23:09:51,441][train_mtl.py][line:161][INFO] task:pg,err:0.11126771690389076
+[2024-12-02 23:12:05,281][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 23:12:05,285][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.1131, device='cuda:2'),acc:0.9565201997756958
+[2024-12-02 23:12:05,286][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0428, device='cuda:2'),acc:0.9847564697265625
+[2024-12-02 23:12:05,288][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0452, device='cuda:2'),acc:0.9836135506629944
+[2024-12-02 23:12:05,289][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0815, device='cuda:2'),acc:0.9722545742988586
+[2024-12-02 23:12:05,659][train_mtl.py][line:100][INFO] ---------------epoch 55---------------
+lr: [0.0003170675229131052]
+[2024-12-02 23:18:15,081][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 23:18:15,082][train_mtl.py][line:161][INFO] task:sp,err:0.16808225571379795
+[2024-12-02 23:18:15,082][train_mtl.py][line:161][INFO] task:lt,err:0.057953304826067045
+[2024-12-02 23:18:15,082][train_mtl.py][line:161][INFO] task:cs,err:0.06147801942498117
+[2024-12-02 23:18:15,082][train_mtl.py][line:161][INFO] task:pg,err:0.10749163753450751
+[2024-12-02 23:20:27,647][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 23:20:27,651][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.1609, device='cuda:2'),acc:0.9412205815315247
+[2024-12-02 23:20:27,652][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0369, device='cuda:2'),acc:0.9872246384620667
+[2024-12-02 23:20:27,653][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0824, device='cuda:2'),acc:0.9699476957321167
+[2024-12-02 23:20:27,655][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.1282, device='cuda:2'),acc:0.9552300572395325
+[2024-12-02 23:20:27,665][train_mtl.py][line:100][INFO] ---------------epoch 56---------------
+lr: [0.00031374121127620316]
+[2024-12-02 23:26:35,498][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 23:26:35,499][train_mtl.py][line:161][INFO] task:sp,err:0.16663955602716732
+[2024-12-02 23:26:35,499][train_mtl.py][line:161][INFO] task:lt,err:0.0586666751040758
+[2024-12-02 23:26:35,500][train_mtl.py][line:161][INFO] task:cs,err:0.06390280252439784
+[2024-12-02 23:26:35,500][train_mtl.py][line:161][INFO] task:pg,err:0.1099423417834552
+[2024-12-02 23:28:46,456][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 23:28:46,460][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.1881, device='cuda:2'),acc:0.9326452612876892
+[2024-12-02 23:28:46,462][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0389, device='cuda:2'),acc:0.986355185508728
+[2024-12-02 23:28:46,463][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0875, device='cuda:2'),acc:0.9673253297805786
+[2024-12-02 23:28:46,464][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.1620, device='cuda:2'),acc:0.9434292912483215
+[2024-12-02 23:28:46,474][train_mtl.py][line:100][INFO] ---------------epoch 57---------------
+lr: [0.00031041490709003607]
+[2024-12-02 23:34:55,624][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 23:34:55,625][train_mtl.py][line:161][INFO] task:sp,err:0.16097157008268617
+[2024-12-02 23:34:55,625][train_mtl.py][line:161][INFO] task:lt,err:0.055279005950616376
+[2024-12-02 23:34:55,625][train_mtl.py][line:161][INFO] task:cs,err:0.06024472113255854
+[2024-12-02 23:34:55,625][train_mtl.py][line:161][INFO] task:pg,err:0.10651821010075249
+[2024-12-02 23:37:08,537][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 23:37:08,541][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.1278, device='cuda:2'),acc:0.9523972868919373
+[2024-12-02 23:37:08,542][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0332, device='cuda:2'),acc:0.9886690378189087
+[2024-12-02 23:37:08,544][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0502, device='cuda:2'),acc:0.9822112321853638
+[2024-12-02 23:37:08,545][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0806, device='cuda:2'),acc:0.9724718928337097
+[2024-12-02 23:37:08,555][train_mtl.py][line:100][INFO] ---------------epoch 58---------------
+lr: [0.0003070886105916354]
+[2024-12-02 23:43:17,617][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 23:43:17,617][train_mtl.py][line:161][INFO] task:sp,err:0.1530223938447612
+[2024-12-02 23:43:17,617][train_mtl.py][line:161][INFO] task:lt,err:0.052223640051181915
+[2024-12-02 23:43:17,617][train_mtl.py][line:161][INFO] task:cs,err:0.05707886015957261
+[2024-12-02 23:43:17,618][train_mtl.py][line:161][INFO] task:pg,err:0.09871222456539427
+[2024-12-02 23:45:30,369][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 23:45:30,373][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.1337, device='cuda:2'),acc:0.9511492252349854
+[2024-12-02 23:45:30,374][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0328, device='cuda:2'),acc:0.9888583421707153
+[2024-12-02 23:45:30,376][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0552, device='cuda:2'),acc:0.9799604415893555
+[2024-12-02 23:45:30,377][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.1052, device='cuda:2'),acc:0.9633987545967102
+[2024-12-02 23:45:30,386][train_mtl.py][line:100][INFO] ---------------epoch 59---------------
+lr: [0.0003037623220281948]
+[2024-12-02 23:51:40,634][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-02 23:51:40,634][train_mtl.py][line:161][INFO] task:sp,err:0.1415989908773999
+[2024-12-02 23:51:40,635][train_mtl.py][line:161][INFO] task:lt,err:0.048094609146612094
+[2024-12-02 23:51:40,635][train_mtl.py][line:161][INFO] task:cs,err:0.05425870649099767
+[2024-12-02 23:51:40,635][train_mtl.py][line:161][INFO] task:pg,err:0.09269535249763436
+[2024-12-02 23:53:54,725][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-02 23:53:54,728][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.7447, device='cuda:2'),acc:0.8219929933547974
+[2024-12-02 23:53:54,730][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0614, device='cuda:2'),acc:0.9786211848258972
+[2024-12-02 23:53:54,732][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.1068, device='cuda:2'),acc:0.9621997475624084
+[2024-12-02 23:53:54,733][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.6081, device='cuda:2'),acc:0.8414225578308105
+[2024-12-02 23:53:54,743][train_mtl.py][line:100][INFO] ---------------epoch 60---------------
+lr: [0.0003004360416576201]
+[2024-12-03 00:00:08,474][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 00:00:08,475][train_mtl.py][line:161][INFO] task:sp,err:0.1396993494794502
+[2024-12-03 00:00:08,475][train_mtl.py][line:161][INFO] task:lt,err:0.04910990937736693
+[2024-12-03 00:00:08,475][train_mtl.py][line:161][INFO] task:cs,err:0.05131075046044755
+[2024-12-03 00:00:08,475][train_mtl.py][line:161][INFO] task:pg,err:0.09011121033007032
+[2024-12-03 00:02:22,973][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 00:02:22,976][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.6323, device='cuda:2'),acc:0.8233883380889893
+[2024-12-03 00:02:22,977][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.1013, device='cuda:2'),acc:0.9657406210899353
+[2024-12-03 00:02:22,979][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.1695, device='cuda:2'),acc:0.9430436491966248
+[2024-12-03 00:02:22,980][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.4301, device='cuda:2'),acc:0.8675622940063477
+[2024-12-03 00:02:22,989][train_mtl.py][line:100][INFO] ---------------epoch 61---------------
+lr: [0.00029710976974911654]
+[2024-12-03 00:08:36,194][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 00:08:36,195][train_mtl.py][line:161][INFO] task:sp,err:0.14635553945611407
+[2024-12-03 00:08:36,195][train_mtl.py][line:161][INFO] task:lt,err:0.0502038404892583
+[2024-12-03 00:08:36,195][train_mtl.py][line:161][INFO] task:cs,err:0.054655205503991854
+[2024-12-03 00:08:36,195][train_mtl.py][line:161][INFO] task:pg,err:0.09489636685881582
+[2024-12-03 00:10:51,786][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 00:10:51,789][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0872, device='cuda:2'),acc:0.9675987362861633
+[2024-12-03 00:10:51,791][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0271, device='cuda:2'),acc:0.9907164573669434
+[2024-12-03 00:10:51,792][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0627, device='cuda:2'),acc:0.9766439199447632
+[2024-12-03 00:10:51,794][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0743, device='cuda:2'),acc:0.9744071364402771
+[2024-12-03 00:10:52,159][train_mtl.py][line:100][INFO] ---------------epoch 62---------------
+lr: [0.00029378350658381417]
+[2024-12-03 00:17:04,918][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 00:17:04,919][train_mtl.py][line:161][INFO] task:sp,err:0.13217280883263874
+[2024-12-03 00:17:04,919][train_mtl.py][line:161][INFO] task:lt,err:0.046471156573926024
+[2024-12-03 00:17:04,919][train_mtl.py][line:161][INFO] task:cs,err:0.05024177290603414
+[2024-12-03 00:17:04,919][train_mtl.py][line:161][INFO] task:pg,err:0.0858373563945085
+[2024-12-03 00:19:20,858][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 00:19:20,861][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.1153, device='cuda:2'),acc:0.9568217396736145
+[2024-12-03 00:19:20,862][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0342, device='cuda:2'),acc:0.9882413148880005
+[2024-12-03 00:19:20,864][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0510, device='cuda:2'),acc:0.981559157371521
+[2024-12-03 00:19:20,865][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0821, device='cuda:2'),acc:0.9721072912216187
+[2024-12-03 00:19:20,873][train_mtl.py][line:100][INFO] ---------------epoch 63---------------
+lr: [0.00029045725245543567]
+[2024-12-03 00:25:36,261][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 00:25:36,262][train_mtl.py][line:161][INFO] task:sp,err:0.13145170814090676
+[2024-12-03 00:25:36,262][train_mtl.py][line:161][INFO] task:lt,err:0.04477387222207405
+[2024-12-03 00:25:36,262][train_mtl.py][line:161][INFO] task:cs,err:0.05191735073376994
+[2024-12-03 00:25:36,262][train_mtl.py][line:161][INFO] task:pg,err:0.0863315322521058
+[2024-12-03 00:27:54,083][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 00:27:54,086][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.2570, device='cuda:2'),acc:0.9106424450874329
+[2024-12-03 00:27:54,088][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0450, device='cuda:2'),acc:0.9839571714401245
+[2024-12-03 00:27:54,089][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.1033, device='cuda:2'),acc:0.9632654786109924
+[2024-12-03 00:27:54,090][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.1961, device='cuda:2'),acc:0.9301350712776184
+[2024-12-03 00:27:54,100][train_mtl.py][line:100][INFO] ---------------epoch 64---------------
+lr: [0.0002871310076710091]
+[2024-12-03 00:34:07,875][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 00:34:07,876][train_mtl.py][line:161][INFO] task:sp,err:0.13811945039909201
+[2024-12-03 00:34:07,876][train_mtl.py][line:161][INFO] task:lt,err:0.04621930535674303
+[2024-12-03 00:34:07,876][train_mtl.py][line:161][INFO] task:cs,err:0.05435172946459347
+[2024-12-03 00:34:07,876][train_mtl.py][line:161][INFO] task:pg,err:0.091284548980998
+[2024-12-03 00:36:25,332][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 00:36:25,335][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0624, device='cuda:2'),acc:0.9756552577018738
+[2024-12-03 00:36:25,336][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0185, device='cuda:2'),acc:0.9940961003303528
+[2024-12-03 00:36:25,337][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0232, device='cuda:2'),acc:0.9925044775009155
+[2024-12-03 00:36:25,339][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0383, device='cuda:2'),acc:0.9882132411003113
+[2024-12-03 00:36:25,693][train_mtl.py][line:100][INFO] ---------------epoch 65---------------
+lr: [0.0002838047725516303]
+[2024-12-03 00:42:38,110][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 00:42:38,110][train_mtl.py][line:161][INFO] task:sp,err:0.11362468431723284
+[2024-12-03 00:42:38,110][train_mtl.py][line:161][INFO] task:lt,err:0.03922378253256837
+[2024-12-03 00:42:38,111][train_mtl.py][line:161][INFO] task:cs,err:0.04433501920486976
+[2024-12-03 00:42:38,111][train_mtl.py][line:161][INFO] task:pg,err:0.07407350115269631
+[2024-12-03 00:44:52,590][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 00:44:52,593][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.1514, device='cuda:2'),acc:0.9444109201431274
+[2024-12-03 00:44:52,594][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0244, device='cuda:2'),acc:0.9916419982910156
+[2024-12-03 00:44:52,596][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0478, device='cuda:2'),acc:0.982638955116272
+[2024-12-03 00:44:52,597][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.1220, device='cuda:2'),acc:0.9559522867202759
+[2024-12-03 00:44:52,608][train_mtl.py][line:100][INFO] ---------------epoch 66---------------
+lr: [0.00028047854743327766]
+[2024-12-03 00:51:05,457][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 00:51:05,458][train_mtl.py][line:161][INFO] task:sp,err:0.12156397743814892
+[2024-12-03 00:51:05,458][train_mtl.py][line:161][INFO] task:lt,err:0.041221079286318144
+[2024-12-03 00:51:05,458][train_mtl.py][line:161][INFO] task:cs,err:0.045380211099852005
+[2024-12-03 00:51:05,458][train_mtl.py][line:161][INFO] task:pg,err:0.07868967327074362
+[2024-12-03 00:53:22,231][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 00:53:22,235][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0867, device='cuda:2'),acc:0.967633843421936
+[2024-12-03 00:53:22,236][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0205, device='cuda:2'),acc:0.9931845664978027
+[2024-12-03 00:53:22,237][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0232, device='cuda:2'),acc:0.9920557141304016
+[2024-12-03 00:53:22,238][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0546, device='cuda:2'),acc:0.9816432595252991
+[2024-12-03 00:53:22,247][train_mtl.py][line:100][INFO] ---------------epoch 67---------------
+lr: [0.0002771523326676848]
+[2024-12-03 00:59:36,179][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 00:59:36,182][train_mtl.py][line:161][INFO] task:sp,err:0.1078287181346775
+[2024-12-03 00:59:36,182][train_mtl.py][line:161][INFO] task:lt,err:0.03791475476097915
+[2024-12-03 00:59:36,182][train_mtl.py][line:161][INFO] task:cs,err:0.04247559568278127
+[2024-12-03 00:59:36,182][train_mtl.py][line:161][INFO] task:pg,err:0.07321667288905466
+[2024-12-03 01:01:53,388][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 01:01:53,391][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0871, device='cuda:2'),acc:0.9678581953048706
+[2024-12-03 01:01:53,393][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0211, device='cuda:2'),acc:0.9927007555961609
+[2024-12-03 01:01:53,394][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0340, device='cuda:2'),acc:0.9877224564552307
+[2024-12-03 01:01:53,396][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0680, device='cuda:2'),acc:0.9760759472846985
+[2024-12-03 01:01:53,404][train_mtl.py][line:100][INFO] ---------------epoch 68---------------
+lr: [0.00027382612862327465]
+[2024-12-03 01:08:16,184][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 01:08:16,184][train_mtl.py][line:161][INFO] task:sp,err:0.10657646228279267
+[2024-12-03 01:08:16,184][train_mtl.py][line:161][INFO] task:lt,err:0.03748356480268644
+[2024-12-03 01:08:16,184][train_mtl.py][line:161][INFO] task:cs,err:0.04278553329356067
+[2024-12-03 01:08:16,184][train_mtl.py][line:161][INFO] task:pg,err:0.07069981012206811
+[2024-12-03 01:10:44,172][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 01:10:44,176][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0703, device='cuda:2'),acc:0.9726752638816833
+[2024-12-03 01:10:44,178][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0214, device='cuda:2'),acc:0.9929602146148682
+[2024-12-03 01:10:44,179][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0276, device='cuda:2'),acc:0.9902046322822571
+[2024-12-03 01:10:44,181][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0492, device='cuda:2'),acc:0.9831297397613525
+[2024-12-03 01:10:44,191][train_mtl.py][line:100][INFO] ---------------epoch 69---------------
+lr: [0.0002704999356861614]
+[2024-12-03 01:16:57,447][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 01:16:57,448][train_mtl.py][line:161][INFO] task:sp,err:0.10794193882469114
+[2024-12-03 01:16:57,448][train_mtl.py][line:161][INFO] task:lt,err:0.03637328303021776
+[2024-12-03 01:16:57,448][train_mtl.py][line:161][INFO] task:cs,err:0.04130516811176301
+[2024-12-03 01:16:57,448][train_mtl.py][line:161][INFO] task:pg,err:0.06958277295571524
+[2024-12-03 01:19:13,159][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 01:19:13,162][train_mtl.py][line:217][INFO] task:sp,err:tensor(3.7353, device='cuda:2'),acc:0.5101600289344788
+[2024-12-03 01:19:13,164][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.5440, device='cuda:2'),acc:0.8658654689788818
+[2024-12-03 01:19:13,165][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.6628, device='cuda:2'),acc:0.8522766828536987
+[2024-12-03 01:19:13,167][train_mtl.py][line:217][INFO] task:pg,err:tensor(1.6581, device='cuda:2'),acc:0.6997714042663574
+[2024-12-03 01:19:13,176][train_mtl.py][line:100][INFO] ---------------epoch 70---------------
+lr: [0.00026717375426122536]
+[2024-12-03 01:25:21,655][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 01:25:21,655][train_mtl.py][line:161][INFO] task:sp,err:0.10692650736211896
+[2024-12-03 01:25:21,655][train_mtl.py][line:161][INFO] task:lt,err:0.0398682258091867
+[2024-12-03 01:25:21,655][train_mtl.py][line:161][INFO] task:cs,err:0.043486367256569486
+[2024-12-03 01:25:21,656][train_mtl.py][line:161][INFO] task:pg,err:0.0685747240676538
+[2024-12-03 01:27:35,977][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 01:27:35,980][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0637, device='cuda:2'),acc:0.9757814407348633
+[2024-12-03 01:27:35,982][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0169, device='cuda:2'),acc:0.9944817423820496
+[2024-12-03 01:27:35,983][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0183, device='cuda:2'),acc:0.9942153096199036
+[2024-12-03 01:27:35,984][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0348, device='cuda:2'),acc:0.9889494776725769
+[2024-12-03 01:27:36,355][train_mtl.py][line:100][INFO] ---------------epoch 71---------------
+lr: [0.0002638475847732671]
+[2024-12-03 01:33:45,567][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 01:33:45,568][train_mtl.py][line:161][INFO] task:sp,err:0.09195299804783784
+[2024-12-03 01:33:45,568][train_mtl.py][line:161][INFO] task:lt,err:0.03310819688884841
+[2024-12-03 01:33:45,568][train_mtl.py][line:161][INFO] task:cs,err:0.03750015100972219
+[2024-12-03 01:33:45,568][train_mtl.py][line:161][INFO] task:pg,err:0.06149201681902567
+[2024-12-03 01:35:59,072][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 01:35:59,075][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.1000, device='cuda:2'),acc:0.9637352824211121
+[2024-12-03 01:35:59,076][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0221, device='cuda:2'),acc:0.9921468496322632
+[2024-12-03 01:35:59,078][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0364, device='cuda:2'),acc:0.9869511723518372
+[2024-12-03 01:35:59,079][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0727, device='cuda:2'),acc:0.9750311970710754
+[2024-12-03 01:35:59,089][train_mtl.py][line:100][INFO] ---------------epoch 72---------------
+lr: [0.0002605214276682474]
+[2024-12-03 01:42:08,155][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 01:42:08,155][train_mtl.py][line:161][INFO] task:sp,err:0.09412207320280425
+[2024-12-03 01:42:08,155][train_mtl.py][line:161][INFO] task:lt,err:0.03372554134877099
+[2024-12-03 01:42:08,155][train_mtl.py][line:161][INFO] task:cs,err:0.03674762629597754
+[2024-12-03 01:42:08,155][train_mtl.py][line:161][INFO] task:pg,err:0.06153728277585306
+[2024-12-03 01:44:21,651][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 01:44:21,654][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.1672, device='cuda:2'),acc:0.9489615559577942
+[2024-12-03 01:44:21,656][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0243, device='cuda:2'),acc:0.9914106130599976
+[2024-12-03 01:44:21,657][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0474, device='cuda:2'),acc:0.9826179146766663
+[2024-12-03 01:44:21,658][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.1389, device='cuda:2'),acc:0.9573756456375122
+[2024-12-03 01:44:21,667][train_mtl.py][line:100][INFO] ---------------epoch 73---------------
+lr: [0.000257195283414622]
+[2024-12-03 01:50:31,276][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 01:50:31,277][train_mtl.py][line:161][INFO] task:sp,err:0.12604170934772574
+[2024-12-03 01:50:31,277][train_mtl.py][line:161][INFO] task:lt,err:0.04197792860620714
+[2024-12-03 01:50:31,277][train_mtl.py][line:161][INFO] task:cs,err:0.0487786997891181
+[2024-12-03 01:50:31,277][train_mtl.py][line:161][INFO] task:pg,err:0.08451543589467769
+[2024-12-03 01:52:44,480][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 01:52:44,483][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0597, device='cuda:2'),acc:0.9778779745101929
+[2024-12-03 01:52:44,484][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0147, device='cuda:2'),acc:0.9953792691230774
+[2024-12-03 01:52:44,486][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0193, device='cuda:2'),acc:0.9936473369598389
+[2024-12-03 01:52:44,487][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0435, device='cuda:2'),acc:0.9858222603797913
+[2024-12-03 01:52:44,862][train_mtl.py][line:100][INFO] ---------------epoch 74---------------
+lr: [0.0002538691525047776]
+[2024-12-03 01:58:54,613][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 01:58:54,614][train_mtl.py][line:161][INFO] task:sp,err:0.08341078396391619
+[2024-12-03 01:58:54,614][train_mtl.py][line:161][INFO] task:lt,err:0.03105835276297652
+[2024-12-03 01:58:54,614][train_mtl.py][line:161][INFO] task:cs,err:0.033895420421800625
+[2024-12-03 01:58:54,614][train_mtl.py][line:161][INFO] task:pg,err:0.05283618593992261
+[2024-12-03 02:01:07,437][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 02:01:07,441][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.1866, device='cuda:2'),acc:0.9434292912483215
+[2024-12-03 02:01:07,442][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0238, device='cuda:2'),acc:0.9919294714927673
+[2024-12-03 02:01:07,443][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0471, device='cuda:2'),acc:0.9831086993217468
+[2024-12-03 02:01:07,445][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.1416, device='cuda:2'),acc:0.9569268822669983
+[2024-12-03 02:01:07,455][train_mtl.py][line:100][INFO] ---------------epoch 75---------------
+lr: [0.0002505430354565803]
+[2024-12-03 02:07:17,204][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 02:07:17,205][train_mtl.py][line:161][INFO] task:sp,err:0.0835664475896767
+[2024-12-03 02:07:17,205][train_mtl.py][line:161][INFO] task:lt,err:0.03012337425717159
+[2024-12-03 02:07:17,205][train_mtl.py][line:161][INFO] task:cs,err:0.033858147094846816
+[2024-12-03 02:07:17,205][train_mtl.py][line:161][INFO] task:pg,err:0.05514440280417879
+[2024-12-03 02:09:29,077][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 02:09:29,080][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0477, device='cuda:2'),acc:0.9824355840682983
+[2024-12-03 02:09:29,082][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0154, device='cuda:2'),acc:0.9949585795402527
+[2024-12-03 02:09:29,083][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0256, device='cuda:2'),acc:0.9906603693962097
+[2024-12-03 02:09:29,084][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0434, device='cuda:2'),acc:0.9853945374488831
+[2024-12-03 02:09:29,441][train_mtl.py][line:100][INFO] ---------------epoch 76---------------
+lr: [0.0002472169328150446]
+[2024-12-03 02:15:38,715][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 02:15:38,716][train_mtl.py][line:161][INFO] task:sp,err:0.07987244281318638
+[2024-12-03 02:15:38,716][train_mtl.py][line:161][INFO] task:lt,err:0.029999243075978923
+[2024-12-03 02:15:38,716][train_mtl.py][line:161][INFO] task:cs,err:0.03382738269344493
+[2024-12-03 02:15:38,716][train_mtl.py][line:161][INFO] task:pg,err:0.05517846900787387
+[2024-12-03 02:17:51,258][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 02:17:51,261][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.2121, device='cuda:2'),acc:0.934755802154541
+[2024-12-03 02:17:51,262][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0513, device='cuda:2'),acc:0.98287034034729
+[2024-12-03 02:17:51,264][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.1535, device='cuda:2'),acc:0.9498240351676941
+[2024-12-03 02:17:51,265][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.1942, device='cuda:2'),acc:0.9381704926490784
+[2024-12-03 02:17:51,945][train_mtl.py][line:100][INFO] ---------------epoch 77---------------
+lr: [0.0002438908451541364]
+[2024-12-03 02:24:00,959][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 02:24:00,960][train_mtl.py][line:161][INFO] task:sp,err:0.08742090697576116
+[2024-12-03 02:24:00,960][train_mtl.py][line:161][INFO] task:lt,err:0.03154340780086138
+[2024-12-03 02:24:00,960][train_mtl.py][line:161][INFO] task:cs,err:0.035760069699059205
+[2024-12-03 02:24:00,960][train_mtl.py][line:161][INFO] task:pg,err:0.05861204947911568
+[2024-12-03 02:26:13,748][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 02:26:13,752][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0474, device='cuda:2'),acc:0.9824987053871155
+[2024-12-03 02:26:13,754][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0117, device='cuda:2'),acc:0.9963959455490112
+[2024-12-03 02:26:13,755][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0131, device='cuda:2'),acc:0.9958701133728027
+[2024-12-03 02:26:13,757][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0285, device='cuda:2'),acc:0.9906042814254761
+[2024-12-03 02:26:14,121][train_mtl.py][line:100][INFO] ---------------epoch 78---------------
+lr: [0.0002405647730787214]
+[2024-12-03 02:32:23,352][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 02:32:23,352][train_mtl.py][line:161][INFO] task:sp,err:0.07209364012847622
+[2024-12-03 02:32:23,353][train_mtl.py][line:161][INFO] task:lt,err:0.02672470169031172
+[2024-12-03 02:32:23,353][train_mtl.py][line:161][INFO] task:cs,err:0.029340058540716977
+[2024-12-03 02:32:23,353][train_mtl.py][line:161][INFO] task:pg,err:0.04731886702348719
+[2024-12-03 02:34:36,986][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 02:34:36,990][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0478, device='cuda:2'),acc:0.9824426174163818
+[2024-12-03 02:34:36,991][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0163, device='cuda:2'),acc:0.9944607019424438
+[2024-12-03 02:34:36,993][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0220, device='cuda:2'),acc:0.9922800660133362
+[2024-12-03 02:34:36,994][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0368, device='cuda:2'),acc:0.9877084493637085
+[2024-12-03 02:34:37,004][train_mtl.py][line:100][INFO] ---------------epoch 79---------------
+lr: [0.00023723871722667271]
+[2024-12-03 02:40:45,612][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 02:40:45,613][train_mtl.py][line:161][INFO] task:sp,err:0.07508305263529708
+[2024-12-03 02:40:45,613][train_mtl.py][line:161][INFO] task:lt,err:0.028669778907254754
+[2024-12-03 02:40:45,613][train_mtl.py][line:161][INFO] task:cs,err:0.03100790753895482
+[2024-12-03 02:40:45,613][train_mtl.py][line:161][INFO] task:pg,err:0.049860160758757925
+[2024-12-03 02:42:57,969][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 02:42:57,973][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0366, device='cuda:2'),acc:0.9867478013038635
+[2024-12-03 02:42:57,974][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0140, device='cuda:2'),acc:0.9953863024711609
+[2024-12-03 02:42:57,976][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0255, device='cuda:2'),acc:0.9907795786857605
+[2024-12-03 02:42:57,977][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0283, device='cuda:2'),acc:0.9904990792274475
+[2024-12-03 02:42:58,342][train_mtl.py][line:100][INFO] ---------------epoch 80---------------
+lr: [0.00023391267827115343]
+[2024-12-03 02:49:06,947][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 02:49:06,948][train_mtl.py][line:161][INFO] task:sp,err:0.0715185004722822
+[2024-12-03 02:49:06,948][train_mtl.py][line:161][INFO] task:lt,err:0.027136442508756905
+[2024-12-03 02:49:06,948][train_mtl.py][line:161][INFO] task:cs,err:0.03041622015953689
+[2024-12-03 02:49:06,948][train_mtl.py][line:161][INFO] task:pg,err:0.048151980785952585
+[2024-12-03 02:51:18,679][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 02:51:18,683][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.1043, device='cuda:2'),acc:0.9649062752723694
+[2024-12-03 02:51:18,684][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0237, device='cuda:2'),acc:0.9919785857200623
+[2024-12-03 02:51:18,685][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0905, device='cuda:2'),acc:0.9681527018547058
+[2024-12-03 02:51:18,687][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.1056, device='cuda:2'),acc:0.964050829410553
+[2024-12-03 02:51:18,695][train_mtl.py][line:100][INFO] ---------------epoch 81---------------
+lr: [0.00023058665692309152]
+[2024-12-03 02:57:27,385][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 02:57:27,386][train_mtl.py][line:161][INFO] task:sp,err:0.08052317119509607
+[2024-12-03 02:57:27,386][train_mtl.py][line:161][INFO] task:lt,err:0.02917555283422914
+[2024-12-03 02:57:27,386][train_mtl.py][line:161][INFO] task:cs,err:0.03266523257744583
+[2024-12-03 02:57:27,386][train_mtl.py][line:161][INFO] task:pg,err:0.05127062238883097
+[2024-12-03 02:59:39,907][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 02:59:39,910][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.1466, device='cuda:2'),acc:0.952299177646637
+[2024-12-03 02:59:39,912][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0287, device='cuda:2'),acc:0.989959180355072
+[2024-12-03 02:59:39,913][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0255, device='cuda:2'),acc:0.9909127950668335
+[2024-12-03 02:59:39,914][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0992, device='cuda:2'),acc:0.9672832489013672
+[2024-12-03 02:59:39,923][train_mtl.py][line:100][INFO] ---------------epoch 82---------------
+lr: [0.00022726065393386565]
+[2024-12-03 03:05:48,189][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 03:05:48,190][train_mtl.py][line:161][INFO] task:sp,err:0.06544468438552394
+[2024-12-03 03:05:48,190][train_mtl.py][line:161][INFO] task:lt,err:0.024410693110064507
+[2024-12-03 03:05:48,190][train_mtl.py][line:161][INFO] task:cs,err:0.027047014264455
+[2024-12-03 03:05:48,190][train_mtl.py][line:161][INFO] task:pg,err:0.0433261893572403
+[2024-12-03 03:08:02,355][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 03:08:02,358][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.2102, device='cuda:2'),acc:0.932750403881073
+[2024-12-03 03:08:02,360][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0294, device='cuda:2'),acc:0.9901484847068787
+[2024-12-03 03:08:02,361][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0478, device='cuda:2'),acc:0.9823023676872253
+[2024-12-03 03:08:02,362][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.1626, device='cuda:2'),acc:0.9445511698722839
+[2024-12-03 03:08:02,373][train_mtl.py][line:100][INFO] ---------------epoch 83---------------
+lr: [0.00022393467009822367]
+[2024-12-03 03:14:11,223][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 03:14:11,224][train_mtl.py][line:161][INFO] task:sp,err:0.06039366463420691
+[2024-12-03 03:14:11,224][train_mtl.py][line:161][INFO] task:lt,err:0.02336017475333195
+[2024-12-03 03:14:11,224][train_mtl.py][line:161][INFO] task:cs,err:0.02673669467302417
+[2024-12-03 03:14:11,224][train_mtl.py][line:161][INFO] task:pg,err:0.04099405224115907
+[2024-12-03 03:16:24,248][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 03:16:24,251][train_mtl.py][line:217][INFO] task:sp,err:tensor(1.3956, device='cuda:2'),acc:0.7310437560081482
+[2024-12-03 03:16:24,253][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0993, device='cuda:2'),acc:0.9691413640975952
+[2024-12-03 03:16:24,254][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.2580, device='cuda:2'),acc:0.9267203211784363
+[2024-12-03 03:16:24,256][train_mtl.py][line:217][INFO] task:pg,err:tensor(1.1105, device='cuda:2'),acc:0.7499614357948303
+[2024-12-03 03:16:24,265][train_mtl.py][line:100][INFO] ---------------epoch 84---------------
+lr: [0.0002206087062574577]
+[2024-12-03 03:22:33,229][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 03:22:33,230][train_mtl.py][line:161][INFO] task:sp,err:0.06373155687551399
+[2024-12-03 03:22:33,230][train_mtl.py][line:161][INFO] task:lt,err:0.02347859864894926
+[2024-12-03 03:22:33,230][train_mtl.py][line:161][INFO] task:cs,err:0.02617957266503489
+[2024-12-03 03:22:33,230][train_mtl.py][line:161][INFO] task:pg,err:0.04219704240860118
+[2024-12-03 03:24:45,537][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 03:24:45,541][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0948, device='cuda:2'),acc:0.968068540096283
+[2024-12-03 03:24:45,542][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0129, device='cuda:2'),acc:0.9956877827644348
+[2024-12-03 03:24:45,544][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0174, device='cuda:2'),acc:0.9940820932388306
+[2024-12-03 03:24:45,546][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0704, device='cuda:2'),acc:0.9763423800468445
+[2024-12-03 03:24:45,555][train_mtl.py][line:100][INFO] ---------------epoch 85---------------
+lr: [0.00021728276330286174]
+[2024-12-03 03:30:55,288][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 03:30:55,289][train_mtl.py][line:161][INFO] task:sp,err:0.06793524337919442
+[2024-12-03 03:30:55,289][train_mtl.py][line:161][INFO] task:lt,err:0.024409305857872213
+[2024-12-03 03:30:55,289][train_mtl.py][line:161][INFO] task:cs,err:0.027048554816901996
+[2024-12-03 03:30:55,289][train_mtl.py][line:161][INFO] task:pg,err:0.04473727262559366
+[2024-12-03 03:33:08,476][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 03:33:08,479][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0535, device='cuda:2'),acc:0.9813908338546753
+[2024-12-03 03:33:08,480][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0136, device='cuda:2'),acc:0.9955545663833618
+[2024-12-03 03:33:08,482][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0264, device='cuda:2'),acc:0.9905131459236145
+[2024-12-03 03:33:08,483][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0427, device='cuda:2'),acc:0.9852542877197266
+[2024-12-03 03:33:08,492][train_mtl.py][line:100][INFO] ---------------epoch 86---------------
+lr: [0.00021395684217950285]
+[2024-12-03 03:39:17,893][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 03:39:17,894][train_mtl.py][line:161][INFO] task:sp,err:0.055147008755459234
+[2024-12-03 03:39:17,894][train_mtl.py][line:161][INFO] task:lt,err:0.02119226704377655
+[2024-12-03 03:39:17,894][train_mtl.py][line:161][INFO] task:cs,err:0.02413476212927095
+[2024-12-03 03:39:17,894][train_mtl.py][line:161][INFO] task:pg,err:0.038516661337856854
+[2024-12-03 03:41:30,558][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 03:41:30,561][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0589, device='cuda:2'),acc:0.979799211025238
+[2024-12-03 03:41:30,563][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0117, device='cuda:2'),acc:0.9960243701934814
+[2024-12-03 03:41:30,565][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0263, device='cuda:2'),acc:0.9903798699378967
+[2024-12-03 03:41:30,566][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0519, device='cuda:2'),acc:0.9816853404045105
+[2024-12-03 03:41:30,575][train_mtl.py][line:100][INFO] ---------------epoch 87---------------
+lr: [0.00021063094389033827]
+[2024-12-03 03:47:40,130][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 03:47:40,130][train_mtl.py][line:161][INFO] task:sp,err:0.051074666146944454
+[2024-12-03 03:47:40,130][train_mtl.py][line:161][INFO] task:lt,err:0.019200922717776646
+[2024-12-03 03:47:40,130][train_mtl.py][line:161][INFO] task:cs,err:0.024926766819952356
+[2024-12-03 03:47:40,131][train_mtl.py][line:161][INFO] task:pg,err:0.03530244813528615
+[2024-12-03 03:49:54,408][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 03:49:54,411][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.1649, device='cuda:2'),acc:0.949045717716217
+[2024-12-03 03:49:54,412][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0361, device='cuda:2'),acc:0.9879398345947266
+[2024-12-03 03:49:54,414][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0999, device='cuda:2'),acc:0.9649553298950195
+[2024-12-03 03:49:54,415][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.1387, device='cuda:2'),acc:0.9551599621772766
+[2024-12-03 03:49:54,425][train_mtl.py][line:100][INFO] ---------------epoch 88---------------
+lr: [0.00020730506950071697]
+[2024-12-03 03:56:09,023][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 03:56:09,023][train_mtl.py][line:161][INFO] task:sp,err:0.046774611072419404
+[2024-12-03 03:56:09,024][train_mtl.py][line:161][INFO] task:lt,err:0.017813367114591222
+[2024-12-03 03:56:09,024][train_mtl.py][line:161][INFO] task:cs,err:0.021521436609816248
+[2024-12-03 03:56:09,024][train_mtl.py][line:161][INFO] task:pg,err:0.03296661676702226
+[2024-12-03 03:58:24,544][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 03:58:24,547][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0709, device='cuda:2'),acc:0.9761601090431213
+[2024-12-03 03:58:24,548][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0129, device='cuda:2'),acc:0.9955545663833618
+[2024-12-03 03:58:24,549][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0187, device='cuda:2'),acc:0.9936122894287109
+[2024-12-03 03:58:24,551][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0570, device='cuda:2'),acc:0.9814749956130981
+[2024-12-03 03:58:24,560][train_mtl.py][line:100][INFO] ---------------epoch 89---------------
+lr: [0.00020397922014330806]
+[2024-12-03 04:04:35,882][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 04:04:35,882][train_mtl.py][line:161][INFO] task:sp,err:0.07382652011107314
+[2024-12-03 04:04:35,883][train_mtl.py][line:161][INFO] task:lt,err:0.025756412971328448
+[2024-12-03 04:04:35,883][train_mtl.py][line:161][INFO] task:cs,err:0.0313854341173766
+[2024-12-03 04:04:35,883][train_mtl.py][line:161][INFO] task:pg,err:0.04980893178445684
+[2024-12-03 04:06:52,222][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 04:06:52,225][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0524, device='cuda:2'),acc:0.9817554354667664
+[2024-12-03 04:06:52,227][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0126, device='cuda:2'),acc:0.9956597089767456
+[2024-12-03 04:06:52,228][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0164, device='cuda:2'),acc:0.9945518970489502
+[2024-12-03 04:06:52,229][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0433, device='cuda:2'),acc:0.9852192401885986
+[2024-12-03 04:06:52,240][train_mtl.py][line:100][INFO] ---------------epoch 90---------------
+lr: [0.00020065339702350334]
+[2024-12-03 04:13:03,377][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 04:13:03,378][train_mtl.py][line:161][INFO] task:sp,err:0.04908720846125088
+[2024-12-03 04:13:03,378][train_mtl.py][line:161][INFO] task:lt,err:0.02106933050359098
+[2024-12-03 04:13:03,378][train_mtl.py][line:161][INFO] task:cs,err:0.023193091598593375
+[2024-12-03 04:13:03,378][train_mtl.py][line:161][INFO] task:pg,err:0.0356992942776036
+[2024-12-03 04:15:18,460][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 04:15:18,463][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0217, device='cuda:2'),acc:0.9925675392150879
+[2024-12-03 04:15:18,464][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0065, device='cuda:2'),acc:0.998008668422699
+[2024-12-03 04:15:18,466][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0088, device='cuda:2'),acc:0.9973495602607727
+[2024-12-03 04:15:18,467][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0142, device='cuda:2'),acc:0.9958701133728027
+[2024-12-03 04:15:18,857][train_mtl.py][line:100][INFO] ---------------epoch 91---------------
+lr: [0.00019732760142534913]
+[2024-12-03 04:21:28,967][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 04:21:28,968][train_mtl.py][line:161][INFO] task:sp,err:0.04629753473038961
+[2024-12-03 04:21:28,968][train_mtl.py][line:161][INFO] task:lt,err:0.01837686412248083
+[2024-12-03 04:21:28,968][train_mtl.py][line:161][INFO] task:cs,err:0.022272002759513323
+[2024-12-03 04:21:28,968][train_mtl.py][line:161][INFO] task:pg,err:0.03307849734735031
+[2024-12-03 04:23:40,421][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 04:23:40,425][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.6066, device='cuda:2'),acc:0.851175844669342
+[2024-12-03 04:23:40,427][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0617, device='cuda:2'),acc:0.9792312383651733
+[2024-12-03 04:23:40,428][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.1563, device='cuda:2'),acc:0.9494734406471252
+[2024-12-03 04:23:40,429][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.4182, device='cuda:2'),acc:0.882910966873169
+[2024-12-03 04:23:40,439][train_mtl.py][line:100][INFO] ---------------epoch 92---------------
+lr: [0.00019400183471806817]
+[2024-12-03 04:29:50,858][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 04:29:50,859][train_mtl.py][line:161][INFO] task:sp,err:0.057279068768232855
+[2024-12-03 04:29:50,859][train_mtl.py][line:161][INFO] task:lt,err:0.020278905529343243
+[2024-12-03 04:29:50,859][train_mtl.py][line:161][INFO] task:cs,err:0.025526417774259003
+[2024-12-03 04:29:50,859][train_mtl.py][line:161][INFO] task:pg,err:0.03945511194284667
+[2024-12-03 04:32:04,520][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 04:32:04,523][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0236, device='cuda:2'),acc:0.9918032884597778
+[2024-12-03 04:32:04,524][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0078, device='cuda:2'),acc:0.9975108504295349
+[2024-12-03 04:32:04,526][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0197, device='cuda:2'),acc:0.993079423904419
+[2024-12-03 04:32:04,527][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0216, device='cuda:2'),acc:0.9928760528564453
+[2024-12-03 04:32:04,536][train_mtl.py][line:100][INFO] ---------------epoch 93---------------
+lr: [0.00019067609836324122]
+[2024-12-03 04:38:14,748][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 04:38:14,749][train_mtl.py][line:161][INFO] task:sp,err:0.05585139997016925
+[2024-12-03 04:38:14,749][train_mtl.py][line:161][INFO] task:lt,err:0.0198280675926122
+[2024-12-03 04:38:14,749][train_mtl.py][line:161][INFO] task:cs,err:0.022674857270806193
+[2024-12-03 04:38:14,749][train_mtl.py][line:161][INFO] task:pg,err:0.03739981736557988
+[2024-12-03 04:40:29,586][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 04:40:29,589][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0707, device='cuda:2'),acc:0.9764335751533508
+[2024-12-03 04:40:29,591][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0088, device='cuda:2'),acc:0.9973005056381226
+[2024-12-03 04:40:29,592][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0152, device='cuda:2'),acc:0.9951758980751038
+[2024-12-03 04:40:29,593][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0655, device='cuda:2'),acc:0.9774011969566345
+[2024-12-03 04:40:29,601][train_mtl.py][line:100][INFO] ---------------epoch 94---------------
+lr: [0.00018735039392272804]
+[2024-12-03 04:46:39,589][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 04:46:39,590][train_mtl.py][line:161][INFO] task:sp,err:0.04909065616857651
+[2024-12-03 04:46:39,590][train_mtl.py][line:161][INFO] task:lt,err:0.01805021806206502
+[2024-12-03 04:46:39,590][train_mtl.py][line:161][INFO] task:cs,err:0.02354098895037143
+[2024-12-03 04:46:39,590][train_mtl.py][line:161][INFO] task:pg,err:0.03514931879781343
+[2024-12-03 04:48:52,098][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 04:48:52,102][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0296, device='cuda:2'),acc:0.9895665049552917
+[2024-12-03 04:48:52,104][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0058, device='cuda:2'),acc:0.9982821345329285
+[2024-12-03 04:48:52,105][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0104, device='cuda:2'),acc:0.9969428777694702
+[2024-12-03 04:48:52,107][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0243, device='cuda:2'),acc:0.9918172955513
+[2024-12-03 04:48:52,115][train_mtl.py][line:100][INFO] ---------------epoch 95---------------
+lr: [0.00018402472306741757]
+[2024-12-03 04:55:02,612][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 04:55:02,613][train_mtl.py][line:161][INFO] task:sp,err:0.037279814094226885
+[2024-12-03 04:55:02,613][train_mtl.py][line:161][INFO] task:lt,err:0.014471820527541132
+[2024-12-03 04:55:02,613][train_mtl.py][line:161][INFO] task:cs,err:0.015946396610250213
+[2024-12-03 04:55:02,613][train_mtl.py][line:161][INFO] task:pg,err:0.02681762957945466
+[2024-12-03 04:57:16,482][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 04:57:16,486][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0743, device='cuda:2'),acc:0.9752275347709656
+[2024-12-03 04:57:16,487][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0165, device='cuda:2'),acc:0.9942854046821594
+[2024-12-03 04:57:16,489][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0303, device='cuda:2'),acc:0.9894543290138245
+[2024-12-03 04:57:16,490][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0705, device='cuda:2'),acc:0.976181149482727
+[2024-12-03 04:57:16,499][train_mtl.py][line:100][INFO] ---------------epoch 96---------------
+lr: [0.00018069908758691077]
+[2024-12-03 05:03:26,313][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 05:03:26,313][train_mtl.py][line:161][INFO] task:sp,err:0.060805753378158474
+[2024-12-03 05:03:26,314][train_mtl.py][line:161][INFO] task:lt,err:0.01988347918788375
+[2024-12-03 05:03:26,314][train_mtl.py][line:161][INFO] task:cs,err:0.024656218497759917
+[2024-12-03 05:03:26,314][train_mtl.py][line:161][INFO] task:pg,err:0.04102568241435435
+[2024-12-03 05:05:39,763][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 05:05:39,766][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0232, device='cuda:2'),acc:0.9918944239616394
+[2024-12-03 05:05:39,767][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0081, device='cuda:2'),acc:0.9972513914108276
+[2024-12-03 05:05:39,769][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0097, device='cuda:2'),acc:0.9967675805091858
+[2024-12-03 05:05:39,770][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0166, device='cuda:2'),acc:0.9947832822799683
+[2024-12-03 05:05:39,778][train_mtl.py][line:100][INFO] ---------------epoch 97---------------
+lr: [0.0001773734894002538]
+[2024-12-03 05:11:49,100][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 05:11:49,100][train_mtl.py][line:161][INFO] task:sp,err:0.0405705059484507
+[2024-12-03 05:11:49,100][train_mtl.py][line:161][INFO] task:lt,err:0.01565877285418003
+[2024-12-03 05:11:49,101][train_mtl.py][line:161][INFO] task:cs,err:0.01802528083855221
+[2024-12-03 05:11:49,101][train_mtl.py][line:161][INFO] task:pg,err:0.027732103434554137
+[2024-12-03 05:14:01,766][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 05:14:01,769][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0148, device='cuda:2'),acc:0.9952740669250488
+[2024-12-03 05:14:01,771][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0047, device='cuda:2'),acc:0.9986748099327087
+[2024-12-03 05:14:01,772][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0061, device='cuda:2'),acc:0.99837327003479
+[2024-12-03 05:14:01,773][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0107, device='cuda:2'),acc:0.9968236684799194
+[2024-12-03 05:14:02,142][train_mtl.py][line:100][INFO] ---------------epoch 98---------------
+lr: [0.00017404793056785762]
+[2024-12-03 05:20:11,653][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 05:20:11,654][train_mtl.py][line:161][INFO] task:sp,err:0.03805215210308666
+[2024-12-03 05:20:11,654][train_mtl.py][line:161][INFO] task:lt,err:0.01630788374695458
+[2024-12-03 05:20:11,654][train_mtl.py][line:161][INFO] task:cs,err:0.017869731710924135
+[2024-12-03 05:20:11,654][train_mtl.py][line:161][INFO] task:pg,err:0.027703807764146087
+[2024-12-03 05:22:24,773][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 05:22:24,775][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0397, device='cuda:2'),acc:0.9869090914726257
+[2024-12-03 05:22:24,777][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0049, device='cuda:2'),acc:0.998653769493103
+[2024-12-03 05:22:24,778][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0056, device='cuda:2'),acc:0.9984995126724243
+[2024-12-03 05:22:24,780][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0294, device='cuda:2'),acc:0.990092396736145
+[2024-12-03 05:22:24,790][train_mtl.py][line:100][INFO] ---------------epoch 99---------------
+lr: [0.00017072241330475882]
+[2024-12-03 05:28:34,159][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 05:28:34,160][train_mtl.py][line:161][INFO] task:sp,err:0.034632639887814336
+[2024-12-03 05:28:34,160][train_mtl.py][line:161][INFO] task:lt,err:0.013728732845202167
+[2024-12-03 05:28:34,160][train_mtl.py][line:161][INFO] task:cs,err:0.015175193096380811
+[2024-12-03 05:28:34,160][train_mtl.py][line:161][INFO] task:pg,err:0.024522742394918015
+[2024-12-03 05:30:46,346][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 05:30:46,350][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0181, device='cuda:2'),acc:0.993990957736969
+[2024-12-03 05:30:46,351][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0055, device='cuda:2'),acc:0.9983522295951843
+[2024-12-03 05:30:46,353][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0053, device='cuda:2'),acc:0.99852055311203
+[2024-12-03 05:30:46,354][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0132, device='cuda:2'),acc:0.9958280324935913
+[2024-12-03 05:30:46,364][train_mtl.py][line:100][INFO] ---------------epoch 100---------------
+lr: [0.0001673969399954021]
+[2024-12-03 05:36:57,508][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 05:36:57,508][train_mtl.py][line:161][INFO] task:sp,err:0.030387999607132864
+[2024-12-03 05:36:57,509][train_mtl.py][line:161][INFO] task:lt,err:0.012004336971102503
+[2024-12-03 05:36:57,509][train_mtl.py][line:161][INFO] task:cs,err:0.014173225016932335
+[2024-12-03 05:36:57,509][train_mtl.py][line:161][INFO] task:pg,err:0.02129802854171583
+[2024-12-03 05:39:12,135][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 05:39:12,138][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0187, device='cuda:2'),acc:0.9937946200370789
+[2024-12-03 05:39:12,140][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0038, device='cuda:2'),acc:0.9989973306655884
+[2024-12-03 05:39:12,141][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0054, device='cuda:2'),acc:0.99852055311203
+[2024-12-03 05:39:12,143][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0161, device='cuda:2'),acc:0.9949725866317749
+[2024-12-03 05:39:12,154][train_mtl.py][line:100][INFO] ---------------epoch 101---------------
+lr: [0.00016407151321015158]
+[2024-12-03 05:45:21,530][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 05:45:21,530][train_mtl.py][line:161][INFO] task:sp,err:0.04065923841500824
+[2024-12-03 05:45:21,531][train_mtl.py][line:161][INFO] task:lt,err:0.016280945013130696
+[2024-12-03 05:45:21,531][train_mtl.py][line:161][INFO] task:cs,err:0.01765722962311254
+[2024-12-03 05:45:21,531][train_mtl.py][line:161][INFO] task:pg,err:0.02757858890401838
+[2024-12-03 05:47:35,522][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 05:47:35,525][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0161, device='cuda:2'),acc:0.9947832822799683
+[2024-12-03 05:47:35,527][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0062, device='cuda:2'),acc:0.9979455471038818
+[2024-12-03 05:47:35,528][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0112, device='cuda:2'),acc:0.996115505695343
+[2024-12-03 05:47:35,529][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0159, device='cuda:2'),acc:0.9946640729904175
+[2024-12-03 05:47:36,105][train_mtl.py][line:100][INFO] ---------------epoch 102---------------
+lr: [0.0001607461357237717]
+[2024-12-03 05:53:46,736][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 05:53:46,737][train_mtl.py][line:161][INFO] task:sp,err:0.03776781195188527
+[2024-12-03 05:53:46,737][train_mtl.py][line:161][INFO] task:lt,err:0.01558635857239548
+[2024-12-03 05:53:46,737][train_mtl.py][line:161][INFO] task:cs,err:0.02049768141754154
+[2024-12-03 05:53:46,737][train_mtl.py][line:161][INFO] task:pg,err:0.028313636581146426
+[2024-12-03 05:56:00,155][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 05:56:00,159][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0177, device='cuda:2'),acc:0.9939559102058411
+[2024-12-03 05:56:00,161][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0052, device='cuda:2'),acc:0.9984153509140015
+[2024-12-03 05:56:00,163][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0062, device='cuda:2'),acc:0.998141884803772
+[2024-12-03 05:56:00,164][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0118, device='cuda:2'),acc:0.9962977766990662
+[2024-12-03 05:56:00,175][train_mtl.py][line:100][INFO] ---------------epoch 103---------------
+lr: [0.00015742081053615717]
+[2024-12-03 06:02:09,065][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 06:02:09,066][train_mtl.py][line:161][INFO] task:sp,err:0.026886867546522013
+[2024-12-03 06:02:09,066][train_mtl.py][line:161][INFO] task:lt,err:0.011693776295751569
+[2024-12-03 06:02:09,066][train_mtl.py][line:161][INFO] task:cs,err:0.012348136380217136
+[2024-12-03 06:02:09,066][train_mtl.py][line:161][INFO] task:pg,err:0.01869590124245603
+[2024-12-03 06:04:22,054][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 06:04:22,057][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0166, device='cuda:2'),acc:0.9942713975906372
+[2024-12-03 06:04:22,059][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0031, device='cuda:2'),acc:0.9990954995155334
+[2024-12-03 06:04:22,060][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0039, device='cuda:2'),acc:0.9990183711051941
+[2024-12-03 06:04:22,061][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0111, device='cuda:2'),acc:0.9963539242744446
+[2024-12-03 06:04:22,070][train_mtl.py][line:100][INFO] ---------------epoch 104---------------
+lr: [0.0001540955408956381]
+[2024-12-03 06:10:33,017][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 06:10:33,017][train_mtl.py][line:161][INFO] task:sp,err:0.02824305910030966
+[2024-12-03 06:10:33,017][train_mtl.py][line:161][INFO] task:lt,err:0.012984473950236098
+[2024-12-03 06:10:33,018][train_mtl.py][line:161][INFO] task:cs,err:0.013152462463676148
+[2024-12-03 06:10:33,018][train_mtl.py][line:161][INFO] task:pg,err:0.019398710677413257
+[2024-12-03 06:12:47,848][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 06:12:47,851][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0147, device='cuda:2'),acc:0.9947692155838013
+[2024-12-03 06:12:47,853][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0025, device='cuda:2'),acc:0.9993338584899902
+[2024-12-03 06:12:47,854][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0039, device='cuda:2'),acc:0.998920202255249
+[2024-12-03 06:12:47,856][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0077, device='cuda:2'),acc:0.9977702498435974
+[2024-12-03 06:12:48,244][train_mtl.py][line:100][INFO] ---------------epoch 105---------------
+lr: [0.00015077033032524125]
+[2024-12-03 06:18:58,358][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 06:18:58,359][train_mtl.py][line:161][INFO] task:sp,err:0.02987503617435329
+[2024-12-03 06:18:58,359][train_mtl.py][line:161][INFO] task:lt,err:0.01258665455751108
+[2024-12-03 06:18:58,359][train_mtl.py][line:161][INFO] task:cs,err:0.013109349614738688
+[2024-12-03 06:18:58,359][train_mtl.py][line:161][INFO] task:pg,err:0.02018676340006865
+[2024-12-03 06:21:12,892][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 06:21:12,896][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0528, device='cuda:2'),acc:0.9836135506629944
+[2024-12-03 06:21:12,897][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0047, device='cuda:2'),acc:0.9985696077346802
+[2024-12-03 06:21:12,899][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0068, device='cuda:2'),acc:0.9978052973747253
+[2024-12-03 06:21:12,900][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0485, device='cuda:2'),acc:0.9834873676300049
+[2024-12-03 06:21:12,909][train_mtl.py][line:100][INFO] ---------------epoch 106---------------
+lr: [0.00014744518265235468]
+[2024-12-03 06:27:23,646][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 06:27:23,646][train_mtl.py][line:161][INFO] task:sp,err:0.03445843555736584
+[2024-12-03 06:27:23,647][train_mtl.py][line:161][INFO] task:lt,err:0.012442911575773041
+[2024-12-03 06:27:23,647][train_mtl.py][line:161][INFO] task:cs,err:0.01610576239466615
+[2024-12-03 06:27:23,647][train_mtl.py][line:161][INFO] task:pg,err:0.026937526837968222
+[2024-12-03 06:29:36,866][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 06:29:36,893][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0084, device='cuda:2'),acc:0.9974337220191956
+[2024-12-03 06:29:36,894][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0029, device='cuda:2'),acc:0.9992427229881287
+[2024-12-03 06:29:36,896][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0041, device='cuda:2'),acc:0.9989482164382935
+[2024-12-03 06:29:36,897][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0070, device='cuda:2'),acc:0.9982050061225891
+[2024-12-03 06:29:37,253][train_mtl.py][line:100][INFO] ---------------epoch 107---------------
+lr: [0.00014412010204232112]
+[2024-12-03 06:35:47,240][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 06:35:47,241][train_mtl.py][line:161][INFO] task:sp,err:0.02750610650705916
+[2024-12-03 06:35:47,241][train_mtl.py][line:161][INFO] task:lt,err:0.011831555970605801
+[2024-12-03 06:35:47,241][train_mtl.py][line:161][INFO] task:cs,err:0.013022515118460764
+[2024-12-03 06:35:47,241][train_mtl.py][line:161][INFO] task:pg,err:0.021164743740997322
+[2024-12-03 06:38:00,527][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 06:38:00,531][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.1448, device='cuda:2'),acc:0.9584203958511353
+[2024-12-03 06:38:00,532][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0079, device='cuda:2'),acc:0.9975529313087463
+[2024-12-03 06:38:00,534][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0280, device='cuda:2'),acc:0.990106463432312
+[2024-12-03 06:38:00,535][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.1470, device='cuda:2'),acc:0.9556577801704407
+[2024-12-03 06:38:00,544][train_mtl.py][line:100][INFO] ---------------epoch 108---------------
+lr: [0.00014079509303658143]
+[2024-12-03 06:44:10,732][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 06:44:10,733][train_mtl.py][line:161][INFO] task:sp,err:0.027659219473118446
+[2024-12-03 06:44:10,733][train_mtl.py][line:161][INFO] task:lt,err:0.011354672169749188
+[2024-12-03 06:44:10,733][train_mtl.py][line:161][INFO] task:cs,err:0.011960813992207388
+[2024-12-03 06:44:10,733][train_mtl.py][line:161][INFO] task:pg,err:0.019641731828255776
+[2024-12-03 06:46:24,262][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 06:46:24,266][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0079, device='cuda:2'),acc:0.9973776340484619
+[2024-12-03 06:46:24,268][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0029, device='cuda:2'),acc:0.9992287158966064
+[2024-12-03 06:46:24,269][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0028, device='cuda:2'),acc:0.9992918372154236
+[2024-12-03 06:46:24,271][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0051, device='cuda:2'),acc:0.9985836148262024
+[2024-12-03 06:46:24,639][train_mtl.py][line:100][INFO] ---------------epoch 109---------------
+lr: [0.00013747016059610323]
+[2024-12-03 06:52:34,963][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 06:52:34,964][train_mtl.py][line:161][INFO] task:sp,err:0.026578326217856232
+[2024-12-03 06:52:34,964][train_mtl.py][line:161][INFO] task:lt,err:0.010488699074310309
+[2024-12-03 06:52:34,964][train_mtl.py][line:161][INFO] task:cs,err:0.01195054324758988
+[2024-12-03 06:52:34,964][train_mtl.py][line:161][INFO] task:pg,err:0.01808366211785746
+[2024-12-03 06:54:47,431][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 06:54:47,434][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0094, device='cuda:2'),acc:0.9971041679382324
+[2024-12-03 06:54:47,436][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0027, device='cuda:2'),acc:0.9992918372154236
+[2024-12-03 06:54:47,437][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0049, device='cuda:2'),acc:0.9985485672950745
+[2024-12-03 06:54:47,439][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0081, device='cuda:2'),acc:0.9975318908691406
+[2024-12-03 06:54:47,447][train_mtl.py][line:100][INFO] ---------------epoch 110---------------
+lr: [0.0001341453101509697]
+[2024-12-03 07:00:57,745][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 07:00:57,746][train_mtl.py][line:161][INFO] task:sp,err:0.022874654135569095
+[2024-12-03 07:00:57,746][train_mtl.py][line:161][INFO] task:lt,err:0.010173373393652556
+[2024-12-03 07:00:57,746][train_mtl.py][line:161][INFO] task:cs,err:0.011710679463853317
+[2024-12-03 07:00:57,746][train_mtl.py][line:161][INFO] task:pg,err:0.01647706705119487
+[2024-12-03 07:03:11,069][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 07:03:11,072][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0136, device='cuda:2'),acc:0.9955264925956726
+[2024-12-03 07:03:11,074][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0032, device='cuda:2'),acc:0.9991445541381836
+[2024-12-03 07:03:11,075][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0066, device='cuda:2'),acc:0.9979245066642761
+[2024-12-03 07:03:11,076][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0125, device='cuda:2'),acc:0.9960103034973145
+[2024-12-03 07:03:11,086][train_mtl.py][line:100][INFO] ---------------epoch 111---------------
+lr: [0.00013082054765717254]
+[2024-12-03 07:09:21,180][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 07:09:21,181][train_mtl.py][line:161][INFO] task:sp,err:0.029492552813884992
+[2024-12-03 07:09:21,181][train_mtl.py][line:161][INFO] task:lt,err:0.011046767633911417
+[2024-12-03 07:09:21,181][train_mtl.py][line:161][INFO] task:cs,err:0.012836810770050552
+[2024-12-03 07:09:21,181][train_mtl.py][line:161][INFO] task:pg,err:0.020613676158489882
+[2024-12-03 07:11:35,362][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 07:11:35,365][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0283, device='cuda:2'),acc:0.9905411601066589
+[2024-12-03 07:11:35,367][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0052, device='cuda:2'),acc:0.9984503984451294
+[2024-12-03 07:11:35,368][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0091, device='cuda:2'),acc:0.9969989657402039
+[2024-12-03 07:11:35,370][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0258, device='cuda:2'),acc:0.9910670518875122
+[2024-12-03 07:11:35,383][train_mtl.py][line:100][INFO] ---------------epoch 112---------------
+lr: [0.00012749587966185986]
+[2024-12-03 07:17:45,470][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 07:17:45,471][train_mtl.py][line:161][INFO] task:sp,err:0.030045856135552163
+[2024-12-03 07:17:45,471][train_mtl.py][line:161][INFO] task:lt,err:0.012279902484310283
+[2024-12-03 07:17:45,471][train_mtl.py][line:161][INFO] task:cs,err:0.012884484733848903
+[2024-12-03 07:17:45,471][train_mtl.py][line:161][INFO] task:pg,err:0.02045675478647691
+[2024-12-03 07:19:57,137][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 07:19:57,140][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0072, device='cuda:2'),acc:0.9976510405540466
+[2024-12-03 07:19:57,141][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0024, device='cuda:2'),acc:0.9994320273399353
+[2024-12-03 07:19:57,143][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0030, device='cuda:2'),acc:0.9992707967758179
+[2024-12-03 07:19:57,144][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0049, device='cuda:2'),acc:0.9987589120864868
+[2024-12-03 07:19:57,526][train_mtl.py][line:100][INFO] ---------------epoch 113---------------
+lr: [0.00012417131337854614]
+[2024-12-03 07:26:07,737][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 07:26:07,738][train_mtl.py][line:161][INFO] task:sp,err:0.018923557952853973
+[2024-12-03 07:26:07,738][train_mtl.py][line:161][INFO] task:lt,err:0.007474607074473678
+[2024-12-03 07:26:07,738][train_mtl.py][line:161][INFO] task:cs,err:0.009971478019785656
+[2024-12-03 07:26:07,738][train_mtl.py][line:161][INFO] task:pg,err:0.014373338285514473
+[2024-12-03 07:28:20,988][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 07:28:20,991][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0092, device='cuda:2'),acc:0.9973565936088562
+[2024-12-03 07:28:20,992][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0024, device='cuda:2'),acc:0.9994811415672302
+[2024-12-03 07:28:20,993][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0028, device='cuda:2'),acc:0.9993058443069458
+[2024-12-03 07:28:20,995][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0065, device='cuda:2'),acc:0.9980857968330383
+[2024-12-03 07:28:21,004][train_mtl.py][line:100][INFO] ---------------epoch 114---------------
+lr: [0.00012084685677410362]
+[2024-12-03 07:34:30,565][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 07:34:30,566][train_mtl.py][line:161][INFO] task:sp,err:0.018967433776413384
+[2024-12-03 07:34:30,566][train_mtl.py][line:161][INFO] task:lt,err:0.008672555427838742
+[2024-12-03 07:34:30,566][train_mtl.py][line:161][INFO] task:cs,err:0.009177030941758018
+[2024-12-03 07:34:30,566][train_mtl.py][line:161][INFO] task:pg,err:0.014020919956110574
+[2024-12-03 07:36:44,114][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 07:36:44,118][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0069, device='cuda:2'),acc:0.997728168964386
+[2024-12-03 07:36:44,120][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0016, device='cuda:2'),acc:0.9995793104171753
+[2024-12-03 07:36:44,121][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0024, device='cuda:2'),acc:0.9994390606880188
+[2024-12-03 07:36:44,123][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0044, device='cuda:2'),acc:0.9987659454345703
+[2024-12-03 07:36:44,490][train_mtl.py][line:100][INFO] ---------------epoch 115---------------
+lr: [0.00011752251866974705]
+[2024-12-03 07:42:54,766][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 07:42:54,767][train_mtl.py][line:161][INFO] task:sp,err:0.01805453860832678
+[2024-12-03 07:42:54,767][train_mtl.py][line:161][INFO] task:lt,err:0.008478027792448842
+[2024-12-03 07:42:54,767][train_mtl.py][line:161][INFO] task:cs,err:0.009673080481165513
+[2024-12-03 07:42:54,767][train_mtl.py][line:161][INFO] task:pg,err:0.014154690336533724
+[2024-12-03 07:45:07,882][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 07:45:07,885][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0541, device='cuda:2'),acc:0.9836345911026001
+[2024-12-03 07:45:07,886][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0021, device='cuda:2'),acc:0.9995021820068359
+[2024-12-03 07:45:07,888][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0042, device='cuda:2'),acc:0.9986607432365417
+[2024-12-03 07:45:07,889][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0528, device='cuda:2'),acc:0.9824355840682983
+[2024-12-03 07:45:07,900][train_mtl.py][line:100][INFO] ---------------epoch 116---------------
+lr: [0.00011419830885870975]
+[2024-12-03 07:51:20,120][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 07:51:20,120][train_mtl.py][line:161][INFO] task:sp,err:0.019394362841934694
+[2024-12-03 07:51:20,121][train_mtl.py][line:161][INFO] task:lt,err:0.009180037918585267
+[2024-12-03 07:51:20,121][train_mtl.py][line:161][INFO] task:cs,err:0.01034043474779041
+[2024-12-03 07:51:20,121][train_mtl.py][line:161][INFO] task:pg,err:0.014125100028427592
+[2024-12-03 07:53:32,857][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 07:53:32,861][train_mtl.py][line:217][INFO] task:sp,err:tensor(2.3476, device='cuda:2'),acc:0.6476952433586121
+[2024-12-03 07:53:32,862][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.1848, device='cuda:2'),acc:0.9530143737792969
+[2024-12-03 07:53:32,864][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.5984, device='cuda:2'),acc:0.8704161047935486
+[2024-12-03 07:53:32,865][train_mtl.py][line:217][INFO] task:pg,err:tensor(2.0078, device='cuda:2'),acc:0.6634225845336914
+[2024-12-03 07:53:32,873][train_mtl.py][line:100][INFO] ---------------epoch 117---------------
+lr: [0.00011087423824392099]
+[2024-12-03 07:59:42,675][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 07:59:42,675][train_mtl.py][line:161][INFO] task:sp,err:0.02567458737941159
+[2024-12-03 07:59:42,676][train_mtl.py][line:161][INFO] task:lt,err:0.009177574691268245
+[2024-12-03 07:59:42,676][train_mtl.py][line:161][INFO] task:cs,err:0.01052742665780096
+[2024-12-03 07:59:42,676][train_mtl.py][line:161][INFO] task:pg,err:0.018350685727245245
+[2024-12-03 08:01:56,020][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 08:01:56,023][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0082, device='cuda:2'),acc:0.9973565936088562
+[2024-12-03 08:01:56,024][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0024, device='cuda:2'),acc:0.9993619322776794
+[2024-12-03 08:01:56,026][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0028, device='cuda:2'),acc:0.9992076754570007
+[2024-12-03 08:01:56,027][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0056, device='cuda:2'),acc:0.9984363913536072
+[2024-12-03 08:01:56,035][train_mtl.py][line:100][INFO] ---------------epoch 118---------------
+lr: [0.00010755031899976639]
+[2024-12-03 08:08:05,863][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 08:08:05,864][train_mtl.py][line:161][INFO] task:sp,err:0.018389432863625405
+[2024-12-03 08:08:05,864][train_mtl.py][line:161][INFO] task:lt,err:0.007445978174467206
+[2024-12-03 08:08:05,864][train_mtl.py][line:161][INFO] task:cs,err:0.008987489762313833
+[2024-12-03 08:08:05,864][train_mtl.py][line:161][INFO] task:pg,err:0.01305718115739316
+[2024-12-03 08:10:18,304][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 08:10:18,308][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0233, device='cuda:2'),acc:0.9924132823944092
+[2024-12-03 08:10:18,309][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0039, device='cuda:2'),acc:0.9988150000572205
+[2024-12-03 08:10:18,311][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0040, device='cuda:2'),acc:0.9987449049949646
+[2024-12-03 08:10:18,312][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0196, device='cuda:2'),acc:0.9933458566665649
+[2024-12-03 08:10:18,322][train_mtl.py][line:100][INFO] ---------------epoch 119---------------
+lr: [0.00010422656476299379]
+[2024-12-03 08:16:28,916][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 08:16:28,917][train_mtl.py][line:161][INFO] task:sp,err:0.021986467171121727
+[2024-12-03 08:16:28,917][train_mtl.py][line:161][INFO] task:lt,err:0.00905261995521996
+[2024-12-03 08:16:28,917][train_mtl.py][line:161][INFO] task:cs,err:0.01187714040678294
+[2024-12-03 08:16:28,918][train_mtl.py][line:161][INFO] task:pg,err:0.016808735180672232
+[2024-12-03 08:18:41,797][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 08:18:41,800][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0052, device='cuda:2'),acc:0.9985625743865967
+[2024-12-03 08:18:41,802][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0017, device='cuda:2'),acc:0.9995793104171753
+[2024-12-03 08:18:41,803][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0018, device='cuda:2'),acc:0.9995793104171753
+[2024-12-03 08:18:41,804][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0041, device='cuda:2'),acc:0.9988781213760376
+[2024-12-03 08:18:42,158][train_mtl.py][line:100][INFO] ---------------epoch 120---------------
+lr: [0.00010090299085908103]
+[2024-12-03 08:24:51,834][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 08:24:51,835][train_mtl.py][line:161][INFO] task:sp,err:0.01760372628907224
+[2024-12-03 08:24:51,835][train_mtl.py][line:161][INFO] task:lt,err:0.007506729630546619
+[2024-12-03 08:24:51,835][train_mtl.py][line:161][INFO] task:cs,err:0.0084531726738946
+[2024-12-03 08:24:51,835][train_mtl.py][line:161][INFO] task:pg,err:0.012328362152211603
+[2024-12-03 08:27:04,537][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 08:27:04,540][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0044, device='cuda:2'),acc:0.9987028241157532
+[2024-12-03 08:27:04,541][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0012, device='cuda:2'),acc:0.9997615814208984
+[2024-12-03 08:27:04,543][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0017, device='cuda:2'),acc:0.9996634125709534
+[2024-12-03 08:27:04,544][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0038, device='cuda:2'),acc:0.9990604519844055
+[2024-12-03 08:27:04,910][train_mtl.py][line:100][INFO] ---------------epoch 121---------------
+lr: [9.757961457199572e-05]
+[2024-12-03 08:33:16,890][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 08:33:16,890][train_mtl.py][line:161][INFO] task:sp,err:0.016688811307825097
+[2024-12-03 08:33:16,890][train_mtl.py][line:161][INFO] task:lt,err:0.007186737049117007
+[2024-12-03 08:33:16,890][train_mtl.py][line:161][INFO] task:cs,err:0.007112739849477434
+[2024-12-03 08:33:16,890][train_mtl.py][line:161][INFO] task:pg,err:0.011088967561425472
+[2024-12-03 08:36:51,945][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 08:36:51,949][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0037, device='cuda:2'),acc:0.9988641142845154
+[2024-12-03 08:36:51,950][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0010, device='cuda:2'),acc:0.9997686147689819
+[2024-12-03 08:36:51,952][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0013, device='cuda:2'),acc:0.9997054934501648
+[2024-12-03 08:36:51,953][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0029, device='cuda:2'),acc:0.9993619322776794
+[2024-12-03 08:36:52,278][train_mtl.py][line:100][INFO] ---------------epoch 122---------------
+lr: [9.42564554673722e-05]
+[2024-12-03 08:43:08,732][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 08:43:08,732][train_mtl.py][line:161][INFO] task:sp,err:0.01687981391657743
+[2024-12-03 08:43:08,732][train_mtl.py][line:161][INFO] task:lt,err:0.007744108030606726
+[2024-12-03 08:43:08,732][train_mtl.py][line:161][INFO] task:cs,err:0.00876058141478676
+[2024-12-03 08:43:08,732][train_mtl.py][line:161][INFO] task:pg,err:0.012398155404489252
+[2024-12-03 08:45:23,059][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 08:45:23,062][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0027, device='cuda:2'),acc:0.999319851398468
+[2024-12-03 08:45:23,064][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0008, device='cuda:2'),acc:0.9998878240585327
+[2024-12-03 08:45:23,065][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0012, device='cuda:2'),acc:0.999733567237854
+[2024-12-03 08:45:23,066][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0023, device='cuda:2'),acc:0.9995091557502747
+[2024-12-03 08:45:23,431][train_mtl.py][line:100][INFO] ---------------epoch 123---------------
+lr: [9.093353578186633e-05]
+[2024-12-03 08:51:35,289][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 08:51:35,290][train_mtl.py][line:161][INFO] task:sp,err:0.015992501872702392
+[2024-12-03 08:51:35,290][train_mtl.py][line:161][INFO] task:lt,err:0.006264617087680137
+[2024-12-03 08:51:35,290][train_mtl.py][line:161][INFO] task:cs,err:0.007918578365995138
+[2024-12-03 08:51:35,290][train_mtl.py][line:161][INFO] task:pg,err:0.012702355673780885
+[2024-12-03 08:53:47,684][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 08:53:47,687][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0032, device='cuda:2'),acc:0.9990604519844055
+[2024-12-03 08:53:47,689][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0012, device='cuda:2'),acc:0.9997405409812927
+[2024-12-03 08:53:47,690][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0014, device='cuda:2'),acc:0.9996844530105591
+[2024-12-03 08:53:47,691][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0040, device='cuda:2'),acc:0.9990674257278442
+[2024-12-03 08:53:47,699][train_mtl.py][line:100][INFO] ---------------epoch 124---------------
+lr: [8.761088089505743e-05]
+[2024-12-03 08:59:57,508][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 08:59:57,508][train_mtl.py][line:161][INFO] task:sp,err:0.01153529387914211
+[2024-12-03 08:59:57,508][train_mtl.py][line:161][INFO] task:lt,err:0.004959994787838753
+[2024-12-03 08:59:57,509][train_mtl.py][line:161][INFO] task:cs,err:0.005866821508452059
+[2024-12-03 08:59:57,509][train_mtl.py][line:161][INFO] task:pg,err:0.008763023291900103
+[2024-12-03 09:02:10,236][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 09:02:10,239][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0020, device='cuda:2'),acc:0.9995232224464417
+[2024-12-03 09:02:10,240][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0008, device='cuda:2'),acc:0.9998387098312378
+[2024-12-03 09:02:10,242][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0016, device='cuda:2'),acc:0.9996213912963867
+[2024-12-03 09:02:10,243][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0018, device='cuda:2'),acc:0.9995652437210083
+[2024-12-03 09:02:10,595][train_mtl.py][line:100][INFO] ---------------epoch 125---------------
+lr: [8.428851990506258e-05]
+[2024-12-03 09:08:20,851][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 09:08:20,852][train_mtl.py][line:161][INFO] task:sp,err:0.013836454886249494
+[2024-12-03 09:08:20,852][train_mtl.py][line:161][INFO] task:lt,err:0.006197100635894763
+[2024-12-03 09:08:20,852][train_mtl.py][line:161][INFO] task:cs,err:0.007337925356378863
+[2024-12-03 09:08:20,852][train_mtl.py][line:161][INFO] task:pg,err:0.010757372169340211
+[2024-12-03 09:10:34,609][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 09:10:34,612][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0040, device='cuda:2'),acc:0.9988641142845154
+[2024-12-03 09:10:34,613][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0020, device='cuda:2'),acc:0.9994040131568909
+[2024-12-03 09:10:34,615][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0032, device='cuda:2'),acc:0.9989902973175049
+[2024-12-03 09:10:34,616][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0052, device='cuda:2'),acc:0.9984153509140015
+[2024-12-03 09:10:34,626][train_mtl.py][line:100][INFO] ---------------epoch 126---------------
+lr: [8.096648633546689e-05]
+[2024-12-03 09:16:45,589][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 09:16:45,590][train_mtl.py][line:161][INFO] task:sp,err:0.01504870372013534
+[2024-12-03 09:16:45,590][train_mtl.py][line:161][INFO] task:lt,err:0.005780514009529725
+[2024-12-03 09:16:45,590][train_mtl.py][line:161][INFO] task:cs,err:0.007166344692793812
+[2024-12-03 09:16:45,590][train_mtl.py][line:161][INFO] task:pg,err:0.009974452932129152
+[2024-12-03 09:19:02,786][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 09:19:02,789][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0056, device='cuda:2'),acc:0.9982470870018005
+[2024-12-03 09:19:02,790][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0010, device='cuda:2'),acc:0.9998247027397156
+[2024-12-03 09:19:02,792][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0013, device='cuda:2'),acc:0.9996844530105591
+[2024-12-03 09:19:02,793][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0031, device='cuda:2'),acc:0.9992147088050842
+[2024-12-03 09:19:03,303][train_mtl.py][line:100][INFO] ---------------epoch 127---------------
+lr: [7.764481900990104e-05]
+[2024-12-03 09:25:13,732][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 09:25:13,732][train_mtl.py][line:161][INFO] task:sp,err:0.012353328545496416
+[2024-12-03 09:25:13,732][train_mtl.py][line:161][INFO] task:lt,err:0.00567139923683257
+[2024-12-03 09:25:13,732][train_mtl.py][line:161][INFO] task:cs,err:0.006194662720565782
+[2024-12-03 09:25:13,732][train_mtl.py][line:161][INFO] task:pg,err:0.009768873241476038
+[2024-12-03 09:27:26,115][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 09:27:26,118][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0027, device='cuda:2'),acc:0.9992006421089172
+[2024-12-03 09:27:26,120][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0011, device='cuda:2'),acc:0.9997405409812927
+[2024-12-03 09:27:26,121][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0012, device='cuda:2'),acc:0.999733567237854
+[2024-12-03 09:27:26,122][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0029, device='cuda:2'),acc:0.999319851398468
+[2024-12-03 09:27:26,130][train_mtl.py][line:100][INFO] ---------------epoch 128---------------
+lr: [7.432356314255873e-05]
+[2024-12-03 09:33:36,672][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 09:33:36,673][train_mtl.py][line:161][INFO] task:sp,err:0.009161259553238906
+[2024-12-03 09:33:36,673][train_mtl.py][line:161][INFO] task:lt,err:0.004174103372619598
+[2024-12-03 09:33:36,673][train_mtl.py][line:161][INFO] task:cs,err:0.0040986564788247715
+[2024-12-03 09:33:36,673][train_mtl.py][line:161][INFO] task:pg,err:0.006973367543008595
+[2024-12-03 09:35:50,490][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 09:35:50,493][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0018, device='cuda:2'),acc:0.9995091557502747
+[2024-12-03 09:35:50,495][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0006, device='cuda:2'),acc:0.9998807907104492
+[2024-12-03 09:35:50,497][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0006, device='cuda:2'),acc:0.9998527765274048
+[2024-12-03 09:35:50,498][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0011, device='cuda:2'),acc:0.9997756481170654
+[2024-12-03 09:35:50,879][train_mtl.py][line:100][INFO] ---------------epoch 129---------------
+lr: [7.100277170952672e-05]
+[2024-12-03 09:42:02,091][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 09:42:02,091][train_mtl.py][line:161][INFO] task:sp,err:0.010071633511851379
+[2024-12-03 09:42:02,091][train_mtl.py][line:161][INFO] task:lt,err:0.004705365714039067
+[2024-12-03 09:42:02,091][train_mtl.py][line:161][INFO] task:cs,err:0.004694676210890505
+[2024-12-03 09:42:02,091][train_mtl.py][line:161][INFO] task:pg,err:0.00787505362143372
+[2024-12-03 09:44:15,148][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 09:44:15,152][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0022, device='cuda:2'),acc:0.9993619322776794
+[2024-12-03 09:44:15,153][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0007, device='cuda:2'),acc:0.9998597502708435
+[2024-12-03 09:44:15,155][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0007, device='cuda:2'),acc:0.9998738169670105
+[2024-12-03 09:44:15,156][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0012, device='cuda:2'),acc:0.9997756481170654
+[2024-12-03 09:44:15,165][train_mtl.py][line:100][INFO] ---------------epoch 130---------------
+lr: [6.768250718907266e-05]
+[2024-12-03 09:50:25,440][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 09:50:25,441][train_mtl.py][line:161][INFO] task:sp,err:0.014646534367148615
+[2024-12-03 09:50:25,441][train_mtl.py][line:161][INFO] task:lt,err:0.005441904144670564
+[2024-12-03 09:50:25,441][train_mtl.py][line:161][INFO] task:cs,err:0.006434643585857661
+[2024-12-03 09:50:25,441][train_mtl.py][line:161][INFO] task:pg,err:0.009798750861578822
+[2024-12-03 09:52:38,228][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 09:52:38,232][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0030, device='cuda:2'),acc:0.9990814328193665
+[2024-12-03 09:52:38,233][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0009, device='cuda:2'),acc:0.9997826218605042
+[2024-12-03 09:52:38,235][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0012, device='cuda:2'),acc:0.9996914863586426
+[2024-12-03 09:52:38,236][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0020, device='cuda:2'),acc:0.9995301961898804
+[2024-12-03 09:52:38,246][train_mtl.py][line:100][INFO] ---------------epoch 131---------------
+lr: [6.436284379214105e-05]
+[2024-12-03 09:58:49,636][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 09:58:49,636][train_mtl.py][line:161][INFO] task:sp,err:0.014343611101076086
+[2024-12-03 09:58:49,636][train_mtl.py][line:161][INFO] task:lt,err:0.005733010543653191
+[2024-12-03 09:58:49,637][train_mtl.py][line:161][INFO] task:cs,err:0.006303083520566628
+[2024-12-03 09:58:49,637][train_mtl.py][line:161][INFO] task:pg,err:0.009022030711151216
+[2024-12-03 10:01:02,539][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 10:01:02,542][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0017, device='cuda:2'),acc:0.9996423721313477
+[2024-12-03 10:01:02,543][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0006, device='cuda:2'),acc:0.9998947978019714
+[2024-12-03 10:01:02,544][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0011, device='cuda:2'),acc:0.999733567237854
+[2024-12-03 10:01:02,546][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0015, device='cuda:2'),acc:0.9996494054794312
+[2024-12-03 10:01:02,919][train_mtl.py][line:100][INFO] ---------------epoch 132---------------
+lr: [6.104387035208954e-05]
+[2024-12-03 10:07:13,678][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 10:07:13,679][train_mtl.py][line:161][INFO] task:sp,err:0.009463353895002625
+[2024-12-03 10:07:13,679][train_mtl.py][line:161][INFO] task:lt,err:0.004496302522826367
+[2024-12-03 10:07:13,679][train_mtl.py][line:161][INFO] task:cs,err:0.004787273870978889
+[2024-12-03 10:07:13,679][train_mtl.py][line:161][INFO] task:pg,err:0.006804645345204386
+[2024-12-03 10:09:35,445][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 10:09:35,449][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0013, device='cuda:2'),acc:0.9996494054794312
+[2024-12-03 10:09:35,450][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0006, device='cuda:2'),acc:0.9998878240585327
+[2024-12-03 10:09:35,451][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0006, device='cuda:2'),acc:0.9998738169670105
+[2024-12-03 10:09:35,453][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0009, device='cuda:2'),acc:0.9998247027397156
+[2024-12-03 10:09:35,819][train_mtl.py][line:100][INFO] ---------------epoch 133---------------
+lr: [5.7725694112760914e-05]
+[2024-12-03 10:15:46,670][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 10:15:46,671][train_mtl.py][line:161][INFO] task:sp,err:0.00911911487720998
+[2024-12-03 10:15:46,671][train_mtl.py][line:161][INFO] task:lt,err:0.00478338252714757
+[2024-12-03 10:15:46,671][train_mtl.py][line:161][INFO] task:cs,err:0.004348016315975496
+[2024-12-03 10:15:46,671][train_mtl.py][line:161][INFO] task:pg,err:0.006269426533009635
+[2024-12-03 10:17:59,539][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 10:17:59,543][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0013, device='cuda:2'),acc:0.9996564388275146
+[2024-12-03 10:17:59,544][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0005, device='cuda:2'),acc:0.9998947978019714
+[2024-12-03 10:17:59,546][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0005, device='cuda:2'),acc:0.9999018311500549
+[2024-12-03 10:17:59,547][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0008, device='cuda:2'),acc:0.9998457431793213
+[2024-12-03 10:17:59,912][train_mtl.py][line:100][INFO] ---------------epoch 134---------------
+lr: [5.4408445758504935e-05]
+[2024-12-03 10:24:13,932][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 10:24:13,932][train_mtl.py][line:161][INFO] task:sp,err:0.00653840286105259
+[2024-12-03 10:24:13,932][train_mtl.py][line:161][INFO] task:lt,err:0.003290821174143364
+[2024-12-03 10:24:13,932][train_mtl.py][line:161][INFO] task:cs,err:0.0034203855621516934
+[2024-12-03 10:24:13,932][train_mtl.py][line:161][INFO] task:pg,err:0.005128921171808225
+[2024-12-03 10:26:25,569][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 10:26:25,572][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0010, device='cuda:2'),acc:0.9997054934501648
+[2024-12-03 10:26:25,573][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0006, device='cuda:2'),acc:0.9998738169670105
+[2024-12-03 10:26:25,575][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0006, device='cuda:2'),acc:0.9998457431793213
+[2024-12-03 10:26:25,576][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0009, device='cuda:2'),acc:0.9997826218605042
+[2024-12-03 10:26:25,964][train_mtl.py][line:100][INFO] ---------------epoch 135---------------
+lr: [5.1092286188655976e-05]
+[2024-12-03 10:32:37,777][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 10:32:37,778][train_mtl.py][line:161][INFO] task:sp,err:0.006830529826046033
+[2024-12-03 10:32:37,778][train_mtl.py][line:161][INFO] task:lt,err:0.003935932992001787
+[2024-12-03 10:32:37,778][train_mtl.py][line:161][INFO] task:cs,err:0.0035488580948253115
+[2024-12-03 10:32:37,778][train_mtl.py][line:161][INFO] task:pg,err:0.00505665844404855
+[2024-12-03 10:34:51,233][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 10:34:51,237][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0012, device='cuda:2'),acc:0.9997125267982483
+[2024-12-03 10:34:51,238][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0005, device='cuda:2'),acc:0.9998947978019714
+[2024-12-03 10:34:51,240][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0006, device='cuda:2'),acc:0.9998597502708435
+[2024-12-03 10:34:51,241][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0009, device='cuda:2'),acc:0.9998457431793213
+[2024-12-03 10:34:51,594][train_mtl.py][line:100][INFO] ---------------epoch 136---------------
+lr: [4.777741578559138e-05]
+[2024-12-03 10:41:03,134][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 10:41:03,135][train_mtl.py][line:161][INFO] task:sp,err:0.006209309785577983
+[2024-12-03 10:41:03,135][train_mtl.py][line:161][INFO] task:lt,err:0.00327498516535152
+[2024-12-03 10:41:03,135][train_mtl.py][line:161][INFO] task:cs,err:0.003150389244552202
+[2024-12-03 10:41:03,135][train_mtl.py][line:161][INFO] task:pg,err:0.005288467168770535
+[2024-12-03 10:43:18,393][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 10:43:18,396][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0011, device='cuda:2'),acc:0.9997265338897705
+[2024-12-03 10:43:18,398][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0005, device='cuda:2'),acc:0.9999088644981384
+[2024-12-03 10:43:18,400][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0006, device='cuda:2'),acc:0.9998738169670105
+[2024-12-03 10:43:18,401][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0010, device='cuda:2'),acc:0.9998036623001099
+[2024-12-03 10:43:18,774][train_mtl.py][line:100][INFO] ---------------epoch 137---------------
+lr: [4.4464087317179684e-05]
+[2024-12-03 10:49:31,148][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 10:49:31,149][train_mtl.py][line:161][INFO] task:sp,err:0.0063028069731203016
+[2024-12-03 10:49:31,149][train_mtl.py][line:161][INFO] task:lt,err:0.002735106800644173
+[2024-12-03 10:49:31,149][train_mtl.py][line:161][INFO] task:cs,err:0.0034396497675089877
+[2024-12-03 10:49:31,149][train_mtl.py][line:161][INFO] task:pg,err:0.005235664141885415
+[2024-12-03 10:51:53,975][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 10:51:53,978][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0009, device='cuda:2'),acc:0.999733567237854
+[2024-12-03 10:51:53,980][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0004, device='cuda:2'),acc:0.9999018311500549
+[2024-12-03 10:51:53,981][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0005, device='cuda:2'),acc:0.9999018311500549
+[2024-12-03 10:51:53,982][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0007, device='cuda:2'),acc:0.9998106956481934
+[2024-12-03 10:51:54,420][train_mtl.py][line:100][INFO] ---------------epoch 138---------------
+lr: [4.1152624252615876e-05]
+[2024-12-03 10:58:09,029][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 10:58:09,030][train_mtl.py][line:161][INFO] task:sp,err:0.007777586768802998
+[2024-12-03 10:58:09,030][train_mtl.py][line:161][INFO] task:lt,err:0.0036884897938641308
+[2024-12-03 10:58:09,030][train_mtl.py][line:161][INFO] task:cs,err:0.005068973487306555
+[2024-12-03 10:58:09,030][train_mtl.py][line:161][INFO] task:pg,err:0.006892508005424585
+[2024-12-03 11:00:28,015][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 11:00:28,018][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0011, device='cuda:2'),acc:0.9997195601463318
+[2024-12-03 11:00:28,020][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0005, device='cuda:2'),acc:0.9999088644981384
+[2024-12-03 11:00:28,021][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0005, device='cuda:2'),acc:0.9998738169670105
+[2024-12-03 11:00:28,022][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0010, device='cuda:2'),acc:0.9997686147689819
+[2024-12-03 11:00:28,031][train_mtl.py][line:100][INFO] ---------------epoch 139---------------
+lr: [3.784344734066599e-05]
+[2024-12-03 11:06:40,441][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 11:06:40,442][train_mtl.py][line:161][INFO] task:sp,err:0.005096479630324879
+[2024-12-03 11:06:40,442][train_mtl.py][line:161][INFO] task:lt,err:0.0025106242305969156
+[2024-12-03 11:06:40,442][train_mtl.py][line:161][INFO] task:cs,err:0.0030325608016543294
+[2024-12-03 11:06:40,442][train_mtl.py][line:161][INFO] task:pg,err:0.004227558379240621
+[2024-12-03 11:08:59,372][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 11:08:59,375][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0008, device='cuda:2'),acc:0.9997896552085876
+[2024-12-03 11:08:59,377][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0003, device='cuda:2'),acc:0.9999509453773499
+[2024-12-03 11:08:59,378][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0004, device='cuda:2'),acc:0.9999088644981384
+[2024-12-03 11:08:59,379][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0007, device='cuda:2'),acc:0.9998387098312378
+[2024-12-03 11:08:59,750][train_mtl.py][line:100][INFO] ---------------epoch 140---------------
+lr: [3.453711415227547e-05]
+[2024-12-03 11:15:14,541][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 11:15:14,541][train_mtl.py][line:161][INFO] task:sp,err:0.007361911894620064
+[2024-12-03 11:15:14,542][train_mtl.py][line:161][INFO] task:lt,err:0.0032105234053602175
+[2024-12-03 11:15:14,542][train_mtl.py][line:161][INFO] task:cs,err:0.0034243760784555526
+[2024-12-03 11:15:14,542][train_mtl.py][line:161][INFO] task:pg,err:0.005300520574800195
+[2024-12-03 11:17:33,423][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 11:17:33,427][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0010, device='cuda:2'),acc:0.999733567237854
+[2024-12-03 11:17:33,428][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0003, device='cuda:2'),acc:0.9999509453773499
+[2024-12-03 11:17:33,430][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0004, device='cuda:2'),acc:0.9999018311500549
+[2024-12-03 11:17:33,431][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0008, device='cuda:2'),acc:0.9998247027397156
+[2024-12-03 11:17:33,441][train_mtl.py][line:100][INFO] ---------------epoch 141---------------
+lr: [3.1234379618135625e-05]
+[2024-12-03 11:23:46,030][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 11:23:46,030][train_mtl.py][line:161][INFO] task:sp,err:0.0053176395130022985
+[2024-12-03 11:23:46,030][train_mtl.py][line:161][INFO] task:lt,err:0.002196217102139669
+[2024-12-03 11:23:46,031][train_mtl.py][line:161][INFO] task:cs,err:0.0025772128089168677
+[2024-12-03 11:23:46,031][train_mtl.py][line:161][INFO] task:pg,err:0.004297529508533132
+[2024-12-03 11:25:58,762][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 11:25:58,765][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0008, device='cuda:2'),acc:0.9997966885566711
+[2024-12-03 11:25:58,767][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0002, device='cuda:2'),acc:0.9999509453773499
+[2024-12-03 11:25:58,769][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0004, device='cuda:2'),acc:0.9998947978019714
+[2024-12-03 11:25:58,770][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0007, device='cuda:2'),acc:0.9998387098312378
+[2024-12-03 11:25:59,164][train_mtl.py][line:100][INFO] ---------------epoch 142---------------
+lr: [2.793629182879379e-05]
+[2024-12-03 11:32:08,286][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 11:32:08,287][train_mtl.py][line:161][INFO] task:sp,err:0.005677989748969244
+[2024-12-03 11:32:08,287][train_mtl.py][line:161][INFO] task:lt,err:0.0025214632863223216
+[2024-12-03 11:32:08,287][train_mtl.py][line:161][INFO] task:cs,err:0.003240759366655346
+[2024-12-03 11:32:08,287][train_mtl.py][line:161][INFO] task:pg,err:0.004761990261308106
+[2024-12-03 11:34:27,174][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 11:34:27,177][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0009, device='cuda:2'),acc:0.9997475743293762
+[2024-12-03 11:34:27,179][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0003, device='cuda:2'),acc:0.9999439120292664
+[2024-12-03 11:34:27,180][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0005, device='cuda:2'),acc:0.9998947978019714
+[2024-12-03 11:34:27,181][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0007, device='cuda:2'),acc:0.9998387098312378
+[2024-12-03 11:34:27,190][train_mtl.py][line:100][INFO] ---------------epoch 143---------------
+lr: [2.464434963729084e-05]
+[2024-12-03 11:40:39,305][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 11:40:39,305][train_mtl.py][line:161][INFO] task:sp,err:0.00491352645825624
+[2024-12-03 11:40:39,305][train_mtl.py][line:161][INFO] task:lt,err:0.0022730429622357293
+[2024-12-03 11:40:39,305][train_mtl.py][line:161][INFO] task:cs,err:0.003141435632756724
+[2024-12-03 11:40:39,305][train_mtl.py][line:161][INFO] task:pg,err:0.0039039370132703008
+[2024-12-03 11:42:52,753][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 11:42:52,756][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0006, device='cuda:2'),acc:0.9998457431793213
+[2024-12-03 11:42:52,758][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0002, device='cuda:2'),acc:0.9999579191207886
+[2024-12-03 11:42:52,760][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0004, device='cuda:2'),acc:0.9999158382415771
+[2024-12-03 11:42:52,761][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0005, device='cuda:2'),acc:0.9998457431793213
+[2024-12-03 11:42:53,140][train_mtl.py][line:100][INFO] ---------------epoch 144---------------
+lr: [2.1360774183164342e-05]
+[2024-12-03 11:49:07,305][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 11:49:07,306][train_mtl.py][line:161][INFO] task:sp,err:0.00546592677038951
+[2024-12-03 11:49:07,306][train_mtl.py][line:161][INFO] task:lt,err:0.00278333240256635
+[2024-12-03 11:49:07,306][train_mtl.py][line:161][INFO] task:cs,err:0.003015913300730501
+[2024-12-03 11:49:07,306][train_mtl.py][line:161][INFO] task:pg,err:0.004183190693619655
+[2024-12-03 11:51:21,243][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 11:51:21,247][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0006, device='cuda:2'),acc:0.9998317360877991
+[2024-12-03 11:51:21,248][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0002, device='cuda:2'),acc:0.9999368786811829
+[2024-12-03 11:51:21,249][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0004, device='cuda:2'),acc:0.9999088644981384
+[2024-12-03 11:51:21,251][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0005, device='cuda:2'),acc:0.9998527765274048
+[2024-12-03 11:51:21,260][train_mtl.py][line:100][INFO] ---------------epoch 145---------------
+lr: [1.8089003568487522e-05]
+[2024-12-03 11:57:30,634][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 11:57:30,634][train_mtl.py][line:161][INFO] task:sp,err:0.003942971090420631
+[2024-12-03 11:57:30,634][train_mtl.py][line:161][INFO] task:lt,err:0.001865264681976702
+[2024-12-03 11:57:30,634][train_mtl.py][line:161][INFO] task:cs,err:0.0019043116024388016
+[2024-12-03 11:57:30,634][train_mtl.py][line:161][INFO] task:pg,err:0.002892506044069826
+[2024-12-03 11:59:42,095][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 11:59:42,099][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0005, device='cuda:2'),acc:0.9998527765274048
+[2024-12-03 11:59:42,100][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0002, device='cuda:2'),acc:0.9999439120292664
+[2024-12-03 11:59:42,102][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0004, device='cuda:2'),acc:0.9999018311500549
+[2024-12-03 11:59:42,103][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0005, device='cuda:2'),acc:0.999866783618927
+[2024-12-03 11:59:42,464][train_mtl.py][line:100][INFO] ---------------epoch 146---------------
+lr: [1.4834658608990689e-05]
+[2024-12-03 12:05:53,038][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 12:05:53,038][train_mtl.py][line:161][INFO] task:sp,err:0.004006849459805558
+[2024-12-03 12:05:53,039][train_mtl.py][line:161][INFO] task:lt,err:0.0019043767142711595
+[2024-12-03 12:05:53,039][train_mtl.py][line:161][INFO] task:cs,err:0.002327189081338506
+[2024-12-03 12:05:53,039][train_mtl.py][line:161][INFO] task:pg,err:0.0030161998087338375
+[2024-12-03 12:08:09,826][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 12:08:09,830][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0004, device='cuda:2'),acc:0.999866783618927
+[2024-12-03 12:08:09,832][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0002, device='cuda:2'),acc:0.9999579191207886
+[2024-12-03 12:08:09,834][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0003, device='cuda:2'),acc:0.9999088644981384
+[2024-12-03 12:08:09,836][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0005, device='cuda:2'),acc:0.999866783618927
+[2024-12-03 12:08:10,217][train_mtl.py][line:100][INFO] ---------------epoch 147---------------
+lr: [1.1607601764335227e-05]
+[2024-12-03 12:14:20,812][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 12:14:20,812][train_mtl.py][line:161][INFO] task:sp,err:0.004805887873969171
+[2024-12-03 12:14:20,812][train_mtl.py][line:161][INFO] task:lt,err:0.0016160252997035021
+[2024-12-03 12:14:20,812][train_mtl.py][line:161][INFO] task:cs,err:0.0031042778685656815
+[2024-12-03 12:14:20,812][train_mtl.py][line:161][INFO] task:pg,err:0.004277628573083882
+[2024-12-03 12:16:38,950][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 12:16:38,954][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0004, device='cuda:2'),acc:0.9998457431793213
+[2024-12-03 12:16:38,955][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0002, device='cuda:2'),acc:0.9999719262123108
+[2024-12-03 12:16:38,956][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0003, device='cuda:2'),acc:0.9999018311500549
+[2024-12-03 12:16:38,958][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0005, device='cuda:2'),acc:0.9998597502708435
+[2024-12-03 12:16:38,968][train_mtl.py][line:100][INFO] ---------------epoch 148---------------
+lr: [8.426868592730668e-06]
+[2024-12-03 12:22:52,086][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 12:22:52,086][train_mtl.py][line:161][INFO] task:sp,err:0.0038695502870551707
+[2024-12-03 12:22:52,086][train_mtl.py][line:161][INFO] task:lt,err:0.002369165916391282
+[2024-12-03 12:22:52,086][train_mtl.py][line:161][INFO] task:cs,err:0.002314188255822828
+[2024-12-03 12:22:52,086][train_mtl.py][line:161][INFO] task:pg,err:0.003258215414093143
+[2024-12-03 12:25:04,020][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 12:25:04,023][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0004, device='cuda:2'),acc:0.9998878240585327
+[2024-12-03 12:25:04,024][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0002, device='cuda:2'),acc:0.9999719262123108
+[2024-12-03 12:25:04,026][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0003, device='cuda:2'),acc:0.9999018311500549
+[2024-12-03 12:25:04,027][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0004, device='cuda:2'),acc:0.9998878240585327
+[2024-12-03 12:25:04,398][train_mtl.py][line:100][INFO] ---------------epoch 149---------------
+lr: [5.3345638534709755e-06]
+[2024-12-03 12:31:16,438][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 12:31:16,438][train_mtl.py][line:161][INFO] task:sp,err:0.003950170871658801
+[2024-12-03 12:31:16,438][train_mtl.py][line:161][INFO] task:lt,err:0.0015285222180209275
+[2024-12-03 12:31:16,438][train_mtl.py][line:161][INFO] task:cs,err:0.002463968308560894
+[2024-12-03 12:31:16,438][train_mtl.py][line:161][INFO] task:pg,err:0.00348568170606582
+[2024-12-03 12:33:32,129][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 12:33:32,132][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0004, device='cuda:2'),acc:0.9998878240585327
+[2024-12-03 12:33:32,134][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0002, device='cuda:2'),acc:0.9999789595603943
+[2024-12-03 12:33:32,135][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0003, device='cuda:2'),acc:0.9999088644981384
+[2024-12-03 12:33:32,136][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0004, device='cuda:2'),acc:0.9998807907104492
+[2024-12-03 12:33:32,516][train_mtl.py][line:100][INFO] ---------------epoch 150---------------
+lr: [2.445998838559806e-06]
+[2024-12-03 12:39:45,961][train_mtl.py][line:159][INFO] ---------------[trainning]---------------
+[2024-12-03 12:39:45,962][train_mtl.py][line:161][INFO] task:sp,err:0.003387269058929906
+[2024-12-03 12:39:45,962][train_mtl.py][line:161][INFO] task:lt,err:0.0016012767316481275
+[2024-12-03 12:39:45,962][train_mtl.py][line:161][INFO] task:cs,err:0.0017447111078925102
+[2024-12-03 12:39:45,962][train_mtl.py][line:161][INFO] task:pg,err:0.0027112159910070437
+[2024-12-03 12:42:01,843][train_mtl.py][line:213][INFO] ---------------[testing]---------------
+[2024-12-03 12:42:01,846][train_mtl.py][line:217][INFO] task:sp,err:tensor(0.0004, device='cuda:2'),acc:0.9998807907104492
+[2024-12-03 12:42:01,848][train_mtl.py][line:217][INFO] task:lt,err:tensor(0.0002, device='cuda:2'),acc:0.9999789595603943
+[2024-12-03 12:42:01,849][train_mtl.py][line:217][INFO] task:cs,err:tensor(0.0003, device='cuda:2'),acc:0.9999088644981384
+[2024-12-03 12:42:01,850][train_mtl.py][line:217][INFO] task:pg,err:tensor(0.0004, device='cuda:2'),acc:0.9998807907104492

@@ -1,0 +1,710 @@
+[2024-11-01 21:12:52,388][train.py][line:73][INFO] ---------------args---------------
+Namespace(data_path='./data/Pymatgen_Wrapped/0', train_name='Hope_Sup2sp_Extend', model_path='/data/ylh/MyExps/MOFV2/checkpoints/Hope_Su2Sup/Hope_Su2Sup_epoch_51.pth', learning_rate=0.0003, min_learning_rate=1e-06, start_scheduler_step=0, weight_decay=5e-06, momentum=0.99, batch_size=256, class_num=230, epoch_num=200, model_save_path='/data/ylh/MyExps/MOFV2/checkpoints/Hope_Sup2sp_Extend', device='4,7', scheduler_T=None, num_workers=20, log_name='log/train//train_Hope_Sup2sp_Extend_2024_11_01_21:12:47.log')
+[2024-11-01 21:12:52,391][train.py][line:74][INFO] ---------------model---------------
+DataParallel(
+  (module): HopeV1_Su2Sp(
+    (conv_module): ResTcn(
+      (intensity_norm): BatchNorm1d(1, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (TCN): Sequential(
+        (0): ResBlock1D(
+          (pre): Conv1d(2, 32, kernel_size=(1,), stride=(1,), bias=False)
+          (conv): Sequential(
+            (0): Conv1d(32, 32, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(32, 32, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (1): MaxPool1d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+        (2): ResBlock1D(
+          (pre): Identity()
+          (conv): Sequential(
+            (0): Conv1d(32, 32, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(32, 32, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (3): MaxPool1d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+        (4): ResBlock1D(
+          (pre): Conv1d(32, 64, kernel_size=(1,), stride=(1,), bias=False)
+          (conv): Sequential(
+            (0): Conv1d(64, 64, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(64, 64, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (5): MaxPool1d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+        (6): ResBlock1D(
+          (pre): Conv1d(64, 128, kernel_size=(1,), stride=(1,), bias=False)
+          (conv): Sequential(
+            (0): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (7): MaxPool1d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+        (8): ResBlock1D(
+          (pre): Identity()
+          (conv): Sequential(
+            (0): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (9): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(1,))
+        (10): ResBlock1D(
+          (pre): Conv1d(128, 256, kernel_size=(1,), stride=(1,), bias=False)
+          (conv): Sequential(
+            (0): Conv1d(256, 256, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(256, 256, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (11): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(0,))
+        (12): ResBlock1D(
+          (pre): Identity()
+          (conv): Sequential(
+            (0): Conv1d(256, 256, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(256, 256, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (13): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(1,))
+        (14): ResBlock1D(
+          (pre): Conv1d(256, 512, kernel_size=(1,), stride=(1,), bias=False)
+          (conv): Sequential(
+            (0): Conv1d(512, 512, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(512, 512, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (15): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(1,))
+        (16): ResBlock1D(
+          (pre): Identity()
+          (conv): Sequential(
+            (0): Conv1d(512, 512, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(512, 512, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (17): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(0,))
+        (18): ResBlock1D(
+          (pre): Conv1d(512, 1024, kernel_size=(1,), stride=(1,), bias=False)
+          (conv): Sequential(
+            (0): Conv1d(1024, 1024, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(1024, 1024, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (19): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(0,))
+        (20): Dropout(p=0.25, inplace=False)
+        (21): ResBlock1D(
+          (pre): Identity()
+          (conv): Sequential(
+            (0): Conv1d(1024, 1024, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(1024, 1024, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (22): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(0,))
+        (23): Dropout(p=0.25, inplace=False)
+        (24): ResBlock1D(
+          (pre): Identity()
+          (conv): Sequential(
+            (0): Conv1d(1024, 1024, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(1024, 1024, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (25): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(0,))
+        (26): Dropout(p=0.25, inplace=False)
+        (27): ResBlock1D(
+          (pre): Identity()
+          (conv): Sequential(
+            (0): Conv1d(1024, 1024, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (1): BatchNorm1d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): LeakyReLU(negative_slope=0.01)
+            (3): Conv1d(1024, 1024, kernel_size=(3,), stride=(1,), padding=(1,), bias=False)
+            (4): BatchNorm1d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01)
+        )
+        (28): AvgPool1d(kernel_size=(2,), stride=(2,), padding=(0,))
+        (29): Flatten(start_dim=1, end_dim=-1)
+      )
+    )
+    (att): AttentionModule(
+      (embed): Embedding(850, 15)
+      (patch_conv): PatchConvModule(
+        (conv): Sequential(
+          (0): Conv2d(1, 2, kernel_size=(1, 3), stride=(1, 1), padding=(0, 1))
+          (1): AvgPool2d(kernel_size=(1, 2), stride=(1, 2), padding=0)
+          (2): Conv2d(2, 4, kernel_size=(1, 3), stride=(1, 1), padding=(0, 1))
+          (3): AvgPool2d(kernel_size=(1, 2), stride=(1, 2), padding=(0, 1))
+          (4): Conv2d(4, 8, kernel_size=(1, 3), stride=(1, 1), padding=(0, 1))
+          (5): AvgPool2d(kernel_size=(1, 2), stride=(1, 2), padding=(0, 1))
+          (6): Conv2d(8, 16, kernel_size=(1, 3), stride=(1, 1), padding=(0, 1))
+          (7): AvgPool2d(kernel_size=(1, 2), stride=(1, 2), padding=0)
+        )
+      )
+      (att): TransformerEncoder(
+        (positionEnbeding): PositionEmbedding()
+        (encoder_layers): ModuleList(
+          (0-7): 8 x EncoderLayer(
+            (mha): MultiHeadAttention(
+              (WQ): Linear(in_features=32, out_features=32, bias=True)
+              (WK): Linear(in_features=32, out_features=32, bias=True)
+              (WV): Linear(in_features=32, out_features=32, bias=True)
+              (scaled_dot_product_attn): ScaledDotProductAttention()
+              (linear): Linear(in_features=32, out_features=32, bias=True)
+            )
+            (dropout1): Dropout(p=0.25, inplace=False)
+            (layernorm1): LayerNorm((32,), eps=1e-06, elementwise_affine=True)
+            (ffn): FeedForwardNetwork(
+              (linear1): Linear(in_features=32, out_features=256, bias=True)
+              (linear2): Linear(in_features=256, out_features=32, bias=True)
+              (relu): LeakyReLU(negative_slope=0.01)
+            )
+            (dropout2): Dropout(p=0.25, inplace=False)
+            (layernorm2): LayerNorm((32,), eps=1e-06, elementwise_affine=True)
+          )
+        )
+      )
+    )
+    (cls_sp): Sequential(
+      (0): Linear(in_features=1069, out_features=230, bias=True)
+    )
+    (cls_cs): Sequential(
+      (0): Linear(in_features=1056, out_features=7, bias=True)
+    )
+    (cls_lt): Sequential(
+      (0): Linear(in_features=1056, out_features=6, bias=True)
+    )
+  )
+)
+[2024-11-01 21:12:52,391][train.py][line:75][INFO] ---------------device---------------
+cuda:4
+[2024-11-01 21:12:52,391][train.py][line:76][INFO] ---------------optimizer---------------
+AdamW (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    initial_lr: 0.0003
+    lr: 0.0003
+    maximize: False
+    weight_decay: 5e-06
+)
+[2024-11-01 21:12:52,391][train.py][line:77][INFO] ---------------lossfn---------------
+CrossEntropyLoss()
+[2024-11-01 21:12:52,391][train.py][line:78][INFO] ---------------seed---------------
+3407
+[2024-11-01 21:12:52,423][train.py][line:90][INFO] ---------------epoch 1---------------
+lr: [0.0003]
+[2024-11-01 21:20:06,574][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.45266722265350423,error_sp: 0.32582056845967283,error_cs: 0.07373168965436244,error_lt: 0.05311496458595354
+[2024-11-01 21:23:30,829][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 1.2750410509610552,total_sp_acc: 0.6175868511199951,cs_error: 0.21883944932195226,total_cs_acc: 0.9182221293449402,lt_error: 0.11258623869388304,total_lt_acc: 0.9593179225921631
+[2024-11-01 21:23:31,726][train.py][line:90][INFO] ---------------epoch 2---------------
+lr: [0.00029996311424967747]
+[2024-11-01 21:30:43,728][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.4224127437364825,error_sp: 0.30558111008432826,error_cs: 0.06866716777485014,error_lt: 0.04816446598169056
+[2024-11-01 21:34:09,693][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.35636291602029485,total_sp_acc: 0.8765162825584412,cs_error: 0.09594012204669383,total_cs_acc: 0.9639316201210022,lt_error: 0.05169956283751898,total_lt_acc: 0.9816011786460876
+[2024-11-01 21:34:10,159][train.py][line:90][INFO] ---------------epoch 3---------------
+lr: [0.0002998709152312415]
+[2024-11-01 21:41:21,363][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.4494373869875058,error_sp: 0.3236125639253239,error_cs: 0.0741930396822909,error_lt: 0.05163178197882952
+[2024-11-01 21:44:44,070][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.16768045990276045,total_sp_acc: 0.9443127512931824,cs_error: 0.028171303684475804,total_cs_acc: 0.9911301732063293,lt_error: 0.015541090932323013,total_lt_acc: 0.9955195188522339
+[2024-11-01 21:44:44,528][train.py][line:90][INFO] ---------------epoch 4---------------
+lr: [0.0002997418702734589]
+[2024-11-01 21:51:54,605][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.4519872962123667,error_sp: 0.3210683372361021,error_cs: 0.07695491670185599,error_lt: 0.05396404324406057
+[2024-11-01 21:55:19,451][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.21493767379357392,total_sp_acc: 0.9241330027580261,cs_error: 0.042518891911585074,total_cs_acc: 0.9844269156455994,lt_error: 0.028391370035434956,total_lt_acc: 0.9901484847068787
+[2024-11-01 21:55:19,466][train.py][line:90][INFO] ---------------epoch 5---------------
+lr: [0.00029957601121455746]
+[2024-11-01 22:02:28,783][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.4269092248429768,error_sp: 0.30317809687186875,error_cs: 0.07299314191052772,error_lt: 0.05073798602632852
+[2024-11-01 22:05:53,616][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.17786377867367348,total_sp_acc: 0.9389348030090332,cs_error: 0.028656330550066642,total_cs_acc: 0.9908636808395386,lt_error: 0.014812817816127536,total_lt_acc: 0.9959962964057922
+[2024-11-01 22:05:53,628][train.py][line:90][INFO] ---------------epoch 6---------------
+lr: [0.000299373378976093]
+[2024-11-01 22:13:03,752][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.4114730528012675,error_sp: 0.292822780077804,error_cs: 0.07062056072499935,error_lt: 0.048029712849050346
+[2024-11-01 22:16:29,241][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.15737812356752606,total_sp_acc: 0.9433521628379822,cs_error: 0.020931248899692778,total_cs_acc: 0.9934019446372986,lt_error: 0.011329266703642244,total_lt_acc: 0.9969639182090759
+[2024-11-01 22:16:29,698][train.py][line:90][INFO] ---------------epoch 7---------------
+lr: [0.0002991340235528518]
+[2024-11-01 22:23:37,446][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.4514082187685574,error_sp: 0.3211990201066129,error_cs: 0.07694700051053392,error_lt: 0.0532621971515844
+[2024-11-01 22:27:03,250][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 4.502285300954628,total_sp_acc: 0.23894599080085754,cs_error: 1.8503428124504624,total_cs_acc: 0.5540184378623962,lt_error: 0.6696259225938868,total_lt_acc: 0.8313536643981934
+[2024-11-01 22:27:03,263][train.py][line:90][INFO] ---------------epoch 8---------------
+lr: [0.0002988580040005152]
+[2024-11-01 22:34:12,154][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.3599263903556062,error_sp: 0.2658180933700134,error_cs: 0.05530129578502787,error_lt: 0.03880700120117659
+[2024-11-01 22:37:38,752][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 3.3801476095269734,total_sp_acc: 0.4046614170074463,cs_error: 1.0556263240435912,total_cs_acc: 0.7624282836914062,lt_error: 0.6189148012946658,total_lt_acc: 0.8421587944030762
+[2024-11-01 22:37:38,761][train.py][line:90][INFO] ---------------epoch 9---------------
+lr: [0.00029854538842108744]
+[2024-11-01 22:44:48,194][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.4115585961922246,error_sp: 0.2906694728522292,error_cs: 0.07108082499309408,error_lt: 0.04980829824740801
+[2024-11-01 22:48:14,079][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.15870538700352407,total_sp_acc: 0.9456800818443298,cs_error: 0.029842568817252828,total_cs_acc: 0.9897909164428711,lt_error: 0.015724520841400358,total_lt_acc: 0.9951549172401428
+[2024-11-01 22:48:14,559][train.py][line:90][INFO] ---------------epoch 10---------------
+lr: [0.00029819625394609265]
+[2024-11-01 22:55:22,813][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.3880710498725053,error_sp: 0.2771143906483926,error_cs: 0.06331078730353959,error_lt: 0.047645871591715114
+[2024-11-01 22:58:48,606][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.13556748474646366,total_sp_acc: 0.954010009765625,cs_error: 0.01883153209428918,total_cs_acc: 0.9941592216491699,lt_error: 0.010919150407008105,total_lt_acc: 0.9969919919967651
+[2024-11-01 22:58:49,068][train.py][line:90][INFO] ---------------epoch 11---------------
+lr: [0.0002978106867175434]
+[2024-11-01 23:05:57,884][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.36648067250038824,error_sp: 0.265774832637214,error_cs: 0.06084079720445251,error_lt: 0.039865042536801634
+[2024-11-01 23:09:19,975][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.9418285904540281,total_sp_acc: 0.7032632827758789,cs_error: 0.07309628988864086,total_cs_acc: 0.9719951152801514,lt_error: 0.05145648827191382,total_lt_acc: 0.9809631109237671
+[2024-11-01 23:09:19,989][train.py][line:90][INFO] ---------------epoch 12---------------
+lr: [0.0002973887818666852]
+[2024-11-01 23:16:29,274][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.3439793942427677,error_sp: 0.25275367146093664,error_cs: 0.054094211681176715,error_lt: 0.03713151033488208
+[2024-11-01 23:19:53,222][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.38179194015139245,total_sp_acc: 0.8568764328956604,cs_error: 0.02496150486055442,total_cs_acc: 0.991866409778595,lt_error: 0.020389341999608818,total_lt_acc: 0.9934369921684265
+[2024-11-01 23:19:53,233][train.py][line:90][INFO] ---------------epoch 13---------------
+lr: [0.000296930643490525]
+[2024-11-01 23:27:02,627][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.3470815617702053,error_sp: 0.251754732662241,error_cs: 0.054412330908948744,error_lt: 0.04091449815130772
+[2024-11-01 23:30:23,387][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.7583207713534661,total_sp_acc: 0.7572255730628967,cs_error: 0.0341704832321651,total_cs_acc: 0.9875962138175964,lt_error: 0.026965179539004704,total_lt_acc: 0.9905341267585754
+[2024-11-01 23:30:23,404][train.py][line:90][INFO] ---------------epoch 14---------------
+lr: [0.00029643638462614557]
+[2024-11-01 23:37:33,609][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.3297735132707606,error_sp: 0.24073496421769705,error_cs: 0.05116591337255175,error_lt: 0.03787263468374382
+[2024-11-01 23:40:55,275][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 2.934334644920563,total_sp_acc: 0.4157189130783081,cs_error: 0.5826937265159161,total_cs_acc: 0.8133545517921448,lt_error: 0.33203801058637283,total_lt_acc: 0.8992623686790466
+[2024-11-01 23:40:55,285][train.py][line:90][INFO] ---------------epoch 15---------------
+lr: [0.0002959061272228153]
+[2024-11-01 23:47:50,626][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.3489323251875812,error_sp: 0.2548498160054095,error_cs: 0.05505991428144498,error_lt: 0.03902259498248252
+[2024-11-01 23:51:04,714][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 1.155315946885458,total_sp_acc: 0.6543283462524414,cs_error: 0.15790045148678344,total_cs_acc: 0.9414870738983154,lt_error: 0.11283134731044911,total_lt_acc: 0.959352970123291
+[2024-11-01 23:51:04,728][train.py][line:90][INFO] ---------------epoch 16---------------
+lr: [0.0002953400021118981]
+[2024-11-01 23:58:00,424][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.3310505887933871,error_sp: 0.2409755025195992,error_cs: 0.05410669008824459,error_lt: 0.035968395690931146
+[2024-11-02 00:01:14,042][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.3780650759928072,total_sp_acc: 0.8672818541526794,cs_error: 0.05807625153632068,total_cs_acc: 0.9781514406204224,lt_error: 0.04069724286769414,total_lt_acc: 0.9855979084968567
+[2024-11-02 00:01:14,052][train.py][line:90][INFO] ---------------epoch 17---------------
+lr: [0.0002947381489745731]
+[2024-11-02 00:08:08,428][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.34611498740633817,error_sp: 0.24785806250394748,error_cs: 0.05817772892439141,error_lt: 0.040079194645849164
+[2024-11-02 00:11:22,796][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.5454707888661249,total_sp_acc: 0.8073945641517639,cs_error: 0.04274030969618459,total_cs_acc: 0.9845952391624451,lt_error: 0.02718640617537353,total_lt_acc: 0.9908216595649719
+[2024-11-02 00:11:22,807][train.py][line:90][INFO] ---------------epoch 18---------------
+lr: [0.000294100716307369]
+[2024-11-02 00:18:18,659][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.3282800840308495,error_sp: 0.23732247759446162,error_cs: 0.05370787501207923,error_lt: 0.03724973012274049
+[2024-11-02 00:21:33,103][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 4.191002106290774,total_sp_acc: 0.31181198358535767,cs_error: 1.029634122777528,total_cs_acc: 0.7130306363105774,lt_error: 0.5343803273034388,total_lt_acc: 0.8606767654418945
+[2024-11-02 00:21:33,112][train.py][line:90][INFO] ---------------epoch 19---------------
+lr: [0.000293427861385525]
+[2024-11-02 00:28:27,100][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.36726927095714257,error_sp: 0.26127399465039813,error_cs: 0.06183463842371534,error_lt: 0.04416063760549781
+[2024-11-02 00:31:40,753][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.12586476814960848,total_sp_acc: 0.9578033685684204,cs_error: 0.0202753993221999,total_cs_acc: 0.9938997626304626,lt_error: 0.011763214130405049,total_lt_acc: 0.9965642690658569
+[2024-11-02 00:31:41,200][train.py][line:90][INFO] ---------------epoch 20---------------
+lr: [0.00029271975022418474]
+[2024-11-02 00:38:36,445][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.3241043531330997,error_sp: 0.23429359014157447,error_cs: 0.05140461247486116,error_lt: 0.03840614988789902
+[2024-11-02 00:41:49,610][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 2.144794766884134,total_sp_acc: 0.5750115513801575,cs_error: 0.5295943407808315,total_cs_acc: 0.876369059085846,lt_error: 0.4231198031435706,total_lt_acc: 0.8941858410835266
+[2024-11-02 00:41:49,620][train.py][line:90][INFO] ---------------epoch 21---------------
+lr: [0.0002919765575374343]
+[2024-11-02 00:48:43,561][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.32393749585398024,error_sp: 0.23447166109252102,error_cs: 0.05558354828438204,error_lt: 0.03388228712480307
+[2024-11-02 00:51:57,365][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.10782824892831246,total_sp_acc: 0.963784396648407,cs_error: 0.016868509836548952,total_cs_acc: 0.9949796199798584,lt_error: 0.008029751785827561,total_lt_acc: 0.9980787634849548
+[2024-11-02 00:51:57,864][train.py][line:90][INFO] ---------------epoch 22---------------
+lr: [0.0002911984666951933]
+[2024-11-02 00:58:52,641][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.28165366899894123,error_sp: 0.2100268551091388,error_cs: 0.041769491698618995,error_lt: 0.029857322150407498
+[2024-11-02 01:02:07,289][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.5586436525404767,total_sp_acc: 0.8081027865409851,cs_error: 0.07272210634477036,total_cs_acc: 0.973264217376709,lt_error: 0.038447124734349906,total_lt_acc: 0.9865164160728455
+[2024-11-02 01:02:07,300][train.py][line:90][INFO] ---------------epoch 23---------------
+lr: [0.000290385669677971]
+[2024-11-02 01:09:01,550][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.32028886213924757,error_sp: 0.22572274996708236,error_cs: 0.05560450887490201,error_lt: 0.03896160298491944
+[2024-11-02 01:12:16,980][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.305558356259103,total_sp_acc: 0.8983999490737915,cs_error: 0.11918529022025065,total_cs_acc: 0.9585956931114197,lt_error: 0.04166167549622382,total_lt_acc: 0.9856820106506348
+[2024-11-02 01:12:16,993][train.py][line:90][INFO] ---------------epoch 24---------------
+lr: [0.00028953836702949734]
+[2024-11-02 01:19:12,629][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.31677074124955046,error_sp: 0.2293604664935122,error_cs: 0.05117646983340252,error_lt: 0.03623380498135309
+[2024-11-02 01:22:27,939][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 1.167748919510382,total_sp_acc: 0.682781994342804,cs_error: 0.35241386664936714,total_cs_acc: 0.880751371383667,lt_error: 0.1544207744626573,total_lt_acc: 0.9498660564422607
+[2024-11-02 01:22:27,949][train.py][line:90][INFO] ---------------epoch 25---------------
+lr: [0.00028865676780724095]
+[2024-11-02 01:29:23,367][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.26146120520638083,error_sp: 0.19640723745062974,error_cs: 0.0396859157021482,error_lt: 0.025368052527011613
+[2024-11-02 01:32:39,465][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.1039561835458525,total_sp_acc: 0.9637072682380676,cs_error: 0.013899602724254317,total_cs_acc: 0.9957789182662964,lt_error: 0.005421675864548277,total_lt_acc: 0.998653769493103
+[2024-11-02 01:32:40,138][train.py][line:90][INFO] ---------------epoch 26---------------
+lr: [0.0002877410895308277]
+[2024-11-02 01:39:35,358][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.3025850970983088,error_sp: 0.21691997240961328,error_cs: 0.047312988095546564,error_lt: 0.03835213714117762
+[2024-11-02 01:42:51,441][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.33301860537712713,total_sp_acc: 0.8984770774841309,cs_error: 0.06024594884773556,total_cs_acc: 0.980647623538971,lt_error: 0.05966170797542051,total_lt_acc: 0.9814609885215759
+[2024-11-02 01:42:51,920][train.py][line:90][INFO] ---------------epoch 27---------------
+lr: [0.0002867915581283695]
+[2024-11-02 01:49:48,010][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.2875871863183541,error_sp: 0.21235417191024003,error_cs: 0.04340371363731052,error_lt: 0.031829299784433454
+[2024-11-02 01:53:03,134][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.08945855299001086,total_sp_acc: 0.9706348180770874,cs_error: 0.007984037506106618,total_cs_acc: 0.9980297088623047,lt_error: 0.0043932494510266614,total_lt_acc: 0.9991235136985779
+[2024-11-02 01:53:03,580][train.py][line:90][INFO] ---------------epoch 28---------------
+lr: [0.0002858084078807201]
+[2024-11-02 01:59:59,406][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.3044190110863821,error_sp: 0.21924276272856,error_cs: 0.049998353293733165,error_lt: 0.03517789435581077
+[2024-11-02 02:03:13,390][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.08267531308448252,total_sp_acc: 0.9735517501831055,cs_error: 0.011617044773025784,total_cs_acc: 0.9966343641281128,lt_error: 0.005070711044068534,total_lt_acc: 0.9988360404968262
+[2024-11-02 02:03:13,835][train.py][line:90][INFO] ---------------epoch 29---------------
+lr: [0.00028479188136366896]
+[2024-11-02 02:10:09,454][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.28612960598410325,error_sp: 0.20826799333774063,error_cs: 0.047135188659382314,error_lt: 0.030726423661792145
+[2024-11-02 02:13:24,039][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.8934631974496691,total_sp_acc: 0.7313733100891113,cs_error: 0.12380004939402987,total_cs_acc: 0.9547532796859741,lt_error: 0.07002762246358285,total_lt_acc: 0.9752836227416992
+[2024-11-02 02:13:24,048][train.py][line:90][INFO] ---------------epoch 30---------------
+lr: [0.0002837422293880886]
+[2024-11-02 02:20:18,379][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.29355054149068177,error_sp: 0.20833971732395543,error_cs: 0.04842612633706705,error_lt: 0.03678469667855435
+[2024-11-02 02:23:32,043][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.15161591219257453,total_sp_acc: 0.9466477036476135,cs_error: 0.06571140227208955,total_cs_acc: 0.9742669463157654,lt_error: 0.026145824827377165,total_lt_acc: 0.9905201196670532
+[2024-11-02 02:23:32,051][train.py][line:90][INFO] ---------------epoch 31---------------
+lr: [0.00028265971093805077]
+[2024-11-02 02:30:27,287][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.28014870535993325,error_sp: 0.205729510524227,error_cs: 0.04404915113005324,error_lt: 0.03037004326343791
+[2024-11-02 02:33:43,064][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.4442417455768627,total_sp_acc: 0.8437995314598083,cs_error: 0.020790059962607563,total_cs_acc: 0.9927919507026672,lt_error: 0.01906745240992139,total_lt_acc: 0.9936754107475281
+[2024-11-02 02:33:43,075][train.py][line:90][INFO] ---------------epoch 32---------------
+lr: [0.000281544593106925]
+[2024-11-02 02:40:38,011][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.25521596162310833,error_sp: 0.18649668057307262,error_cs: 0.040021415335825934,error_lt: 0.028697865483315984
+[2024-11-02 02:43:51,756][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.7538094305793792,total_sp_acc: 0.7639989256858826,cs_error: 0.05125577693426698,total_cs_acc: 0.9809070229530334,lt_error: 0.028967434530158754,total_lt_acc: 0.9899170994758606
+[2024-11-02 02:43:51,766][train.py][line:90][INFO] ---------------epoch 33---------------
+lr: [0.00028039715103147643]
+[2024-11-02 02:50:47,268][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.25702399423838496,error_sp: 0.1872415841278178,error_cs: 0.0414805827587321,error_lt: 0.028301827035413733
+[2024-11-02 02:54:01,791][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.5907548395900509,total_sp_acc: 0.8206186890602112,cs_error: 0.2888651894056442,total_cs_acc: 0.9055519104003906,lt_error: 0.09799966779575217,total_lt_acc: 0.9653549790382385
+[2024-11-02 02:54:01,800][train.py][line:90][INFO] ---------------epoch 34---------------
+lr: [0.0002792176678239806]
+[2024-11-02 03:00:55,331][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.25818776627660006,error_sp: 0.18616526593468863,error_cs: 0.0406092834926411,error_lt: 0.03141321636770645
+[2024-11-02 03:04:08,964][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.19838778527156692,total_sp_acc: 0.9249534010887146,cs_error: 0.029700835232766454,total_cs_acc: 0.9893351197242737,lt_error: 0.012165598121216904,total_lt_acc: 0.9962347149848938
+[2024-11-02 03:04:08,973][train.py][line:90][INFO] ---------------epoch 35---------------
+lr: [0.0002780064345023674]
+[2024-11-02 03:11:02,919][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.2412271671871379,error_sp: 0.17586492962365394,error_cs: 0.037803125935125505,error_lt: 0.02755911175726143
+[2024-11-02 03:14:16,396][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.06446562669502535,total_sp_acc: 0.9789858460426331,cs_error: 0.008643553477416657,total_cs_acc: 0.9975529313087463,lt_error: 0.003099123019478492,total_lt_acc: 0.9993829727172852
+[2024-11-02 03:14:16,823][train.py][line:90][INFO] ---------------epoch 36---------------
+lr: [0.0002767637499184175]
+[2024-11-02 03:21:09,973][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.2474435615090689,error_sp: 0.18043010308686155,error_cs: 0.03843577058566652,error_lt: 0.028577687902597876
+[2024-11-02 03:24:23,798][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.5226512834064388,total_sp_acc: 0.8415136933326721,cs_error: 0.028956344790265657,total_cs_acc: 0.9898399710655212,lt_error: 0.02320559762745293,total_lt_acc: 0.992798924446106
+[2024-11-02 03:24:23,807][train.py][line:90][INFO] ---------------epoch 37---------------
+lr: [0.00027548992068402383]
+[2024-11-02 03:31:18,365][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.2614365223853893,error_sp: 0.19120638553973046,error_cs: 0.041900489070728394,error_lt: 0.028329648062910544
+[2024-11-02 03:34:30,718][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 8.410457273707081,total_sp_acc: 0.10642415285110474,cs_error: 3.3869600759496206,total_cs_acc: 0.36616694927215576,lt_error: 1.6256071665241087,total_lt_acc: 0.7009353637695312
+[2024-11-02 03:34:30,728][train.py][line:90][INFO] ---------------epoch 38---------------
+lr: [0.0002741852610955395]
+[2024-11-02 03:41:25,485][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.2685407517174497,error_sp: 0.19106084418902256,error_cs: 0.04506857353857932,error_lt: 0.032411334349083894
+[2024-11-02 03:44:39,094][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.4861380014888251,total_sp_acc: 0.8335554003715515,cs_error: 0.034732504102273805,total_cs_acc: 0.9873228073120117,lt_error: 0.03274665821828181,total_lt_acc: 0.988647997379303
+[2024-11-02 03:44:39,102][train.py][line:90][INFO] ---------------epoch 39---------------
+lr: [0.00027285009305622846]
+[2024-11-02 03:51:33,557][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.28070679757150374,error_sp: 0.1966372939730275,error_cs: 0.04879670697647667,error_lt: 0.03527279815395182
+[2024-11-02 03:54:47,409][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.43432116371476714,total_sp_acc: 0.8752401471138,cs_error: 0.14710863340840122,total_cs_acc: 0.9536874890327454,lt_error: 0.09032751405640177,total_lt_acc: 0.9719880819320679
+[2024-11-02 03:54:47,418][train.py][line:90][INFO] ---------------epoch 40---------------
+lr: [0.0002714847459968412]
+[2024-11-02 04:01:41,515][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.22437467732696734,error_sp: 0.16612795688172774,error_cs: 0.03448099107930075,error_lt: 0.023765729971869397
+[2024-11-02 04:04:56,180][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.385088826371471,total_sp_acc: 0.8676604628562927,cs_error: 0.049242694656880026,total_cs_acc: 0.9821691513061523,lt_error: 0.028589189259615275,total_lt_acc: 0.9903027415275574
+[2024-11-02 04:04:56,190][train.py][line:90][INFO] ---------------epoch 41---------------
+lr: [0.0002700895567943304]
+[2024-11-02 04:11:52,458][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.21627485638585484,error_sp: 0.15496049774402912,error_cs: 0.0356726706086702,error_lt: 0.025641687359333025
+[2024-11-02 04:15:05,458][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.09578228028305201,total_sp_acc: 0.9655513167381287,cs_error: 0.007217540956038497,total_cs_acc: 0.9980857968330383,lt_error: 0.003126498854855396,total_lt_acc: 0.9993338584899902
+[2024-11-02 04:15:05,468][train.py][line:90][INFO] ---------------epoch 42---------------
+lr: [0.0002686648696887323]
+[2024-11-02 04:21:59,512][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.2149632816609067,error_sp: 0.15745764254427624,error_cs: 0.03427975398819443,error_lt: 0.02322588482750955
+[2024-11-02 04:25:13,042][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 1.8835163710413798,total_sp_acc: 0.5944691300392151,cs_error: 0.934594204985323,total_cs_acc: 0.7646019458770752,lt_error: 0.2766511353717924,total_lt_acc: 0.9202274680137634
+[2024-11-02 04:25:13,051][train.py][line:90][INFO] ---------------epoch 43---------------
+lr: [0.000267211036198229]
+[2024-11-02 04:32:06,769][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.2364441198598587,error_sp: 0.16999390539949705,error_cs: 0.03796085424520623,error_lt: 0.0284893600071981
+[2024-11-02 04:35:20,775][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.2864520337478292,total_sp_acc: 0.9077395796775818,cs_error: 0.030559207263984513,total_cs_acc: 0.9894473552703857,lt_error: 0.011828363015418978,total_lt_acc: 0.9964100122451782
+[2024-11-02 04:35:20,784][train.py][line:90][INFO] ---------------epoch 44---------------
+lr: [0.0002657284150324164]
+[2024-11-02 04:42:17,123][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.2574935509658528,error_sp: 0.17973866088612694,error_cs: 0.04457147579335146,error_lt: 0.03318341412938701
+[2024-11-02 04:45:32,923][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.11280273211281583,total_sp_acc: 0.9600961804389954,cs_error: 0.011744304360934385,total_cs_acc: 0.9966974854469299,lt_error: 0.007653107150536446,total_lt_acc: 0.997973620891571
+[2024-11-02 04:45:32,933][train.py][line:90][INFO] ---------------epoch 45---------------
+lr: [0.0002642173720037964]
+[2024-11-02 04:52:28,075][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.202311956658046,error_sp: 0.1480103116254151,error_cs: 0.033118976594883484,error_lt: 0.021182668210829293
+[2024-11-02 04:55:42,714][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.11234055971971431,total_sp_acc: 0.9609376192092896,cs_error: 0.012882907877022958,total_cs_acc: 0.9962627291679382,lt_error: 0.006821024246107256,total_lt_acc: 0.9981138706207275
+[2024-11-02 04:55:42,723][train.py][line:90][INFO] ---------------epoch 46---------------
+lr: [0.00026267827993751845]
+[2024-11-02 05:02:38,636][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.20630874302101218,error_sp: 0.15160333600723805,error_cs: 0.03392345816689672,error_lt: 0.020781949042601937
+[2024-11-02 05:05:53,626][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.09400261740237735,total_sp_acc: 0.967668890953064,cs_error: 0.02414299725633785,total_cs_acc: 0.9913685321807861,lt_error: 0.010668712179867153,total_lt_acc: 0.9966203570365906
+[2024-11-02 05:05:53,635][train.py][line:90][INFO] ---------------epoch 47---------------
+lr: [0.0002611115185793887]
+[2024-11-02 05:12:49,252][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.2236847955922738,error_sp: 0.15851840170690767,error_cs: 0.03867867032649899,error_lt: 0.026487723609429317
+[2024-11-02 05:16:03,509][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.0535338119238341,total_sp_acc: 0.9828282594680786,cs_error: 0.004676289822717259,total_cs_acc: 0.9989762902259827,lt_error: 0.0021174708614418924,total_lt_acc: 0.9996213912963867
+[2024-11-02 05:16:03,951][train.py][line:90][INFO] ---------------epoch 48---------------
+lr: [0.00025951747450217303]
+[2024-11-02 05:22:59,168][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.20401895213904814,error_sp: 0.14802362469731195,error_cs: 0.03371252521755086,error_lt: 0.02228280137686121
+[2024-11-02 05:26:14,427][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 1.9100789307712882,total_sp_acc: 0.6336928009986877,cs_error: 0.2789932153515531,total_cs_acc: 0.9123042225837708,lt_error: 0.1401798024263083,total_lt_acc: 0.9584344029426575
+[2024-11-02 05:26:14,441][train.py][line:90][INFO] ---------------epoch 49---------------
+lr: [0.00025789654101021533]
+[2024-11-02 05:33:09,509][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.2120854928045682,error_sp: 0.14799067699032364,error_cs: 0.03575444193524284,error_lt: 0.028340373761567
+[2024-11-02 05:36:24,148][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 1.8096752387525321,total_sp_acc: 0.5833695530891418,cs_error: 0.27393355345697634,total_cs_acc: 0.9085108637809753,lt_error: 0.14223444746193947,total_lt_acc: 0.9549846649169922
+[2024-11-02 05:36:24,164][train.py][line:90][INFO] ---------------epoch 50---------------
+lr: [0.0002562491180423938]
+[2024-11-02 05:43:19,538][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.21533969861509086,error_sp: 0.15476901345150693,error_cs: 0.03739986438634471,error_lt: 0.02317082079171469
+[2024-11-02 05:46:34,997][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.13442360532132422,total_sp_acc: 0.9539609551429749,cs_error: 0.031804238924868375,total_cs_acc: 0.988746166229248,lt_error: 0.010424985408571128,total_lt_acc: 0.9968657493591309
+[2024-11-02 05:46:35,010][train.py][line:90][INFO] ---------------epoch 51---------------
+lr: [0.00025457561207344205]
+[2024-11-02 05:53:29,202][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.2215568734668913,error_sp: 0.16178199799565007,error_cs: 0.036776086569139034,error_lt: 0.02299878862074816
+[2024-11-02 05:56:42,906][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.3955141697503013,total_sp_acc: 0.8743496537208557,cs_error: 0.0981000090888889,total_cs_acc: 0.964450478553772,lt_error: 0.030511236867279013,total_lt_acc: 0.9899451732635498
+[2024-11-02 05:56:43,371][train.py][line:90][INFO] ---------------epoch 52---------------
+lr: [0.00025287643601365603]
+[2024-11-02 06:03:37,491][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.2032841112327659,error_sp: 0.1460897243221253,error_cs: 0.03504030771990634,error_lt: 0.02215407898685456
+[2024-11-02 06:06:51,509][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.10358892995113876,total_sp_acc: 0.9615826606750488,cs_error: 0.005164703263920747,total_cs_acc: 0.9987519383430481,lt_error: 0.0029028062632666953,total_lt_acc: 0.9993058443069458
+[2024-11-02 06:06:51,519][train.py][line:90][INFO] ---------------epoch 53---------------
+lr: [0.0002511520091070137]
+[2024-11-02 06:13:45,930][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.16339046393248746,error_sp: 0.12154907313699062,error_cs: 0.025871738689525896,error_lt: 0.015969651693420326
+[2024-11-02 06:17:00,963][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.5128242501013647,total_sp_acc: 0.853847324848175,cs_error: 0.06625414412752473,total_cs_acc: 0.97779381275177,lt_error: 0.04129729521738719,total_lt_acc: 0.987287700176239
+[2024-11-02 06:17:00,973][train.py][line:90][INFO] ---------------epoch 54---------------
+lr: [0.0002494027568277316]
+[2024-11-02 06:23:56,090][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.193514522465171,error_sp: 0.1377775510267441,error_cs: 0.03177549644257554,error_lt: 0.023961475196469007
+[2024-11-02 06:27:10,635][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.08263365472153142,total_sp_acc: 0.9711607098579407,cs_error: 0.017201213010990684,total_cs_acc: 0.9940330386161804,lt_error: 0.0072760548290909275,total_lt_acc: 0.9977141618728638
+[2024-11-02 06:27:10,646][train.py][line:90][INFO] ---------------epoch 55---------------
+lr: [0.000247629110775285]
+[2024-11-02 06:34:05,113][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.18015623174855672,error_sp: 0.1304211414397911,error_cs: 0.029943723574071966,error_lt: 0.01979136690503515
+[2024-11-02 06:37:19,898][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 2.766195395155671,total_sp_acc: 0.49991586804389954,cs_error: 0.6594605480178851,total_cs_acc: 0.8247416019439697,lt_error: 0.3051991583983334,total_lt_acc: 0.9219313263893127
+[2024-11-02 06:37:19,909][train.py][line:90][INFO] ---------------epoch 56---------------
+lr: [0.00024583150856791555]
+[2024-11-02 06:44:14,144][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.18170265630931445,error_sp: 0.13275974053374104,error_cs: 0.029510418328272274,error_lt: 0.019432497757351216
+[2024-11-02 06:47:28,587][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.6632351937937027,total_sp_acc: 0.8132634162902832,cs_error: 0.13161005446362764,total_cs_acc: 0.9575088620185852,lt_error: 0.1135565058644021,total_lt_acc: 0.9659930467605591
+[2024-11-02 06:47:28,596][train.py][line:90][INFO] ---------------epoch 57---------------
+lr: [0.00024401039373465433]
+[2024-11-02 06:54:24,700][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.18635889891724244,error_sp: 0.13413886187007673,error_cs: 0.032914029948100214,error_lt: 0.019306006977145417
+[2024-11-02 06:57:39,883][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.3565894774962119,total_sp_acc: 0.8820485472679138,cs_error: 0.007072335698428986,total_cs_acc: 0.9980647563934326,lt_error: 0.003954390797468195,total_lt_acc: 0.9990043044090271
+[2024-11-02 06:57:39,892][train.py][line:90][INFO] ---------------epoch 58---------------
+lr: [0.00024216621560588697]
+[2024-11-02 07:04:35,502][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.19643930499743664,error_sp: 0.14174493557517456,error_cs: 0.033599769054372154,error_lt: 0.02109460031946847
+[2024-11-02 07:07:49,300][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 2.0366854650961748,total_sp_acc: 0.5830960869789124,cs_error: 0.3277258320390239,total_cs_acc: 0.9010573625564575,lt_error: 0.22665912425604237,total_lt_acc: 0.9388996958732605
+[2024-11-02 07:07:49,314][train.py][line:90][INFO] ---------------epoch 59---------------
+lr: [0.00024029942920248632]
+[2024-11-02 07:14:45,045][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.15814137724986635,error_sp: 0.11621624435218224,error_cs: 0.02488642314859974,error_lt: 0.017038709641996552
+[2024-11-02 07:18:00,709][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.09060506133489872,total_sp_acc: 0.9681877493858337,cs_error: 0.0070902280323915864,total_cs_acc: 0.9979104995727539,lt_error: 0.0035041539231633815,total_lt_acc: 0.9990323781967163
+[2024-11-02 07:18:00,722][train.py][line:90][INFO] ---------------epoch 60---------------
+lr: [0.00023841049512354217]
+[2024-11-02 07:24:56,551][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.18769091252896497,error_sp: 0.13317585617121172,error_cs: 0.032048462074161906,error_lt: 0.02246659317020418
+[2024-11-02 07:28:07,403][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.04525358609336505,total_sp_acc: 0.9854155778884888,cs_error: 0.005869358700780433,total_cs_acc: 0.9984854459762573,lt_error: 0.002682278934554789,total_lt_acc: 0.9994040131568909
+[2024-11-02 07:28:07,941][train.py][line:90][INFO] ---------------epoch 61---------------
+lr: [0.0002364998794327136]
+[2024-11-02 07:34:59,768][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.17701966053237014,error_sp: 0.12848908814312907,error_cs: 0.02877732542475552,error_lt: 0.019753246776508443
+[2024-11-02 07:38:11,501][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.4362660088036503,total_sp_acc: 0.8593094944953918,cs_error: 0.007543017896059546,total_cs_acc: 0.9979665875434875,lt_error: 0.00692411132065154,total_lt_acc: 0.9977001547813416
+[2024-11-02 07:38:11,516][train.py][line:90][INFO] ---------------epoch 62---------------
+lr: [0.0002345680535432333]
+[2024-11-02 07:45:05,175][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.17325609024685862,error_sp: 0.12535721342195144,error_cs: 0.02782508348654662,error_lt: 0.020073792962100514
+[2024-11-02 07:48:16,897][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 1.3849284123309649,total_sp_acc: 0.6526034474372864,cs_error: 0.18412238148965868,total_cs_acc: 0.9368382692337036,lt_error: 0.13914265706091336,total_lt_acc: 0.9580487608909607
+[2024-11-02 07:48:16,907][train.py][line:90][INFO] ---------------epoch 63---------------
+lr: [0.00023261549410159255]
+[2024-11-02 07:55:10,067][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.1734491587859528,error_sp: 0.12390967365843611,error_cs: 0.029292627191252602,error_lt: 0.020246857556640033
+[2024-11-02 07:58:22,520][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.07101810890235229,total_sp_acc: 0.9741336703300476,cs_error: 0.009458164668406198,total_cs_acc: 0.9972303509712219,lt_error: 0.003785769606413623,total_lt_acc: 0.9991655945777893
+[2024-11-02 07:58:22,529][train.py][line:90][INFO] ---------------epoch 64---------------
+lr: [0.00023064268286993348]
+[2024-11-02 08:05:16,110][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.2001928600063466,error_sp: 0.1404259256013847,error_cs: 0.03358591447548448,error_lt: 0.02618102031807218
+[2024-11-02 08:08:27,322][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.35201182127025,total_sp_acc: 0.8931761980056763,cs_error: 0.10549021493737307,total_cs_acc: 0.9641700387001038,lt_error: 0.03133147057887854,total_lt_acc: 0.9895104169845581
+[2024-11-02 08:08:27,333][train.py][line:90][INFO] ---------------epoch 65---------------
+lr: [0.00022865010660718093]
+[2024-11-02 08:15:19,890][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.16088413094837486,error_sp: 0.11665001826037877,error_cs: 0.027557927922259254,error_lt: 0.016676184956466326
+[2024-11-02 08:18:32,368][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 9.054606871930606,total_sp_acc: 0.1403399258852005,cs_error: 3.0392490429135,total_cs_acc: 0.528993546962738,lt_error: 1.6127859533563804,total_lt_acc: 0.7294801473617554
+[2024-11-02 08:18:32,379][train.py][line:90][INFO] ---------------epoch 66---------------
+lr: [0.00022663825694893967]
+[2024-11-02 08:25:24,575][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.13529153479403455,error_sp: 0.10432296694173182,error_cs: 0.019697973973381997,error_lt: 0.011270594069650218
+[2024-11-02 08:28:35,984][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.03712165893068547,total_sp_acc: 0.9886760711669922,cs_error: 0.0031456487896956583,total_cs_acc: 0.999319851398468,lt_error: 0.0011517563306037096,total_lt_acc: 0.9997686147689819
+[2024-11-02 08:28:36,441][train.py][line:90][INFO] ---------------epoch 67---------------
+lr: [0.0002246076302861892]
+[2024-11-02 08:35:29,006][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.15934717432055917,error_sp: 0.11651155340848997,error_cs: 0.02579679613853046,error_lt: 0.017038824563950377
+[2024-11-02 08:38:40,605][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.18759841737443428,total_sp_acc: 0.9296652674674988,cs_error: 0.006232277803357867,total_cs_acc: 0.9982821345329285,lt_error: 0.003307679533202449,total_lt_acc: 0.9991305470466614
+[2024-11-02 08:38:40,614][train.py][line:90][INFO] ---------------epoch 68---------------
+lr: [0.000222558727642805]
+[2024-11-02 08:45:33,956][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.16161918133210176,error_sp: 0.11832875099470236,error_cs: 0.026958280015449757,error_lt: 0.016332150063939857
+[2024-11-02 08:48:44,016][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.05263416266440693,total_sp_acc: 0.9828001856803894,cs_error: 0.025916877816214705,total_cs_acc: 0.9903518557548523,lt_error: 0.005853350576733124,total_lt_acc: 0.9982540607452393
+[2024-11-02 08:48:44,025][train.py][line:90][INFO] ---------------epoch 69---------------
+lr: [0.00022049205455193667]
+[2024-11-02 08:55:37,204][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.15016424349931617,error_sp: 0.10992943628604691,error_cs: 0.024235177461804917,error_lt: 0.01599963007086742
+[2024-11-02 08:58:48,616][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.03379626391229632,total_sp_acc: 0.9900082945823669,cs_error: 0.0036868748551005443,total_cs_acc: 0.9991305470466614,lt_error: 0.001749269357263818,total_lt_acc: 0.9995442628860474
+[2024-11-02 08:58:49,069][train.py][line:90][INFO] ---------------epoch 70---------------
+lr: [0.0002184081209312735]
+[2024-11-02 09:05:41,636][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.18850833838463038,error_sp: 0.13212219259054148,error_cs: 0.03643060459032811,error_lt: 0.01995554092811541
+[2024-11-02 09:08:53,615][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.042911869948285414,total_sp_acc: 0.9867478013038635,cs_error: 0.005090698113128985,total_cs_acc: 0.9986677765846252,lt_error: 0.002200176556921744,total_lt_acc: 0.999453067779541
+[2024-11-02 09:08:53,626][train.py][line:90][INFO] ---------------epoch 71---------------
+lr: [0.00021630744095722722]
+[2024-11-02 09:15:48,752][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.16220790775404711,error_sp: 0.11241253178351397,error_cs: 0.030172983457247896,error_lt: 0.019622392174488117
+[2024-11-02 09:19:00,467][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.038290376489127344,total_sp_acc: 0.9881361126899719,cs_error: 0.007231024155726994,total_cs_acc: 0.9980437159538269,lt_error: 0.0023907958842940527,total_lt_acc: 0.9994601011276245
+[2024-11-02 09:19:00,477][train.py][line:90][INFO] ---------------epoch 72---------------
+lr: [0.00021419053293806565]
+[2024-11-02 09:25:54,318][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.13207296006733815,error_sp: 0.09467023387290342,error_cs: 0.02259100431530702,error_lt: 0.014811721883307255
+[2024-11-02 09:29:06,077][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.0997995801739747,total_sp_acc: 0.9626835584640503,cs_error: 0.004555343851638141,total_cs_acc: 0.998955249786377,lt_error: 0.002387410099285558,total_lt_acc: 0.9994390606880188
+[2024-11-02 09:29:06,085][train.py][line:90][INFO] ---------------epoch 73---------------
+lr: [0.00021205791918602526]
+[2024-11-02 09:35:59,810][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.1473263151186882,error_sp: 0.10433495909158277,error_cs: 0.02571711501705211,error_lt: 0.017274241512718783
+[2024-11-02 09:39:11,840][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.027827826003183575,total_sp_acc: 0.9922730922698975,cs_error: 0.0030518818254602308,total_cs_acc: 0.9994250535964966,lt_error: 0.0014045486971389996,total_lt_acc: 0.9996774792671204
+[2024-11-02 09:39:12,284][train.py][line:90][INFO] ---------------epoch 74---------------
+lr: [0.000209910125888436]
+[2024-11-02 09:46:07,215][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.1288658011959125,error_sp: 0.09550120115227959,error_cs: 0.019235645146019456,error_lt: 0.014128955331061772
+[2024-11-02 09:49:20,287][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.022713662568608628,total_sp_acc: 0.9942994713783264,cs_error: 0.004321930237031247,total_cs_acc: 0.998920202255249,lt_error: 0.001090745795484679,total_lt_acc: 0.9998106956481934
+[2024-11-02 09:49:20,721][train.py][line:90][INFO] ---------------epoch 75---------------
+lr: [0.00020774768297789065]
+[2024-11-02 09:56:16,018][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.12569034459712,error_sp: 0.09460324360850396,error_cs: 0.017012810297253267,error_lt: 0.014074290277639848
+[2024-11-02 09:59:27,043][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.021586115267731236,total_sp_acc: 0.9945869445800781,cs_error: 0.001514472819828383,total_cs_acc: 0.9997615814208984,lt_error: 0.0008598279799366497,total_lt_acc: 0.9998457431793213
+[2024-11-02 09:59:27,690][train.py][line:90][INFO] ---------------epoch 76---------------
+lr: [0.00020557112400148957]
+[2024-11-02 10:06:19,866][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.12849067963803296,error_sp: 0.09413891630785477,error_cs: 0.020181923821093857,error_lt: 0.014169839350822677
+[2024-11-02 10:09:30,876][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.027899289632851387,total_sp_acc: 0.9926517009735107,cs_error: 0.0025167577949172077,total_cs_acc: 0.999488115310669,lt_error: 0.0010919884035898646,total_lt_acc: 0.9997826218605042
+[2024-11-02 10:09:31,368][train.py][line:90][INFO] ---------------epoch 77---------------
+lr: [0.00020338098598919268]
+[2024-11-02 10:16:23,053][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.16171204666044373,error_sp: 0.11466663711803807,error_cs: 0.028599719859654777,error_lt: 0.018445690131795978
+[2024-11-02 10:19:34,675][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.024819178796241195,total_sp_acc: 0.9933739304542542,cs_error: 0.0020678502654377655,total_cs_acc: 0.9996283650398254,lt_error: 0.001045174532909634,total_lt_acc: 0.9997966885566711
+[2024-11-02 10:19:34,688][train.py][line:90][INFO] ---------------epoch 78---------------
+lr: [0.00020117780932131353]
+[2024-11-02 10:26:28,963][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.14825356153415714,error_sp: 0.10534079683269333,error_cs: 0.02331905464695574,error_lt: 0.019593709818109536
+[2024-11-02 10:29:43,545][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.23437372888332386,total_sp_acc: 0.9155156016349792,cs_error: 0.030777864325946546,total_cs_acc: 0.9888864159584045,lt_error: 0.014047054948912776,total_lt_acc: 0.9952320456504822
+[2024-11-02 10:29:43,558][train.py][line:90][INFO] ---------------epoch 79---------------
+lr: [0.00019896213759518572]
+[2024-11-02 10:36:34,747][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.1368039255201712,error_sp: 0.09811710698070125,error_cs: 0.022860612901704037,error_lt: 0.015826205523236492
+[2024-11-02 10:39:46,189][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.037374790288257576,total_sp_acc: 0.9884727001190186,cs_error: 0.002490439981254213,total_cs_acc: 0.9994460940361023,lt_error: 0.0014000908154317877,total_lt_acc: 0.9997265338897705
+[2024-11-02 10:39:46,203][train.py][line:90][INFO] ---------------epoch 80---------------
+lr: [0.0001967345174910349]
+[2024-11-02 10:46:38,618][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.11410283885452564,error_sp: 0.08513784418355563,error_cs: 0.016807715763866367,error_lt: 0.012157278548632121
+[2024-11-02 10:49:50,658][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 1.0804199755400576,total_sp_acc: 0.7228680849075317,cs_error: 0.0574196064638809,total_cs_acc: 0.9784389138221741,lt_error: 0.03714003848910863,total_lt_acc: 0.9863621592521667
+[2024-11-02 10:49:50,668][train.py][line:90][INFO] ---------------epoch 81---------------
+lr: [0.00019449549863709157]
+[2024-11-02 10:56:45,729][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.13041960041572043,error_sp: 0.09272424526016787,error_cs: 0.020102565610233283,error_lt: 0.01759278946183051
+[2024-11-02 10:59:59,909][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.12904960350883757,total_sp_acc: 0.9578454494476318,cs_error: 0.015069805996670084,total_cs_acc: 0.995035707950592,lt_error: 0.013152929529431454,total_lt_acc: 0.99583500623703
+[2024-11-02 10:59:59,921][train.py][line:90][INFO] ---------------epoch 82---------------
+lr: [0.00019224563347397476]
+[2024-11-02 11:06:53,498][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.14433513265657655,error_sp: 0.10115574403044535,error_cs: 0.026320462830319035,error_lt: 0.01685892519054424
+[2024-11-02 11:10:08,223][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.4504687021276057,total_sp_acc: 0.8614550828933716,cs_error: 0.01887393100950712,total_cs_acc: 0.9930934309959412,lt_error: 0.008447545561770768,total_lt_acc: 0.9970410466194153
+[2024-11-02 11:10:08,251][train.py][line:90][INFO] ---------------epoch 83---------------
+lr: [0.00018998547711838247]
+[2024-11-02 11:17:02,344][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.12867050210826242,error_sp: 0.09165552660379227,error_cs: 0.02437116498789781,error_lt: 0.01264381040209389
+[2024-11-02 11:20:14,121][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.017513260430751788,total_sp_acc: 0.9958560466766357,cs_error: 0.0022677228636843174,total_cs_acc: 0.9995512366294861,lt_error: 0.0009568670637311071,total_lt_acc: 0.9998106956481934
+[2024-11-02 11:20:14,574][train.py][line:90][INFO] ---------------epoch 84---------------
+lr: [0.0001877155872261216]
+[2024-11-02 11:27:10,466][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.12292563475198691,error_sp: 0.08825378644813485,error_cs: 0.020189727540127933,error_lt: 0.014482121560740939
+[2024-11-02 11:30:24,702][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.07537063969370147,total_sp_acc: 0.9727734327316284,cs_error: 0.004659393951219332,total_cs_acc: 0.9987449049949646,lt_error: 0.002845958555795914,total_lt_acc: 0.9992567300796509
+[2024-11-02 11:30:24,711][train.py][line:90][INFO] ---------------epoch 85---------------
+lr: [0.0001854365238545114]
+[2024-11-02 11:37:18,919][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.10244851349649099,error_sp: 0.0774729056430625,error_cs: 0.017069535445843557,error_lt: 0.00790607252298086
+[2024-11-02 11:40:30,378][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.12381204580659806,total_sp_acc: 0.9550266861915588,cs_error: 0.009389676207891827,total_cs_acc: 0.9968867897987366,lt_error: 0.003908221913375782,total_lt_acc: 0.998786985874176
+[2024-11-02 11:40:30,390][train.py][line:90][INFO] ---------------epoch 86---------------
+lr: [0.00018314884932419336]
+[2024-11-02 11:47:27,635][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.11564726950747536,error_sp: 0.08249480211732162,error_cs: 0.020763849423041863,error_lt: 0.012388618377266914
+[2024-11-02 11:50:40,229][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.022395294061890475,total_sp_acc: 0.9941171407699585,cs_error: 0.0022105874498228985,total_cs_acc: 0.9995512366294861,lt_error: 0.0011520606816552916,total_lt_acc: 0.9997896552085876
+[2024-11-02 11:50:40,241][train.py][line:90][INFO] ---------------epoch 87---------------
+lr: [0.00018085312808038332]
+[2024-11-02 11:57:36,205][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.1312387499194951,error_sp: 0.09320025550831115,error_cs: 0.02103274321936286,error_lt: 0.017005751244676903
+[2024-11-02 12:00:47,782][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.0232206750525045,total_sp_acc: 0.9936683773994446,cs_error: 0.0029281731940165832,total_cs_acc: 0.9992427229881287,lt_error: 0.0014107175384197035,total_lt_acc: 0.9996494054794312
+[2024-11-02 12:00:47,790][train.py][line:90][INFO] ---------------epoch 88---------------
+lr: [0.00017854992655359932]
+[2024-11-02 12:07:42,739][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.11307932109606245,error_sp: 0.0823427985753414,error_cs: 0.016243158012299086,error_lt: 0.01449336461658017
+[2024-11-02 12:10:55,422][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.01816902906672039,total_sp_acc: 0.9956387281417847,cs_error: 0.0015143189989836705,total_cs_acc: 0.9996985197067261,lt_error: 0.000723082113364158,total_lt_acc: 0.9998738169670105
+[2024-11-02 12:10:55,440][train.py][line:90][INFO] ---------------epoch 89---------------
+lr: [0.00017623981301989857]
+[2024-11-02 12:17:48,415][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.10763327868071412,error_sp: 0.08027885483998655,error_cs: 0.017071166171487618,error_lt: 0.010283257671227782
+[2024-11-02 12:21:00,484][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.09251233330893538,total_sp_acc: 0.9655373096466064,cs_error: 0.0026285184027526496,total_cs_acc: 0.9994040131568909,lt_error: 0.0021967485185160115,total_lt_acc: 0.9993969798088074
+[2024-11-02 12:21:00,496][train.py][line:90][INFO] ---------------epoch 90---------------
+lr: [0.00017392335746065936]
+[2024-11-02 12:27:54,019][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.10136607482429144,error_sp: 0.07467874759994121,error_cs: 0.015894139261391084,error_lt: 0.010793187572019771
+[2024-11-02 12:31:05,048][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.6623929877049451,total_sp_acc: 0.8078082799911499,cs_error: 0.0959696156511429,total_cs_acc: 0.9664978981018066,lt_error: 0.043116354161987426,total_lt_acc: 0.9856259226799011
+[2024-11-02 12:31:05,060][train.py][line:90][INFO] ---------------epoch 91---------------
+lr: [0.00017160113142194235]
+[2024-11-02 12:37:57,641][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.10144563506303547,error_sp: 0.07847911384015388,error_cs: 0.01435704924424722,error_lt: 0.008609472300560457
+[2024-11-02 12:41:07,798][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.030368084352094055,total_sp_acc: 0.9904219508171082,cs_error: 0.004045137772366165,total_cs_acc: 0.998822033405304,lt_error: 0.0014513589524392163,total_lt_acc: 0.9996143579483032
+[2024-11-02 12:41:07,809][train.py][line:90][INFO] ---------------epoch 92---------------
+lr: [0.00016927370787346417]
+[2024-11-02 12:48:00,555][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.0922683747958281,error_sp: 0.06862806256097169,error_cs: 0.013590119793177655,error_lt: 0.010050192695024796
+[2024-11-02 12:51:10,115][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.02774802046094413,total_sp_acc: 0.9911792278289795,cs_error: 0.00199558564993435,total_cs_acc: 0.9996073246002197,lt_error: 0.0007962178311734313,total_lt_acc: 0.9998036623001099
+[2024-11-02 12:51:10,124][train.py][line:90][INFO] ---------------epoch 93---------------
+lr: [0.0001669416610672214]
+[2024-11-02 12:58:02,708][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.12503462771505064,error_sp: 0.0871784156759232,error_cs: 0.02394965382534668,error_lt: 0.01390655801428446
+[2024-11-02 13:01:14,339][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.2418099657735166,total_sp_acc: 0.9268956184387207,cs_error: 0.09176244826794923,total_cs_acc: 0.9681807160377502,lt_error: 0.028566900847332703,total_lt_acc: 0.9901555180549622
+[2024-11-02 13:01:14,352][train.py][line:90][INFO] ---------------epoch 94---------------
+lr: [0.0001646055663957964]
+[2024-11-02 13:08:07,146][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.129120195206196,error_sp: 0.08792811656948146,error_cs: 0.024598529048577185,error_lt: 0.01659354967967935
+[2024-11-02 13:11:19,080][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.022828559904263867,total_sp_acc: 0.9930863976478577,cs_error: 0.003431466575943369,total_cs_acc: 0.9989833235740662,lt_error: 0.0009169517246194767,total_lt_acc: 0.9998247027397156
+[2024-11-02 13:11:19,091][train.py][line:90][INFO] ---------------epoch 95---------------
+lr: [0.00016226600025038217]
+[2024-11-02 13:18:14,048][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.1175142903135349,error_sp: 0.08336080698828147,error_cs: 0.019871421531821403,error_lt: 0.01428206172166637
+[2024-11-02 13:21:25,392][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.018537454999760675,total_sp_acc: 0.9953301548957825,cs_error: 0.001991871117349472,total_cs_acc: 0.9995722770690918,lt_error: 0.0009441576574169746,total_lt_acc: 0.9998106956481934
+[2024-11-02 13:21:25,404][train.py][line:90][INFO] ---------------epoch 96---------------
+lr: [0.00015992353987856006]
+[2024-11-02 13:28:20,721][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.09746862834746804,error_sp: 0.07020037174029128,error_cs: 0.01659383400330718,error_lt: 0.010674422180768178
+[2024-11-02 13:31:32,767][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.2530890877461371,total_sp_acc: 0.9176331162452698,cs_error: 0.033004918499729856,total_cs_acc: 0.9884446859359741,lt_error: 0.023521927502899286,total_lt_acc: 0.9929391741752625
+[2024-11-02 13:31:32,779][train.py][line:90][INFO] ---------------epoch 97---------------
+lr: [0.00015757876324186623]
+[2024-11-02 13:38:25,181][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.10680769625300911,error_sp: 0.07398170668259915,error_cs: 0.021540028849027844,error_lt: 0.011285961046876082
+[2024-11-02 13:41:37,824][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.1417288735782933,total_sp_acc: 0.9481481909751892,cs_error: 0.007671932375717879,total_cs_acc: 0.99760901927948,lt_error: 0.0034829318834269404,total_lt_acc: 0.9988991618156433
+[2024-11-02 13:41:37,840][train.py][line:90][INFO] ---------------epoch 98---------------
+lr: [0.00015523224887318136]
+[2024-11-02 13:48:32,349][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.1100318621054631,error_sp: 0.07669567060371414,error_cs: 0.020003746253386915,error_lt: 0.013332445784807821
+[2024-11-02 13:51:44,883][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.6338730590147229,total_sp_acc: 0.8216985464096069,cs_error: 0.07498489607228684,total_cs_acc: 0.9723877906799316,lt_error: 0.03773790184508735,total_lt_acc: 0.9866356253623962
+[2024-11-02 13:51:44,899][train.py][line:90][INFO] ---------------epoch 99---------------
+lr: [0.00015288457573397929]
+[2024-11-02 13:58:37,388][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.09907584169295644,error_sp: 0.06983432222170766,error_cs: 0.017393432617115734,error_lt: 0.011848087015249007
+[2024-11-02 14:01:49,431][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.056200668557810855,total_sp_acc: 0.9817905426025391,cs_error: 0.007326560583626795,total_cs_acc: 0.9977632761001587,lt_error: 0.0020852067442254517,total_lt_acc: 0.9994250535964966
+[2024-11-02 14:01:49,445][train.py][line:90][INFO] ---------------epoch 100---------------
+lr: [0.0001505363230714688]
+[2024-11-02 14:08:42,531][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.13123180873157056,error_sp: 0.08847862643217456,error_cs: 0.023996848742385442,error_lt: 0.01875633404407921
+[2024-11-02 14:11:56,180][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.02388395028344385,total_sp_acc: 0.993163526058197,cs_error: 0.003418098167521796,total_cs_acc: 0.999186635017395,lt_error: 0.0014790044595034192,total_lt_acc: 0.9997125267982483
+[2024-11-02 14:11:56,196][train.py][line:90][INFO] ---------------epoch 101---------------
+lr: [0.00014818807027566544]
+[2024-11-02 14:18:52,191][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.08995717212283778,error_sp: 0.06660805396318123,error_cs: 0.01354126532506214,error_lt: 0.009807852757069153
+[2024-11-02 14:22:05,196][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.0282805453796933,total_sp_acc: 0.9910320043563843,cs_error: 0.0013788304833737138,total_cs_acc: 0.999733567237854,lt_error: 0.0006214946307280246,total_lt_acc: 0.9998807907104492
+[2024-11-02 14:22:05,695][train.py][line:90][INFO] ---------------epoch 102---------------
+lr: [0.00014584039673642713]
+[2024-11-02 14:29:01,609][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.09148856004024815,error_sp: 0.06459565802710539,error_cs: 0.017307436067260103,error_lt: 0.009585465737033371
+[2024-11-02 14:32:13,638][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 1.8549390985857166,total_sp_acc: 0.6722853779792786,cs_error: 0.56957567331174,total_cs_acc: 0.8707736730575562,lt_error: 0.3226756468744934,total_lt_acc: 0.9269587397575378
+[2024-11-02 14:32:13,648][train.py][line:90][INFO] ---------------epoch 103---------------
+lr: [0.00014349388170048884]
+[2024-11-02 14:39:06,301][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.10792193667483622,error_sp: 0.07386277719594916,error_cs: 0.02017894426960948,error_lt: 0.013880216015316056
+[2024-11-02 14:42:17,955][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.06919341330537197,total_sp_acc: 0.9764896631240845,cs_error: 0.008290093317794069,total_cs_acc: 0.9975739121437073,lt_error: 0.004870472869858425,total_lt_acc: 0.998555600643158
+[2024-11-02 14:42:17,965][train.py][line:90][INFO] ---------------epoch 104---------------
+lr: [0.00014114910412853343]
+[2024-11-02 14:49:10,802][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.08914727273343323,error_sp: 0.06480577730307854,error_cs: 0.015061057340253826,error_lt: 0.009280437746512559
+[2024-11-02 14:52:21,682][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 1.1295080737140675,total_sp_acc: 0.725385308265686,cs_error: 0.16823973811693138,total_cs_acc: 0.9416623711585999,lt_error: 0.07509804737618382,total_lt_acc: 0.974722683429718
+[2024-11-02 14:52:21,692][train.py][line:90][INFO] ---------------epoch 105---------------
+lr: [0.0001388066425523307]
+[2024-11-02 14:59:11,912][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.08071370626067426,error_sp: 0.05784467857611576,error_cs: 0.0119448140455816,error_lt: 0.010924213361292718
+[2024-11-02 15:02:22,643][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 9.747391836864518,total_sp_acc: 0.14975669980049133,cs_error: 3.0595918695479893,total_cs_acc: 0.5025312304496765,lt_error: 1.3201061751295513,total_lt_acc: 0.7956429123878479
+[2024-11-02 15:02:22,652][train.py][line:90][INFO] ---------------epoch 106---------------
+lr: [0.00013646707493198345]
+[2024-11-02 15:09:13,885][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.1085289974685517,error_sp: 0.07417543384942982,error_cs: 0.02087957177807833,error_lt: 0.01347399230604223
+[2024-11-02 15:12:26,217][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.21336221380074444,total_sp_acc: 0.9417254328727722,cs_error: 0.04242011111560657,total_cs_acc: 0.9859344363212585,lt_error: 0.012218900376901983,total_lt_acc: 0.9959472417831421
+[2024-11-02 15:12:26,227][train.py][line:90][INFO] ---------------epoch 107---------------
+lr: [0.0001341309785133123]
+[2024-11-02 15:19:21,215][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.08406240871786132,error_sp: 0.059924070602658024,error_cs: 0.013183881375867703,error_lt: 0.010954456611681401
+[2024-11-02 15:22:34,456][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.041468625412169266,total_sp_acc: 0.9856469631195068,cs_error: 0.001992388646965119,total_cs_acc: 0.9996704459190369,lt_error: 0.0007668774169280764,total_lt_acc: 0.9998738169670105
+[2024-11-02 15:22:34,465][train.py][line:90][INFO] ---------------epoch 108---------------
+lr: [0.00013179892968541765]
+[2024-11-02 15:29:29,883][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.07449658731432492,error_sp: 0.05535737147323148,error_cs: 0.011158696066195899,error_lt: 0.00798051980471176
+[2024-11-02 15:32:43,876][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.20043873457456637,total_sp_acc: 0.9414660334587097,cs_error: 0.043322843236069074,total_cs_acc: 0.9848125576972961,lt_error: 0.016269832783072816,total_lt_acc: 0.9946430325508118
+[2024-11-02 15:32:43,885][train.py][line:90][INFO] ---------------epoch 109---------------
+lr: [0.00012947150383845079]
+[2024-11-02 15:39:38,697][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.07432973876615069,error_sp: 0.05388732412369227,error_cs: 0.012464199060225133,error_lt: 0.007978215316221225
+[2024-11-02 15:42:53,047][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.051890481926823745,total_sp_acc: 0.9810963273048401,cs_error: 0.00378480281494094,total_cs_acc: 0.9990463852882385,lt_error: 0.0012623905408689642,total_lt_acc: 0.9997054934501648
+[2024-11-02 15:42:53,059][train.py][line:90][INFO] ---------------epoch 110---------------
+lr: [0.00012714927522163177]
+[2024-11-02 15:49:46,273][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.08963612134318845,error_sp: 0.05970449539981195,error_cs: 0.015422940404266903,error_lt: 0.014508686060531982
+[2024-11-02 15:52:56,359][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.6601158195874945,total_sp_acc: 0.8220421075820923,cs_error: 0.17203866515183028,total_cs_acc: 0.9456590414047241,lt_error: 0.05061941318586632,total_lt_acc: 0.9830877184867859
+[2024-11-02 15:52:56,367][train.py][line:90][INFO] ---------------epoch 111---------------
+lr: [0.00012483281680154715]
+[2024-11-02 15:59:50,783][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.08390173039377884,error_sp: 0.05941175679217913,error_cs: 0.015160246085515817,error_lt: 0.009329727330553345
+[2024-11-02 16:03:02,565][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.34561153394276123,total_sp_acc: 0.9056991338729858,cs_error: 0.085772049981096,total_cs_acc: 0.9723667502403259,lt_error: 0.022655200490709237,total_lt_acc: 0.9925956130027771
+[2024-11-02 16:03:02,578][train.py][line:90][INFO] ---------------epoch 112---------------
+lr: [0.00012252270012076428]
+[2024-11-02 16:09:56,601][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.08552058161140115,error_sp: 0.05905184214005015,error_cs: 0.01464067575001466,error_lt: 0.011828063810024013
+[2024-11-02 16:13:06,608][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.40571250303301,total_sp_acc: 0.894094705581665,cs_error: 0.11124224603484383,total_cs_acc: 0.9639105796813965,lt_error: 0.049624461494049796,total_lt_acc: 0.9851070642471313
+[2024-11-02 16:13:06,626][train.py][line:90][INFO] ---------------epoch 113---------------
+lr: [0.00012021949515679464]
+[2024-11-02 16:20:01,949][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.0720281173962767,error_sp: 0.05234382745211262,error_cs: 0.010940635982564863,error_lt: 0.008743653798750283
+[2024-11-02 16:23:13,757][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.007328265540323411,total_sp_acc: 0.9986677765846252,cs_error: 0.0006504443923299199,total_cs_acc: 0.9998527765274048,lt_error: 0.00030421296241513277,total_lt_acc: 0.9999509453773499
+[2024-11-02 16:23:14,153][train.py][line:90][INFO] ---------------epoch 114---------------
+lr: [0.00011792377018144312]
+[2024-11-02 16:30:09,370][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.06512114438415878,error_sp: 0.04816844535342397,error_cs: 0.010467780878489687,error_lt: 0.0064849182031131245
+[2024-11-02 16:33:22,108][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.02112588001906076,total_sp_acc: 0.9931215047836304,cs_error: 0.0012851780916247465,total_cs_acc: 0.9996634125709534,lt_error: 0.0004501810692684776,total_lt_acc: 0.9998947978019714
+[2024-11-02 16:33:22,119][train.py][line:90][INFO] ---------------epoch 115---------------
+lr: [0.000115636091620577]
+[2024-11-02 16:40:18,747][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.074338325834303,error_sp: 0.05381894656726128,error_cs: 0.014135739569623194,error_lt: 0.006383639905299387
+[2024-11-02 16:43:32,552][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.22173076120063323,total_sp_acc: 0.9275617599487305,cs_error: 0.0178817028928564,total_cs_acc: 0.9937385320663452,lt_error: 0.007547125784765265,total_lt_acc: 0.9973495602607727
+[2024-11-02 16:43:32,564][train.py][line:90][INFO] ---------------epoch 116---------------
+lr: [0.00011335702391434852]
+[2024-11-02 16:50:26,516][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.07437155110151515,error_sp: 0.053969011292996735,error_cs: 0.01343916910841177,error_lt: 0.006963370426296176
+[2024-11-02 16:53:40,602][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.9725766993811168,total_sp_acc: 0.7565103769302368,cs_error: 0.23839651589606434,total_cs_acc: 0.9260121583938599,lt_error: 0.07674659237429914,total_lt_acc: 0.9749470353126526
+[2024-11-02 16:53:40,612][train.py][line:90][INFO] ---------------epoch 117---------------
+lr: [0.00011108712937790727]
+[2024-11-02 17:00:35,051][train.py][line:119][INFO] [training]total_num: 142618.0,error: 0.06406790081855242,error_sp: 0.04690489362462076,error_cs: 0.010928211352137944,error_lt: 0.006234795983719489
+[2024-11-02 17:03:49,133][train.py][line:176][INFO] [testing]total_number: 142618,sp_error: 0.007738984245586743,total_sp_acc: 0.9984574317932129,cs_error: 0.0009766996483159584,total_cs_acc: 0.9998106956481934,lt_error: 0.00036422954602508125,total_lt_acc: 0.9999228715896606
+[2024-11-02 17:03:49,144][train.py][line:90][INFO] ---------------epoch 118---------------
+lr: [0.00010882696806263338]

@@ -369,9 +369,35 @@ from torchinfo import summary
 # summary(model,[(batch,length),(batch,length)])
 # print(a.shape)
 
-device = torch.device("cuda:7")
-from models.HopeV1_Sup_Sub import HopeV1_Sup_Sub
-model = HopeV1_Sup_Sub(64).to(device)
+# device = torch.device("cuda:2")
+# from models.HopeV1_3Sup2Sp import HopeV1_3Sup2Sp
+# model = HopeV1_3Sup2Sp().to(device)
+# batch,length,zero_pad_len = 64,8500,0
+# angle = torch.arange(0,length-zero_pad_len).view(1,-1)
+# angle = angle.type(torch.float)/100 + 5 
+# zeros = torch.zeros(zero_pad_len).view(1,-1)
+# angle = torch.concat([angle,zeros],dim=-1).repeat((batch,1)).to(device)
+# intensity = torch.randn(batch,length).to(device)
+# a = model(intensity,angle)
+# summary(model,[(batch,length),(batch,length)])
+# for v in a :
+#     print(v.shape)
+
+# device = torch.device("cuda:7")
+# from models.XrdMamba import XRDMamba
+# model = XRDMamba().to(device)
+# batch,length,zero_pad_len = 64,8500,0
+# index = torch.range(0,length-1).view(1,-1).type(torch.long).to(device)
+# intensity = torch.randn(batch,length).to(device)
+# a = model(intensity,index)
+# summary(model,[(batch,length),(1,length)])
+# for v in a :
+#     print(v.shape)
+    
+    
+device = torch.device("cuda:2")
+from models.XRDecouplerEncoder import XRDecouplerEncoder
+model = XRDecouplerEncoder().to(device)
 batch,length,zero_pad_len = 64,8500,0
 angle = torch.arange(0,length-zero_pad_len).view(1,-1)
 angle = angle.type(torch.float)/100 + 5 
@@ -380,5 +406,15 @@ angle = torch.concat([angle,zeros],dim=-1).repeat((batch,1)).to(device)
 intensity = torch.randn(batch,length).to(device)
 a = model(intensity,angle)
 summary(model,[(batch,length),(batch,length)])
-for v in a :
-    print(v.shape)
+print(a.shape)
+    
+# import argparse
+
+# parser = argparse.ArgumentParser()
+# parser.add_argument('--model_path',type=str,required=True)
+
+# args = parser.parse_args()
+
+# model = torch.load(args.model_path,map_location="cpu")
+
+# print(model)

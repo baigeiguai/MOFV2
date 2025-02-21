@@ -18,6 +18,7 @@ parser.add_argument('--top_k',type=int,default=5)
 parser.add_argument('--parallel_model',type=bool,default=False)
 parser.add_argument('--test_name',type=str,required=True)
 parser.add_argument("--num_workers",type=int,default=20)
+parser.add_argument("--balanced",type=bool,default=False)
 
 args = parser.parse_args()
 
@@ -66,7 +67,7 @@ def test():
                 logits = raw_logits.softmax(dim=1)
                 cs_logits = cs_raw_logits.softmax(dim=1)
                 lt_logits = lt_raw_logits.softmax(dim=1)
-                total_acc(logits,labels230,)
+                total_acc(logits,labels230)
                 crystal_system_accuracy(cs_logits,labels7)
                 # print(lt_logits.shape,labels6.shape,labels7.shape,lt_raw_logits.shape)
                 lattice_type_accuracy(lt_logits,labels6)
@@ -83,7 +84,7 @@ def test():
         f1_score = f1_score.compute().cpu().item()
         top_k_acc_val = top_k_acc.compute().cpu().item()
         per_class_acc = list(acc_per_class.compute().cpu().numpy())
-        h_acc,m_acc,t_acc = per_class_acc2hmt_acc(per_class_acc) 
+        h_acc,m_acc,t_acc = per_class_acc2hmt_acc(per_class_acc,args.balanced) 
     
     logger.info('-'*15+'performance'+'-'*15+'\ntotal_num:%d\nerror:%f\ntotal_acc:%s\nf1_score:%s\ntop%d_acc:%s\nhead_acc:%s\nmedium_acc:%s\ntail_add:%s\ncrystal_system_acc:%s\nlattice_type_acc:%s\n'%(
         total_num,
